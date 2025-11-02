@@ -25,7 +25,7 @@ If you're interested in contributing, here are some ways to help improve College
 - **Code Typing Speed Test**: Create a code typing speed test with analytics to track improvement over time.
 
 ## Why College Daddy?
-Many students struggle with organizing and sharing notes, and traditional methods like Google Drive can be cumbersome. To solve this, College Daddy provides a structured platform for accessing and managing study materials. Additionally, students often find it difficult to calculate their internal marks, leading to uncertainty about their final grades. This tool integrates multiple solutions into one convenient platform, making it an all-in-one academic assistant.
+Many students struggle with organizing and sharing notes, and traditional methods like Google Drive can be cumbersome. To solve this, College Daddy provides a structured platform for accessing and managing study materials. Additionally, students often find it difficult to calculate their internal marks, leading to uncertainty about their final grades. This tool integrates multiple solutions into one convenient platform, making it an all-in-one academic assistant
 
 ## Demo
 Experience College Daddy live: [College Daddy Demo](https://collegedaddy.vercel.app/index.html)
