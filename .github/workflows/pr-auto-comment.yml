@@ -15,6 +15,7 @@ jobs:
         if: github.event.action == 'opened'
         uses: peter-evans/create-or-update-comment@v3
         with:
+          token: ${{ secrets.GH_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             👋 **Thanks for contributing to College Daddy!**
@@ -35,7 +36,7 @@ jobs:
         if: github.event.action == 'opened'
         uses: actions-ecosystem/action-add-labels@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           labels: |
             awaiting review
             contribution
@@ -44,6 +45,7 @@ jobs:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         uses: peter-evans/create-or-update-comment@v3
         with:
+          token: ${{ secrets.GH_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             🎉 **Your pull request has been successfully merged!**  
@@ -58,7 +60,7 @@ jobs:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         uses: actions-ecosystem/action-remove-labels@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           labels: |
             awaiting review
 
