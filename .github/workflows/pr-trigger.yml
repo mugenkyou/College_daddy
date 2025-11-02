@@ -13,9 +13,9 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
           repository: mugenkyou/College_daddy
-          workflow: pr-handler.yml
-          ref: main
-          inputs:
+          workflow: "pr-handler.yml"
+          ref: "main"
+          inputs: |
             pr_number: ${{ github.event.pull_request.number }}
             action: ${{ github.event.action }}
             merged: ${{ github.event.pull_request.merged }}
