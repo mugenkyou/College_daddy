@@ -1,13 +1,14 @@
 name: PR Auto Comment & Label
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, closed]
 
 jobs:
   pr_feedback:
     runs-on: ubuntu-latest
     permissions:
+      contents: write
       issues: write
       pull-requests: write
     steps:
