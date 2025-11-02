@@ -1,0 +1,81 @@
+name: PR Handler
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        required: true
+      action:
+        required: true
+      merged:
+        required: false
+
+jobs:
+  handle_pr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Add comment when PR is opened
+        if: ${{ github.event.inputs.action == 'opened' }}
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          issue-number: ${{ github.event.inputs.pr_number }}
+          body: |
+            👋 **Thanks for contributing to College Daddy!**
+
+            Your pull request has been received and is under review.  
+
+            Please make sure you've:
+
+            - Followed the contribution guidelines.
+
+            - Linked the related issue (if any).
+
+            - Tested your changes locally.
+
+            ⭐ If this project helps you, **star the repo** to support us!
+
+      - name: Add PR labels
+        if: ${{ github.event.inputs.action == 'opened' }}
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: parseInt("${{ github.event.inputs.pr_number }}"),
+              labels: ['awaiting review', 'contribution']
+            })
+
+      - name: Add thank-you comment when merged
+        if: ${{ github.event.inputs.action == 'closed' && github.event.inputs.merged == 'true' }}
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          issue-number: ${{ github.event.inputs.pr_number }}
+          body: |
+            🎉 **Your pull request has been successfully merged!**
+
+            Thanks for contributing to **College Daddy** — every improvement helps students.  
+
+            If you haven't yet, please **star the repo** and stay tuned for more updates! 🚀
+
+      - name: Remove awaiting review label when merged
+        if: ${{ github.event.inputs.action == 'closed' && github.event.inputs.merged == 'true' }}
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            github.rest.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: parseInt("${{ github.event.inputs.pr_number }}"),
+              name: 'awaiting review'
+            })
+
