@@ -7,16 +7,29 @@ on:
 jobs:
   trigger:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
     steps:
       - name: Trigger main PR handler
-        uses: peter-evans/workflow-dispatch@v1
+        uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          ACTION: ${{ github.event.action }}
+          MERGED: ${{ github.event.pull_request.merged }}
         with:
-          token: ${{ secrets.GH_TOKEN }}
-          repository: mugenkyou/College_daddy
-          workflow: "pr-handler.yml"
-          ref: "main"
-          inputs: |
-            pr_number: ${{ github.event.pull_request.number }}
-            action: ${{ github.event.action }}
-            merged: ${{ github.event.pull_request.merged }}
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            const merged = process.env.MERGED === 'true' ? 'true' : 'false';
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'pr-handler.yml',
+              ref: 'main',
+              inputs: {
+                pr_number: process.env.PR_NUMBER,
+                action: process.env.ACTION,
+                merged: merged
+              }
+            })
 
