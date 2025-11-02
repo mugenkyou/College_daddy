@@ -7,6 +7,9 @@ on:
 jobs:
   pr_feedback:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - name: Add comment when PR is opened
         if: github.event.action == 'opened'
