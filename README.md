@@ -7,7 +7,7 @@ The original name, "College Buddy," was not available as a domain, so we rebrand
 
 ## Features
 - **CGPA Calculator**: Quickly estimate your CGPA based on your grades. If you enter your current SGPA and desired CGPA, the calculator will tell you how much SGPA is needed in each semester to reach your goal. It also suggests how many companies you may be eligible for during placements based on your CGPA.
-- **Internal Marks Calculator**: Predict your internal marks and assess your academic standing. It also helps determine if you are eligible for the end-semester exam and calculates how many marks you need in the final exam to achieve your desired grade.
+- **Internal Marks Calculator**: Predict your intearnal marks and assess your academic standing. It also helps determine if you are eligible for the end-semester exam and calculates how many marks you need in the final exam to achieve your desired grade.
 - **Notes Repository**: Access all 8 semesters of engineering notes in one place.
 - **Pomodoro Study Timer**: Boost productivity with a built-in study timer designed for effective learning. It also includes built-in study music to help maintain focus.
 - **Roadmaps & Career Guidance**: Get structured learning roadmaps for various career paths, including AI, Full Stack Development, and Cybersecurity. Each roadmap includes recommended learning resources and skill-building steps.
