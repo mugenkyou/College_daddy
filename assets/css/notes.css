@@ -63,7 +63,7 @@ p {
 /* Header and Navigation */
 header {
     background-color: var(--background-darker);
-    padding: 1rem;
+    /* padding: 1rem; */
     position: sticky;
     top: 0;
     z-index: 1000;
