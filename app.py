@@ -4,7 +4,7 @@ import os
 import json
 from werkzeug.utils import secure_filename
 from datetime import datetime
-from utils.thumbnail_generator import ThumbnailGenerator
+from utils.document_converter import DocumentConverter
 import logging
 import subprocess
 import threading
@@ -78,27 +78,52 @@ def admin_upload():
     if not subject:
         return jsonify({'success': False, 'message': 'Subject not found.'}), 404
 
-    # Save PDF
+    # Handle file upload and conversion
     safe_filename = secure_filename(pdf.filename)
     folder_path = os.path.join(UPLOAD_ROOT, f'semester-{semester_id}', branch_id, subject['name'].replace(' ', '-').lower())
     os.makedirs(folder_path, exist_ok=True)
-    file_path = os.path.join(folder_path, safe_filename)
-    pdf.save(file_path)
-
-    # Generate thumbnail asynchronously in background
-    try:
-        success, message = ThumbnailGenerator.generate_thumbnail(file_path, output_format='png')
-        if success:
-            logger.info(f"Thumbnail generated for {file_path}: {message}")
+    
+    file_extension = os.path.splitext(safe_filename)[1].lower()
+    original_path = os.path.join(folder_path, safe_filename)
+    pdf.save(original_path)
+    
+    # Convert to PDF if not already PDF
+    conversion_message = ""
+    if file_extension != '.pdf':
+        if DocumentConverter.is_supported(file_extension):
+            pdf_filename = DocumentConverter.get_converted_filename(safe_filename)
+            pdf_path = os.path.join(folder_path, pdf_filename)
+            
+            success, converted_path, message = DocumentConverter.convert_to_pdf(original_path, pdf_path)
+            if success:
+                file_path = pdf_path
+                conversion_message = f" (Converted from {file_extension.upper()} to PDF)"
+                logger.info(f"Document converted: {original_path} -> {pdf_path}")
+                # Delete original file after successful conversion
+                os.remove(original_path)
+                logger.info(f"Original file deleted: {original_path}")
+                # Add converted file path to existing paths to prevent watcher duplicate
+                rel_path_watcher = f"../{file_path.replace(os.path.sep, '/')}"
+                if not any(m['path'] == rel_path_watcher for m in subject.get('materials', [])):
+                    pass  # Will be added by admin upload logic below
+            else:
+                logger.error(f"Conversion failed: {message}")
+                return jsonify({'success': False, 'message': f'Conversion failed: {message}'}), 500
         else:
-            logger.warning(f"Failed to generate thumbnail for {file_path}: {message}")
-            # Don't fail the upload if thumbnail generation fails
-    except Exception as e:
-        logger.error(f"Error generating thumbnail for {file_path}: {str(e)}")
+            return jsonify({'success': False, 'message': f'Unsupported file format: {file_extension}'}), 400
+    else:
+        file_path = original_path
+
+    # Thumbnail generation disabled
 
     # Update JSON
     rel_path = '/' + file_path.replace('\\', '/').replace(os.path.sep, '/')
-    thumbnail_url = ThumbnailGenerator.get_thumbnail_url(file_path, format='png')
+    
+    # Check for duplicates before adding
+    rel_path_alt = f"..{rel_path[1:]}"
+    existing_paths = [m['path'] for m in subject.get('materials', [])]
+    if rel_path in existing_paths or rel_path_alt in existing_paths:
+        return jsonify({'success': True, 'message': 'File already exists in database'}), 200
     
     material = {
         'title': title,
@@ -107,15 +132,18 @@ def admin_upload():
         'type': 'pdf',
         'size': f"{os.path.getsize(file_path) // 1024}KB",
         'uploadDate': datetime.now().strftime('%Y-%m-%d'),
-        'downloadUrl': f"/api/download?path={rel_path}",
-        'thumbnailUrl': thumbnail_url
+        'downloadUrl': f"/api/download?path={rel_path}"
     }
     subject.setdefault('materials', []).append(material)
 
     with open(NOTES_JSON, 'w', encoding='utf-8') as f:
         json.dump(notes_data, f, indent=2, ensure_ascii=False)
 
-    return jsonify({'success': True, 'message': 'PDF uploaded and notes updated.', 'thumbnailUrl': thumbnail_url})
+    return jsonify({
+        'success': True, 
+        'message': f'File uploaded and notes updated.{conversion_message}', 
+        'converted': conversion_message != ""
+    })
 
 @app.route('/api/download')
 def download():
@@ -126,47 +154,7 @@ def download():
     file_name = os.path.basename(path)
     return send_from_directory(dir_name, file_name, as_attachment=True)
 
-@app.route('/api/thumbnail')
-def get_thumbnail():
-    """
-    Serve PDF thumbnails
-    Query Parameters:
-        path: Path to the PDF file
-        format: Thumbnail format ('png' or 'webp', default: 'png')
-    """
-    pdf_path = request.args.get('path')
-    output_format = request.args.get('format', 'png').lower()
-    
-    if not pdf_path:
-        return jsonify({'success': False, 'message': 'Missing path parameter'}), 400
-    
-    if output_format not in ['png', 'webp']:
-        output_format = 'png'
-    
-    # Ensure thumbnails directory exists
-    ThumbnailGenerator.ensure_thumbnails_dir()
-    
-    # Get thumbnail path
-    thumbnail_path = ThumbnailGenerator.get_thumbnail_path(pdf_path, output_format)
-    
-    # Check if thumbnail exists; if not, generate it
-    if not os.path.exists(thumbnail_path):
-        # Check if PDF exists
-        pdf_file_path = pdf_path.lstrip('/')
-        if not os.path.isfile(pdf_file_path):
-            return jsonify({'success': False, 'message': 'PDF file not found'}), 404
-        
-        # Generate thumbnail
-        success, message = ThumbnailGenerator.generate_thumbnail(pdf_file_path, output_format)
-        if not success:
-            return jsonify({'success': False, 'message': message}), 500
-    
-    # Serve the thumbnail
-    try:
-        return send_from_directory(os.path.dirname(thumbnail_path), os.path.basename(thumbnail_path))
-    except Exception as e:
-        logger.error(f"Error serving thumbnail {thumbnail_path}: {str(e)}")
-        return jsonify({'success': False, 'message': 'Error serving thumbnail'}), 500
+# Thumbnail endpoint removed - thumbnails disabled
 
 @app.route('/pages/<path:filename>')
 def serve_pages(filename):
@@ -217,16 +205,11 @@ def delete_material():
             os.remove(pdf_file_path)
             logger.info(f"PDF file deleted: {pdf_file_path}")
         
-        # Delete thumbnail
-        success = ThumbnailGenerator.delete_thumbnail(pdf_file_path)
-        if success:
-            logger.info(f"Thumbnail deleted for: {pdf_file_path}")
-        
         # Update JSON
         with open(NOTES_JSON, 'w', encoding='utf-8') as f:
             json.dump(notes_data, f, indent=2, ensure_ascii=False)
         
-        return jsonify({'success': True, 'message': 'Material and thumbnail deleted successfully'})
+        return jsonify({'success': True, 'message': 'Material deleted successfully'})
     
     except Exception as e:
         logger.error(f"Error deleting material: {str(e)}")

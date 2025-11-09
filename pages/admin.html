@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin PDF Upload</title>
+  <title>College Daddy - Admin PDF Upload</title>
   <link rel="stylesheet" href="/assets/css/notes.css">
   <style>
     .admin-container {
@@ -104,8 +104,9 @@
       <input type="text" id="title" name="title" required>
       <label for="description">Description:</label>
       <input type="text" id="description" name="description" required>
-      <label for="pdf">PDF File:</label>
-      <input type="file" id="pdf" name="pdf" accept="application/pdf" required>
+      <label for="pdf">Document File:</label>
+      <input type="file" id="pdf" name="pdf" accept=".pdf,.docx,.doc,.txt,.pptx,.ppt" required>
+      <small style="color: var(--text-secondary); font-size: 0.9em;">Supported: PDF, DOCX, DOC, TXT, PPTX, PPT (auto-converts to PDF)</small>
       <button type="submit">Upload</button>
     </form>
     <div id="result"></div>

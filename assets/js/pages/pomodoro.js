@@ -16,6 +16,8 @@ class PomodoroTimer {
         this.updateStats();
     }
 
+    title
+
     setupElements() {
         // Add settings icon element
         this.settingsIcon = document.getElementById('settings-icon');
@@ -297,7 +299,6 @@ class PomodoroTimer {
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
         this.display.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        document.title = `${this.display.textContent} - Pomodoro Timer`;
     }
 
     updateProgress(progress) {

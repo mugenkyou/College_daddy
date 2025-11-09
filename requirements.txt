@@ -1,19 +1,10 @@
-# College Daddy - Python Dependencies
-
-# Core Flask dependencies (pre-installed)
-Flask>=3.0.0
-Flask-CORS>=4.0.0
-
-# PDF and image processing (with pre-built wheels)
-PyMuPDF>=1.23.8
-Pillow>=10.1.0
-
-# Utilities
-python-dotenv>=1.0.0
-
-# Optional: For testing
-pytest>=7.4.3
-pytest-cov>=4.1.0
-
-# Optional: For better error handling
-Werkzeug>=3.0.1
+Flask==2.3.3
+Flask-CORS==4.0.0
+Werkzeug==2.3.7
+Pillow==10.0.1
+pdf2image==1.16.3
+docx2pdf==0.1.8
+reportlab==4.0.4
+python-pptx==0.6.21
+openpyxl==3.1.2
+comtypes==1.2.0
