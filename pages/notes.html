@@ -7,15 +7,14 @@
     <link rel="stylesheet" href="../assets/css/navigation.css">
     <link rel="stylesheet" href="../assets/css/notes.css">
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        /* Critical overrides for icons */
-        .fas, .far, .fa {
-            display: inline-block !important;
-            font-family: "Font Awesome 5 Free" !important;
-            font-weight: 900 !important;
-            font-style: normal !important;
-        }
+
+<style>
+        .fas, .far, .fa, .fa-solid {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    font-style: normal !important;
+}
+
         
         i.fab {
             font-family: "Font Awesome 5 Brands" !important;
@@ -70,6 +69,18 @@
 
     <main id="content">
         <!-- Content will be loaded dynamically -->
+         <div class="grid">
+       <div class="card">
+            <h2>Semester 1</h2>
+            <p>Aug 2023 – Dec 2023</p>
+
+            <div class="icons">
+                <div class="icon"><i class="fa-solid fa-book-open"></i><span>Notes</span></div>
+                <div class="icon"><i class="fa-solid fa-flask"></i><span>Labs</span></div>
+                <div class="icon"><i class="fa-solid fa-compass"></i><span>Credits</span></div>
+            </div>
+        </div>
+    </div>
     </main>
 
     <script src="../assets/js/components/navigation.js" defer></script>

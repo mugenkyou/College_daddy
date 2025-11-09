@@ -27,7 +27,17 @@ function displaySemesters() {
     window.notesData.semesters.forEach(semester => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `<h2>Semester ${semester.id}</h2>`;
+        card.innerHTML = `
+    <h2>Semester ${semester.id}</h2>
+    <p>${semester.duration || ""}</p>
+
+    <div class="icons">
+        <div class="icon"><i class="fa-solid fa-book-open"></i><span>Notes</span></div>
+        <div class="icon"><i class="fa-solid fa-flask"></i><span>Labs</span></div>
+        <div class="icon"><i class="fa-solid fa-compass"></i><span>Credits</span></div>
+    </div>
+`;
+
         card.onclick = () => displayBranches(semester.id);
         content.appendChild(card);
     });

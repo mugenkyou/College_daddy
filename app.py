@@ -28,6 +28,8 @@ def admin_upload():
     description = request.form.get('description')
     pdf = request.files.get('pdf')
 
+
+
     if not all([semester_id, branch_id, subject_id, title, description, pdf]):
         return jsonify({'success': False, 'message': 'Missing required fields.'}), 400
 
@@ -91,6 +93,11 @@ def serve_assets(filename):
 @app.route('/data/<path:filename>')
 def serve_data(filename):
     return send_from_directory('data', filename)
+
+
+@app.route('/')
+def home():
+    return send_from_directory('.', 'index.html')
 
 if __name__ == '__main__':
     app.run(debug=True) 
