@@ -101,6 +101,7 @@
   font-weight: 700;
   margin-bottom: 1rem;
   line-height: 1.2;
+  font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, -apple-system, sans-serif;
 }
 
 /* If you want the h1 to use the signature font, uncomment below
