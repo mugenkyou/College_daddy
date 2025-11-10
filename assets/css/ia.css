@@ -507,21 +507,7 @@ a.download-button:active, button.download-button:active {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Fix for button in menu navigation */
-button.menu-button {
-    background-color: transparent !important;
-    box-shadow: none !important;
-    border-radius: 50% !important;
-    width: auto !important;
-    margin: 0 !important;
-    padding: 8px !important;
-    font-size: 1.5rem !important;
-    color: var(--text-light) !important;
-    z-index: 1000 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
+
 
 /* Eligibility Styles */
 .eligibility {
@@ -920,14 +906,6 @@ button.menu-button {
         line-height: 1.4;
     }
     
-    /* Navigation adjustments */
-    .mobile-menu-button {
-        top: 12px;
-        right: 12px;
-        padding: 10px 14px;
-        font-size: 0.9rem;
-        border-radius: 8px;
-    }
     
     /* Footer adjustments */
     .footer {

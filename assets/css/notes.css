@@ -76,15 +76,6 @@ p {
     color: var(--text-secondary);
 }
 
-/* Header and Navigation */
-header {
-    background-color: var(--background-darker);
-    padding: 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
 
 /* Notes Navigation */
 nav {
@@ -462,42 +453,6 @@ nav h1 {
         font-size: 0.9rem;
     }
 
-    /* Nav adjustments */
-    .nav-container {
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-
-    .menu-button {
-        display: block;
-    }
-
-    .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        padding: 1rem 0;
-        order: 3;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-link {
-        width: 100%;
-        justify-content: center;
-    }
-
-    #searchInput {
-        width: 100%;
-        order: 2;
-    }
-
-    /* Hide navigation line in mobile view */
-    nav::after {
-        display: none !important;
-    }
 }
 
 /* Medium phones */

@@ -45,7 +45,7 @@ body > header .nav-container {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    padding: 1rem 5% !important;
+    padding: 2rem 5% !important;
     max-width: 1400px !important;
     margin: 0 auto !important;
 }

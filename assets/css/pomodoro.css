@@ -79,6 +79,7 @@ main {
     display: flex;
     justify-content: center;
     padding-top: 60px;
+
 }
 
 .container {
@@ -92,11 +93,6 @@ main {
     position: relative;
 }
 
-/* Navigation Styles - Keep These */
-.menu-button.active {
-    background-color: var(--primary-dim);
-    color: var(--primary-color);
-}
 
 /* Original Pomodoro Timer Styles */
 body {
@@ -107,7 +103,6 @@ body {
     align-items: center;
     color: var(--primary-color);
     overflow-x: hidden;
-    padding: 2rem;
 }
 
 .container {
