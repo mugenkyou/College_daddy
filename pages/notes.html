@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes Portal</title>
+    <title>College Daddy - Notes Portal</title>
     <link rel="stylesheet" href="../assets/css/navigation.css">
     <link rel="stylesheet" href="../assets/css/notes.css">
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -42,6 +42,17 @@
             margin-right: 8px !important;
         }
     </style>
+    <!-- Theme initialization script - runs before page render to prevent flash -->
+    <script>
+      (function() {
+        try {
+          const theme = localStorage.getItem('theme') || 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
 </head>
 <body>
     <header>
@@ -50,7 +61,9 @@
             
                 <span>College Daddy</span>
             </a>
-            <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <div class="nav-actions">
+                <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            </div>
             <nav class="nav-links">
                 <a href="../index.html" class="nav-link">Home</a>
                 <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
@@ -58,6 +71,13 @@
                 <a href="pomodoro.html" class="nav-link">Study Timer</a>
                 <a href="notes.html" class="nav-link active">Notes</a>
                 <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <button
+                    class="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    title="Toggle theme"
+                >
+                    <span class="theme-icon">🌙</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -119,6 +139,8 @@ Follow our journey on social media for updates and resources.</p>
     </footer>
 </body>
 </html>
+
+
 
 
 

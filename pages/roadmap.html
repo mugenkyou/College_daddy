@@ -21,12 +21,12 @@
     <meta name="robots" content="index, follow">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://collegedaddy.tech/pages/roadmap.html">
+    <link rel="canonical" href="https://collegedaddy.vercel.app/pages/roadmap.html">
     
     <!-- Open Graph / Social Media Tags -->
     <meta property="og:title" content="College Daddy - Career Roadmaps for Students">
     <meta property="og:description" content="Explore career roadmaps, calculate your CGPA, and optimize your college journey with College Daddy.">
-    <meta property="og:url" content="https://collegedaddy.tech/pages/roadmap.html">
+    <meta property="og:url" content="https://collegedaddy.vercel.app/pages/roadmap.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="College Daddy">
     
@@ -40,6 +40,17 @@
     <link rel="preload" href="../assets/css/roadmap.css" as="style">
     <link rel="preload" href="../assets/js/components/navigation.js" as="script">
     <link rel="preload" href="../assets/js/pages/roadmap.js" as="script">
+    <!-- Theme initialization script - runs before page render to prevent flash -->
+    <script>
+      (function() {
+        try {
+          const theme = localStorage.getItem('theme') || 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
 </head>
 <body>
         <header>
@@ -48,7 +59,9 @@
                 <i class="fas fa-graduation-cap"></i>
                 <span>College Daddy</span>
             </a>
-            <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <div class="nav-actions">
+                <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            </div>
             <nav class="nav-links">
                 <a href="../index.html" class="nav-link">Home</a>
                 <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
@@ -56,6 +69,13 @@
                 <a href="pomodoro.html" class="nav-link">Study Timer</a>
                 <a href="notes.html" class="nav-link">Notes</a>
                 <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <button
+                    class="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    title="Toggle theme"
+                >
+                    <span class="theme-icon">🌙</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -264,10 +284,10 @@ Follow our journey on social media for updates and resources.</p>
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "College Daddy",
-        "url": "https://collegedaddy.tech",
+        "url": "https://collegedaddy.vercel.app",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://collegedaddy.tech/search?q={search_term_string}",
+            "target": "https://collegedaddy.vercel.app/search?q={search_term_string}",
             "query-input": "required name=search_term_string"
         }
     }
@@ -283,13 +303,13 @@ Follow our journey on social media for updates and resources.</p>
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://collegedaddy.tech"
+                "item": "https://collegedaddy.vercel.app"
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Career Roadmaps",
-                "item": "https://collegedaddy.tech/pages/roadmap.html"
+                "item": "https://collegedaddy.vercel.app/pages/roadmap.html"
             }
         ]
     }
@@ -300,6 +320,8 @@ Follow our journey on social media for updates and resources.</p>
     <script src="../assets/js/pages/roadmap.js" defer></script>
 </body>
 </html>
+
+
 
 
 

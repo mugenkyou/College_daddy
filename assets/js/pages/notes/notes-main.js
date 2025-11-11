@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         await loadData();
         displaySemesters();
+        updateBreadcrumb();
     } catch (error) {
         showError('Failed to load data');
     }
@@ -10,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadData() {
     try {
-        const response = await fetch('/data/notes-data.json');
+        const response = await fetch('../data/notes-data.json');
         if (!response.ok) throw new Error('Failed to load data');
         window.notesData = await response.json();
     } catch (error) {
@@ -76,30 +77,46 @@ function displayMaterials(semesterId, branchId, subjectId) {
     const content = document.getElementById('content');
     content.innerHTML = '';
     content.className = 'materials-container'; // Remove grid class to prevent cards from being clickable
-    
+
     // Detect if mobile device
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
+
     subject.materials.forEach(material => {
         const card = document.createElement('div');
         card.className = 'card material-card'; // Add specific class for material cards
-        
+
         // Get the material data
         const filePath = material.path || '';
-        
+
         // Get absolute path for PDF files
         let absoluteFilePath = filePath;
         if (filePath.startsWith('/')) {
             absoluteFilePath = window.location.origin + filePath;
         }
-        
+
         const uploadDate = material.uploadDate ? new Date(material.uploadDate).toLocaleDateString() : 'Unknown';
-        
+
         // Create a safe download filename
         const safeFileName = material.title.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.pdf';
-        
+
+        // Get thumbnail URL if available
+        const thumbnailUrl = material.thumbnailUrl || '';
+        const hasThumbnail = thumbnailUrl && thumbnailUrl.length > 0;
+
+        // Create the card content with thumbnail if available
+        let thumbnailHTML = '';
+        if (hasThumbnail) {
+            thumbnailHTML = `
+                <div class="thumbnail-container">
+                    <img src="${thumbnailUrl}" alt="PDF Preview" class="material-thumbnail" 
+                         onerror="this.style.display='none'">
+                </div>
+            `;
+        }
+
         // Create the card content - important: no onclick attribute
         card.innerHTML = `
+            ${thumbnailHTML}
             <div class="card-header">
                 <h3>${material.title}</h3>
                 <p>${material.description}</p>
@@ -116,10 +133,10 @@ function displayMaterials(semesterId, branchId, subjectId) {
                 </a>
             </div>
         `;
-        
+
         // Remove cursor pointer style
         card.style.cursor = 'default';
-        
+
         content.appendChild(card);
     });
 
@@ -167,3 +184,5 @@ function addMaterial(semesterId, branchName, subjectName, newMaterial) {
     // Optionally save or update JSON file (depends on backend)
     console.log(`Added material "${newMaterial.title}" successfully.`);
 }
+
+

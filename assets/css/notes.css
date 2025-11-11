@@ -1,5 +1,7 @@
 /* Modern CSS Reset */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -31,6 +33,21 @@
     --transition-speed: 0.3s;
 }
 
+/* Light theme variables */
+[data-theme="light"] {
+    --background-dark: #ffffff;
+    --background-darker: #f5f5f5;
+    --background-card: #ffffff;
+    --background-hover: #f0f0f0;
+    --input-bg: #f8f8f8;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-tertiary: #888888;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 102, 204, 0.1);
+    --error-bg: #ffeaea;
+}
+
 /* Base Styles */
 body {
     font-family: 'Roboto', system-ui, -apple-system, sans-serif;
@@ -38,10 +55,16 @@ body {
     background-color: var(--background-dark);
     color: var(--text-primary);
     min-height: 100vh;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: 600;
     line-height: 1.3;
     color: var(--text-primary);
@@ -61,6 +84,24 @@ header {
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Notes Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 20px;
+    gap: 1rem;
+}
+
+nav h1 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
 }
 
 /* Search Input */
@@ -85,6 +126,25 @@ header {
     color: var(--text-tertiary);
 }
 
+/* Mobile responsive nav */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 1rem 16px;
+    }
+    
+    nav h1 {
+        text-align: center;
+        font-size: 1.75rem;
+    }
+    
+    #searchInput {
+        width: 100%;
+    }
+}
+
 /* Breadcrumb */
 #breadcrumb {
     margin-bottom: 1.5rem;
@@ -94,7 +154,9 @@ header {
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem;
-    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto 1.5rem auto;
+    padding: 0 20px;
 }
 
 #breadcrumb a {
@@ -123,11 +185,10 @@ header {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
-    margin: 2rem;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
 }
 
 /* Card Styles */
@@ -175,7 +236,8 @@ header {
     flex-direction: column;
 }
 
-.card h2, .card h3 {
+.card h2,
+.card h3 {
     font-size: 1.25rem;
     color: var(--text-primary);
     margin-bottom: 0.75rem;
@@ -300,7 +362,9 @@ header {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Search Results Styling */
@@ -384,19 +448,20 @@ header {
         gap: 16px;
         padding: 16px;
     }
-    
+
     .card {
         padding: 1.25rem;
     }
-    
-    .card h2, .card h3 {
+
+    .card h2,
+    .card h3 {
         font-size: 1.1rem;
     }
-    
+
     .card p {
         font-size: 0.9rem;
     }
-    
+
     /* Nav adjustments */
     .nav-container {
         flex-wrap: wrap;
@@ -406,7 +471,7 @@ header {
     .menu-button {
         display: block;
     }
-    
+
     .nav-links {
         display: none;
         width: 100%;
@@ -428,7 +493,7 @@ header {
         width: 100%;
         order: 2;
     }
-    
+
     /* Hide navigation line in mobile view */
     nav::after {
         display: none !important;
@@ -442,18 +507,19 @@ header {
         gap: 20px;
         padding: 16px;
     }
-    
+
     .card {
         padding: 1.5rem;
         /* Don't change to horizontal layout */
         flex-direction: column;
     }
-    
-    .card h2, .card h3 {
+
+    .card h2,
+    .card h3 {
         font-size: 1.4rem;
         margin-bottom: 0.8rem;
     }
-    
+
     .card p {
         font-size: 1rem;
         margin-bottom: 1.2rem;
@@ -463,7 +529,7 @@ header {
         -webkit-box-orient: unset;
         overflow: visible;
     }
-    
+
     .download-btn {
         padding: 0.8rem 1.5rem;
         font-size: 1rem;
@@ -480,23 +546,23 @@ header {
         gap: 16px;
         padding: 12px;
     }
-    
+
     .card {
         padding: 1.25rem;
         /* Maintain vertical layout */
         flex-direction: column;
     }
-    
+
     .card-content {
         margin-right: 0;
         margin-bottom: 1rem;
     }
-    
+
     .card h3 {
         font-size: 1.25rem;
         margin-bottom: 0.7rem;
     }
-    
+
     .card p {
         font-size: 0.95rem;
         margin-bottom: 1rem;
@@ -506,7 +572,7 @@ header {
         -webkit-box-orient: unset;
         overflow: visible;
     }
-    
+
     .download-btn {
         margin-left: 0;
         padding: 0.75rem 1.25rem;
@@ -514,14 +580,15 @@ header {
         font-size: 0.95rem;
         align-self: stretch;
     }
-    
+
     .card-actions {
         flex-direction: column;
         width: 100%;
         gap: 0.75rem;
     }
-    
-    .view-btn, .download-btn {
+
+    .view-btn,
+    .download-btn {
         width: 100%;
         justify-content: center;
     }
@@ -533,19 +600,19 @@ header {
         gap: 12px;
         padding: 10px;
     }
-    
+
     .card {
         padding: 1.1rem;
     }
-    
+
     .card h3 {
         font-size: 1.15rem;
     }
-    
+
     .card p {
         font-size: 0.9rem;
     }
-    
+
     .download-btn {
         padding: 0.7rem 1.1rem;
         font-size: 0.9rem;
@@ -614,8 +681,13 @@ header {
 }
 
 @keyframes borderGlow {
-    0% { left: -100%; }
-    100% { left: 100%; }
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
 }
 
 .footer-content {
@@ -785,32 +857,32 @@ header {
     .footer {
         padding: 2rem 1rem 1rem;
     }
-    
+
     .footer-content {
         flex-direction: column;
         gap: 1.5rem;
     }
-    
+
     .footer-section {
         width: 100%;
     }
-    
+
     .footer-section h3 {
         font-size: 1.2rem;
     }
-    
+
     .footer-section ul li {
         margin-bottom: 12px;
     }
-    
+
     .footer-section ul li a {
         font-size: 1rem;
     }
-    
+
     .social-links {
         margin-top: 20px;
     }
-    
+
     .social-link {
         width: 44px;
         height: 44px;
@@ -822,7 +894,7 @@ header {
     .footer::before {
         animation: none;
     }
-    
+
     .footer-section p:hover,
     .feedback-link:hover,
     .footer-section ul li a:hover,
@@ -835,6 +907,7 @@ header {
 
 /* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
+
     /* Ensure menu button is visible */
     .mobile-menu-button {
         display: flex !important;
@@ -849,21 +922,21 @@ header {
         font-size: 14px;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
+
     .mobile-menu-button i {
         margin-right: 6px;
     }
-    
+
     /* Reduce container size */
     .container {
         width: 94%;
         padding: 15px;
         margin: 10px auto;
     }
-    
+
     .card {
         padding: 15px;
         margin-bottom: 15px;
@@ -876,7 +949,7 @@ header {
         width: 92%;
         padding: 12px;
     }
-    
+
     .card {
         padding: 12px;
     }
@@ -889,8 +962,9 @@ header {
         width: 100%;
         gap: 0.75rem;
     }
-    
-    .view-btn, .download-btn {
+
+    .view-btn,
+    .download-btn {
         width: 100%;
         justify-content: center;
         min-width: unset;
@@ -933,19 +1007,45 @@ header {
     color: var(--text-secondary);
 }
 
+/* Thumbnail styles */
+.thumbnail-container {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background-color: var(--background-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.material-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.material-card:hover .material-thumbnail {
+    transform: scale(1.05);
+}
+
 /* Touch-friendly card styles for mobile */
 @media (max-width: 768px) {
     .material-card {
         pointer-events: auto !important;
     }
-    
+
     .material-card .card-actions {
         pointer-events: auto;
         position: relative;
         z-index: 10;
     }
-    
+
     .material-card a {
-        padding: 12px !important; /* Larger touch targets */
+        padding: 12px !important;
+        /* Larger touch targets */
     }
 }
+

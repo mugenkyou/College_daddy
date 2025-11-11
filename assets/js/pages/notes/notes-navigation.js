@@ -46,3 +46,4 @@ function goToBranch(branchId) {
     navigationState.subject = null;
     displaySubjects(navigationState.semester, branchId);
 }
+

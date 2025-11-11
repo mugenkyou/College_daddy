@@ -427,3 +427,4 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error in initialization:', error);
     }
 });
+

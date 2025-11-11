@@ -19,6 +19,19 @@
     --font-main: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
 }
 
+/* Light theme variables */
+[data-theme="light"] {
+    --dark-bg: #ffffff;
+    --darker-bg: #f5f5f5;
+    --card-bg: #ffffff;
+    --card-bg-hover: #f0f0f0;
+    --border-color: #e0e0e0;
+    --text-color: #333333;
+    --text-muted: #666666;
+    --text-bright: #000000;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
 /* Font Awesome icon fixes */
 i.fas, i.far, i.fab, i.fa {
     display: inline-block !important;
@@ -44,6 +57,7 @@ body {
     color: var(--text-color);
     background-color: var(--dark-bg);
     overflow-x: hidden;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
 /*** Typography ***/
@@ -687,3 +701,5 @@ a:hover {
     transform: translateX(-50%) scale(1);
     opacity: 1;
 }
+
+

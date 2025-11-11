@@ -1,0 +1,9 @@
+{
+  "name": "college-daddy",
+  "version": "1.0.0",
+  "scripts": {
+    "update-metadata": "node scripts/update-file-metadata.js",
+    "watch-files": "node scripts/auto-update-watcher.js",
+    "start-watcher": "node scripts/auto-update-watcher.js"
+  }
+}

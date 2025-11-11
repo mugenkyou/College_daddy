@@ -12,11 +12,22 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Marks Calculator | College Buddy</title>
+    <title>College Daddy - Final Marks Calculator</title>
     <link rel="stylesheet" href="../assets/css/navigation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/css/ia.css">
+    <!-- Theme initialization script - runs before page render to prevent flash -->
+    <script>
+      (function() {
+        try {
+          const theme = localStorage.getItem('theme') || 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
 </head>
 <body>
     <header>
@@ -25,7 +36,9 @@
                 <i class="fas fa-graduation-cap"></i>
                 <span>College Daddy</span>
             </a>
-            <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <div class="nav-actions">
+                <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            </div>
             <nav class="nav-links">
                 <a href="../index.html" class="nav-link">Home</a>
                 <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
@@ -33,6 +46,13 @@
                 <a href="pomodoro.html" class="nav-link">Study Timer</a>
                 <a href="notes.html" class="nav-link">Notes</a>
                 <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <button
+                    class="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    title="Toggle theme"
+                >
+                    <span class="theme-icon">🌙</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -45,57 +65,17 @@
                     <span>Final Marks Calculator</span>
                 </h1>
 
-                <div class="calculator-mode" style="display: flex; justify-content: center; align-items: center;">
+                <div class="calculator-mode">
                     <!-- Label for Toggle Switch with Gap -->
-                    <label style="display: flex; flex-direction: row; align-items: center; gap: 1cm;">
+                    <label class="mode-toggle-label">
                         <!-- Toggle Switch -->
                         <input type="checkbox" id="labMode" class="switch" onchange="toggleLabMode(this)">
                         
                         <!-- Label Text -->
-                        <span style="font-size: 20px; font-weight: 500; color: #ffffff;">4 credit course</span>
+                        <span class="course-credit-label">4 credit course</span>
                     </label>
                 </div>
                 
-                <style>
-                .tooltip {
-                  position: relative;
-                  display: inline-block;
-                  margin-left: 0.5rem;
-                }
-                .switch {
-                  position: relative;
-                  height: 1.5rem;
-                  width: 3rem;
-                  cursor: pointer;
-                  appearance: none;
-                  -webkit-appearance: none;
-                  border-radius: 9999px;
-                  background-color: #4b5563;
-                  transition-duration: 300ms;
-                }
-                .switch:checked {
-                  background-color: #009dff;
-                }
-                .switch:focus {
-                  outline: none;
-                  box-shadow: 0 0 0 2px #009dff;
-                }
-                .switch:before {
-                  content: "";
-                  position: absolute;
-                  left: 0.25rem;
-                  top: 0.25rem;
-                  height: 1rem;
-                  width: 1rem;
-                  transform: translateX(0);
-                  background-color: white;
-                  border-radius: 9999px;
-                  transition-duration: 300ms;
-                }
-                .switch:checked:before {
-                  transform: translateX(1.5rem);
-                }
-                </style>
             </div>
             
             <p>Calculate your total marks and SEE exam eligibility</p>
@@ -392,6 +372,8 @@ Follow our journey on social media for updates and resources.</p>
     
 </body>
 </html>
+
+
 
 
 

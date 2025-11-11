@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
         <!-- Google tag (gtag.js) -->
@@ -12,12 +12,23 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Enhanced Pomodoro Timer</title>
+    <title>College Daddy - Pomodoro Timer</title>
     <script src="../assets/js/components/navigation.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <link rel="stylesheet" href="../assets/css/navigation.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/pomodoro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Theme initialization script - runs before page render to prevent flash -->
+    <script>
+      (function() {
+        try {
+          const theme = localStorage.getItem('theme') || 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
     </head>
 <body>
     
@@ -27,7 +38,9 @@
                 <i class="fas fa-graduation-cap"></i>
                 <span>College Daddy</span>
             </a>
-            <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <div class="nav-actions">
+                <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            </div>
             <nav class="nav-links">
                 <a href="../index.html" class="nav-link">Home</a>
                 <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
@@ -35,6 +48,13 @@
                 <a href="pomodoro.html" class="nav-link active">Study Timer</a>
                 <a href="notes.html" class="nav-link">Notes</a>
                 <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <button
+                    class="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    title="Toggle theme"
+                >
+                    <span class="theme-icon">🌙</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -274,6 +294,7 @@
 
 </body>
 </html>
+
 
 
 

@@ -450,7 +450,11 @@ input[type="checkbox"]:checked::after {
 
 /*** Footer Section - FIXED ***/
 .footer {
-    background-color: var(--bg-darker);
+    background-color:var(--bg-darker);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: var(--text-gray);
     border-top: 2px solid var(--primary-color);
     padding: 40px 20px 20px;
@@ -999,16 +1003,9 @@ input[type="checkbox"]:checked::after {
     padding: 0 var(--spacing-md) var(--spacing-md);
     color: var(--text-light);
     line-height: 1.6;
+    display: none;
 }
 
-/* Hide answer by default (for CSS-only toggle) */
-.faq-item div[itemprop="acceptedAnswer"] {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height var(--transition-speed);
-    padding-top: 0;
-    padding-bottom: 0;
-}
 
 /* Show answer when active class is applied */
 .faq-item.active div[itemprop="acceptedAnswer"] {
@@ -1095,3 +1092,47 @@ input[type="checkbox"]:checked::after {
         font-size: 0.95rem;
     }
 }
+
+/* ===============================
+   STATUS BADGES + COMPLETION TIME
+================================== */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 8px;
+  color: white;
+}
+
+.badge-beginner {
+  background-color: #4caf50; /* Green */
+}
+
+.badge-intermediate {
+  background-color: #ff9800; /* Orange */
+}
+
+.badge-advanced {
+  background-color: #f44336; /* Red */
+}
+
+.completion-time {
+  font-size: 13px;
+  color: #555;
+  margin-top: 4px;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .badge {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+  .completion-time {
+    font-size: 12px;
+  }
+}
+
+

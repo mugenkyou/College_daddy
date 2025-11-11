@@ -1,118 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G1XX1WLPNP"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-G1XX1WLPNP"
+    ></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-G1XX1WLPNP');
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-G1XX1WLPNP");
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Your ultimate companion for academic success. Track your progress, calculate your grades, and stay organized throughout your college journey.">
-    <title>College Daddy - The Best CGPA Calculator, Study Tools & Roadmaps for Students</title>
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Your ultimate companion for academic success. Track your progress, calculate your grades, and stay organized throughout your college journey."
+    />
+    <title>
+      College Daddy - The Best CGPA Calculator, Study Tools & Roadmaps for
+      Students
+    </title>
+
     <!-- Open Graph Meta Tags for Social Sharing -->
-    <meta property="og:title" content="College Daddy – Student Success Simplified">
-    <meta property="og:description" content="Your ultimate college companion—track grades, stay organized, and achieve more.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://collegedaddy.live">
-    <meta property="og:image" content="images/college-daddy-logo.png">
-    
+    <meta
+      property="og:title"
+      content="College Daddy – Student Success Simplified"
+    />
+    <meta
+      property="og:description"
+      content="Your ultimate college companion—track grades, stay organized, and achieve more."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://collegedaddy.vercel.app" />
+    <meta property="og:image" content="images/college-daddy-logo.png" />
+
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json">
-    {
+      {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "College Daddy",
-        "url": "https://collegedaddy.live",
+        "url": "https://collegedaddy.vercel.app",
         "description": "Your ultimate companion for academic success. Track your progress, calculate your grades, and stay organized throughout your college journey.",
         "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://collegedaddy.live/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
+          "@type": "SearchAction",
+          "target": "https://collegedaddy.vercel.app/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
         }
-    }
+      }
     </script>
+<<<<<<< HEAD
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <link rel="stylesheet" href="assets/css/navigation.css">
     <link rel="stylesheet" href="assets/css/index.css">
+=======
+    <link rel="stylesheet" href="assets/css/navigation.css" />
+    <link rel="stylesheet" href="assets/css/index.css" />
+    <link rel="stylesheet" href="assets/css/hero.css" />
+>>>>>>> main
     <style>
-        /* FAQ Toggle Specific Styles */
-        .faq-question {
-            cursor: pointer;
-            position: relative;
-            padding-right: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+      /* FAQ Toggle Specific Styles , WHY IS FAQ STYLING HERE , SEPARATE THIS OUT */
+      .faq-question {
+        cursor: pointer;
+        position: relative;
+        padding-right: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .faq-question h3 {
-            flex: 1;
-        }
+      .faq-question h3 {
+        flex: 1;
+      }
 
-        .faq-question::after {
-            content: '+';
-            position: absolute;
-            right: 10px;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
+      .faq-question::after {
+        content: "+";
+        position: absolute;
+        right: 10px;
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+      }
 
-        .faq-item.active .faq-question::after {
-            content: '−';
-        }
+      .faq-item.active .faq-question::after {
+        content: "−";
+      }
 
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            opacity: 0;
-        }
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        opacity: 0;
+      }
 
-        .faq-item.active .faq-answer {
-            max-height: 500px; /* Adjust based on your content */
-            opacity: 1;
-            padding-top: 1rem;
-        }
+      .faq-item.active .faq-answer {
+        max-height: 500px; /* Adjust based on your content */
+        opacity: 1;
+        padding-top: 1rem;
+      }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    </head>
-<body>
-        <header>
-        <div class="nav-container">
-            <a href="index.html" class="logo" aria-label="College Daddy Home">
-                <i class="fas fa-graduation-cap"></i>
-                <span>College Daddy</span>
-            </a>
-            <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-            <nav class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="pages/cgpa.html" class="nav-link">CGPA Calculator</a>
-                <a href="pages/iacal.html" class="nav-link">IA Calculator</a>
-                <a href="pages/pomodoro.html" class="nav-link">Study Timer</a>
-                <a href="pages/notes.html" class="nav-link">Notes</a>
-                <a href="pages/roadmap.html" class="nav-link">Roadmap</a>
-            </nav>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Web font for hero/title -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Theme initialization script - runs before page render to prevent flash -->
+    <script>
+      (function() {
+        try {
+          const theme = localStorage.getItem('theme') || 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          // localStorage not available, use default
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="nav-container">
+        <a href="index.html" class="logo" aria-label="College Daddy Home">
+          <i class="fas fa-graduation-cap"></i>
+          <span>College Daddy</span>
+        </a>
+        <div class="nav-actions">
+          <button
+            class="menu-button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
         </div>
+        <nav class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="pages/cgpa.html" class="nav-link">CGPA Calculator</a>
+          <a href="pages/iacal.html" class="nav-link">IA Calculator</a>
+          <a href="pages/pomodoro.html" class="nav-link">Study Timer</a>
+          <a href="pages/notes.html" class="nav-link">Notes</a>
+          <a href="pages/roadmap.html" class="nav-link">Roadmap</a>
+          <button
+            class="theme-toggle"
+            aria-label="Toggle dark/light theme"
+            title="Toggle theme"
+          >
+            <span class="theme-icon">🌙</span>
+          </button>
+        </nav>
+      </div>
     </header>
 
     <section class="hero">
-        <h1>College Daddy: The Ultimate Student Toolkit</h1>
-        <p class="subheading">CGPA Calculator, Study Planner & Expert Roadmaps</p>
-        <p>Your ultimate companion for academic success. Track your progress, calculate your grades, and stay organized throughout your college journey.</p>
-        <p class="tagline"><strong>Developed with students in mind, for students by a student.</strong></p>
+      <h1>
+        College Daddy: The Ultimate Student Toolkit
+      </h1>
+      <p class="subheading">
+        CGPA Calculator , Study Planner & Expert Roadmaps
+      </p>
+      <p class="tagline">
+        <strong
+          >Developed with students in mind, for students by a student.</strong
+        >
+      </p>
     </section>
-    
 
-   
     <section class="features">
+<<<<<<< HEAD
         <h2>College Daddy Tools & Resources</h2>
         <div class="features-container">
             <div class="feature-card" data-aos="fade-up" data-aos-delay="0" data-url="pages/cgpa.html">
@@ -150,117 +216,227 @@
                 <h3>Student Resources</h3>
                 <p>Sharpen your problem-solving skills with College Daddy's best aptitude resources!</p>
             </div>
+=======
+      <h2>College Daddy Tools & Resources</h2>
+      <div class="features-container">
+        <div class="feature-card" data-url="pages/cgpa.html">
+          <div class="feature-icon">📊</div>
+          <h3>Grade Calculator</h3>
+          <p>
+            Calculate your CGPA easily with College Daddy's advanced calculator.
+            Track your academic progress across semesters.
+          </p>
+>>>>>>> main
         </div>
+
+        <div class="feature-card" data-url="pages/notes.html">
+          <div class="feature-icon">📒</div>
+          <h3>Study Resources</h3>
+          <p>
+            Get notes, lab manuals, and question papers for all 8 semesters in
+            one place with College Daddy! Perfect for exams, revisions, and
+            practicals.
+          </p>
+        </div>
+
+        <div class="feature-card" data-url="pages/iacal.html">
+          <div class="feature-icon">📝</div>
+          <h3>IA Calculator</h3>
+          <p>
+            Keep track of your internal assessment marks and calculate your best
+            performances with College Daddy's tools.
+          </p>
+        </div>
+
+        <div class="feature-card" data-url="pages/pomodoro.html">
+          <div class="feature-icon">⏳</div>
+          <h3>Study Planner</h3>
+          <p>
+            Boost your productivity with College Daddy's simple Pomodoro timer!
+            Stay focused by working in short sprints with regular breaks.
+          </p>
+        </div>
+
+        <div class="feature-card" data-url="pages/roadmap.html">
+          <div class="feature-icon">🛤️</div>
+          <h3>College Tips</h3>
+          <p>
+            Your guided path to mastering tech careers like AI, Full Stack, and
+            more with College Daddy's roadmaps!
+          </p>
+        </div>
+
+        <div class="feature-card" data-url="https://www.indiabix.com/">
+          <div class="feature-icon">🧠</div>
+          <h3>Student Resources</h3>
+          <p>
+            Sharpen your problem-solving skills with College Daddy's best
+            aptitude resources!
+          </p>
+        </div>
+        <div class="feature-card" data-url="pages/cpdsa.html">
+          <div class="feature-icon">💻</div>
+          <h3>CP & DSA Resources</h3>
+          <p>
+            Explore top platforms, tutorials, and practice sites for mastering
+            Competitive Programming and Data Structures & Algorithms.
+          </p>
+        </div>
+
+      </div>
     </section>
 
     <section class="testimonials">
-        <h2>Why Students Love College Daddy</h2>
-        <div class="testimonial-container">
-            <div class="testimonial">
-                <p>"College Daddy helped me stay on top of my grades and plan my study time effectively. It's been an essential part of my academic success!"</p>
-                <p class="student-name">- Engineering Student</p>
-            </div>
-            <div class="testimonial">
-                <p>"The CGPA calculator from College Daddy makes it so easy to track my progress and set realistic goals for each semester."</p>
-                <p class="student-name">- Computer Science Major</p>
-            </div>
+      <h2>Why Students Love College Daddy</h2>
+      <div class="testimonial-container">
+        <div class="testimonial">
+          <p>
+            "College Daddy helped me stay on top of my grades and plan my study
+            time effectively. It's been an essential part of my academic
+            success!"
+          </p>
+          <p class="student-name">- Engineering Student</p>
         </div>
+        <div class="testimonial">
+          <p>
+            "The CGPA calculator from College Daddy makes it so easy to track my
+            progress and set realistic goals for each semester."
+          </p>
+          <p class="student-name">- Computer Science Major</p>
+        </div>
+      </div>
     </section>
 
     <!-- FAQ Section with Toggle Functionality -->
     <section class="faq-section">
-        <h2 class="faq-title">📌 Frequently Asked Questions (FAQs)</h2>
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>1. What is College Daddy, and how does it help students?</h3>
-                </div>
-                <div class="faq-answer">
-                    <p>College Daddy is your ultimate college companion, designed to help students track grades, organize assignments, and stay on top of their academic journey.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>2. Can I track my GPA and grades with College Daddy?</h3>
-                </div>
-                <div class="faq-answer">
-                    <p>Yes! College Daddy provides a simple GPA calculator and grade tracker to help you monitor your academic progress.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>3. Is College Daddy free to use?</h3>
-                </div>
-                <div class="faq-answer">
-                    <p>Yes, College Daddy is completely free for students. No hidden fees or subscriptions!</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>4. How can I organize my assignments and deadlines?</h3>
-                </div>
-                <div class="faq-answer">
-                    <p>College Daddy offers a built-in planner where you can set reminders, track assignments, and stay ahead of deadlines.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>5. Does College Daddy work for all colleges?</h3>
-                </div>
-                <div class="faq-answer">
-                    <p>Absolutely! Whether you're in a university, community college, or online program, College Daddy is designed to help students in any academic setting.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>6. Is College Daddy available on mobile?</h3>
-                </div>
-                <div class="faq-answer">
-                    <p>Currently, College Daddy is a web-based platform, but a mobile app version is in development. Stay tuned!</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>7. Does College Daddy have all notes for my subjects?</h3>
-                </div>
-                <div class="faq-answer">
-                    <p>Not yet! We're working on adding a <strong>comprehensive notes section</strong>, but since every course is different, it's a bit of a challenge. Stay tuned for updates!</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>8. Are College Daddy's roadmaps reliable?</h3>
-                </div>
-                <div class="faq-answer">
-                    <p>Yes! Our roadmaps are designed by <strong>industry professionals and academic experts</strong>, ensuring that students follow the best learning paths possible.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>9. Can I share my progress with friends or professors?</h3>
-                </div>
-                <div class="faq-answer">
-                    <p>Currently, progress tracking is personal, but we're exploring ways to add <strong>collaborative features</strong> in the future.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>10. How can I suggest new features for College Daddy?</h3>
-                </div>
-                <div class="faq-answer">
-                    <p>We love feedback! You can send your ideas through our <strong>contact page</strong> or social media channels. Your input helps shape the future of College Daddy!</p>
-                </div>
-            </div>
+      <h2 class="faq-title">📌 Frequently Asked Questions (FAQs)</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>1. What is College Daddy, and how does it help students?</h3>
+          </div>
+          <div class="faq-answer">
+            <p>
+              College Daddy is your ultimate college companion, designed to help
+              students track grades, organize assignments, and stay on top of
+              their academic journey.
+            </p>
+          </div>
         </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>2. Can I track my GPA and grades with College Daddy?</h3>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Yes! College Daddy provides a simple GPA calculator and grade
+              tracker to help you monitor your academic progress.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>3. Is College Daddy free to use?</h3>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Yes, College Daddy is completely free for students. No hidden fees
+              or subscriptions!
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>4. How can I organize my assignments and deadlines?</h3>
+          </div>
+          <div class="faq-answer">
+            <p>
+              College Daddy offers a built-in planner where you can set
+              reminders, track assignments, and stay ahead of deadlines.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>5. Does College Daddy work for all colleges?</h3>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Absolutely! Whether you're in a university, community college, or
+              online program, College Daddy is designed to help students in any
+              academic setting.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>6. Is College Daddy available on mobile?</h3>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Currently, College Daddy is a web-based platform, but a mobile app
+              version is in development. Stay tuned!
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>7. Does College Daddy have all notes for my subjects?</h3>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Not yet! We're working on adding a
+              <strong>comprehensive notes section</strong>, but since every
+              course is different, it's a bit of a challenge. Stay tuned for
+              updates!
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>8. Are College Daddy's roadmaps reliable?</h3>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Yes! Our roadmaps are designed by
+              <strong>industry professionals and academic experts</strong>,
+              ensuring that students follow the best learning paths possible.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>9. Can I share my progress with friends or professors?</h3>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Currently, progress tracking is personal, but we're exploring ways
+              to add <strong>collaborative features</strong> in the future.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>10. How can I suggest new features for College Daddy?</h3>
+          </div>
+          <div class="faq-answer">
+            <p>
+              We love feedback! You can send your ideas through our
+              <strong>contact page</strong> or social media channels. Your input
+              helps shape the future of College Daddy!
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer class="footer">
@@ -271,9 +447,14 @@
                 <p class="tagline">Developed with students in mind, for students by a student.</p>
                 
                 <div class="social-links">
-                    <a href="https://www.linkedin.com/company/collegedaddy-tech" target="_blank" class="social-link" aria-label="LinkedIn">
+                    <a href="https://www.instagram.com/collegedaddy.tech/" target="_blank" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <!-- LinkedIn link commented out
+                    <a href="https://www.linkedin.com/company/collegedaddy-tech/" target="_blank" class="social-link" aria-label="LinkedIn">
                         <i class="fab fa-linkedin"></i>
                     </a>
+                    -->
                     <a href="https://github.com/collegedaddy" target="_blank" class="social-link" aria-label="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
@@ -302,35 +483,37 @@ Follow our journey on social media for updates and resources.</p>
             <p>&copy; 2025 College Daddy. All rights reserved. Developed by <span class="developer-name">Sachin</span></p>
         </div>
     </footer>
-    
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="assets/js/components/navigation.js"></script>
     <script src="assets/js/pages/index.js"></script>
     <script>
-        // FAQ Toggle Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const faqItems = document.querySelectorAll('.faq-item');
-            
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                
-                question.addEventListener('click', () => {
-                    // Close all other items
-                    faqItems.forEach(otherItem => {
-                        if (otherItem !== item && otherItem.classList.contains('active')) {
-                            otherItem.classList.remove('active');
-                        }
-                    });
-                    
-                    // Toggle the clicked item
-                    item.classList.toggle('active');
-                });
+      // FAQ Toggle Functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        faqItems.forEach((item) => {
+          const question = item.querySelector(".faq-question");
+
+          question.addEventListener("click", () => {
+            // Close all other items
+            faqItems.forEach((otherItem) => {
+              if (
+                otherItem !== item &&
+                otherItem.classList.contains("active")
+              ) {
+                otherItem.classList.remove("active");
+              }
             });
+
+            // Toggle the clicked item
+            item.classList.toggle("active");
+          });
         });
+      });
     </script>
-</body>
+  </body>
 </html>
-
-
-
-

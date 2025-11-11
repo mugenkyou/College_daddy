@@ -84,6 +84,100 @@ college_daddy/
 - **Data Files**: Application data is stored in dedicated data directory for easy updates
 - **Page Templates**: Each feature has its own dedicated HTML page in the pages directory
 
+## API Documentation
+
+### PDF Thumbnail API
+
+#### Overview
+College Daddy now supports automatic PDF thumbnail generation! When you upload a PDF, a thumbnail is automatically generated for the first page. This improves user experience by allowing users to preview PDFs without downloading them.
+
+#### Features
+- ✅ **Automatic Generation**: Thumbnails are generated automatically on PDF upload
+- ✅ **Caching**: Generated thumbnails are cached to improve performance
+- ✅ **Multiple Formats**: Support for PNG and WebP formats
+- ✅ **Automatic Cleanup**: Thumbnails are deleted when PDFs are removed
+- ✅ **Scalable**: Designed to handle multiple uploads efficiently
+
+#### Endpoints
+
+##### 1. Upload PDF (with automatic thumbnail generation)
+```
+POST /api/admin/upload
+Content-Type: multipart/form-data
+
+Parameters:
+- semester (required): Semester ID (1-8)
+- branch (required): Branch ID (e.g., "cse", "physics")
+- subject (required): Subject ID
+- title (required): PDF title
+- description (required): PDF description
+- pdf (required): PDF file
+
+Response:
+{
+  "success": true,
+  "message": "PDF uploaded and notes updated.",
+  "thumbnailUrl": "/api/thumbnail?path=/data/notes/semester-1/cse/dsa/file.pdf&format=png"
+}
+```
+
+##### 2. Get Thumbnail
+```
+GET /api/thumbnail?path=<pdf_path>&format=<format>
+
+Query Parameters:
+- path (required): Path to the PDF file (e.g., "/data/notes/semester-1/cse/dsa/file.pdf")
+- format (optional): Thumbnail format - "png" (default) or "webp"
+
+Response: Binary image data (PNG or WebP)
+
+Status Codes:
+- 200: Thumbnail served successfully
+- 400: Missing required parameters
+- 404: PDF or thumbnail not found
+- 500: Error generating thumbnail
+```
+
+##### 3. Delete Material (removes PDF and thumbnail)
+```
+POST /api/admin/delete-material
+Content-Type: application/json
+
+Body:
+{
+  "semester": "1",
+  "branch": "cse",
+  "subject": "cse301",
+  "path": "/data/notes/semester-1/cse/dsa/file.pdf"
+}
+
+Response:
+{
+  "success": true,
+  "message": "Material and thumbnail deleted successfully"
+}
+```
+
+#### Thumbnail Storage
+Thumbnails are stored in the `data/thumbnails/` directory with MD5-hashed filenames for uniqueness and collision prevention.
+
+#### Performance Considerations
+- Thumbnails are cached after first generation
+- Cache is invalidated when PDFs are deleted
+- Thumbnail generation is non-blocking (upload succeeds even if thumbnail generation fails)
+- Supports both PNG and WebP formats for optimal CDN delivery
+
+#### Usage Example
+
+```javascript
+// Fetch thumbnail in your frontend
+const pdfPath = "/data/notes/semester-1/cse/dsa/file.pdf";
+const thumbnailUrl = `/api/thumbnail?path=${pdfPath}&format=png`;
+
+// Use in HTML
+<img src={thumbnailUrl} alt="PDF Preview" />
+```
+
 ## Contribution Guidelines
 We welcome contributions to enhance College Daddy! To contribute:
 1. Fork the repository and create a new branch for your feature or bug fix.

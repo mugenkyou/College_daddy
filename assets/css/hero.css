@@ -1,0 +1,164 @@
+/* assets/css/hero.css */
+
+.momo-signature-regular {
+  font-family: "Momo Signature", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* — Hero — */
+.hero {
+  padding: 6rem 1.5rem;
+  text-align: center;
+  position: relative;
+  color: #fff;
+
+  /* brighter + sharper grid */
+  background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.12) 1px,
+      transparent 1px
+    ),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 40px 40px;
+
+  animation: gridMove 4s linear infinite; /* faster */
+  transition: background var(--transition-speed, 0.3s) ease, color var(--transition-speed, 0.3s) ease;
+}
+
+[data-theme="light"] .hero {
+  color: #1a1a1a;
+  background: linear-gradient(
+      90deg,
+      rgba(0, 102, 204, 0.08) 1px,
+      transparent 1px
+    ),
+    linear-gradient(0deg, rgba(0, 102, 204, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@keyframes gridMove {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 40px 40px, 40px 40px;
+  }
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background: radial-gradient(circle at 50% 30%, #009dffb3, transparent 80%);
+
+  filter: blur(60px);
+  animation: glowMove 25s linear infinite;
+  transition: background var(--transition-speed, 0.3s) ease;
+}
+
+[data-theme="light"] .hero::before {
+  background: radial-gradient(circle at 50% 30%, #0066cc80, transparent 80%);
+}
+
+/* below keyframe is for random movement of glow effect , its a bit repetitive */
+@keyframes glowMove {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  15% {
+    transform: translate(25%, -10%) scale(1.2);
+  }
+  30% {
+    transform: translate(-20%, 15%) scale(0.9);
+  }
+  45% {
+    transform: translate(10%, -25%) scale(1.3);
+  }
+  60% {
+    transform: translate(-30%, -5%) scale(1.1);
+  }
+  75% {
+    transform: translate(15%, 20%) scale(1.4);
+  }
+  90% {
+    transform: translate(-10%, -15%) scale(1.05);
+  }
+  100% {
+    transform: translate(0%, 0%) scale(1);
+  }
+}
+
+.hero > * {
+  position: relative; /* <-- puts text on top of overlay */
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, -apple-system, sans-serif;
+}
+
+/* If you want the h1 to use the signature font, uncomment below
+.hero h1 {
+  font-family: "Momo Signature", cursive;
+}
+*/
+
+.hero .subheading {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  color: #e2e2e2;
+  transition: color var(--transition-speed, 0.3s) ease;
+}
+
+[data-theme="light"] .hero .subheading {
+  color: #4a4a4a;
+}
+
+.hero p {
+  max-width: 700px;
+  margin-inline: auto;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.hero .tagline {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #ffcb47;
+  font-size: 15px;
+}
+
+/* Optional animation */
+.hero > * {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.hero > *:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.hero > *:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.hero > *:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+

@@ -96,8 +96,81 @@ class MobileMenu {
     }
 }
 
+// Theme Manager
+class ThemeManager {
+    constructor() {
+        this.theme = this.getStoredTheme() || 'dark';
+        this.init();
+    }
+
+    init() {
+        // Apply stored theme immediately to prevent flash
+        this.applyTheme(this.theme);
+        
+        // Wait for DOM to be ready before setting up button
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.setupToggleButton());
+        } else {
+            this.setupToggleButton();
+        }
+    }
+
+    setupToggleButton() {
+        // Set up theme toggle button
+        const themeToggle = document.querySelector('.theme-toggle');
+        if (themeToggle) {
+            // Add click listener
+            themeToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggleTheme();
+            });
+            this.updateToggleIcon();
+        }
+    }
+
+    getStoredTheme() {
+        try {
+            return localStorage.getItem('theme');
+        } catch (e) {
+            console.warn('localStorage not available:', e);
+            return null;
+        }
+    }
+
+    setStoredTheme(theme) {
+        try {
+            localStorage.setItem('theme', theme);
+        } catch (e) {
+            console.warn('localStorage not available:', e);
+        }
+    }
+
+    applyTheme(theme) {
+        this.theme = theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        this.setStoredTheme(theme);
+        this.updateToggleIcon();
+    }
+
+    toggleTheme() {
+        const newTheme = this.theme === 'dark' ? 'light' : 'dark';
+        this.applyTheme(newTheme);
+    }
+
+    updateToggleIcon() {
+        const themeIcon = document.querySelector('.theme-toggle .theme-icon');
+        if (themeIcon) {
+            themeIcon.textContent = this.theme === 'dark' ? '🌙' : '☀️';
+        }
+    }
+}
+
 // Initialize navigation when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize theme manager first
+    const themeManager = new ThemeManager();
+    
     // Wait a moment to ensure other scripts have run
     setTimeout(() => {
         console.log('Initializing mobile menu');
@@ -115,3 +188,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 100);
 }); 
+

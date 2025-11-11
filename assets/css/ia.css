@@ -9,6 +9,7 @@
     --bg-dark: #000000;
     --bg-darker: #000000;
     --card-bg: #181818;
+    --card-bg-hover: #1e1e1e;
     --input-bg: #242424;
     
     /* Text colors */
@@ -28,15 +29,37 @@
     --transition-speed: 0.3s;
 }
 
+/* Light theme variables */
+[data-theme="light"] {
+    /* Background colors */
+    --bg-dark: #ffffff;
+    --bg-darker: #f5f5f5;
+    --card-bg: #ffffff;
+    --card-bg-hover: #f0f0f0;
+    --input-bg: #f8f8f8;
+    
+    /* Text colors */
+    --text-light: #1a1a1a;
+    --text-gray: #666666;
+    --text-muted: #888888;
+    
+    /* Border color */
+    --border-color: #e0e0e0;
+    
+    /* Effects */
+    --shadow-color: rgba(0, 102, 204, 0.1);
+}
+
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
     margin: 0;
     padding: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
 /* Main container adjustments for better layout with navigation */
@@ -62,6 +85,12 @@ main {
     overflow: hidden;
     transform-style: preserve-3d;
     perspective: 1000px;
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+[data-theme="light"] .container {
+    box-shadow: 0 8px 32px rgba(0, 102, 204, 0.1);
+    border: 1px solid rgba(0, 102, 204, 0.2);
 }
 
 .container::before {
@@ -97,14 +126,93 @@ main {
 }
 
 .header p {
-    color: #666;
+    color: var(--text-muted);
     margin: 8px 0 0 0;
     font-size: 0.95em;
+    transition: color var(--transition-speed) ease;
+}
+
+/* Calculator Mode Toggle */
+.calculator-mode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 16px 0;
+}
+
+.mode-toggle-label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1cm;
+    cursor: pointer;
+}
+
+.course-credit-label {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-light);
+    transition: color var(--transition-speed) ease;
+}
+
+/* Toggle Switch Styles */
+.switch {
+    position: relative;
+    height: 1.5rem;
+    width: 3rem;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 9999px;
+    background-color: #4b5563;
+    transition: all 300ms ease;
+    border: 2px solid transparent;
+}
+
+.switch:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.switch:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+.switch:before {
+    content: "";
+    position: absolute;
+    left: 0.25rem;
+    top: 0.25rem;
+    height: 1rem;
+    width: 1rem;
+    transform: translateX(0);
+    background-color: #ffffff;
+    border-radius: 9999px;
+    transition: transform 300ms ease;
+}
+
+.switch:checked:before {
+    transform: translateX(1.5rem);
+}
+
+[data-theme="light"] .switch {
+    background-color: #d1d5db;
+    border-color: transparent;
+}
+
+[data-theme="light"] .switch:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+[data-theme="light"] .switch:before {
+    background-color: #ffffff;
 }
 
 /* Sections */
 .section {
-    background-color: #161616;
+    background-color: var(--card-bg);
     padding: 24px;
     border-radius: 12px;
     margin-bottom: 24px;
@@ -114,6 +222,10 @@ main {
     transform: translateZ(0);
     position: relative;
     overflow: hidden;
+}
+
+[data-theme="light"] .section {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .section::after {
@@ -130,12 +242,26 @@ main {
         rgba(0, 0, 0, 0.1) 100%
     );
     pointer-events: none;
+    transition: background var(--transition-speed) ease;
+}
+
+[data-theme="light"] .section::after {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 102, 204, 0.05) 0%,
+        rgba(0, 102, 204, 0) 50%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
 }
 
 .section:hover {
     border-color: var(--primary-color);
     box-shadow: 0 8px 24px rgba(0, 157, 255, 0.2);
     transform: translateY(-2px) translateZ(5px);
+}
+
+[data-theme="light"] .section:hover {
+    box-shadow: 0 8px 24px rgba(0, 102, 204, 0.15);
 }
 
 .section-title {
@@ -169,30 +295,37 @@ main {
 .input-group label {
     display: block;
     margin-bottom: 8px;
-    color: #ccc;
+    color: var(--text-light);
     font-size: 0.95em;
     font-weight: 500;
+    transition: color var(--transition-speed) ease;
 }
 
 .input-group .max-marks {
-    color: #666;
+    color: var(--text-muted);
     font-size: 0.85em;
     position: absolute;
     right: 12px;
     top: 8px;
+    transition: color var(--transition-speed) ease;
 }
 
 /* Form Elements */
 input {
     width: 100%;
     padding: 12px 16px;
-    border: 2px solid #2a2a2a;
+    border: 2px solid var(--border-color);
     border-radius: 10px;
-    background-color: #1a1a1a;
-    color: #fff;
+    background-color: var(--input-bg);
+    color: var(--text-light);
     font-size: 16px;
     box-sizing: border-box;
     transition: all 0.3s ease;
+}
+
+input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
 }
 
 input:focus {
@@ -201,8 +334,16 @@ input:focus {
     box-shadow: 0 0 15px rgba(0, 157, 255, 0.15);
 }
 
+[data-theme="light"] input:focus {
+    box-shadow: 0 0 15px rgba(0, 102, 204, 0.2);
+}
+
 input:hover {
-    border-color: #444;
+    border-color: var(--border-color);
+}
+
+[data-theme="light"] input:hover {
+    border-color: rgba(0, 102, 204, 0.3);
 }
 
 /* Button Styles */
@@ -236,7 +377,7 @@ button:active {
 
 /* Results Section */
 .result-section {
-    background: linear-gradient(145deg, #161616, #1a1a1a);
+    background: linear-gradient(145deg, var(--card-bg), var(--card-bg-hover));
     padding: 28px;
     border-radius: 12px;
     margin-top: 24px;
@@ -246,6 +387,12 @@ button:active {
     position: relative;
     overflow: hidden;
     transform: translateZ(0);
+    transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+[data-theme="light"] .result-section {
+    background: linear-gradient(145deg, var(--card-bg), var(--card-bg-hover));
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .result-section::before {
@@ -280,18 +427,26 @@ button:active {
     align-items: center;
     margin-bottom: 16px;
     padding: 16px;
-    background-color: #1e1e1e;
+    background-color: var(--input-bg);
     border-radius: 10px;
     transition: all 0.3s ease;
     transform: translateZ(0);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    border: 1px solid #2d2d2d;
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .result-item {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .result-item:hover {
-    background-color: #222;
+    background-color: var(--card-bg-hover);
     transform: translateY(-1px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .result-item:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .result-item.total-marks {
@@ -299,17 +454,28 @@ button:active {
     border: 1px solid rgba(0, 157, 255, 0.2);
 }
 
+[data-theme="light"] .result-item.total-marks {
+    background-color: rgba(0, 102, 204, 0.1);
+    border: 1px solid rgba(0, 102, 204, 0.2);
+}
+
 .result-label {
-    color: #ccc;
+    color: var(--text-light);
     font-size: 0.95em;
     font-weight: 500;
+    transition: color var(--transition-speed) ease;
 }
 
 .result-value {
     font-weight: 600;
-    color: #00ff88;
+    color: var(--success-color);
     font-size: 1.1em;
     text-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
+    transition: color var(--transition-speed) ease, text-shadow var(--transition-speed) ease;
+}
+
+[data-theme="light"] .result-value {
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.2);
 }
 
 /* Download button fix */
@@ -1003,3 +1169,5 @@ i.fas, i.far, i.fab, i.fa {
     font-family: "Font Awesome 5 Free", "Font Awesome 5 Brands" !important;
 }
 .tool-card p { color: var(--text-muted); }
+
+

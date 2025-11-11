@@ -441,3 +441,5 @@ function updateSemesterChart(completedSem, remainingSem, requiredCGPA, chartOpti
         });
     }
 }
+
+

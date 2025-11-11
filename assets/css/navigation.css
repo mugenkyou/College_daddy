@@ -15,6 +15,16 @@
     --border-radius: 8px;
 }
 
+/* Light theme variables */
+[data-theme="light"] {
+    --dark-bg: #ffffff;
+    --darker-bg: #f5f5f5;
+    --border-color: #e0e0e0;
+    --text-color: #333333;
+    --text-muted: #666666;
+    --text-bright: #000000;
+}
+
 /* Header and Navigation Container */
 body > header {
     background-color: var(--darker-bg) !important;
@@ -24,6 +34,11 @@ body > header {
     z-index: 1000 !important;
     border-bottom: 1px solid var(--border-color) !important;
     width: 100% !important;
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+[data-theme="light"] body > header {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1) !important;
 }
 
 body > header .nav-container {
@@ -34,6 +49,68 @@ body > header .nav-container {
     max-width: 1400px !important;
     margin: 0 auto !important;
 }
+
+/* Nav Actions Container */
+body > header .nav-actions {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+    height: 100% !important;
+}
+
+/* Theme Toggle Button */
+body > header .theme-toggle {
+    background: transparent !important;
+    border: 2px solid var(--primary-color) !important;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all var(--transition-speed) ease !important;
+    color: var(--primary-color) !important;
+    font-size: 1.2rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: relative !important;
+    overflow: hidden !important;
+    vertical-align: middle !important;
+    flex-shrink: 0 !important;
+    order: 999 !important; /* Ensure it's always last */
+}
+
+body > header .theme-toggle:hover {
+    background: var(--primary-color) !important;
+    color: var(--text-bright) !important;
+    transform: scale(1.1) rotate(15deg) !important;
+    box-shadow: 0 4px 12px rgba(66, 133, 244, 0.4) !important;
+}
+
+body > header .theme-toggle:active {
+    transform: scale(0.95) !important;
+}
+
+body > header .theme-toggle .theme-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: transform var(--transition-speed) ease !important;
+    line-height: 1 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: middle !important;
+}
+
+body > header .theme-toggle:hover .theme-icon {
+    transform: rotate(360deg) !important;
+}
+
+/* Theme icon is handled by JavaScript */
 
 /* Logo Styling */
 body > header .logo {
@@ -71,6 +148,7 @@ body > header .logo span {
 /* Navigation Links */
 body > header .nav-links {
     display: flex !important;
+    align-items: center !important;
     gap: 1.5rem !important;
     transition: transform var(--transition-speed) ease !important;
     margin: 0 !important;
@@ -87,6 +165,12 @@ body > header .nav-link {
     overflow: hidden !important;
     text-decoration: none !important;
     display: inline-block !important;
+}
+
+/* Theme toggle when inside nav-links */
+body > header .nav-links .theme-toggle {
+    margin-left: 0.5rem !important;
+    flex-shrink: 0 !important;
 }
 
 body > header .nav-link::before {
@@ -124,6 +208,13 @@ body > header .menu-button {
     color: var(--primary-color) !important;
     cursor: pointer !important;
     z-index: 1002 !important;
+    padding: 0.5rem !important;
+    margin: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 1 !important;
 }
 
 /* Nav Overlay for Mobile */
@@ -165,9 +256,32 @@ body > header .menu-button {
         justify-content: space-between !important; /* Ensure proper spacing */
     }
     
+    body > header .nav-actions {
+        gap: 0.5rem !important;
+    }
+    
+    body > header .theme-toggle {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 1rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    body > header .theme-toggle .theme-icon {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
     body > header .menu-button {
-        display: block !important;
+        display: flex !important;
         margin-right: 0 !important; /* Ensure proper alignment */
+        align-items: center !important;
+        justify-content: center !important;
     }
     
     body > header .nav-links {
@@ -184,6 +298,15 @@ body > header .menu-button {
         z-index: 1001 !important;
         border-left: 1px solid var(--border-color) !important;
         margin: 0 !important; /* Reset margin */
+        align-items: stretch !important;
+    }
+    
+    body > header .nav-links .theme-toggle {
+        margin-left: 0 !important;
+        margin-top: auto !important;
+        margin-bottom: 1rem !important;
+        align-self: center !important;
+        order: 999 !important;
     }
     
     body > header .nav-links.active {
@@ -244,3 +367,4 @@ body > header .menu-button {
     transform: rotate(10deg);
     transition: transform 0.3s ease;
 } 
+

@@ -196,3 +196,4 @@ if (feedbackLink) {
 
 // Initialize the application
 new RoadmapApp();
+

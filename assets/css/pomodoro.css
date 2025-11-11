@@ -34,6 +34,26 @@
     --transition-speed: 0.3s;
 }
 
+/* Light theme variables */
+[data-theme="light"] {
+    /* Background colors */
+    --bg-dark: #ffffff;
+    --bg-darker: #f5f5f5;
+    --card-bg: #ffffff;
+    --input-bg: #f8f8f8;
+    
+    /* Text colors */
+    --text-light: #1a1a1a;
+    --text-gray: #666666;
+    --text-muted: #888888;
+    
+    /* Border color */
+    --border-color: #e0e0e0;
+    
+    /* Effects */
+    --shadow-color: rgba(0, 102, 204, 0.1);
+}
+
 /* Font Awesome icon fixes */
 i.fas, i.far, i.fab, i.fa {
     display: inline-block !important;
@@ -51,6 +71,7 @@ body {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
 main {
@@ -819,3 +840,4 @@ html {
     z-index: 5;
     position: relative;
 }
+
