@@ -34,7 +34,9 @@ body > header {
     z-index: 1000 !important;
     border-bottom: 1px solid var(--border-color) !important;
     width: 100% !important;
-    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    transition: background-color var(--transition-speed) ease, 
+                box-shadow var(--transition-speed) ease, 
+                border-color var(--transition-speed) ease;
 }
 
 [data-theme="light"] body > header {
@@ -59,7 +61,7 @@ body > header .nav-actions {
     height: 100% !important;
 }
 
-/* Theme Toggle Button */
+/* Theme Toggle Button with enhanced animations */
 body > header .theme-toggle {
     background: transparent !important;
     border: 2px solid var(--primary-color) !important;
@@ -80,6 +82,25 @@ body > header .theme-toggle {
     vertical-align: middle !important;
     flex-shrink: 0 !important;
     order: 999 !important; /* Ensure it's always last */
+}
+
+/* Ripple effect on click */
+body > header .theme-toggle::after {
+    content: '' !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    background: var(--primary-color) !important;
+    opacity: 0 !important;
+    transform: scale(0) !important;
+    transition: transform 0.5s ease, opacity 0.5s ease !important;
+}
+
+body > header .theme-toggle:active::after {
+    transform: scale(1.5) !important;
+    opacity: 0.3 !important;
+    transition: transform 0s, opacity 0s !important;
 }
 
 body > header .theme-toggle:hover {
@@ -104,6 +125,8 @@ body > header .theme-toggle .theme-icon {
     margin: 0 !important;
     padding: 0 !important;
     vertical-align: middle !important;
+    position: relative !important;
+    z-index: 1 !important;
 }
 
 body > header .theme-toggle:hover .theme-icon {

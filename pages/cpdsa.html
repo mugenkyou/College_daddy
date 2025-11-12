@@ -10,6 +10,24 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+    <!-- Theme initialization script - runs before page render to prevent flash -->
+    <script>
+      (function() {
+        try {
+          const autoMode = localStorage.getItem('themeAutoMode') === 'true';
+          let theme;
+          if (autoMode) {
+            const hour = new Date().getHours();
+            theme = (hour >= 18 || hour < 6) ? 'dark' : 'light';
+          } else {
+            theme = localStorage.getItem('theme') || 'dark';
+          }
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
   </head>
 
   <body>

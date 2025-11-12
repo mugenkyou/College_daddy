@@ -96,10 +96,12 @@ class MobileMenu {
     }
 }
 
-// Theme Manager
+// Theme Manager with Auto-Switch and Smooth Transitions
 class ThemeManager {
     constructor() {
-        this.theme = this.getStoredTheme() || 'dark';
+        this.theme = this.getStoredTheme() || this.getAutoTheme();
+        this.autoMode = this.getAutoMode();
+        this.autoCheckInterval = null;
         this.init();
     }
 
@@ -113,18 +115,51 @@ class ThemeManager {
         } else {
             this.setupToggleButton();
         }
+
+        // Start auto-theme checking if enabled
+        if (this.autoMode) {
+            this.startAutoThemeCheck();
+        }
     }
 
     setupToggleButton() {
         // Set up theme toggle button
         const themeToggle = document.querySelector('.theme-toggle');
         if (themeToggle) {
-            // Add click listener
+            // Add click listener for manual toggle
             themeToggle.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 this.toggleTheme();
             });
+
+            // Add long press listener for auto-mode toggle
+            let pressTimer;
+            themeToggle.addEventListener('mousedown', (e) => {
+                pressTimer = setTimeout(() => {
+                    this.toggleAutoMode();
+                }, 1000);
+            });
+
+            themeToggle.addEventListener('mouseup', () => {
+                clearTimeout(pressTimer);
+            });
+
+            themeToggle.addEventListener('mouseleave', () => {
+                clearTimeout(pressTimer);
+            });
+
+            // Touch events for mobile
+            themeToggle.addEventListener('touchstart', (e) => {
+                pressTimer = setTimeout(() => {
+                    this.toggleAutoMode();
+                }, 1000);
+            });
+
+            themeToggle.addEventListener('touchend', () => {
+                clearTimeout(pressTimer);
+            });
+
             this.updateToggleIcon();
         }
     }
@@ -146,23 +181,134 @@ class ThemeManager {
         }
     }
 
-    applyTheme(theme) {
+    getAutoMode() {
+        try {
+            return localStorage.getItem('themeAutoMode') === 'true';
+        } catch (e) {
+            return false;
+        }
+    }
+
+    setAutoMode(enabled) {
+        try {
+            localStorage.setItem('themeAutoMode', enabled.toString());
+        } catch (e) {
+            console.warn('localStorage not available:', e);
+        }
+    }
+
+    getAutoTheme() {
+        const hour = new Date().getHours();
+        // Dark theme from 6 PM (18:00) to 6 AM (6:00)
+        // Light theme from 6 AM (6:00) to 6 PM (18:00)
+        return (hour >= 18 || hour < 6) ? 'dark' : 'light';
+    }
+
+    applyTheme(theme, animate = true) {
         this.theme = theme;
-        document.documentElement.setAttribute('data-theme', theme);
+        
+        if (animate) {
+            // Add transitioning class for smooth animation
+            document.documentElement.classList.add('theme-transitioning');
+            
+            // Apply theme
+            document.documentElement.setAttribute('data-theme', theme);
+            
+            // Remove transitioning class after animation completes
+            setTimeout(() => {
+                document.documentElement.classList.remove('theme-transitioning');
+            }, 300);
+        } else {
+            document.documentElement.setAttribute('data-theme', theme);
+        }
+        
         this.setStoredTheme(theme);
         this.updateToggleIcon();
     }
 
     toggleTheme() {
+        // Manual toggle disables auto mode
+        if (this.autoMode) {
+            this.autoMode = false;
+            this.setAutoMode(false);
+            this.stopAutoThemeCheck();
+        }
+        
         const newTheme = this.theme === 'dark' ? 'light' : 'dark';
         this.applyTheme(newTheme);
+    }
+
+    toggleAutoMode() {
+        this.autoMode = !this.autoMode;
+        this.setAutoMode(this.autoMode);
+        
+        if (this.autoMode) {
+            // Apply auto theme immediately
+            const autoTheme = this.getAutoTheme();
+            this.applyTheme(autoTheme);
+            this.startAutoThemeCheck();
+            this.showNotification('Auto theme enabled');
+        } else {
+            this.stopAutoThemeCheck();
+            this.showNotification('Auto theme disabled');
+        }
+    }
+
+    startAutoThemeCheck() {
+        // Check every minute if theme should change based on time
+        this.autoCheckInterval = setInterval(() => {
+            if (this.autoMode) {
+                const autoTheme = this.getAutoTheme();
+                if (autoTheme !== this.theme) {
+                    this.applyTheme(autoTheme);
+                }
+            }
+        }, 60000); // Check every minute
+    }
+
+    stopAutoThemeCheck() {
+        if (this.autoCheckInterval) {
+            clearInterval(this.autoCheckInterval);
+            this.autoCheckInterval = null;
+        }
     }
 
     updateToggleIcon() {
         const themeIcon = document.querySelector('.theme-toggle .theme-icon');
         if (themeIcon) {
-            themeIcon.textContent = this.theme === 'dark' ? '🌙' : '☀️';
+            if (this.autoMode) {
+                themeIcon.textContent = '🌓'; // Auto mode icon
+            } else {
+                themeIcon.textContent = this.theme === 'dark' ? '🌙' : '☀️';
+            }
         }
+
+        // Update button title
+        const themeToggle = document.querySelector('.theme-toggle');
+        if (themeToggle) {
+            if (this.autoMode) {
+                themeToggle.setAttribute('title', 'Auto theme enabled (long-press to disable)');
+            } else {
+                themeToggle.setAttribute('title', 'Toggle theme (long-press for auto mode)');
+            }
+        }
+    }
+
+    showNotification(message) {
+        // Create a simple notification
+        const notification = document.createElement('div');
+        notification.className = 'theme-notification';
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        // Trigger animation
+        setTimeout(() => notification.classList.add('show'), 10);
+
+        // Remove after 2 seconds
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
     }
 }
 
