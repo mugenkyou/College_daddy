@@ -128,8 +128,19 @@
       })();
     </script>
   </head>
+  
   <body>
     <header>
+      <div id="offline-banner" style="
+    display:none;
+    background:#ff4d4d;
+    color:white;
+    padding:10px;
+    text-align:center;
+    font-weight:bold;">
+    You are offline. Some features may not work.
+</div>
+
       <div class="nav-container">
         <a href="index.html" class="logo" aria-label="College Daddy Home">
           <i class="fas fa-graduation-cap"></i>
@@ -529,5 +540,26 @@
         });
       });
     </script>
+    <script type="module" src="offline/offlineCache.js"></script>
+
   </body>
 </html>
+// ------------------- OFFLINE MODE CHECK -------------------
+window.addEventListener("load", () => {
+    const banner = document.getElementById("offline-banner");
+
+    function updateStatus() {
+        if (!navigator.onLine) {
+            banner.style.display = "block";
+            console.log("You are offline");
+        } else {
+            banner.style.display = "none";
+            console.log("You are online");
+        }
+    }
+
+    updateStatus();
+
+    window.addEventListener("online", updateStatus);
+    window.addEventListener("offline", updateStatus);
+});
