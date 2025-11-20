@@ -1,533 +1,1096 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>College Daddy - Full-Stack Developer Roadmap</title>
-    <meta name="description" content="Follow College Daddy's comprehensive Full-Stack Developer learning path. Our career roadmap guides students through frontend, backend, and essential skills for tech success."/>
-    <meta name="keywords" content="College Daddy, career roadmaps, student career guide, full-stack developer roadmap, learning paths, tech career, coding roadmap"/>
-    <link rel="canonical" href="https://collegedaddy.vercel.app/roadmaps/full-stack-developer"/>
-    
+    <meta
+      name="description"
+      content="Follow College Daddy's comprehensive Full-Stack Developer learning path. Our career roadmap guides students through frontend, backend, and essential skills for tech success."
+    />
+    <meta
+      name="keywords"
+      content="College Daddy, career roadmaps, student career guide, full-stack developer roadmap, learning paths, tech career, coding roadmap"
+    />
+    <link
+      rel="canonical"
+      href="https://collegedaddy.vercel.app/roadmaps/full-stack-developer"
+    />
+
     <!-- Open Graph meta tags for social sharing -->
-    <meta property="og:title" content="Full-Stack Developer Career Roadmap | College Daddy"/>
-    <meta property="og:description" content="Follow College Daddy's comprehensive Full-Stack Developer learning path with step-by-step guidance for students."/>
-    <meta property="og:url" content="https://collegedaddy.vercel.app/roadmaps/full-stack-developer"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:image" content="https://collegedaddy.vercel.app/images/full-stack-roadmap.jpg"/>
-    
+    <meta
+      property="og:title"
+      content="Full-Stack Developer Career Roadmap | College Daddy"
+    />
+    <meta
+      property="og:description"
+      content="Follow College Daddy's comprehensive Full-Stack Developer learning path with step-by-step guidance for students."
+    />
+    <meta
+      property="og:url"
+      content="https://collegedaddy.vercel.app/roadmaps/full-stack-developer"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:image"
+      content="https://collegedaddy.vercel.app/images/full-stack-roadmap.jpg"
+    />
+
     <!-- Twitter Card data -->
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:title" content="Full-Stack Developer Career Roadmap | College Daddy"/>
-    <meta name="twitter:description" content="Follow College Daddy's comprehensive Full-Stack Developer learning path with step-by-step guidance for students."/>
-    <meta name="twitter:image" content="https://collegedaddy.vercel.app/images/full-stack-roadmap.jpg"/>
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="/css/sub-roadmap.css" rel="stylesheet"/>
-    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Full-Stack Developer Career Roadmap | College Daddy"
+    />
+    <meta
+      name="twitter:description"
+      content="Follow College Daddy's comprehensive Full-Stack Developer learning path with step-by-step guidance for students."
+    />
+    <meta
+      name="twitter:image"
+      content="https://collegedaddy.vercel.app/images/full-stack-roadmap.jpg"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="../css\sub-roadmap.css" rel="stylesheet" />
+
     <!-- Preload critical resources -->
-    <link rel="preload" href="/css/sub-roadmap.css" as="style"/>
-    <link rel="preload" href="/js/sub-roadmap.js" as="script"/>
-    
-    
+    <link rel="preload" href="../css\sub-roadmap.css" as="style" />
+
     <!-- Structured data for better SEO -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "Full-Stack Developer Career Roadmap",
-      "description": "Comprehensive learning path for becoming a Full-Stack Developer with step-by-step guidance for students.",
-      "image": "https://collegedaddy.vercel.app/images/full-stack-roadmap.jpg",
-      "author": {
-        "@type": "Organization",
-        "name": "College Daddy"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "College Daddy",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://collegedaddy.vercel.app/images/logo.png"
-        }
-      },
-      "datePublished": "2025-01-15"
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Full-Stack Developer Career Roadmap",
+        "description": "Comprehensive learning path for becoming a Full-Stack Developer with step-by-step guidance for students.",
+        "image": "https://collegedaddy.vercel.app/images/full-stack-roadmap.jpg",
+        "author": {
+          "@type": "Organization",
+          "name": "College Daddy"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "College Daddy",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://collegedaddy.vercel.app/images/logo.png"
+          }
+        },
+        "datePublished": "2025-01-15"
+      }
     </script>
-    
+
     <!-- Breadcrumb structured data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://collegedaddy.vercel.app/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Career Roadmaps",
-          "item": "https://collegedaddy.vercel.app/roadmaps/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Full-Stack Developer Roadmap",
-          "item": "https://collegedaddy.vercel.app/roadmaps/full-stack-developer"
-        }
-      ]
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://collegedaddy.vercel.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Career Roadmaps",
+            "item": "https://collegedaddy.vercel.app/roadmaps/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Full-Stack Developer Roadmap",
+            "item": "https://collegedaddy.vercel.app/roadmaps/full-stack-developer"
+          }
+        ]
+      }
     </script>
-</head>
-<link href="../css\sub-roadmap.css" rel="stylesheet"/>
-<body>
+  </head>
+  <link href="../css\sub-roadmap.css" rel="stylesheet" />
+  <body>
     <header>
-        <div class="nav-container">
-            <a aria-label="College Daddy Home" class="logo" href="/">
-                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-                <span>College Daddy</span>
-            </a>
-            <button aria-expanded="false" aria-label="Toggle navigation menu" class="menu-button">
-                <i class="fas fa-bars" aria-hidden="true"></i>
-            </button>
-            <nav aria-label="Main navigation" class="nav-links">
-                <a class="nav-link" href="/">Home</a>
-                <a class="nav-link active" href="/roadmaps/">Career Roadmaps</a>
-                <a class="nav-link" href="/cgpa-calculator/">CGPA Calculator</a>
-                <a class="nav-link" href="/ia-calculator/">IA Calculator</a>
-                <a class="nav-link" href="/study-timer/">Study Timer</a>
-                <a class="nav-link" href="/notes/">Notes</a>
-            </nav>
-        </div>
-        
-        <!-- Breadcrumb navigation -->
-        <div class="breadcrumb">
-            <a href="/">Home</a> &gt;
-            <a href="/roadmaps/">Career Roadmaps</a> &gt;
-            <span>Full-Stack Developer</span>
-        </div>
+      <div class="nav-container">
+        <a
+          aria-label="College Daddy Home"
+          class="logo"
+          href="/College_daddy/index.html"
+        >
+          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+          <span>College Daddy</span>
+        </a>
+        <button
+          aria-expanded="false"
+          aria-label="Toggle navigation menu"
+          class="menu-button"
+        >
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+        <nav aria-label="Main navigation" class="nav-links">
+          <a class="nav-link" href="/College_daddy/index.html">Home</a>
+          <a class="nav-link active" href="/College_daddy/pages/roadmap.html"
+            >Career Roadmaps</a
+          >
+          <a class="nav-link" href="/College_daddy/pages/cgpa.html"
+            >CGPA Calculator</a
+          >
+          <a class="nav-link" href="/College_daddy/pages/iacal.html"
+            >IA Calculator</a
+          >
+          <a class="nav-link" href="/College_daddy/pages/pomodoro.html"
+            >Study Timer</a
+          >
+          <a class="nav-link" href="/College_daddy/pages/notes.html">Notes</a>
+        </nav>
+      </div>
     </header>
 
     <main class="main-content">
-        <article class="roadmap-article">
-            <h1>Full-Stack Developer Career Roadmap: Your Complete Learning Path</h1>
-            
-            <div class="roadmap-intro">
-                <p>Want to become a full-stack developer but don't know where to start? College Daddy's comprehensive learning path breaks down the essential skills and technologies you need to master. Track your progress, follow our step-by-step guide, and prepare for a successful tech career.</p>
-                
-                <div class="roadmap-actions">
-                    <a href="/study-planner/?roadmap=full-stack" class="action-btn">Add to Study Planner</a>
-                    <a href="/resources/full-stack-developer/" class="action-btn">Browse Learning Resources</a>
-                </div>
-                
-                <figure class="roadmap-overview">
-                    <img src="/images/full-stack-roadmap-overview.jpg" alt="Full-Stack Developer career roadmap showing frontend, backend, and devops skills path from beginner to professional level" width="800" height="400">
-                    <figcaption>The complete journey from beginner to professional Full-Stack Developer</figcaption>
-                </figure>
-            </div>
-            
-            <div class="roadmap-sections">
-                <!-- Frontend Section -->
-                <section class="roadmap-section" id="frontend">
-                    <h2>
-                        <div class="section-header">
-                            <input class="heading-checkbox" type="checkbox" aria-label="Mark Frontend section as complete"/>
-                            <span>1. Frontend Development Fundamentals</span>
-                        </div>
-                        <span class="section-number">1/6</span>
-                    </h2>
-                    <div class="progress-container">
-                        <div class="progress-bar" aria-label="Section completion progress"></div>
-                    </div>
-                    <p class="section-description">Master the essential frontend technologies that create the visual and interactive elements users see and interact with in web applications.</p>
-                    <ul>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="html-check" aria-label="Mark HTML as complete"/>
-                            <label for="html-check"><span>HTML5 Fundamentals</span></label>
-                            <p>Learn semantic HTML, forms, media elements, and accessibility best practices.</p>
-                            <div class="resource-links">
-                                <a href="/resources/html/" class="resource-link">Learning Resources</a>
-                                <a href="/practice/html/" class="resource-link">Practice Exercises</a>
-                            </div>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="css-check" aria-label="Mark CSS as complete"/>
-                            <label for="css-check"><span>CSS3 & Responsive Design</span></label>
-                            <p>Master styling, layouts, animations, and mobile-first responsive design techniques.</p>
-                            <div class="resource-links">
-                                <a href="/resources/css/" class="resource-link">Learning Resources</a>
-                                <a href="/practice/css/" class="resource-link">Practice Exercises</a>
-                            </div>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="js-check" aria-label="Mark JavaScript as complete"/>
-                            <label for="js-check"><span>JavaScript (ES6+)</span></label>
-                            <p>Learn modern JavaScript, DOM manipulation, asynchronous programming, and API integration.</p>
-                            <div class="resource-links">
-                                <a href="/resources/javascript/" class="resource-link">Learning Resources</a>
-                                <a href="/practice/javascript/" class="resource-link">Practice Exercises</a>
-                            </div>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="css-fw-check" aria-label="Mark CSS Frameworks as complete"/>
-                            <label for="css-fw-check"><span>CSS Frameworks: Bootstrap/Tailwind CSS</span></label>
-                            <p>Speed up development with component libraries and utility-first approaches.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="react-check" aria-label="Mark React.js as complete"/>
-                            <label for="react-check"><span>React.js</span></label>
-                            <p>Build interactive UIs with components, state management, and hooks.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="nextjs-check" aria-label="Mark Next.js as complete"/>
-                            <label for="nextjs-check"><span>Next.js</span></label>
-                            <p>Create production-ready React applications with server-side rendering and static site generation.</p>
-                        </li>
-                    </ul>
-                    <div class="milestone-project">
-                        <h4>Milestone Project: Personal Portfolio Website</h4>
-                        <p>Apply your frontend skills by creating a responsive personal portfolio that showcases your projects and skills.</p>
-                    </div>
-                </section>
-            
-                <!-- Backend Section -->
-                <section class="roadmap-section" id="backend">
-                    <h2>
-                        <div class="section-header">
-                            <input class="heading-checkbox" type="checkbox" aria-label="Mark Backend section as complete"/>
-                            <span>2. Backend Development & API Design</span>
-                        </div>
-                        <span class="section-number">2/6</span>
-                    </h2>
-                    <div class="progress-container">
-                        <div class="progress-bar" aria-label="Section completion progress"></div>
-                    </div>
-                    <p class="section-description">Build the server-side components that power web applications, handle business logic, and connect to databases.</p>
-                    <ul>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="nodejs-check" aria-label="Mark Node.js as complete"/>
-                            <label for="nodejs-check"><span>Node.js Fundamentals</span></label>
-                            <p>Learn server-side JavaScript, npm ecosystem, and asynchronous programming patterns.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="express-check" aria-label="Mark Express.js as complete"/>
-                            <label for="express-check"><span>Express.js Framework</span></label>
-                            <p>Create robust APIs, handle middleware, routing, and error management.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="api-check" aria-label="Mark REST API / GraphQL as complete"/>
-                            <label for="api-check"><span>REST API / GraphQL Design</span></label>
-                            <p>Master API design patterns, RESTful services, and modern GraphQL implementations.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="auth-check" aria-label="Mark Authentication as complete"/>
-                            <label for="auth-check"><span>Authentication & Authorization (JWT, OAuth)</span></label>
-                            <p>Implement secure user authentication, session management, and role-based access control.</p>
-                        </li>
-                    </ul>
-                    <div class="milestone-project">
-                        <h4>Milestone Project: RESTful API Service</h4>
-                        <p>Build a complete API with authentication, CRUD operations, and proper error handling.</p>
-                    </div>
-                </section>
-            
-                <!-- Database Section -->
-                <section class="roadmap-section" id="database">
-                    <h2>
-                        <div class="section-header">
-                            <input class="heading-checkbox" type="checkbox" aria-label="Mark Database section as complete"/>
-                            <span>3. Database Systems & Data Modeling</span>
-                        </div>
-                        <span class="section-number">3/6</span>
-                    </h2>
-                    <div class="progress-container">
-                        <div class="progress-bar" aria-label="Section completion progress"></div>
-                    </div>
-                    <p class="section-description">Learn to store, retrieve, and manage application data effectively using both SQL and NoSQL solutions.</p>
-                    <ul>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="sql-check" aria-label="Mark SQL as complete"/>
-                            <label for="sql-check"><span>SQL Fundamentals</span></label>
-                            <p>Master database queries, joins, transactions, and normalization principles.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="postgres-check" aria-label="Mark PostgreSQL / MySQL as complete"/>
-                            <label for="postgres-check"><span>PostgreSQL / MySQL Implementation</span></label>
-                            <p>Set up, optimize, and maintain relational database systems for web applications.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="mongo-check" aria-label="Mark MongoDB as complete"/>
-                            <label for="mongo-check"><span>MongoDB & NoSQL Databases</span></label>
-                            <p>Work with document-based storage, collections, and schema design for flexible data models.</p>
-                        </li>
-                    </ul>
-                    <div class="milestone-project">
-                        <h4>Milestone Project: Database-Driven Web Application</h4>
-                        <p>Create a simple application that demonstrates CRUD operations with proper data validation.</p>
-                    </div>
-                </section>
-            
-                <!-- DevOps & Deployment Section -->
-                <section class="roadmap-section" id="devops">
-                    <h2>
-                        <div class="section-header">
-                            <input class="heading-checkbox" type="checkbox" aria-label="Mark DevOps & Deployment section as complete"/>
-                            <span>4. DevOps & Deployment Strategies</span>
-                        </div>
-                        <span class="section-number">4/6</span>
-                    </h2>
-                    <div class="progress-container">
-                        <div class="progress-bar" aria-label="Section completion progress"></div>
-                    </div>
-                    <p class="section-description">Learn the tools and practices for continuous integration, deployment, and monitoring of applications.</p>
-                    <ul>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="git-check" aria-label="Mark Git & GitHub as complete"/>
-                            <label for="git-check"><span>Git & GitHub Workflow</span></label>
-                            <p>Master version control, branching strategies, and collaborative development practices.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="docker-check" aria-label="Mark Docker & Kubernetes as complete"/>
-                            <label for="docker-check"><span>Docker & Kubernetes</span></label>
-                            <p>Containerize applications and orchestrate deployments for scalable infrastructure.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="cloud-check" aria-label="Mark Cloud Deployment as complete"/>
-                            <label for="cloud-check"><span>Cloud Deployment (AWS, Vercel, Netlify)</span></label>
-                            <p>Deploy and scale applications on cloud platforms with proper security configurations.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="cicd-check" aria-label="Mark CI/CD as complete"/>
-                            <label for="cicd-check"><span>CI/CD Pipelines (GitHub Actions, Jenkins)</span></label>
-                            <p>Automate testing, building, and deployment processes for reliable delivery.</p>
-                        </li>
-                    </ul>
-                    <div class="milestone-project">
-                        <h4>Milestone Project: Automated Deployment Pipeline</h4>
-                        <p>Set up a complete CI/CD workflow for a web application with automated testing.</p>
-                    </div>
-                </section>
-            
-                <!-- Projects Section -->
-                <section class="roadmap-section" id="projects">
-                    <h2>
-                        <div class="section-header">
-                            <input class="heading-checkbox" type="checkbox" aria-label="Mark Projects section as complete"/>
-                            <span>5. Project Portfolio Development</span>
-                        </div>
-                        <span class="section-number">5/6</span>
-                    </h2>
-                    <div class="progress-container">
-                        <div class="progress-bar" aria-label="Section completion progress"></div>
-                    </div>
-                    <p class="section-description">Build real-world projects that demonstrate your full-stack capabilities to potential employers.</p>
-                    <ul>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="mini-projects-check" aria-label="Mark Mini Projects as complete"/>
-                            <label for="mini-projects-check"><span>Mini Projects (Frontend & Backend)</span></label>
-                            <p>Create smaller applications that showcase specific technologies and skills.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="fullstack-check" aria-label="Mark Full Stack Project as complete"/>
-                            <label for="fullstack-check"><span>Comprehensive Full Stack Project</span></label>
-                            <p>Build a production-quality application that solves a real-world problem.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="opensource-check" aria-label="Mark Open Source Contributions as complete"/>
-                            <label for="opensource-check"><span>Open Source Contributions</span></label>
-                            <p>Participate in community projects to gain collaboration experience and visibility.</p>
-                        </li>
-                    </ul>
-                    <div class="milestone-project">
-                        <h4>Milestone Project: Full-Featured Web Application</h4>
-                        <p>Create a complete application with authentication, database integration, and responsive UI.</p>
-                    </div>
-                </section>
-            
-                <!-- Job Preparation Section -->
-                <section class="roadmap-section" id="job-prep">
-                    <h2>
-                        <div class="section-header">
-                            <input class="heading-checkbox" type="checkbox" aria-label="Mark Job Preparation section as complete"/>
-                            <span>6. Career Preparation & Job Search</span>
-                        </div>
-                        <span class="section-number">6/6</span>
-                    </h2>
-                    <div class="progress-container">
-                        <div class="progress-bar" aria-label="Section completion progress"></div>
-                    </div>
-                    <p class="section-description">Prepare for technical interviews and position yourself effectively in the job market.</p>
-                    <ul>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="resume-check" aria-label="Mark Resume & Portfolio Building as complete"/>
-                            <label for="resume-check"><span>Resume & Portfolio Building</span></label>
-                            <p>Create compelling developer profiles that highlight your skills and projects.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="system-design-check" aria-label="Mark System Design Basics as complete"/>
-                            <label for="system-design-check"><span>System Design Fundamentals</span></label>
-                            <p>Learn to architect scalable systems and communicate technical solutions.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="dsa-check" aria-label="Mark DSA & Coding Practice as complete"/>
-                            <label for="dsa-check"><span>DSA & Coding Practice (Leetcode, Codeforces)</span></label>
-                            <p>Master algorithms and data structures commonly tested in technical interviews.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="interview-check" aria-label="Mark Interview Preparation as complete"/>
-                            <label for="interview-check"><span>Technical Interview Preparation</span></label>
-                            <p>Practice common interview questions and improve your problem-solving skills.</p>
-                        </li>
-                        <li>
-                            <input class="subheading-checkbox" type="checkbox" id="job-apps-check" aria-label="Mark Job Applications & Networking as complete"/>
-                            <label for="job-apps-check"><span>Job Applications & Professional Networking</span></label>
-                            <p>Develop strategies for finding opportunities and connecting with industry professionals.</p>
-                        </li>
-                    </ul>
-                </section>
-            </div>
-            
-            <!-- Related Career Paths -->
-            <section class="related-roadmaps">
-                <h2>Related Career Paths</h2>
-                <div class="roadmap-cards">
-                    <a href="/roadmaps/frontend-developer/" class="roadmap-card">
-                        <img src="/images/frontend-roadmap.jpg" alt="Frontend Developer Career Roadmap showing HTML, CSS, JavaScript and frameworks" width="300" height="200">
-                        <h3>Frontend Developer</h3>
-                        <p>Focus on creating beautiful, interactive user interfaces</p>
-                    </a>
-                    <a href="/roadmaps/backend-developer/" class="roadmap-card">
-                        <img src="/images/backend-roadmap.jpg" alt="Backend Developer Career Roadmap showing server technologies and databases" width="300" height="200">
-                        <h3>Backend Developer</h3>
-                        <p>Specialize in server-side applications and APIs</p>
-                    </a>
-                    <a href="/roadmaps/devops-engineer/" class="roadmap-card">
-                        <img src="/images/devops-roadmap.jpg" alt="DevOps Engineer Career Roadmap showing deployment and infrastructure skills" width="300" height="200">
-                        <h3>DevOps Engineer</h3>
-                        <p>Master deployment, scaling, and infrastructure</p>
-                    </a>
-                </div>
-            </section>
-            
-            <!-- Progress Tracking -->
-            <section class="roadmap-progress">
-                <h2>Track Your Progress</h2>
-                <p>Stay motivated by tracking your journey through the full-stack development roadmap.</p>
-                <div class="progress-features">
-                    <div class="progress-feature">
-                        <i class="fas fa-calendar-check" aria-hidden="true"></i>
-                        <h3>Set Learning Goals</h3>
-                        <p><a href="/study-planner/">Add this roadmap</a> to your personalized study plan with deadlines.</p>
-                    </div>
-                    <div class="progress-feature">
-                        <i class="fas fa-chart-line" aria-hidden="true"></i>
-                        <h3>Visualize Progress</h3>
-                        <p>Monitor your advancement with our interactive progress tracker.</p>
-                    </div>
-                    <div class="progress-feature">
-                        <i class="fas fa-certificate" aria-hidden="true"></i>
-                        <h3>Earn Achievements</h3>
-                        <p>Unlock badges as you complete major milestones in your learning journey.</p>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- FAQ Section for Rich Snippets -->
-            <section class="faq-section" id="faq">
-                <h2>Frequently Asked Questions About Full-Stack Development</h2>
-                <div class="faq-container" itemscope itemtype="https://schema.org/FAQPage">
-                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h3 itemprop="name">How long does it take to become a Full-Stack Developer?</h3>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
-                                <p>The journey to becoming a Full-Stack Developer typically takes 6-12 months of dedicated study for beginners. If you're already familiar with programming concepts, you might progress faster. College Daddy's roadmap is designed to be completed in 9 months with 15-20 hours of weekly practice, but you can adjust the pace to fit your schedule.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h3 itemprop="name">Do I need a Computer Science degree to become a Full-Stack Developer?</h3>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
-                                <p>No, a CS degree is not mandatory. While it provides a strong theoretical foundation, many successful developers are self-taught or have completed bootcamps. What's most important is building a strong portfolio of projects that demonstrate your skills. College Daddy's roadmap focuses on practical skills and project-based learning that employers value.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h3 itemprop="name">Which is better to learn first: frontend or backend development?</h3>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
-                                <p>Many beginners find frontend development more approachable as it provides immediate visual feedback. Starting with HTML, CSS, and JavaScript gives you the ability to create visible components while building a foundation for more complex concepts. However, if you have prior programming experience, you might feel comfortable starting with backend technologies. College Daddy's roadmap suggests a frontend-first approach for most students.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h3 itemprop="name">What projects should I include in my Full-Stack Developer portfolio?</h3>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
-                                <p>Your portfolio should showcase a range of skills across the full stack. Consider including: (1) A personal website/portfolio built with responsive design, (2) A CRUD application with authentication (like a task manager or blog), (3) An e-commerce platform or marketplace, and (4) A real-time application such as a chat app or collaborative tool. Focus on code quality, user experience, and solving real problems rather than quantity of projects.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h3 itemprop="name">How important is it to learn multiple programming languages as a Full-Stack Developer?</h3>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
-                                <p>Rather than trying to learn many languages simultaneously, focus on mastering one backend language (like JavaScript with Node.js or Python) and becoming proficient in frontend technologies (HTML, CSS, JavaScript). Once you're comfortable with these fundamentals, it becomes easier to learn additional languages. The College Daddy roadmap recommends JavaScript for both frontend and backend to create a smoother learning curve for beginners.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Call to Action -->
-            <section class="cta-section">
-                <h2>Ready to Start Your Full-Stack Developer Journey?</h2>
-                <p>Track your progress, access learning resources, and join our community of aspiring developers.</p>
-                <div class="cta-buttons">
-                    <a href="/register/" class="cta-button primary">Create Free Account</a>
-                    <a href="/roadmaps/" class="cta-button secondary">Explore All Career Roadmaps</a>
-                </div>
-            </section>
-        </article>
-    </main>
-    
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>College Daddy</h3>
-                <p>Helping students navigate their academic and career journeys with comprehensive roadmaps and tools.</p>
-                <p class="tagline">*Developed with students in mind, for students by students*</p>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/roadmaps/">Career Roadmaps</a></li>
-                    <li><a href="/cgpa-calculator/">CGPA Calculator</a></li>
-                    <li><a href="/study-timer/">Study Timer</a></li>
-                    <li><a href="/notes/">Notes</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="/blog/">Student Success Blog</a></li>
-                    <li><a href="/resources/">Learning Resources</a></li>
-                    <li><a href="/internships/">Internship Opportunities</a></li>
-                    <li><a href="/roadmaps-sitemap/">All Career Roadmaps</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <ul class="social-links">
-                    <li><a href="https://www.linkedin.com/company/collegedaddy-tech" aria-label="Follow us on LinkedIn" target="_blank"><i class="fab fa-linkedin"
+      <article class="roadmap-article">
+        <h1>
+          Full-Stack Developer Career Roadmap: Your Complete Learning Path
+        </h1>
 
+        <div class="roadmap-intro">
+          <div class="roadmap-actions">
+            <a href="/study-planner/?roadmap=full-stack" class="action-btn"
+              >Add to Study Planner</a
+            >
+            <a href="/resources/full-stack-developer/" class="action-btn"
+              >Browse Learning Resources</a
+            >
+          </div>
+          <figure class="roadmap-overview">
+            <img
+              src="/College_daddy/assets/images/full-stackdeveloper.png"
+              alt="Full-Stack Developer career roadmap showing frontend, backend, and devops skills path from beginner to professional level"
+              width="800"
+              height="400"
+              id="fullStack"
+            />
+            <div class="roadmap-description">
+              The complete journey from beginner to professional Full-Stack
+              Developer .Want to become a full-stack developer but don't know
+              where to start? College Daddy's comprehensive learning path breaks
+              down the essential skills and technologies you need to master.
+              Track your progress, follow our step-by-step guide, and prepare
+              for a successful tech career.
+            </div>
+          </figure>
+        </div>
+
+        <div class="roadmap-sections">
+          <!-- Frontend Section -->
+          <section class="roadmap-section" id="frontend">
+            <h2>
+              <div class="section-header">
+                <input
+                  class="heading-checkbox"
+                  type="checkbox"
+                  aria-label="Mark Frontend section as complete"
+                />
+                <span>1. Frontend Development Fundamentals</span>
+              </div>
+              <span class="section-number">1/6</span>
+            </h2>
+            <div class="progress-container">
+              <div
+                class="progress-bar"
+                aria-label="Section completion progress"
+              ></div>
+            </div>
+            <p class="section-description">
+              Master the essential frontend technologies that create the visual
+              and interactive elements users see and interact with in web
+              applications.
+            </p>
+            <ul>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="html-check"
+                  aria-label="Mark HTML as complete"
+                />
+                <label for="html-check"><span>HTML5 Fundamentals</span></label>
+                <p>
+                  Learn semantic HTML, forms, media elements, and accessibility
+                  best practices.
+                </p>
+                <div class="resource-links">
+                  <a href="/resources/html/" class="resource-link"
+                    >Learning Resources</a
+                  >
+                  <a href="/practice/html/" class="resource-link"
+                    >Practice Exercises</a
+                  >
+                </div>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="css-check"
+                  aria-label="Mark CSS as complete"
+                />
+                <label for="css-check"
+                  ><span>CSS3 & Responsive Design</span></label
+                >
+                <p>
+                  Master styling, layouts, animations, and mobile-first
+                  responsive design techniques.
+                </p>
+                <div class="resource-links">
+                  <a href="/resources/css/" class="resource-link"
+                    >Learning Resources</a
+                  >
+                  <a href="/practice/css/" class="resource-link"
+                    >Practice Exercises</a
+                  >
+                </div>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="js-check"
+                  aria-label="Mark JavaScript as complete"
+                />
+                <label for="js-check"><span>JavaScript (ES6+)</span></label>
+                <p>
+                  Learn modern JavaScript, DOM manipulation, asynchronous
+                  programming, and API integration.
+                </p>
+                <div class="resource-links">
+                  <a href="/resources/javascript/" class="resource-link"
+                    >Learning Resources</a
+                  >
+                  <a href="/practice/javascript/" class="resource-link"
+                    >Practice Exercises</a
+                  >
+                </div>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="css-fw-check"
+                  aria-label="Mark CSS Frameworks as complete"
+                />
+                <label for="css-fw-check"
+                  ><span>CSS Frameworks: Bootstrap/Tailwind CSS</span></label
+                >
+                <p>
+                  Speed up development with component libraries and
+                  utility-first approaches.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="react-check"
+                  aria-label="Mark React.js as complete"
+                />
+                <label for="react-check"><span>React.js</span></label>
+                <p>
+                  Build interactive UIs with components, state management, and
+                  hooks.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="nextjs-check"
+                  aria-label="Mark Next.js as complete"
+                />
+                <label for="nextjs-check"><span>Next.js</span></label>
+                <p>
+                  Create production-ready React applications with server-side
+                  rendering and static site generation.
+                </p>
+              </li>
+            </ul>
+            <div class="milestone-project">
+              <h4>Milestone Project: Personal Portfolio Website</h4>
+              <p>
+                Apply your frontend skills by creating a responsive personal
+                portfolio that showcases your projects and skills.
+              </p>
+            </div>
+          </section>
+
+          <!-- Backend Section -->
+          <section class="roadmap-section" id="backend">
+            <h2>
+              <div class="section-header">
+                <input
+                  class="heading-checkbox"
+                  type="checkbox"
+                  aria-label="Mark Backend section as complete"
+                />
+                <span>2. Backend Development & API Design</span>
+              </div>
+              <span class="section-number">2/6</span>
+            </h2>
+            <div class="progress-container">
+              <div
+                class="progress-bar"
+                aria-label="Section completion progress"
+              ></div>
+            </div>
+            <p class="section-description">
+              Build the server-side components that power web applications,
+              handle business logic, and connect to databases.
+            </p>
+            <ul>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="nodejs-check"
+                  aria-label="Mark Node.js as complete"
+                />
+                <label for="nodejs-check"
+                  ><span>Node.js Fundamentals</span></label
+                >
+                <p>
+                  Learn server-side JavaScript, npm ecosystem, and asynchronous
+                  programming patterns.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="express-check"
+                  aria-label="Mark Express.js as complete"
+                />
+                <label for="express-check"
+                  ><span>Express.js Framework</span></label
+                >
+                <p>
+                  Create robust APIs, handle middleware, routing, and error
+                  management.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="api-check"
+                  aria-label="Mark REST API / GraphQL as complete"
+                />
+                <label for="api-check"
+                  ><span>REST API / GraphQL Design</span></label
+                >
+                <p>
+                  Master API design patterns, RESTful services, and modern
+                  GraphQL implementations.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="auth-check"
+                  aria-label="Mark Authentication as complete"
+                />
+                <label for="auth-check"
+                  ><span
+                    >Authentication & Authorization (JWT, OAuth)</span
+                  ></label
+                >
+                <p>
+                  Implement secure user authentication, session management, and
+                  role-based access control.
+                </p>
+              </li>
+            </ul>
+            <div class="milestone-project">
+              <h4>Milestone Project: RESTful API Service</h4>
+              <p>
+                Build a complete API with authentication, CRUD operations, and
+                proper error handling.
+              </p>
+            </div>
+          </section>
+
+          <!-- Database Section -->
+          <section class="roadmap-section" id="database">
+            <h2>
+              <div class="section-header">
+                <input
+                  class="heading-checkbox"
+                  type="checkbox"
+                  aria-label="Mark Database section as complete"
+                />
+                <span>3. Database Systems & Data Modeling</span>
+              </div>
+              <span class="section-number">3/6</span>
+            </h2>
+            <div class="progress-container">
+              <div
+                class="progress-bar"
+                aria-label="Section completion progress"
+              ></div>
+            </div>
+            <p class="section-description">
+              Learn to store, retrieve, and manage application data effectively
+              using both SQL and NoSQL solutions.
+            </p>
+            <ul>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="sql-check"
+                  aria-label="Mark SQL as complete"
+                />
+                <label for="sql-check"><span>SQL Fundamentals</span></label>
+                <p>
+                  Master database queries, joins, transactions, and
+                  normalization principles.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="postgres-check"
+                  aria-label="Mark PostgreSQL / MySQL as complete"
+                />
+                <label for="postgres-check"
+                  ><span>PostgreSQL / MySQL Implementation</span></label
+                >
+                <p>
+                  Set up, optimize, and maintain relational database systems for
+                  web applications.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="mongo-check"
+                  aria-label="Mark MongoDB as complete"
+                />
+                <label for="mongo-check"
+                  ><span>MongoDB & NoSQL Databases</span></label
+                >
+                <p>
+                  Work with document-based storage, collections, and schema
+                  design for flexible data models.
+                </p>
+              </li>
+            </ul>
+            <div class="milestone-project">
+              <h4>Milestone Project: Database-Driven Web Application</h4>
+              <p>
+                Create a simple application that demonstrates CRUD operations
+                with proper data validation.
+              </p>
+            </div>
+          </section>
+
+          <!-- DevOps & Deployment Section -->
+          <section class="roadmap-section" id="devops">
+            <h2>
+              <div class="section-header">
+                <input
+                  class="heading-checkbox"
+                  type="checkbox"
+                  aria-label="Mark DevOps & Deployment section as complete"
+                />
+                <span>4. DevOps & Deployment Strategies</span>
+              </div>
+              <span class="section-number">4/6</span>
+            </h2>
+            <div class="progress-container">
+              <div
+                class="progress-bar"
+                aria-label="Section completion progress"
+              ></div>
+            </div>
+            <p class="section-description">
+              Learn the tools and practices for continuous integration,
+              deployment, and monitoring of applications.
+            </p>
+            <ul>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="git-check"
+                  aria-label="Mark Git & GitHub as complete"
+                />
+                <label for="git-check"
+                  ><span>Git & GitHub Workflow</span></label
+                >
+                <p>
+                  Master version control, branching strategies, and
+                  collaborative development practices.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="docker-check"
+                  aria-label="Mark Docker & Kubernetes as complete"
+                />
+                <label for="docker-check"
+                  ><span>Docker & Kubernetes</span></label
+                >
+                <p>
+                  Containerize applications and orchestrate deployments for
+                  scalable infrastructure.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="cloud-check"
+                  aria-label="Mark Cloud Deployment as complete"
+                />
+                <label for="cloud-check"
+                  ><span>Cloud Deployment (AWS, Vercel, Netlify)</span></label
+                >
+                <p>
+                  Deploy and scale applications on cloud platforms with proper
+                  security configurations.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="cicd-check"
+                  aria-label="Mark CI/CD as complete"
+                />
+                <label for="cicd-check"
+                  ><span>CI/CD Pipelines (GitHub Actions, Jenkins)</span></label
+                >
+                <p>
+                  Automate testing, building, and deployment processes for
+                  reliable delivery.
+                </p>
+              </li>
+            </ul>
+            <div class="milestone-project">
+              <h4>Milestone Project: Automated Deployment Pipeline</h4>
+              <p>
+                Set up a complete CI/CD workflow for a web application with
+                automated testing.
+              </p>
+            </div>
+          </section>
+
+          <!-- Projects Section -->
+          <section class="roadmap-section" id="projects">
+            <h2>
+              <div class="section-header">
+                <input
+                  class="heading-checkbox"
+                  type="checkbox"
+                  aria-label="Mark Projects section as complete"
+                />
+                <span>5. Project Portfolio Development</span>
+              </div>
+              <span class="section-number">5/6</span>
+            </h2>
+            <div class="progress-container">
+              <div
+                class="progress-bar"
+                aria-label="Section completion progress"
+              ></div>
+            </div>
+            <p class="section-description">
+              Build real-world projects that demonstrate your full-stack
+              capabilities to potential employers.
+            </p>
+            <ul>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="mini-projects-check"
+                  aria-label="Mark Mini Projects as complete"
+                />
+                <label for="mini-projects-check"
+                  ><span>Mini Projects (Frontend & Backend)</span></label
+                >
+                <p>
+                  Create smaller applications that showcase specific
+                  technologies and skills.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="fullstack-check"
+                  aria-label="Mark Full Stack Project as complete"
+                />
+                <label for="fullstack-check"
+                  ><span>Comprehensive Full Stack Project</span></label
+                >
+                <p>
+                  Build a production-quality application that solves a
+                  real-world problem.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="opensource-check"
+                  aria-label="Mark Open Source Contributions as complete"
+                />
+                <label for="opensource-check"
+                  ><span>Open Source Contributions</span></label
+                >
+                <p>
+                  Participate in community projects to gain collaboration
+                  experience and visibility.
+                </p>
+              </li>
+            </ul>
+            <div class="milestone-project">
+              <h4>Milestone Project: Full-Featured Web Application</h4>
+              <p>
+                Create a complete application with authentication, database
+                integration, and responsive UI.
+              </p>
+            </div>
+          </section>
+
+          <!-- Job Preparation Section -->
+          <section class="roadmap-section" id="job-prep">
+            <h2>
+              <div class="section-header">
+                <input
+                  class="heading-checkbox"
+                  type="checkbox"
+                  aria-label="Mark Job Preparation section as complete"
+                />
+                <span>6. Career Preparation & Job Search</span>
+              </div>
+              <span class="section-number">6/6</span>
+            </h2>
+            <div class="progress-container">
+              <div
+                class="progress-bar"
+                aria-label="Section completion progress"
+              ></div>
+            </div>
+            <p class="section-description">
+              Prepare for technical interviews and position yourself effectively
+              in the job market.
+            </p>
+            <ul>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="resume-check"
+                  aria-label="Mark Resume & Portfolio Building as complete"
+                />
+                <label for="resume-check"
+                  ><span>Resume & Portfolio Building</span></label
+                >
+                <p>
+                  Create compelling developer profiles that highlight your
+                  skills and projects.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="system-design-check"
+                  aria-label="Mark System Design Basics as complete"
+                />
+                <label for="system-design-check"
+                  ><span>System Design Fundamentals</span></label
+                >
+                <p>
+                  Learn to architect scalable systems and communicate technical
+                  solutions.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="dsa-check"
+                  aria-label="Mark DSA & Coding Practice as complete"
+                />
+                <label for="dsa-check"
+                  ><span
+                    >DSA & Coding Practice (Leetcode, Codeforces)</span
+                  ></label
+                >
+                <p>
+                  Master algorithms and data structures commonly tested in
+                  technical interviews.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="interview-check"
+                  aria-label="Mark Interview Preparation as complete"
+                />
+                <label for="interview-check"
+                  ><span>Technical Interview Preparation</span></label
+                >
+                <p>
+                  Practice common interview questions and improve your
+                  problem-solving skills.
+                </p>
+              </li>
+              <li>
+                <input
+                  class="subheading-checkbox"
+                  type="checkbox"
+                  id="job-apps-check"
+                  aria-label="Mark Job Applications & Networking as complete"
+                />
+                <label for="job-apps-check"
+                  ><span
+                    >Job Applications & Professional Networking</span
+                  ></label
+                >
+                <p>
+                  Develop strategies for finding opportunities and connecting
+                  with industry professionals.
+                </p>
+              </li>
+            </ul>
+          </section>
+        </div>
+
+        <!-- Related Career Paths -->
+        <section class="related-roadmaps">
+          <h2>Related Career Paths</h2>
+          <div class="roadmap-cards">
+            <a href="/roadmaps/frontend-developer/" class="roadmap-card">
+              <img
+                src="/College_daddy/assets/images/frontend.png"
+                alt="Frontend Developer Career Roadmap showing HTML, CSS, JavaScript and frameworks"
+                width="300"
+                height="200"
+              />
+              <h3>Frontend Developer</h3>
+              <p>Focus on creating beautiful, interactive user interfaces</p>
+            </a>
+            <a href="/roadmaps/backend-developer/" class="roadmap-card">
+              <img
+                src="/College_daddy/assets/images/backend.png"
+                alt="Backend Developer Career Roadmap showing server technologies and databases"
+                width="300"
+                height="200"
+              />
+              <h3>Backend Developer</h3>
+              <p>Specialize in server-side applications and APIs</p>
+            </a>
+            <a href="/roadmaps/devops-engineer/" class="roadmap-card">
+              <img
+                src="/College_daddy/assets/images/devops.png"
+                alt="DevOps Engineer Career Roadmap showing deployment and infrastructure skills"
+                width="300"
+                height="200"
+              />
+              <h3>DevOps Engineer</h3>
+              <p>Master deployment, scaling, and infrastructure</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- Progress Tracking -->
+        <section class="roadmap-progress">
+          <h2>Track Your Progress</h2>
+          <p>
+            Stay motivated by tracking your journey through the full-stack
+            development roadmap.
+          </p>
+          <div class="progress-features">
+            <div class="progress-feature">
+              <i class="fas fa-calendar-check" aria-hidden="true"></i>
+              <h3>Set Learning Goals</h3>
+              <p>
+                <a href="/study-planner/">Add this roadmap</a> to your
+                personalized study plan with deadlines.
+              </p>
+            </div>
+            <div class="progress-feature">
+              <i class="fas fa-chart-line" aria-hidden="true"></i>
+              <h3>Visualize Progress</h3>
+              <p>
+                Monitor your advancement with our interactive progress tracker. Use for better
+              </p>
+            </div>
+            <div class="progress-feature">
+              <i class="fas fa-certificate" aria-hidden="true"></i>
+              <h3>Earn Achievements</h3>
+              <p>
+                Unlock badges as you complete major milestones in your learning
+                journey.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ Section for Rich Snippets -->
+        <section class="faq-section" id="faq">
+          <h2>Frequently Asked Questions About Full-Stack Development</h2>
+          <div
+            class="faq-container"
+            itemscope
+            itemtype="https://schema.org/FAQPage"
+          >
+            <div
+              class="faq-item"
+              itemscope
+              itemprop="mainEntity"
+              itemtype="https://schema.org/Question"
+            >
+              <h3 itemprop="name">
+                How long does it take to become a Full-Stack Developer?
+              </h3>
+              <div
+                itemscope
+                itemprop="acceptedAnswer"
+                itemtype="https://schema.org/Answer"
+              >
+                <div itemprop="text">
+                  <p>
+                    The journey to becoming a Full-Stack Developer typically
+                    takes 6-12 months of dedicated study for beginners. If
+                    you're already familiar with programming concepts, you might
+                    progress faster. College Daddy's roadmap is designed to be
+                    completed in 9 months with 15-20 hours of weekly practice,
+                    but you can adjust the pace to fit your schedule.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="faq-item"
+              itemscope
+              itemprop="mainEntity"
+              itemtype="https://schema.org/Question"
+            >
+              <h3 itemprop="name">
+                Do I need a Computer Science degree to become a Full-Stack
+                Developer?
+              </h3>
+              <div
+                itemscope
+                itemprop="acceptedAnswer"
+                itemtype="https://schema.org/Answer"
+              >
+                <div itemprop="text">
+                  <p>
+                    No, a CS degree is not mandatory. While it provides a strong
+                    theoretical foundation, many successful developers are
+                    self-taught or have completed bootcamps. What's most
+                    important is building a strong portfolio of projects that
+                    demonstrate your skills. College Daddy's roadmap focuses on
+                    practical skills and project-based learning that employers
+                    value.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="faq-item"
+              itemscope
+              itemprop="mainEntity"
+              itemtype="https://schema.org/Question"
+            >
+              <h3 itemprop="name">
+                Which is better to learn first: frontend or backend development?
+              </h3>
+              <div
+                itemscope
+                itemprop="acceptedAnswer"
+                itemtype="https://schema.org/Answer"
+              >
+                <div itemprop="text">
+                  <p>
+                    Many beginners find frontend development more approachable
+                    as it provides immediate visual feedback. Starting with
+                    HTML, CSS, and JavaScript gives you the ability to create
+                    visible components while building a foundation for more
+                    complex concepts. However, if you have prior programming
+                    experience, you might feel comfortable starting with backend
+                    technologies. College Daddy's roadmap suggests a
+                    frontend-first approach for most students.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="faq-item"
+              itemscope
+              itemprop="mainEntity"
+              itemtype="https://schema.org/Question"
+            >
+              <h3 itemprop="name">
+                What projects should I include in my Full-Stack Developer
+                portfolio?
+              </h3>
+              <div
+                itemscope
+                itemprop="acceptedAnswer"
+                itemtype="https://schema.org/Answer"
+              >
+                <div itemprop="text">
+                  <p>
+                    Your portfolio should showcase a range of skills across the
+                    full stack. Consider including: (1) A personal
+                    website/portfolio built with responsive design, (2) A CRUD
+                    application with authentication (like a task manager or
+                    blog), (3) An e-commerce platform or marketplace, and (4) A
+                    real-time application such as a chat app or collaborative
+                    tool. Focus on code quality, user experience, and solving
+                    real problems rather than quantity of projects.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="faq-item"
+              itemscope
+              itemprop="mainEntity"
+              itemtype="https://schema.org/Question"
+            >
+              <h3 itemprop="name">
+                How important is it to learn multiple programming languages as a
+                Full-Stack Developer?
+              </h3>
+              <div
+                itemscope
+                itemprop="acceptedAnswer"
+                itemtype="https://schema.org/Answer"
+              >
+                <div itemprop="text">
+                  <p>
+                    Rather than trying to learn many languages simultaneously,
+                    focus on mastering one backend language (like JavaScript
+                    with Node.js or Python) and becoming proficient in frontend
+                    technologies (HTML, CSS, JavaScript). Once you're
+                    comfortable with these fundamentals, it becomes easier to
+                    learn additional languages. The College Daddy roadmap
+                    recommends JavaScript for both frontend and backend to
+                    create a smoother learning curve for beginners.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+          <h2>Ready to Start Your Full-Stack Developer Journey?</h2>
+          <p>
+            Track your progress, access learning resources, and join our
+            community of aspiring developers.
+          </p>
+          <div class="cta-buttons">
+            <a href="/register/" class="cta-button primary"
+              >Create Free Account</a
+            >
+            <a href="/roadmaps/" class="cta-button secondary"
+              >Explore All Career Roadmaps</a
+            >
+          </div>
+        </section>
+      </article>
+    </main>
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>College Daddy</h3>
+          <p>Your ultimate companion for academic success.</p>
+          <p class="tagline">
+            Developed with students in mind, for students by a student.
+          </p>
+
+          <div class="social-links">
+            <a
+              href="https://www.linkedin.com/company/collegedaddy-tech"
+              target="_blank"
+              class="social-link"
+              aria-label="LinkedIn"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a
+              href="https://github.com/mugenkyou/College_daddy"
+              target="_blank"
+              class="social-link"
+              aria-label="GitHub"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="../index.html">College Daddy Home</a></li>
+            <li>
+              <a href="../pages/cgpa.html">College Daddy CGPA Calculator</a>
+            </li>
+            <li><a href="../pages/notes.html">College Daddy Notes</a></li>
+            <li><a href="../pages/roadmap.html">College Daddy Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Connect</h3>
+          <p>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSciD1CUiYUpiz4mtQSTYG9XeCRyG3CEhr9GNL03WxmRbFOgkw/viewform?usp=dialog"
+              target="_blank"
+              class="feedback-link"
+              >Send Feedback to College Daddy</a
+            >
+          </p>
+          <p>
+            <!-- Follow our journey on <a href="https://www.linkedin.com/company/collegedaddy-tech/" target="_blank" style="color: var(--primary-color); text-decoration: none;">LinkedIn</a> for updates and resources. -->
+            Follow our journey on social media for updates and resources.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 College Daddy. All rights reserved. Developed by
+          <span class="developer-name">Sachin</span>
+        </p>
+      </div>
+    </footer>
+      <button id="backToTop" title="Back to top">↑</button>
+
+
+    <script src="../js\sub-roadmap.js"></script>
+  </body>
+</html>

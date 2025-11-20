@@ -960,7 +960,7 @@ body::before {
 
   .footer-section {
     width: 100% !important;
-  }
+    }
 }
 
 /* Accessibility improvements */
@@ -1002,4 +1002,30 @@ body::before {
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--primary-color) rgba(0, 0, 0, 0.02);
+}
+#backToTop {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  background: #3b82f6; /* blue */
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 9999;
+}
+
+/* Hover effect */
+#backToTop:hover {
+  background: #2563eb;
+  transform: translateY(-3px);
 }
