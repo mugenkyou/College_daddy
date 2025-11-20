@@ -9,6 +9,33 @@
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        #backToTop {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  background: #3b82f6; /* blue */
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 9999;
+}
+
+/* Hover effect */
+#backToTop:hover {
+  background: #2563eb;
+  transform: translateY(-3px);
+}
+
         /* Critical overrides for icons */
         .fas, .far, .fa {
             display: inline-block !important;
@@ -134,6 +161,26 @@ Follow our journey on social media for updates and resources.</p>
             <p>&copy; 2025 College Daddy. All rights reserved. Developed by <span class="developer-name">Sachin</span></p>
         </div>
     </footer>
+      <button id="backToTop" title="Back to top">↑</button>
+<script>
+    /* back to top */
+const backToTopBtn = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTopBtn.style.display = "flex";
+  } else {
+    backToTopBtn.style.display = "none";
+  }
+});
+
+backToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}); 
+</script>
 </body>
 </html>
 
