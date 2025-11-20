@@ -41,6 +41,8 @@
     --bg-darker: #f5f5f5;
     --card-bg: #ffffff;
     --input-bg: #f8f8f8;
+    --accent-color: rgba(0, 157, 255, 0.05);
+
     
     /* Text colors */
     --text-light: #1a1a1a;
@@ -100,7 +102,7 @@ main {
 
 /* Original Pomodoro Timer Styles */
 body {
-    background-color: var(--background-color);
+    background-color: var(--bg-dark);
     min-height: 300vh;
     display: flex;
     flex-direction: column;
@@ -145,8 +147,8 @@ body {
     height: 100%;
     border-radius: 50%;
     background: radial-gradient(circle at center,
-        var(--background-color) 0%,
-        #001a2c 100%);
+        var(--bg-dark) 0%,
+        var(--bg-darker) 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -277,7 +279,7 @@ body {
 
 .btn:hover {
     background: var(--primary-color);
-    color: var(--background-color);
+    color: var(--bg-dark);
     box-shadow: 0 0 20px var(--primary-color);
 }
 
@@ -467,7 +469,7 @@ html {
     right: 20px;
     padding: 1rem 2rem;
     background: var(--primary-color);
-    color: var(--background-color);
+    color: var(--bg-dark);
     border-radius: 5px;
     transform: translateX(120%);
     transition: transform 0.3s ease;
@@ -485,11 +487,11 @@ html {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    :root {
+    /* :root {
         --primary-color: #00b3ff;
-        --background-color: #000;
+        --bg-dark: #000;
         --accent-color: rgba(0, 179, 255, 0.1);
-    }
+    } */
 
     
     .settings-icon {
