@@ -825,11 +825,11 @@ nav h1 {
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
-.social-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 15px;
-    justify-content: center;
+.social-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    transition: 0.3s ease;
 }
 
 .social-link {
@@ -846,7 +846,7 @@ nav h1 {
 }
 
 .social-link:hover {
-    background-color: var(--primary-color);
+    background-color: #0d2533;
     color: var(--text-primary);
     transform: translateY(-3px);
     box-shadow: 0 4px 10px var(--shadow-color);
