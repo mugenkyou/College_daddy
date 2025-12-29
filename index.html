@@ -103,6 +103,84 @@
         opacity: 1;
         padding-top: 1rem;
       }
+
+      /* Review Section Styles */
+      .review-section {
+        padding: 60px 20px;
+        background-color: var(--background-color, #f5f7fa);
+        text-align: center;
+      }
+
+      .review-section h2 {
+        margin-bottom: 40px;
+        font-size: 2.5rem;
+        color: var(--text-color, #333);
+      }
+
+      .review-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .review-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+        width: 100%;
+        max-width: 380px;
+        text-align: left;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .review-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .review-header {
+        margin-bottom: 15px;
+      }
+
+      .reviewer-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .reviewer-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .reviewer-details h4 {
+        margin: 0 0 5px 0;
+        color: var(--text-color, #333);
+        font-size: 1.2rem;
+      }
+
+      .rating {
+        display: flex;
+        gap: 3px;
+      }
+
+      .star {
+        font-size: 1.2rem;
+        color: #ffc107;
+      }
+
+      .review-text {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--text-color, #555);
+        margin: 0;
+      }
     </style>
     <link
       rel="stylesheet"
@@ -256,6 +334,75 @@
             progress and set realistic goals for each semester."
           </p>
           <p class="student-name">- Computer Science Major</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Review Section -->
+    <section class="review-section">
+      <h2>What Our Users Say</h2>
+      <div class="review-container">
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-info">
+              <img src="https://via.placeholder.com/50x50/4a90e2/ffffff?text=JD" alt="Reviewer" class="reviewer-avatar">
+              <div class="reviewer-details">
+                <h4>Aman Singh</h4>
+                <div class="rating">
+                  <span class="star">⭐</span>
+                  <span class="star">⭐</span>
+                  <span class="star">⭐</span>
+                  <span class="star">⭐</span>
+                  <span class="star">⭐</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">
+            "College Daddy has been a game-changer for my academic planning. The CGPA calculator is incredibly accurate and the study resources have helped me excel in my courses."
+          </p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-info">
+              <img src="https://via.placeholder.com/50x50/e74c3c/ffffff?text=AS" alt="Reviewer" class="reviewer-avatar">
+              <div class="reviewer-details">
+                <h4>Priya</h4>
+                <div class="rating">
+                  <span class="star">⭐</span>
+                  <span class="star">⭐</span>
+                  <span class="star">⭐</span>
+                  <span class="star">⭐</span>
+                  <span class="star">⭐</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">
+            "The IA calculator and Pomodoro timer have significantly improved my study efficiency. I can track my internal assessments and manage my time better than ever before."
+          </p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-info">
+              <img src="https://via.placeholder.com/50x50/2ecc71/ffffff?text=MJ" alt="Reviewer" class="reviewer-avatar">
+              <div class="reviewer-details">
+                <h4>Rohan</h4>
+                <div class="rating">
+                  <span class="star">⭐</span>
+                  <span class="star">⭐</span>
+                  <span class="star">⭐</span>
+                  <span class="star">⭐</span>
+                  <span class="star">⭐</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">
+            "As an engineering student, College Daddy has made it so much easier to organize my academic life. The roadmap section guided me in choosing the right career path."
+          </p>
         </div>
       </div>
     </section>
