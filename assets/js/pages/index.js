@@ -160,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initFeatureCards();
     initFeedbackLinkRipple();
+    initCursorTrail();
 });
 
 // Handle window resize
@@ -169,6 +170,155 @@ window.addEventListener('resize', () => {
         navLinks.classList.remove('active');
     }
 });
+
+// Initialize custom cursor trail
+function initCursorTrail() {
+  // Check if it's a mobile device, if so, don't initialize the cursor trail
+  if (isMobile()) {
+    return;
+  }
+
+  // Check if user prefers reduced motion, if so, don't initialize the cursor trail
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  // Create the cursor elements
+  const cursor = document.createElement('div');
+  const cursorInner = document.createElement('div');
+  
+  cursor.classList.add('custom-cursor');
+  cursorInner.classList.add('cursor-trail');
+  
+  // Add to document
+  document.body.appendChild(cursor);
+  document.body.appendChild(cursorInner);
+  
+  // Set initial positions
+  cursor.style.cssText = `
+    position: fixed;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--primary-color, #009dff);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+  `;
+  
+  cursorInner.style.cssText = `
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background-color: var(--primary-color, #009dff);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9998;
+  `;
+  
+  // Variables for trail effect
+  const trail = [];
+  const trailLength = 12; // Reduced number of particles to improve performance
+  const particles = [];
+  
+  // Create trail particles
+  for (let i = 0; i < trailLength; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('cursor-particle');
+    particle.style.cssText = `
+      position: fixed;
+      width: ${8 - (i * 0.5)}px;
+      height: ${8 - (i * 0.5)}px;
+      background-color: var(--primary-color, #009dff);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9997;
+      opacity: ${0.9 - (i * 0.07)};
+    `;
+    document.body.appendChild(particle);
+    particles.push(particle);
+    trail.push({x: 0, y: 0});
+  }
+  
+  let mouseX = 0;
+  let mouseY = 0;
+  let posX = 0;
+  let posY = 0;
+  let innerMouseX = 0;
+  let innerMouseY = 0;
+  let innerPosX = 0;
+  let innerPosY = 0;
+  
+  // Track mouse movement
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    innerMouseX = e.clientX;
+    innerMouseY = e.clientY;
+  });
+  
+  // Handle mouse clicks for ripple effect
+  document.addEventListener('mousedown', () => {
+    cursor.style.transform = `translate(-50%, -50%) scale(1.5)`;
+    cursorInner.style.transform = `translate(-50%, -50%) scale(2)`;
+  });
+  
+  document.addEventListener('mouseup', () => {
+    cursor.style.transform = `translate(-50%, -50%) scale(1)`;
+    cursorInner.style.transform = `translate(-50%, -50%) scale(1)`;
+  });
+  
+  // Animation loop for smooth cursor movement
+  function animateCursor() {
+    // Smoothly follow the mouse for the main cursor
+    posX += (mouseX - posX) / 8; // Increased divisor for smoother, more performant animation
+    posY += (mouseY - posY) / 8;
+    
+    // Update main cursor position
+    cursor.style.left = `${posX}px`;
+    cursor.style.top = `${posY}px`;
+    
+    // Smoothly follow the mouse for the inner cursor
+    innerPosX += (innerMouseX - innerPosX) / 10;
+    innerPosY += (innerMouseY - innerPosY) / 10;
+    
+    // Update inner cursor position
+    cursorInner.style.left = `${innerPosX}px`;
+    cursorInner.style.top = `${innerPosY}px`;
+    
+    // Update trail positions efficiently
+    for (let i = trailLength - 1; i >= 0; i--) {
+      if (i === 0) {
+        trail[i] = {x: innerPosX, y: innerPosY};
+      } else {
+        // Apply easing to create trail effect
+        const easing = 0.3;
+        trail[i].x += (trail[i-1].x - trail[i].x) * easing;
+        trail[i].y += (trail[i-1].y - trail[i].y) * easing;
+      }
+      
+      // Update particle position and appearance
+      if (particles[i]) {
+        particles[i].style.left = `${trail[i].x}px`;
+        particles[i].style.top = `${trail[i].y}px`;
+        
+        // Make particles smaller and more transparent as they age
+        const size = Math.max(1, 8 - (i * 0.5));
+        particles[i].style.width = `${size}px`;
+        particles[i].style.height = `${size}px`;
+        particles[i].style.opacity = `${0.9 - (i * 0.07)}`;
+      }
+    }
+    
+    requestAnimationFrame(animateCursor);
+  }
+  
+  // Start the animation
+  animateCursor();
+}
 
 // text animation 
 const texts = ["CGPA Calculator", "Study Planner", "Expert Roadmaps"];

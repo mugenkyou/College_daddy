@@ -1162,3 +1162,53 @@ body::before {
 #scrollToTopBtn:hover {
   opacity: 0.8;
 }
+
+/* Custom cursor trail styles */
+.custom-cursor {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--primary-color, #009dff);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: width 0.2s ease, height 0.2s ease;
+  display: none;
+}
+
+.cursor-trail {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background-color: var(--primary-color, #009dff);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9998;
+  transition: width 0.1s ease, height 0.1s ease;
+  display: none;
+}
+
+.cursor-particle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary-color, #009dff);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.9;
+  display: none;
+}
+
+/* Show cursor elements only when not on mobile */
+@media (min-width: 769px) {
+  .custom-cursor,
+  .cursor-trail,
+  .cursor-particle {
+    display: block;
+  }
+}
