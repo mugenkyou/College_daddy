@@ -710,6 +710,14 @@ html {
     box-shadow: 0 4px 10px rgba(0, 157, 255, 0.3);
 }
 
+.social-link i {
+    font-size: 1.2rem;
+    display: inline-block;
+    color: inherit;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
 /* Accessibility improvements */
 @media (prefers-reduced-motion: reduce) {
     .footer-section p:hover,

@@ -265,7 +265,7 @@ nav h1 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #333333;
+    background: #807e7e;
     color: var(--text-primary);
     padding: 0.75rem 1.25rem;
     border-radius: 8px;
@@ -284,7 +284,7 @@ nav h1 {
 }
 
 .view-btn:hover {
-    background: #444444;
+    background: #646363;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
@@ -305,8 +305,8 @@ nav h1 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--primary-color);
-    color: var(--text-primary);
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    color: #ffffff;
     padding: 0.75rem 1.25rem;
     border-radius: 8px;
     text-decoration: none;
@@ -324,13 +324,13 @@ nav h1 {
 }
 
 .download-btn:hover {
-    background: var(--primary-hover);
+    background: linear-gradient(135deg, #ff7d4a 0%, #f9a332 100%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px var(--shadow-color);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
 }
 
 .download-btn:active {
-    background: var(--primary-active);
+    background: linear-gradient(135deg, #f45a20 0%, #f0880a 100%);
     transform: translateY(0);
 }
 
@@ -850,6 +850,14 @@ nav h1 {
     color: var(--text-primary);
     transform: translateY(-3px);
     box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+.social-link i {
+    font-size: 1.3rem;
+    display: inline-block;
+    color: inherit;
+    width: 1.3rem;
+    height: 1.3rem;
 }
 
 /* Better mobile footer */

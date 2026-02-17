@@ -792,6 +792,14 @@ input[type="checkbox"]:checked::after {
     box-shadow: 0 4px 10px rgba(0, 157, 255, 0.3);
 }
 
+.social-link i {
+    font-size: 1.1rem;
+    display: inline-block;
+    color: inherit;
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
 /* FAQ Section Styling */
 .faq-section {
     background-color: #000000;

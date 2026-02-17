@@ -230,6 +230,14 @@ footer a:hover {
   transform: scale(1.2);
 }
 
+.footer .social-link i {
+  font-size: 1.2rem;
+  display: inline-block;
+  color: inherit;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
 .footer-bottom {
   text-align: center;
   padding-top: 2rem;

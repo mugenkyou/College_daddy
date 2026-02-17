@@ -55,6 +55,7 @@
             }
         })();
     </script>
+    <button id="scrollToTopBtn" title="Go to top">↑</button>
 </head>
 
 <body>
@@ -396,6 +397,24 @@
     <!-- Load JavaScript at the end for better performance -->
     <script src="../assets/js/components/navigation.js" defer></script>
     <script src="../assets/js/pages/roadmap.js" defer></script>
+    <script>
+  const scrollBtn = document.getElementById("scrollToTopBtn");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) {
+      scrollBtn.style.display = "block";
+    } else {
+      scrollBtn.style.display = "none";
+    }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+</script>
 </body>
 
 </html>

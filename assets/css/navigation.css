@@ -368,3 +368,31 @@ body > header .menu-button {
     transition: transform 0.3s ease;
 } 
 
+/* Back to Top Button - Available on all pages */
+#scrollToTopBtn { 
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: linear-gradient(135deg, #00ff88 0%, #00cc6e 100%);
+  color: #000000;
+  border: none;
+  padding: 12px 16px;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none; /* Hidden by default */
+  z-index: 999;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 255, 136, 0.4);
+  font-weight: bold;
+}
+
+#scrollToTopBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 255, 136, 0.6);
+  background: linear-gradient(135deg, #00ff99 0%, #00dd7d 100%);
+}
+
+[data-theme="light"] #scrollToTopBtn {
+  color: #000000;
+}

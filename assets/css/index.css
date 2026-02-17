@@ -954,6 +954,14 @@ body::before {
   outline: none;
 }
 
+.social-link i {
+  font-size: 1.4rem;
+  display: inline-block;
+  color: inherit;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
 /* Footer bottom: compact & centered, small-caps feel */
 .footer-bottom {
   text-align: center;
@@ -1151,19 +1159,23 @@ body::before {
   position: fixed;
   bottom: 25px;
   right: 25px;
-  background-color: transparent;
-  color: rgb(255, 255, 255);
-  border: 2px solid rgb(10, 137, 241); /* <-- border added */
-  padding: 7px 15px;
+  background: linear-gradient(135deg, #00ff88 0%, #00cc6e 100%);
+  color: #000000;
+  border: none;
+  padding: 12px 16px;
   font-size: 20px;
   border-radius: 50%;
   cursor: pointer;
   display: none; /* Hidden by default */
   z-index: 999;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 255, 136, 0.4);
+  font-weight: bold;
 }
 
 
 #scrollToTopBtn:hover {
-  opacity: 0.8;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 255, 136, 0.6);
+  background: linear-gradient(135deg, #00ff99 0%, #00dd7d 100%);
 }

@@ -287,6 +287,14 @@ h2 {
     box-shadow: 0 4px 10px rgba(0, 157, 255, 0.3);
 }
 
+.social-link i {
+    font-size: 1.2rem;
+    display: inline-block;
+    color: inherit;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .footer-content {
