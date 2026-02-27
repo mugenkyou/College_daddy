@@ -335,7 +335,12 @@
         </section>
     </main>
 
-    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+    <script>
+const yearElement = document.getElementById("year");
+if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+}
+</script>
     <script src="../assets/js/components/navigation.js" defer></script>
     <script src="../assets/js/components/footer.js"></script>
     <script src="../assets/js/pages/ia.js"></script>

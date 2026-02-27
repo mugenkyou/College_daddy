@@ -24,30 +24,45 @@ function initializePage() {
 
 
 function showTab(tabName) {
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    // If tabs are not present on this page, stop execution
+    if (!tabButtons.length || !tabContents.length) {
+        return;
+    }
+
     // Update tab buttons
-    document.querySelectorAll('.tab-btn').forEach(btn => {
+    tabButtons.forEach(btn => {
         btn.classList.remove('active');
     });
-    
-    if (tabName === 'stats') {
-        document.getElementById('statsTab').classList.add('active');
-    } else {
-        document.getElementById('calendarTab').classList.add('active');
+
+    const statsTab = document.getElementById('statsTab');
+    const calendarTab = document.getElementById('calendarTab');
+
+    if (tabName === 'stats' && statsTab) {
+        statsTab.classList.add('active');
+    } else if (calendarTab) {
+        calendarTab.classList.add('active');
     }
-    
+
     // Update tab content
-    document.querySelectorAll('.tab-content').forEach(content => {
+    tabContents.forEach(content => {
         content.classList.remove('active');
     });
-    
-    if (tabName === 'stats') {
-        document.getElementById('statsContent').classList.add('active');
+
+    const statsContent = document.getElementById('statsContent');
+    const calendarContent = document.getElementById('calendarContent');
+
+    if (tabName === 'stats' && statsContent) {
+        statsContent.classList.add('active');
         loadStatistics();
-    } else {
-        document.getElementById('calendarContent').classList.add('active');
+    } else if (calendarContent) {
+        calendarContent.classList.add('active');
         renderCalendar();
     }
-    
+
     currentTab = tabName;
 }
 
