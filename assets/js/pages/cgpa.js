@@ -549,7 +549,8 @@ function updateProgressChart(currentCGPA, targetCGPA, chartOptions) {
 }
 const feedbackLink = document.querySelector('.feedback-link');
 
-feedbackLink.addEventListener('click', (e) => {
+if(feedbackLink){
+    feedbackLink.addEventListener('click', (e) => {
     const ripple = document.createElement('div');
     ripple.style.position = 'absolute';
     ripple.style.borderRadius = '50%';
@@ -564,6 +565,8 @@ feedbackLink.addEventListener('click', (e) => {
     feedbackLink.appendChild(ripple);
     setTimeout(() => ripple.remove(), 600);
 });
+}
+
 
 const style = document.createElement('style');
 style.textContent = `

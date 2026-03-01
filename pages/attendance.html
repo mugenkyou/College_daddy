@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Track your subject-wise attendance with College Daddy's Attendance Tracker. Get real-time warnings before you fall below 75%."
+    />
+    <title>Attendance Tracker – College Daddy</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../favicon.png" />
+
+    <!-- Shared stylesheets (same order as every other page) -->
+    <link rel="stylesheet" href="../assets/css/navigation.css" />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+    <link rel="stylesheet" href="../assets/css/footer.css" />
+
+    <!-- Page-specific stylesheet -->
+    <link rel="stylesheet" href="../assets/css/attendance.css" />
+
+    <!-- Font Awesome (icons in nav) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Theme init — runs before render to prevent flash (same as every other page) -->
+    <script>
+      (function () {
+        try {
+          const theme = localStorage.getItem("theme") || "dark";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <!-- ===================== NAVIGATION ===================== -->
+    <!-- Matches the exact structure used in index.html and all other pages -->
+    <header>
+      <div class="nav-container">
+        <a href="../index.html" class="logo" aria-label="College Daddy Home">
+          <i class="fas fa-graduation-cap"></i>
+          <span>College Daddy</span>
+        </a>
+        <div class="nav-actions">
+          <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">
+            ☰
+          </button>
+        </div>
+        <nav class="nav-links">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
+          <a href="iacal.html" class="nav-link">IA Calculator</a>
+          <a href="attendance.html" class="nav-link">Attendance</a>
+          <a href="pomodoro.html" class="nav-link">Study Timer</a>
+          <a href="notes.html" class="nav-link">Notes</a>
+          <a href="roadmap.html" class="nav-link">Roadmap</a>
+          <a href="events.html" class="nav-link">Events</a>
+          <button class="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">
+            <span class="theme-icon">🌙</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="attendance-main" id="main-content">
+      <!-- Page header -->
+      <header class="attendance-header">
+        <h1 class="attendance-title">📋 Attendance Tracker</h1>
+        <p class="attendance-subtitle">
+          Monitor your subject-wise attendance. Stay above 75% to avoid
+          detention.
+        </p>
+      </header>
+
+      <!-- ---- Summary card ---- -->
+      <section class="summary-section" aria-label="Overall attendance summary">
+        <div class="summary-card" id="summary-card">
+          <div class="summary-stat">
+            <span class="summary-stat__value" id="summary-overall">—</span>
+            <span class="summary-stat__label">Overall Attendance</span>
+          </div>
+          <div class="summary-stat">
+            <span class="summary-stat__value" id="summary-safe">0</span>
+            <span class="summary-stat__label">🟢 Safe</span>
+          </div>
+          <div class="summary-stat">
+            <span class="summary-stat__value" id="summary-warning">0</span>
+            <span class="summary-stat__label">🟡 Warning</span>
+          </div>
+          <div class="summary-stat">
+            <span class="summary-stat__value" id="summary-danger">0</span>
+            <span class="summary-stat__label">🔴 Danger</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---- Add subject form ---- -->
+      <section class="form-section" aria-label="Add a new subject">
+        <div class="form-card">
+          <h2 class="form-card__title">Add Subject</h2>
+          <div class="add-subject-form" id="add-subject-form">
+            <div class="form-group">
+              <label for="subject-name" class="form-label">Subject Name</label>
+              <input
+                type="text"
+                id="subject-name"
+                class="form-input"
+                placeholder="e.g. Data Structures"
+                maxlength="60"
+                autocomplete="off"
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="total-classes" class="form-label">Total Classes Held</label>
+              <input
+                type="number"
+                id="total-classes"
+                class="form-input"
+                placeholder="e.g. 40"
+                min="1"
+                max="999"
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="attended-classes" class="form-label">Classes Attended</label>
+              <input
+                type="number"
+                id="attended-classes"
+                class="form-input"
+                placeholder="e.g. 32"
+                min="0"
+                max="999"
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-actions">
+              <button
+                type="button"
+                class="btn btn--primary"
+                id="add-subject-btn"
+                aria-label="Add subject to tracker"
+              >
+                + Add Subject
+              </button>
+            </div>
+
+            <!-- Inline validation message -->
+            <p class="form-error" id="form-error" role="alert" aria-live="polite" hidden></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---- Subject cards list ---- -->
+      <section class="subjects-section" aria-label="Your tracked subjects" aria-live="polite">
+        <div class="subjects-header">
+          <h2 class="subjects-title">Your Subjects</h2>
+          <button
+            type="button"
+            class="btn btn--danger-outline btn--sm"
+            id="clear-all-btn"
+            aria-label="Clear all subjects"
+            hidden
+          >
+            🗑 Clear All
+          </button>
+        </div>
+
+        <!-- Populated dynamically by JS -->
+        <div class="subjects-grid" id="subjects-grid">
+          <!-- Empty state shown when no subjects added yet -->
+          <div class="empty-state" id="empty-state">
+            <span class="empty-state__icon" aria-hidden="true">📚</span>
+            <p class="empty-state__text">
+              No subjects added yet.<br />Add your first subject above to get started.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <!-- Injected by footer.js, same as every other page -->
+    <div id="footer-placeholder"></div>
+
+    <!-- ===================== EDIT MODAL ===================== -->
+    <div
+      class="modal-overlay"
+      id="edit-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      hidden
+    >
+      <div class="modal-card">
+        <h2 class="modal-card__title" id="modal-title">Edit Subject</h2>
+
+        <div class="form-group">
+          <label for="edit-subject-name" class="form-label">Subject Name</label>
+          <input
+            type="text"
+            id="edit-subject-name"
+            class="form-input"
+            maxlength="60"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="edit-total-classes" class="form-label">Total Classes Held</label>
+          <input
+            type="number"
+            id="edit-total-classes"
+            class="form-input"
+            min="1"
+            max="999"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="edit-attended-classes" class="form-label">Classes Attended</label>
+          <input
+            type="number"
+            id="edit-attended-classes"
+            class="form-input"
+            min="0"
+            max="999"
+          />
+        </div>
+
+        <p class="form-error" id="edit-form-error" role="alert" aria-live="polite" hidden></p>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn--primary" id="save-edit-btn">
+            Save Changes
+          </button>
+          <button type="button" class="btn btn--secondary" id="cancel-edit-btn">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shared components (navigation + footer) — same as every other page -->
+    <script src="../assets/js/components/navigation.js"></script>
+    <script src="../assets/js/components/footer.js"></script>
+
+    <!-- Page-specific logic -->
+    <script src="../assets/js/pages/attendance.js"></script>
+  </body>
+</html>
