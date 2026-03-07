@@ -1,485 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>College Daddy - AI Agent & Automation Developer Roadmap</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-  <link href="../css/sub-roadmap.css" rel="stylesheet" />
+    <!-- Theme initialization - prevents white flash -->
+    <script>
+        (function () {
+            try {
+                const theme = localStorage.getItem("theme") || "dark";
+                document.documentElement.setAttribute("data-theme", theme);
+            } catch (e) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Build intelligent agents that automate workflows, integrate APIs, and use AI models like OpenAI and Gemini to create smart, self-operating systems."/>
+    
+    <title>College Daddy - AI Agent Developer Roadmap</title>
+    
+    <!-- External Styles -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../assets/css/global.css" />
+    <link rel="stylesheet" href="../../assets/css/navigation.css">
+    <link href="../css/sub-roadmap.css" rel="stylesheet"/>
+    <link href="../../assets/css/share.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../assets/css/footer.css" />
+
+    <style>
+        /* UI FIX: Ensures the 'Roadmap' active link displays text clearly over the blue background */
+        .nav-links .nav-link.active {
+            background-color: #00a8ff !important;
+            color: #ffffff !important;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Theme Toggle Styling */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            margin-left: 15px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        [data-theme="light"] .theme-toggle {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .theme-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-color, #0f172a);
+                padding: 20px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <header>
-    <div class="nav-container">
-      <a aria-label="College Buddy Home" class="logo" href="index.html">
-        <i class="fas fa-graduation-cap"></i>
-        <span>College Daddy</span>
-      </a>
-      <button aria-expanded="false" aria-label="Toggle navigation menu" class="menu-button">
-        <i class="fas fa-bars"></i>
-      </button>
-      <nav aria-label="Main navigation" class="nav-links">
-        <a class="nav-link" href="../../index.html">Home</a>
-        <a class="nav-link active" href="../../pages/roadmap.html">Career Roadmaps</a>
-        <a class="nav-link" href="../../pages/cgpa.html">CGPA Calculator</a>
-        <a class="nav-link" href="../../pages/iacal.html">IA Calculator</a>
-        <a class="nav-link" href="../../pages/pomodoro.html">Study Timer</a>
-        <a class="nav-link" href="../../pages/notes.html">Notes</a>
-      </nav>
+    <header>
+        <div class="nav-container">
+            <a aria-label="College Daddy Home" class="logo" href="../../index.html">
+                <i class="fas fa-graduation-cap"></i>
+                <span>College Daddy</span>
+            </a>
+            <div class="nav-actions">
+                <button aria-expanded="false" aria-label="Toggle navigation menu" class="menu-button" id="mobile-menu-btn">
+                    ☰
+                </button>
+            </div>
+            <nav aria-label="Main navigation" class="nav-links" id="nav-links-container">
+                <a class="nav-link" href="../../index.html">Home</a>
+                <a class="nav-link" href="../../pages/cgpa.html">CGPA Calculator</a>
+                <a class="nav-link" href="../../pages/iacal.html">IA Calculator</a>
+                <a class="nav-link" href="../../pages/pomodoro.html">Study Timer</a>
+                <a class="nav-link" href="../../pages/notes.html">Notes</a>
+                <a class="nav-link active" href="../../pages/roadmap.html">Roadmap</a>
+                <a class="nav-link" href="../../pages/events.html">Events</a>
+                <button class="theme-toggle" id="theme-toggle-btn" title="Toggle Light/Dark Mode">
+                    <span class="theme-icon" id="theme-icon-span">🌙</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="roadmap-hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>AI Agent Developer<br>Professional Roadmap</h1>
+                <p>Design and build autonomous AI agents, multi-agent systems, and intelligent pipelines with LLMs and modern AI tooling.</p>
+                <div class="hero-stats">
+                    <div class="stat-item"><span class="stat-value">24+</span><span class="stat-label">Weeks</span></div>
+                    <div class="stat-item"><span class="stat-value">8</span><span class="stat-label">Modules</span></div>
+                    <div class="stat-item"><span class="stat-value">Mid</span><span class="stat-label">Level</span></div>
+                </div>
+            </div>
+            <div class="hero-progress-card">
+                <div class="progress-header"><span>Overall Mastery</span><span id="global-progress-text">0%</span></div>
+                <div class="global-progress-bar"><div class="global-progress-fill" id="global-progress-fill"></div></div>
+                <a href="#module-1" class="continue-btn" id="resume-btn">Start Learning</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="dashboard-layout">
+        <aside class="roadmap-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-map-signs"></i>
+                <span>Roadmap Modules</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#module-1" class="sidebar-link active"><i class="fas fa-code"></i> Python & ML Basics</a>
+                <a href="#module-2" class="sidebar-link"><i class="fas fa-brain"></i> LLM Fundamentals</a>
+                <a href="#module-3" class="sidebar-link"><i class="fas fa-comments"></i> Prompt Engineering</a>
+                <a href="#module-4" class="sidebar-link"><i class="fas fa-robot"></i> Agent Frameworks</a>
+                <a href="#module-5" class="sidebar-link"><i class="fas fa-plug"></i> Tools & Integrations</a>
+                <a href="#module-6" class="sidebar-link"><i class="fas fa-sitemap"></i> Multi-Agent Systems</a>
+                <a href="#module-7" class="sidebar-link"><i class="fas fa-upload"></i> Deployment & Ops</a>
+                <a href="#module-8" class="sidebar-link"><i class="fas fa-briefcase"></i> Career Prep</a>
+            </nav>
+        </aside>
+
+        <div class="dashboard-content">
+            <div class="roadmap-sections">
+                <!-- Module 1 -->
+                <div class="roadmap-section" id="module-1">
+                    <span class="section-badge">~3 WEEKS</span>
+                    <div class="section-header">
+                        <div class="section-progress">
+                            <div class="progress-label"><span>Progress</span><span>0%</span></div>
+                            <div class="progress-container"><div class="progress-bar" style="width: 0%"></div></div>
+                        </div>
+                        <h2 class="section-title">
+                            <input type="checkbox" onclick="event.stopPropagation()">
+                            Python & ML Fundamentals
+                            <span class="badge badge-beginner">Beginner</span>
+                        </h2>
+                        <div class="section-content">
+                            <ul>
+                                <li><input type="checkbox"><span>Python Proficiency (OOP, Async)</span></li>
+                                <li><input type="checkbox"><span>Machine Learning Basics</span></li>
+                                <li><input type="checkbox"><span>Deep Learning Fundamentals</span></li>
+                                <li><input type="checkbox"><span>REST APIs & HTTP</span></li>
+                                <li><input type="checkbox"><span>JSON & Data Formats</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Note: Add remaining modules 2-8 here following the same structure -->
+            </div>
+        </div>
     </div>
-  </header>
 
-  <main class="main-content">
-    <h1>AI Agent & Automation Developer Roadmap</h1>
-    <div class="roadmap-sections">
-
-      <!-- Fundamentals of AI Automation -->
-      <div class="roadmap-section">
-        <span class="section-badge">~2 WEEKS</span>
-        <div class="section-header">
-          <div class="section-progress">
-            <div class="progress-label">
-              <span>Progress</span>
-              <span>0%</span>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>College Daddy</h3>
+                <p>Your ultimate companion for academic success.</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/company/collegedaddy-tech" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
-            <div class="progress-container">
-              <div class="progress-bar" style="width: 0%"></div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../pages/cgpa.html">CGPA Calculator</a></li>
+                    <li><a href="../../pages/roadmap.html">Career Roadmaps</a></li>
+                </ul>
             </div>
-          </div>
-          
-          <h2 class="section-title">
-            <input type="checkbox" onclick="event.stopPropagation()">
-            Fundamentals of AI Automation
-            <span class="badge badge-beginner">Beginner</span>
-          </h2>
-          
-          <p class="section-description">
-            Learn the basics of AI agents, workflows, and automation fundamentals
-          </p>
-          
-          <div class="section-content">
-            <ul>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Understanding AI Agents & Workflows</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Basics of Automation & APIs</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Prompt Engineering Essentials</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>JSON, REST APIs, and Webhooks</span>
-              </li>
-            </ul>
-          </div>
         </div>
-      </div>
-
-      <!-- Programming & Tools -->
-      <div class="roadmap-section">
-        <span class="section-badge">~3 WEEKS</span>
-        <div class="section-header">
-          <div class="section-progress">
-            <div class="progress-label">
-              <span>Progress</span>
-              <span>0%</span>
-            </div>
-            <div class="progress-container">
-              <div class="progress-bar" style="width: 0%"></div>
-            </div>
-          </div>
-          
-          <h2 class="section-title">
-            <input type="checkbox" onclick="event.stopPropagation()">
-            Programming & Tools
-            <span class="badge badge-beginner">Beginner</span>
-          </h2>
-          
-          <p class="section-description">
-            Master Python, Node.js, and essential AI APIs for automation development
-          </p>
-          
-          <div class="section-content">
-            <ul>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Python (Requests, AsyncIO, APIs)</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Node.js (Automation & Integrations)</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>OpenAI API / Gemini API Basics</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>LangChain Fundamentals</span>
-              </li>
-            </ul>
-          </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 College Daddy. Developed by <span class="developer-name">Sachin</span></p>
         </div>
-      </div>
+    </footer>
 
-      <!-- Building AI Agents -->
-      <div class="roadmap-section">
-        <span class="section-badge">~4 WEEKS</span>
-        <div class="section-header">
-          <div class="section-progress">
-            <div class="progress-label">
-              <span>Progress</span>
-              <span>0%</span>
-            </div>
-            <div class="progress-container">
-              <div class="progress-bar" style="width: 0%"></div>
-            </div>
-          </div>
-          
-          <h2 class="section-title">
-            <input type="checkbox" onclick="event.stopPropagation()">
-            Building AI Agents
-            <span class="badge badge-intermediate">Intermediate</span>
-          </h2>
-          
-          <p class="section-description">
-            Create intelligent agents using modern frameworks and architectures
-          </p>
-          
-          <div class="section-content">
-            <ul>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Agent Architectures (ReAct, Toolformer)</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Using LangChain Agents & Tools</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Memory, Context, and Reasoning Chains</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>CrewAI / AutoGen / LlamaIndex Basics</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeBtn = document.getElementById('theme-toggle-btn');
+        const themeIcon = document.getElementById('theme-icon-span');
+        const htmlEl = document.documentElement;
 
-      <!-- Automation & Integrations -->
-      <div class="roadmap-section">
-        <span class="section-badge">~3 WEEKS</span>
-        <div class="section-header">
-          <div class="section-progress">
-            <div class="progress-label">
-              <span>Progress</span>
-              <span>0%</span>
-            </div>
-            <div class="progress-container">
-              <div class="progress-bar" style="width: 0%"></div>
-            </div>
-          </div>
-          
-          <h2 class="section-title">
-            <input type="checkbox" onclick="event.stopPropagation()">
-            Automation & Integrations
-            <span class="badge badge-intermediate">Intermediate</span>
-          </h2>
-          
-          <p class="section-description">
-            Connect AI with real-world tools and automate complex workflows
-          </p>
-          
-          <div class="section-content">
-            <ul>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Automating Workflows (Zapier, n8n, Make)</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Connecting AI with Google Sheets, Slack, Discord</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Browser Automation (Playwright, Selenium)</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Email & File Automation Scripts</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = (theme === 'light') ? '☀️' : '🌙';
+        }
 
-      <!-- Databases & Knowledge Integration -->
-      <div class="roadmap-section">
-        <span class="section-badge">~4 WEEKS</span>
-        <div class="section-header">
-          <div class="section-progress">
-            <div class="progress-label">
-              <span>Progress</span>
-              <span>0%</span>
-            </div>
-            <div class="progress-container">
-              <div class="progress-bar" style="width: 0%"></div>
-            </div>
-          </div>
-          
-          <h2 class="section-title">
-            <input type="checkbox" onclick="event.stopPropagation()">
-            Databases & Knowledge Integration
-            <span class="badge badge-intermediate">Intermediate</span>
-          </h2>
-          
-          <p class="section-description">
-            Build knowledge bases and document Q&A systems using vector databases
-          </p>
-          
-          <div class="section-content">
-            <ul>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Vector Databases (FAISS, Pinecone, Chroma)</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Embeddings & Context Retrieval</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Document Q&A Systems (PDFs, Websites)</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Building Personal Knowledge Bots</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        updateThemeIcon(currentTheme);
 
-      <!-- Deploying AI Agents -->
-      <div class="roadmap-section">
-        <span class="section-badge">~3 WEEKS</span>
-        <div class="section-header">
-          <div class="section-progress">
-            <div class="progress-label">
-              <span>Progress</span>
-              <span>0%</span>
-            </div>
-            <div class="progress-container">
-              <div class="progress-bar" style="width: 0%"></div>
-            </div>
-          </div>
-          
-          <h2 class="section-title">
-            <input type="checkbox" onclick="event.stopPropagation()">
-            Deploying AI Agents
-            <span class="badge badge-advanced">Advanced</span>
-          </h2>
-          
-          <p class="section-description">
-            Deploy and monitor AI agents in production environments
-          </p>
-          
-          <div class="section-content">
-            <ul>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Hosting APIs on FastAPI / Flask</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Creating Dashboards with Streamlit / Next.js</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Dockerizing AI Apps</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Monitoring & Logging Agent Behavior</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        themeBtn.addEventListener('click', () => {
+            const nowTheme = htmlEl.getAttribute('data-theme');
+            const newTheme = (nowTheme === 'dark') ? 'light' : 'dark';
+            
+            htmlEl.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
 
-      <!-- Advanced Concepts -->
-      <div class="roadmap-section">
-        <span class="section-badge">~5 WEEKS</span>
-        <div class="section-header">
-          <div class="section-progress">
-            <div class="progress-label">
-              <span>Progress</span>
-              <span>0%</span>
-            </div>
-            <div class="progress-container">
-              <div class="progress-bar" style="width: 0%"></div>
-            </div>
-          </div>
-          
-          <h2 class="section-title">
-            <input type="checkbox" onclick="event.stopPropagation()">
-            Advanced Concepts
-            <span class="badge badge-advanced">Advanced</span>
-          </h2>
-          
-          <p class="section-description">
-            Master multi-agent systems, RAG, and cutting-edge automation techniques
-          </p>
-          
-          <div class="section-content">
-            <ul>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Multi-Agent Collaboration (CrewAI, AutoGPT)</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Reasoning & Planning Frameworks</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>RAG (Retrieval-Augmented Generation) Systems</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>AI + IoT / AI + Cloud Automations</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links-container');
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
 
-      <!-- Career Prep & Projects -->
-      <div class="roadmap-section">
-        <span class="section-badge">~4 WEEKS</span>
-        <div class="section-header">
-          <div class="section-progress">
-            <div class="progress-label">
-              <span>Progress</span>
-              <span>0%</span>
-            </div>
-            <div class="progress-container">
-              <div class="progress-bar" style="width: 0%"></div>
-            </div>
-          </div>
-          
-          <h2 class="section-title">
-            <input type="checkbox" onclick="event.stopPropagation()">
-            Career Prep & Projects
-            <span class="badge badge-advanced">Advanced</span>
-          </h2>
-          
-          <p class="section-description">
-            Build portfolio projects and prepare for AI automation roles
-          </p>
-          
-          <div class="section-content">
-            <ul>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Build an Autonomous Task Assistant</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Create an AI Automation Script (Email Summarizer, File Sorter)</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>Portfolio & Resume Building</span>
-              </li>
-              <li>
-                <input type="checkbox" onclick="event.stopPropagation()">
-                <span>AI Agent Interview Prep</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        const STORAGE_KEY_PREFIX = 'ai-agent-dev-roadmap';
+        const sections = document.querySelectorAll('.roadmap-section');
+        
+        sections.forEach((section, idx) => {
+            const moduleKey = STORAGE_KEY_PREFIX + '-module-' + (idx + 1);
+            const checkboxes = section.querySelectorAll('input[type="checkbox"]');
+            
+            checkboxes.forEach((cb, cbIdx) => {
+                if (localStorage.getItem(moduleKey + '-cb-' + cbIdx) === 'true') cb.checked = true;
+                cb.addEventListener('change', function() {
+                    localStorage.setItem(moduleKey + '-cb-' + cbIdx, cb.checked);
+                    updateModuleProgress(section);
+                    updateGlobalProgress();
+                });
+            });
+            updateModuleProgress(section);
+            
+            section.querySelector('.section-header').addEventListener('click', function(e) {
+                if (e.target.type === 'checkbox') return;
+                section.classList.toggle('expanded');
+            });
+        });
 
-    </div>
-  </main>
+        function updateModuleProgress(section) {
+            const all = section.querySelectorAll('input[type="checkbox"]');
+            const checked = section.querySelectorAll('input[type="checkbox"]:checked');
+            const pct = all.length > 0 ? Math.round((checked.length / all.length) * 100) : 0;
+            const bar = section.querySelector('.progress-bar');
+            const text = section.querySelector('.progress-label span:last-child');
+            if (bar) bar.style.width = pct + '%';
+            if (text) text.textContent = pct + '%';
+        }
 
-  <footer class="footer">
-    <p>2025 College Daddy. All rights reserved. Developed by <span class="developer-name">Sachin</span></p>
-    <p class="tagline">*Developed with students in mind, for students by students*</p>
-    <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSciD1CUiYUpiz4mtQSTYG9XeCRyG3CEhr9GNL03WxmRbFOgkw/viewform?usp=dialog" target="_blank" class="feedback-link">Feedback</a></p>
-  </footer>
+        function updateGlobalProgress() {
+            const all = document.querySelectorAll('.roadmap-section input[type="checkbox"]');
+            const checked = document.querySelectorAll('.roadmap-section input[type="checkbox"]:checked');
+            const pct = all.length > 0 ? Math.round((checked.length / all.length) * 100) : 0;
+            const fill = document.getElementById('global-progress-fill');
+            const text = document.getElementById('global-progress-text');
+            if (fill) fill.style.width = pct + '%';
+            if (text) text.textContent = pct + '%';
+            const btn = document.getElementById('resume-btn');
+            if (btn && pct > 0) btn.textContent = 'Continue Learning';
+        }
 
-  <script>
-  // Roadmap Collapsible Functionality
-  document.addEventListener('DOMContentLoaded', function() {
-      // Get all roadmap sections
-      const roadmapSections = document.querySelectorAll('.roadmap-section');
-      
-      roadmapSections.forEach(section => {
-          const header = section.querySelector('.section-header');
-          
-          // Add click event to toggle expansion
-          header.addEventListener('click', function(e) {
-              // Don't toggle if clicking on a checkbox
-              if (e.target.type === 'checkbox') {
-                  return;
-              }
-              
-              // Toggle expanded class
-              section.classList.toggle('expanded');
-          });
-      });
-      
-      // Update progress bars on checkbox change
-      const checkboxes = document.querySelectorAll('.roadmap-section input[type="checkbox"]');
-      
-      checkboxes.forEach(checkbox => {
-          checkbox.addEventListener('change', function() {
-              updateProgress(this);
-          });
-          
-          // Initialize progress on page load
-          updateProgress(checkbox);
-      });
-      
-      function updateProgress(checkbox) {
-          // Find the parent roadmap section
-          const section = checkbox.closest('.roadmap-section');
-          if (!section) return;
-          
-          // Count total and checked checkboxes in this section
-          const allCheckboxes = section.querySelectorAll('input[type="checkbox"]');
-          const checkedBoxes = section.querySelectorAll('input[type="checkbox"]:checked');
-          
-          const total = allCheckboxes.length;
-          const checked = checkedBoxes.length;
-          const percentage = total > 0 ? Math.round((checked / total) * 100) : 0;
-          
-          // Update progress bar
-          const progressBar = section.querySelector('.progress-bar');
-          const progressText = section.querySelector('.progress-label span:last-child');
-          
-          if (progressBar) {
-              progressBar.style.width = percentage + '%';
-          }
-          
-          if (progressText) {
-              progressText.textContent = percentage + '%';
-          }
-      }
-  });
-  </script>
-
-  <script src="../js/sub-roadmap.js"></script>
-<script src="../../assets/js/components/back-to-top.js"></script>
+        updateGlobalProgress();
+    });
+    </script>
+    <script src="../../assets/js/components/share.js"></script>
+    <script src="../../assets/js/components/back-to-top.js"></script>
 </body>
 </html>

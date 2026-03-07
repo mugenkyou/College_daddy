@@ -43,6 +43,17 @@ main {
     position: relative;
 }
 
+/* Header - sticky to top like Home menu navbar */
+body > header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+    background-color: var(--bg-darker) !important;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
 /* Navigation Styles - Keep These */
 .menu-button.active {
     background-color: var(--primary-dim);
@@ -58,7 +69,7 @@ body {
     align-items: center;
     color: var(--primary-color);
     overflow-x: hidden;
-    padding: 2rem;
+    padding: 0 1rem 2rem 1rem; /* no top padding so navbar sticks flush to top like Home */
 }
 
 .container {
@@ -68,7 +79,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    padding: 5rem;
+    padding: 2rem 1.5rem;
 }
 
 .title {
@@ -81,12 +92,35 @@ body {
     animation: glow 2s ease-in-out infinite alternate;
 }
 /*-----------circle---------------------------------------------------------------------*/
+/* Timer section card - organizes content and reduces empty space */
+.timer-section {
+    padding: 2rem 1.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.timer-section-card {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius, 16px);
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
 .timer-container {
     position: relative;
     margin-top: 0;
-    width: min(80vw, 500px);
-    height: min(80vw, 500px);
-    /
+    width: min(72vw, 320px);
+    height: min(72vw, 320px);
 }
 
 .timer-circle {
@@ -95,14 +129,15 @@ body {
     height: 100%;
     border-radius: 50%;
     background: radial-gradient(circle at center,
-        var(--bg-dark) 0%,
-        var(--bg-darker) 100%);
+        var(--bg-darker) 0%,
+        var(--card-bg) 70%);
+    border: 3px solid rgba(0, 157, 255, 0.25);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 50px rgba(0, 179, 255, 0.3),
-                inset 0 0 30px rgba(0, 179, 255, 0.2);
+    box-shadow: 0 0 40px rgba(0, 157, 255, 0.2),
+                inset 0 0 24px rgba(0, 157, 255, 0.06);
     animation: pulse 4s ease-in-out infinite;
 }
 
@@ -120,7 +155,7 @@ body {
     stroke: var(--primary-color);
     stroke-width: 8;
     stroke-linecap: round;
-    filter: drop-shadow(0 0 10px var(--primary-color));
+    filter: drop-shadow(0 0 12px rgba(0, 157, 255, 0.5));
     transition: stroke-dashoffset 0.3s ease-in-out, stroke-width 0.3s ease;
 }
 
@@ -129,10 +164,12 @@ body {
 }
 
 .time-display {
-    font-size: clamp(2rem, 10vw, 5rem);
-    font-weight: bold;
+    font-size: clamp(2.5rem, 12vw, 4rem);
+    font-weight: 700;
     z-index: 2;
-    text-shadow: 0 0 20px rgba(0, 179, 255, 0.5);
+    color: var(--text-light);
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 24px rgba(0, 157, 255, 0.4);
     transition: transform 0.3s ease;
 }
 
@@ -141,12 +178,14 @@ body {
 }
 
 .phase-display {
-    font-size: clamp(1rem, 3vw, 1.5rem);
-    margin-top: 1rem;
+    font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+    margin-top: 0.75rem;
     z-index: 2;
     text-transform: uppercase;
-    letter-spacing: 0.2rem;
-    opacity: 0.9;
+    letter-spacing: 0.15em;
+    color: var(--primary-color);
+    font-weight: 600;
+    opacity: 0.95;
     transition: opacity 0.3s ease;
 }
 
@@ -195,60 +234,118 @@ body {
     font-size: 1rem;
 }
 
-/* FIX 3: Controls - all buttons on one line, shifted slightly left to center under timer */
+/* Controls - centered, modern spacing */
 .controls {
-    position: relative;
-    top: 0;
     display: flex;
-    gap: 1rem;
-    margin: 1rem auto;
-    flex-wrap: nowrap;
+    gap: 0.75rem;
+    margin: 0;
+    flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    transform: translateX(-140px);
+    max-width: 400px;
 }
 
+/* Base button - theme-aligned */
 .btn {
-    
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    background: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    padding: 0.85rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--transition-speed, 0.25s) ease;
     text-transform: uppercase;
-    letter-spacing: 0.2rem;
-    border-radius: 5px;
+    letter-spacing: 0.08em;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    min-height: 44px;
 }
-
-.btn:hover {
+/* Primary: Start - filled */
+.btn-primary {
     background: var(--primary-color);
-    color: var(--bg-dark);
-    box-shadow: 0 0 20px var(--primary-color);
+    color: var(--text-light);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 14px rgba(0, 157, 255, 0.35);
 }
-
+.btn-primary:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+    color: var(--text-light);
+    box-shadow: 0 6px 20px rgba(0, 157, 255, 0.45);
+    transform: translateY(-1px);
+}
+.btn-primary:active {
+    transform: translateY(0);
+    background: var(--primary-active);
+    border-color: var(--primary-active);
+}
+/* Secondary: Skip, Reset - outline */
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-secondary:hover {
+    background: rgba(0, 157, 255, 0.12);
+    color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+.btn-secondary:active {
+    transform: translateY(0);
+    background: rgba(0, 157, 255, 0.18);
+}
 .btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    transform: none !important;
+}
+/* Pause state - when timer is running (JS adds .btn-pause) */
+.btn-primary.btn-pause {
+    background: rgba(255, 68, 68, 0.2);
+    border-color: #e55555;
+    color: #ff6b6b;
+    box-shadow: 0 4px 14px rgba(229, 85, 85, 0.25);
+}
+.btn-primary.btn-pause:hover {
+    background: rgba(255, 68, 68, 0.3);
+    border-color: #ff6b6b;
+    color: #ff8888;
+    box-shadow: 0 6px 20px rgba(229, 85, 85, 0.35);
+}
+/* Buttons without .btn-primary/.btn-secondary (e.g. Apply Settings, Load Music) */
+.btn:not(.btn-primary):not(.btn-secondary) {
+    background: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn:not(.btn-primary):not(.btn-secondary):hover {
+    background: rgba(0, 157, 255, 0.12);
+    color: var(--primary-hover);
+    border-color: var(--primary-hover);
 }
 
-/* FIX 1: Music section - changed top:4cm to margin-top:4cm so it pushes content below */
+/* Music section - directly below timer, centered */
+.timer-section .music-section {
+    width: 100%;
+    margin-top: 1.5rem;
+}
 .music-section {
     width: 100%;
     max-width: 600px;
     background: var(--card-bg);
-    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius, 16px);
     padding: 2rem;
     position: relative;
     top: 0;
-    margin-top: 4cm;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .music-title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     text-align: center;
+    color: var(--primary-color);
+    font-weight: 600;
 }
 
 .music-controls {
@@ -366,27 +463,36 @@ body {
 /* Animations */
 @keyframes pulse {
     0% {
-        transform: scale(0.95);
-        box-shadow: 0 0 50px rgba(0, 179, 255, 0.3),
-                    inset 0 0 30px rgba(0, 179, 255, 0.2);
+        transform: scale(0.98);
+        box-shadow: 0 0 40px rgba(0, 157, 255, 0.2),
+                    inset 0 0 24px rgba(0, 157, 255, 0.06);
     }
     50% {
         transform: scale(1);
-        box-shadow: 0 0 50px rgba(0, 179, 255, 0.5),
-                    inset 0 0 30px rgba(0, 179, 255, 0.3);
+        box-shadow: 0 0 48px rgba(0, 157, 255, 0.28),
+                    inset 0 0 28px rgba(0, 157, 255, 0.08);
     }
     100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 50px rgba(0, 179, 255, 0.3),
-                    inset 0 0 30px rgba(0, 179, 255, 0.2);
+        transform: scale(0.98);
+        box-shadow: 0 0 40px rgba(0, 157, 255, 0.2),
+                    inset 0 0 24px rgba(0, 157, 255, 0.06);
     }
 }
 
 @media (max-width: 600px) {
+    .timer-section-card {
+        padding: 1.75rem 1.25rem;
+        gap: 1.5rem;
+    }
+    .controls {
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+    }
     .btn {
         width: 100%;
-        font-size: 1rem;
-        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        padding: 0.85rem 1.25rem;
     }
 }
 /* Accessibility and Touch Improvements */
@@ -440,27 +546,68 @@ html {
     } */
 
     
-    .settings-icon {
-        
-        position: fixed;
-        top: 80px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-        background: var(--bg-dark);
-        border: 2px solid var(--primary-color);
-        border-radius: 50%;
-        cursor: pointer;
+    /* Timer controls on navbar (Study Timer page only) */
+    .timer-nav-controls {
         display: flex;
         align-items: center;
-        justify-content: center;
-        z-index: 1000;
-        transition: transform 0.3s ease;
+        gap: 8px;
     }
-
-    .settings-icon:hover {
+    body > header .settings-icon {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        left: auto !important;
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        background: transparent !important;
+        border: 2px solid var(--primary-color) !important;
+        border-radius: 50% !important;
+        cursor: pointer;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease, background 0.2s ease, color 0.2s ease;
+        flex-shrink: 0;
+    }
+    body > header .settings-icon:hover {
+        background: var(--primary-color) !important;
         transform: rotate(45deg);
     }
+
+/* Fullscreen button - on navbar, match theme toggle style */
+body > header .fullscreen-btn {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 2px solid var(--primary-color) !important;
+    border-radius: 50% !important;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    box-shadow: none;
+}
+body > header .fullscreen-btn svg {
+    width: 16px;
+    height: 16px;
+}
+body > header .fullscreen-btn span {
+    display: none;
+}
+body > header .fullscreen-btn:hover {
+    background: var(--primary-color) !important;
+    color: var(--text-light);
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 157, 255, 0.3);
+}
+body > header .fullscreen-btn:active {
+    transform: scale(0.95);
+}
 
     .settings-icon::before {
         content: "⚙️";
@@ -468,8 +615,8 @@ html {
     }
 
     .settings-panel {
-        position: fixed;
-        top: 70px;
+        position: fixed !important;
+        top: 64px;
         right: 20px;
         width: 300px;
         background: var(--card-bg);

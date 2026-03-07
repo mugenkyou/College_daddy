@@ -47,6 +47,10 @@ class RoadmapRenderer {
             return;
         }
 
+        if (typeof roadmaps === "undefined") {
+            //console.error("roadmaps data is not defined.");
+            return;
+        }
         const roadmap = roadmaps[roadmapId];
         if (!roadmap) {
             console.error('Roadmap not found:', roadmapId);

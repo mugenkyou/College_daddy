@@ -3,111 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Daddy - Notes Portal</title>
-    <link rel="stylesheet" href="../assets/css/navigation.css">
-    <link rel="stylesheet" href="../assets/css/global.css">
-    <link rel="stylesheet" href="../assets/css/footer.css">
-    <link rel="stylesheet" href="../assets/css/notes.css">
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>College Daddy | Notes Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Critical overrides for icons */
-        .fas, .far, .fa {
-            display: inline-block !important;
-            font-family: "Font Awesome 5 Free" !important;
-            font-weight: 900 !important;
-            font-style: normal !important;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
-        i.fab {
-            font-family: "Font Awesome 5 Brands" !important;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
         }
-        
-        .logo i {
-            color: #009dff !important;
-            font-size: 1.5rem !important;
-            margin-right: 8px !important;
+
+        /* Navbar Styles from Image */
+        .nav-link {
+            color: #ffffff;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
         }
-        
-        .tool-card i {
-            color: #009dff !important;
-            font-size: 2.5rem !important;
-            margin-bottom: 1rem !important;
+        .nav-link:hover {
+            color: #38bdf8;
         }
-        
-        .download-btn {
-            display: flex !important;
-            align-items: center !important;
+        .nav-active {
+            border-bottom: 2px solid #00d1b2;
         }
-        
-        .download-btn i {
-            margin-right: 8px !important;
+
+        /* Card Styles from Image */
+        .sem-card {
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .sem-card:hover {
+            background-color: #262626;
+            transform: translateY(-2px);
+        }
+        .sem-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Search Bar */
+        .search-input {
+            background-color: #262626;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            padding: 0.75rem 1rem;
+            width: 300px;
+        }
+
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .dept-btn {
+            background: #262626;
+            border: 1px solid #333;
+            transition: all 0.2s;
+        }
+        .dept-btn:hover {
+            background: #00d1b2;
+            color: black;
+            font-weight: 600;
+        }
+
+        .chapter-item {
+            background: #1a1a1a;
+            border-left: 4px solid #00d1b2;
+            transition: all 0.2s;
+        }
+        .chapter-item:hover {
+            background: #262626;
         }
     </style>
-    <!-- Theme initialization script - runs before page render to prevent flash -->
-    <script>
-      (function() {
-        try {
-          const theme = localStorage.getItem('theme') || 'dark';
-          document.documentElement.setAttribute('data-theme', theme);
-        } catch (e) {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        }
-      })();
-    </script>
 </head>
 <body>
-    <header>
-        <div class="nav-container">
-            <a href="../index.html" class="logo" aria-label="College Daddy Home">
-            
-                <span>College Daddy</span>
-            </a>
-            <div class="nav-actions">
-                <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-            </div>
-            <nav class="nav-links">
-                <a href="../index.html" class="nav-link">Home</a>
-                <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
-                <a href="iacal.html" class="nav-link">IA Calculator</a>
-                <a href="pomodoro.html" class="nav-link">Study Timer</a>
-                <a href="notes.html" class="nav-link active">Notes</a>
-                <a href="roadmap.html" class="nav-link">Roadmap</a>
-                <a href="events.html" class="nav-link">Events</a>
-                <button
-                    class="theme-toggle"
-                    aria-label="Toggle dark/light theme"
-                    title="Toggle theme"
-                >
-                    <span class="theme-icon">🌙</span>
-                </button>
-            </nav>
+
+    <!-- Top Navigation Bar -->
+    <nav class="flex items-center justify-between px-12 py-6 border-b border-gray-800">
+        <div class="text-2xl font-bold text-sky-500">College Daddy</div>
+        <div class="hidden md:flex space-x-6 items-center">
+            <a href="../index.html" class="nav-link">Home</a>
+            <a href="#" class="nav-link">CGPA Calculator</a>
+            <a href="#" class="nav-link">IA Calculator</a>
+            <a href="#" class="nav-link">Study Timer</a>
+            <a href="#" class="nav-link nav-active">Notes</a>
+            <a href="#" class="nav-link">Roadmap</a>
+            <a href="#" class="nav-link">Events</a>
+            <button class="ml-4 p-2 rounded-full border border-sky-500 text-sky-500">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
-    </header>
-    <nav>
-        <h1>Notes Portal</h1>
-        <input type="search" id="searchInput" placeholder="Search notes...">
     </nav>
 
-    <div id="breadcrumb">Home</div>
+    <!-- Content Header -->
+    <div class="max-w-7xl mx-auto px-12 mt-12 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center">
+        <div>
+            <h1 class="text-4xl font-bold mb-4">Notes Portal</h1>
+            <nav class="text-sm text-sky-500">
+                <a href="../index.html" class="hover:underline">Home</a>
+            </nav>
+        </div>
+        <div class="mt-4 md:mt-0">
+            <input type="text" placeholder="Search notes..." class="search-input">
+        </div>
+    </div>
 
-    <main id="content">
-        <!-- Content will be loaded dynamically -->
+    <!-- Main Grid -->
+    <main class="max-w-7xl mx-auto px-12 pb-24">
+        <!-- Semester Grid -->
+        <div id="semesterGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Semesters 1-8 -->
+        </div>
+
+        <!-- Subjects/Chapters View -->
+        <div id="resourceView" class="hidden">
+            <button onclick="resetToGrid()" class="text-sky-500 hover:text-white mb-6 flex items-center gap-2">
+                <i class="fas fa-arrow-left"></i> Back to Semesters
+            </button>
+            <div id="resourceContent">
+                <!-- Content injected here -->
+            </div>
+        </div>
     </main>
 
-    <script src="../assets/js/components/navigation.js" defer></script>
-    <script src="../assets/js/components/footer.js"></script>
-    <script src="../assets/js/pages/notes/notes-utils.js"></script>
-    <script src="../assets/js/pages/notes/notes-navigation.js"></script>
-    <script src="../assets/js/pages/notes/notes-search.js"></script>
-    <script src="../assets/js/pages/notes/notes-main.js"></script>
+    <!-- Dept/Subject Modal -->
+    <div id="selectionModal" class="modal-overlay fixed inset-0 z-50 items-center justify-center p-4">
+        <div class="bg-[#121212] border border-gray-800 w-full max-w-2xl rounded-2xl p-8 shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-gray-500 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <h2 id="modalTitle" class="text-2xl font-bold mb-2">Select Branch</h2>
+            <p id="modalSubtitle" class="text-gray-400 mb-8">Choose your department to view subjects</p>
+            <div id="modalGrid" class="grid grid-cols-2 gap-4">
+                <!-- Buttons injected -->
+            </div>
+        </div>
+    </div>
 
-<script src="../assets/js/components/back-to-top.js"></script>
+    <script>
+        // Unique Data for different semesters
+        const academicData = {
+            departments: [
+                { id: 'cse', name: 'Computer Science' },
+                { id: 'ece', name: 'Electronics' },
+                { id: 'it', name: 'Information Tech' },
+                { id: 'me', name: 'Mechanical' },
+                { id: 'ce', name: 'Civil' },
+                { id: 'aids', name: 'AI & DS' }
+            ],
+            // Define subjects and their unique chapters
+            subjects: {
+                '1-cse': {
+                    'Mathematics I': ['Calculus & Linear Algebra', 'Ordinary Differential Equations', 'Multivariable Calculus'],
+                    'Programming in C': ['Introduction to C', 'Control Structures', 'Arrays & Strings', 'Functions & Pointers'],
+                    'Engineering Physics': ['Wave Optics', 'Quantum Mechanics', 'Semiconductors']
+                },
+                '3-cse': {
+                    'Data Structures': ['Arrays & Linked Lists', 'Stacks & Queues', 'Trees & Graphs', 'Hashing'],
+                    'Discrete Mathematics': ['Logic & Proofs', 'Set Theory', 'Graph Theory'],
+                    'Digital Logic': ['Number Systems', 'Combinational Circuits', 'Sequential Circuits']
+                }
+            }
+        };
+
+        const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
+        let selectionState = { semester: null, dept: null };
+
+        function init() {
+            const grid = document.getElementById('semesterGrid');
+            grid.innerHTML = semesters.map(num => `
+                <div class="sem-card" onclick="openDeptSelection(${num})">
+                    <h3>Semester ${num}</h3>
+                </div>
+            `).join('');
+        }
+
+        function openDeptSelection(sem) {
+            selectionState.semester = sem;
+            const grid = document.getElementById('modalGrid');
+            document.getElementById('modalTitle').innerText = `Semester ${sem}: Select Branch`;
+            
+            grid.innerHTML = academicData.departments.map(d => `
+                <button onclick="selectDept('${d.id}', '${d.name}')" class="dept-btn p-4 rounded-xl text-left">
+                    ${d.name}
+                </button>
+            `).join('');
+            
+            document.getElementById('selectionModal').classList.add('active');
+        }
+
+        function selectDept(id, name) {
+            selectionState.dept = id;
+            const key = `${selectionState.semester}-${id}`;
+            const subjectsObj = academicData.subjects[key] || { 
+                "Core Engineering Subject 1": ["Unit 1: Basics", "Unit 2: Application"], 
+                "Professional Elective": ["Syllabus Overview", "Reference Material"] 
+            };
+            
+            document.getElementById('modalTitle').innerText = `${name} Subjects`;
+            const grid = document.getElementById('modalGrid');
+            
+            grid.innerHTML = Object.keys(subjectsObj).map(subName => `
+                <button onclick="viewChapters('${subName}')" class="dept-btn p-4 rounded-xl text-left">
+                    ${subName}
+                </button>
+            `).join('');
+        }
+
+        function viewChapters(subjectName) {
+            closeModal();
+            const key = `${selectionState.semester}-${selectionState.dept}`;
+            const chapters = (academicData.subjects[key] && academicData.subjects[key][subjectName]) 
+                             ? academicData.subjects[key][subjectName] 
+                             : ["General Introduction", "Technical Details", "Exam Preparation"];
+
+            document.getElementById('semesterGrid').classList.add('hidden');
+            const view = document.getElementById('resourceView');
+            const content = document.getElementById('resourceContent');
+            view.classList.remove('hidden');
+
+            content.innerHTML = `
+                <h2 class="text-3xl font-bold mb-2">${subjectName}</h2>
+                <p class="text-gray-400 mb-8">Semester ${selectionState.semester} • ${selectionState.dept.toUpperCase()}</p>
+                <div class="space-y-4">
+                    ${chapters.map((ch, i) => `
+                        <div class="chapter-item p-6 rounded-r-lg flex justify-between items-center">
+                            <div>
+                                <h4 class="text-lg font-semibold">${ch}</h4>
+                                <span class="text-xs text-gray-500">PDF Document • 4.5 MB</span>
+                            </div>
+                            <button class="p-3 bg-gray-800 rounded-full hover:bg-sky-500 hover:text-black transition-all">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function resetToGrid() {
+            document.getElementById('resourceView').classList.add('hidden');
+            document.getElementById('semesterGrid').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('selectionModal').classList.remove('active');
+        }
+
+        window.onload = init;
+    </script>
 </body>
 </html>
-
-
-
-
-
-

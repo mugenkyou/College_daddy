@@ -15,6 +15,8 @@
     <title>College Daddy - Pomodoro Timer</title>
     <script src="../assets/js/components/navigation.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="../assets/css/navigation.css">
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/footer.css">
@@ -106,8 +108,8 @@
         }
 
         .focus-stat-card {
-            background: var(--shadow-color);
-            border: 1px solid hsla(var(--primary-color-hsl), 0.2);
+            background: var(--primary-dim);
+            border: 1px solid var(--primary-border);
             border-radius: 16px;
             padding: 20px;
             text-align: center;
@@ -115,8 +117,10 @@
         }
 
         .focus-stat-card:hover {
-            background: var(--shadow-color);
+            background: var(--primary-dim);
+            border-color: var(--primary-color);
             transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 157, 255, 0.2);
         }
 
         .focus-stat-card .focus-icon {
@@ -159,7 +163,7 @@
         }
 
         .streaks-card h2 i {
-            color: #ffa500;
+            color: var(--streak-color);
             font-size: 1.3rem;
         }
 
@@ -174,7 +178,7 @@
         }
 
         .streak-hint i {
-            color: #ffa500;
+            color: var(--streak-color);
             font-size: 1rem;
         }
 
@@ -185,8 +189,8 @@
         }
 
         .streak-stat-card {
-            background: rgba(255, 165, 0, 0.08);
-            border: 1px solid rgba(255, 165, 0, 0.15);
+            background: var(--streak-dim);
+            border: 1px solid var(--streak-color);
             border-radius: 16px;
             padding: 20px;
             text-align: center;
@@ -194,13 +198,15 @@
         }
 
         .streak-stat-card:hover {
-            background: rgba(255, 165, 0, 0.12);
+            background: var(--streak-dim);
+            border-color: var(--streak-color);
             transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
         }
 
         .streak-stat-card .streak-icon {
             font-size: 1.8rem;
-            color: #ffa500;
+            color: var(--streak-color);
             margin-bottom: 10px;
         }
 
@@ -215,7 +221,7 @@
         .streak-stat-card .streak-value {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #ffa500;
+            color: var(--streak-color);
         }
 
         /* Progress Bar Section */
@@ -272,8 +278,8 @@
 
         /* Motivation Card */
         .motivation-card {
-            background: linear-gradient(135deg, var(--shadow-color), rgba(var(--primary-color), 0.05));
-            border: 1px solid hsla(var(--primary-color-hsl), 0.2);
+            background: linear-gradient(135deg, var(--card-bg), var(--primary-dim));
+            border: 1px solid var(--primary-border);
             border-radius: 16px;
             padding: 20px;
             display: flex;
@@ -284,10 +290,14 @@
             line-height: 1.6;
         }
 
+        .motivation-card i {
+            color: var(--primary-color);
+        }
+
         /* Day Details */
         .day-details {
-            background: var(--shadow-color);
-            border: 1px solid hsla(var(--primary-color-hsl), 0.2);
+            background: var(--primary-dim);
+            border: 1px solid var(--primary-border);
             border-radius: 16px;
             padding: 24px;
         }
@@ -354,7 +364,15 @@
                 <a href="notes.html" class="nav-link">Notes</a>
                 <a href="roadmap.html" class="nav-link">Roadmap</a>
                 <a href="events.html" class="nav-link">Events</a>
-
+                <div class="timer-nav-controls">
+                    <div class="settings-icon" id="settings-icon" aria-label="Timer settings" title="Settings"></div>
+                    <button id="fullscreenBtn" class="fullscreen-btn" aria-label="Toggle fullscreen" title="Fullscreen">
+                        <svg id="fullscreenIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                        </svg>
+                        <span></span>
+                    </button>
+                </div>
                 <button
                     class="theme-toggle"
                     aria-label="Toggle dark/light theme"
@@ -368,34 +386,10 @@
 
     <main>
         <!-- SECTION 1: TIMER + CONTROLS -->
-        <div class="container">
-            <!-- Settings and Fullscreen Controls -->
-            <div style="position: fixed; top: 80px; left: 20px; display: flex; gap: 10px; z-index: 1000;">
-                <div class="settings-icon" id="settings-icon" style="cursor: pointer;"></div>
-                
-                <button id="fullscreenBtn" style="
-                    padding: 8px 8px;
-                    background-color: #000000;
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    font-size: 14px;
-                    display: flex;
-                    align-items: center;
-                    gap: 6px;
-                    transition: all 0.3s ease;
-                    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-                    height: 36px;
-                ">
-                    <svg id="fullscreenIcon" style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
-                    </svg>
-                    <span></span>
-                </button>
-            </div>
-
-            <!-- Settings Panel -->
+        <div class="container timer-section">
+            <!-- Timer Card - contains timer and controls -->
+            <div class="timer-section-card">
+            <!-- Settings Panel (opens from navbar gear icon) -->
             <div class="settings-panel" id="settings-panel">
                 <div class="settings-grid">
                     <div class="settings-group">
@@ -415,7 +409,7 @@
                         <input type="number" class="settings-input" id="pomodoros-count" value="4" min="1" max="10">
                     </div>
                 </div>
-                <button class="btn" id="apply-settings">Apply Settings</button>
+                <button class="btn btn-secondary" id="apply-settings">Apply Settings</button>
             </div>
 
             <!-- Timer -->
@@ -445,26 +439,24 @@
 
             <!-- Controls -->
             <div class="controls">
-                <button class="btn" id="start">Start</button>
-                <button class="btn" id="skip">Skip Phase</button>
-                <button class="btn" id="reset">Reset</button>
+                <button class="btn btn-primary" id="start">Start</button>
+                <button class="btn btn-secondary" id="skip">Skip Phase</button>
+                <button class="btn btn-secondary" id="reset">Reset</button>
             </div>
-        </div>
+            </div>
 
-        <!-- SECTION 2: STUDY MUSIC -->
-        <div class="container">
+            <!-- Study Music - directly below timer, centered -->
             <div class="music-section">
                 <h2 class="music-title">Study Music</h2>
-                
                 <div class="music-controls">
                     <input type="text" placeholder="Enter YouTube URL" class="music-input" id="youtube-url">
-                    <button class="btn" id="add-youtube">Load Music</button>
+                    <button class="btn btn-secondary" id="add-youtube">Load Music</button>
                 </div>
                 <div class="youtube-container"></div>
             </div>
         </div>
 
-        <!-- SECTION 3: REDESIGNED STATS + CALENDAR -->
+        <!-- SECTION 2: STATS + CALENDAR -->
         <div class="progress-tracking-wrapper">
             <div class="progress-tracking-section">
                 <!-- LEFT COLUMN: Today's Focus + Streaks -->
@@ -632,24 +624,6 @@
         // Fullscreen functionality
         const btn = document.getElementById('fullscreenBtn');
         const icon = document.getElementById('fullscreenIcon');
-
-        btn.addEventListener('mouseover', () => {
-            btn.style.backgroundColor = '#1976D2';
-            btn.style.transform = 'translateY(-2px)';
-        });
-
-        btn.addEventListener('mouseout', () => {
-            btn.style.backgroundColor = '#2196F3';
-            btn.style.transform = 'translateY(0)';
-        });
-
-        btn.addEventListener('mousedown', () => {
-            btn.style.transform = 'translateY(0) scale(0.95)';
-        });
-
-        btn.addEventListener('mouseup', () => {
-            btn.style.transform = 'translateY(-2px) scale(1)';
-        });
 
         function updateButtonText() {
             const isFullscreen = document.fullscreenElement !== null;

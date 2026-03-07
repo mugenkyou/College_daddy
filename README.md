@@ -76,16 +76,18 @@ The project follows a clean, organized directory structure:
 
 ```
 college_daddy/
-├── assets/               # All static assets
-│   ├── css/              # CSS stylesheets
-│   ├── js/               # JavaScript files
-│   │   ├── components/   # Reusable UI components (navigation, etc.)
-│   │   └── pages/        # Page-specific scripts
-│   │       └── notes/    # Notes-specific functionality
-│   └── img/              # Images and graphics
-├── data/                 # Data files for applications
-├── pages/                # Individual page templates (notes.html, cgpa.html, etc.)
-└── index.html            # Homepage
+├── assets/                     # All static assets
+│   ├── css/                    # CSS stylesheets
+│   ├── js/                     # JavaScript files
+│   │   ├── components/         # Reusable UI components (navigation, footer, etc.)
+│   │   └── pages/              # Page-specific scripts
+│   │       └── notes/          # Notes-specific functionality
+│   ├── img/                    # Images and graphics
+│   └── offline/                # Offline caching scripts
+│       └── offlineCache.js
+├── data/                       # Data files for applications
+├── pages/                      # Individual page templates (notes.html, cgpa.html, etc.)
+└── index.html                  # Homepage
 ```
 
 ### Key Components

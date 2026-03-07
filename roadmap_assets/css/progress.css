@@ -72,7 +72,7 @@
 .tab-btn.active {
     background: var(--shadow-color);
     color: var(--primary-color);
-    border: 1px solid hsla(var(--primary-color-hsl), 0.3);
+    border: 1px solid var(--primary-border);
 }
 
 .tab-btn i {
@@ -138,7 +138,7 @@
 }
 
 .stat-card.highlight .stat-icon {
-    color: #ffbb35;
+    color: var(--streak-color);
 }
 
 .stat-info {
@@ -154,7 +154,7 @@
 }
 
 .stat-card.highlight .stat-value {
-    color: #ffbb35;
+    color: var(--streak-color);
 }
 
 .stat-label {
@@ -202,16 +202,16 @@
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--primary-color), var(--accent-color), #00d4ff);
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
     border-radius: 7px;
     transition: width 0.5s ease;
-    box-shadow: 0 0 12px rgba(0, 184, 255, 0.5);
+    box-shadow: 0 0 12px rgba(0, 157, 255, 0.4);
 }
 
 /* Motivation Card */
 .motivation-card {
-    background: linear-gradient(135deg, var(--shadow-color), rgba(var(--primary-color), 0.05));
-    border: 1px solid hsla(var(--primary-color-hsl), 0.3);
+    background: linear-gradient(135deg, var(--card-bg), var(--primary-dim));
+    border: 1px solid var(--primary-border);
     border-radius: 12px;
     padding: 20px;
     display: flex;
@@ -253,8 +253,8 @@
 }
 
 .month-nav {
-    background: var(--shadow-color);
-    border: 1px solid hsla(var(--primary-color-hsl), 0.3);
+    background: var(--primary-dim);
+    border: 1px solid var(--primary-border);
     color: var(--primary-color);
     width: 44px;
     height: 44px;
@@ -265,7 +265,8 @@
 }
 
 .month-nav:hover {
-    background: var(--shadow-color);
+    background: var(--primary-color);
+    color: var(--text-light);
     border-color: var(--primary-color);
     transform: scale(1.05);
 }
@@ -337,8 +338,9 @@
 }
 
 .calendar-day.today {
-    border-color: #ffbb35 !important;
-    box-shadow: 0 0 0 2px rgba(255, 187, 53, 0.3);
+    border-color: var(--primary-color) !important;
+    background: var(--primary-dim) !important;
+    box-shadow: 0 0 0 2px var(--primary-border);
 }
 
 .calendar-legend {
@@ -360,11 +362,16 @@
     height: 18px;
     border-radius: 4px;
 }
+.legend-box.intensity-0 { background: var(--bg-darker); }
+.legend-box.intensity-1 { background: rgba(0, 157, 255, 0.2); }
+.legend-box.intensity-2 { background: rgba(0, 157, 255, 0.4); }
+.legend-box.intensity-3 { background: rgba(0, 157, 255, 0.6); }
+.legend-box.intensity-4 { background: rgba(0, 157, 255, 0.8); }
 
 /* Day Details */
 .day-details {
-    background: var(--shadow-color);
-    border: 1px solid hsla(var(--primary-color-hsl), 0.3);
+    background: var(--primary-dim);
+    border: 1px solid var(--primary-border);
     border-radius: 16px;
     padding: 24px;
     margin-bottom: 32px;
@@ -448,40 +455,46 @@
 }
 
 .mgmt-btn.export {
-    background: rgba(37, 211, 102, 0.1);
-    border-color: rgba(37, 211, 102, 0.3);
-    color: #25D366;
+    background: var(--success-dim);
+    border-color: var(--success-color);
+    color: var(--success-color);
 }
 
 .mgmt-btn.export:hover {
-    background: rgba(37, 211, 102, 0.2);
-    border-color: #25D366;
+    background: var(--success-color);
+    color: var(--text-light);
+    border-color: var(--success-color);
     transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
 }
 
 .mgmt-btn.import {
-    background: var(--shadow-color);
-    border-color: hsla(var(--primary-color-hsl), 0.3);
+    background: var(--primary-dim);
+    border-color: var(--primary-border);
     color: var(--primary-color);
     cursor: pointer;
 }
 
 .mgmt-btn.import:hover {
-    background: var(--shadow-color);
+    background: var(--primary-color);
+    color: var(--text-light);
     border-color: var(--primary-color);
     transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 157, 255, 0.35);
 }
 
 .mgmt-btn.clear {
-    background: rgba(255, 68, 68, 0.1);
-    border-color: rgba(255, 68, 68, 0.3);
-    color: #ff4444;
+    background: var(--danger-dim);
+    border-color: var(--danger-color);
+    color: var(--danger-color);
 }
 
 .mgmt-btn.clear:hover {
-    background: rgba(255, 68, 68, 0.2);
-    border-color: #ff4444;
+    background: var(--danger-color);
+    color: var(--text-light);
+    border-color: var(--danger-color);
     transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
 }
 
 .data-notice {
@@ -489,8 +502,8 @@
     align-items: flex-start;
     gap: 12px;
     padding: 16px;
-    background: var(--shadow-color);
-    border: 1px solid hsla(var(--primary-color-hsl), 0.3);
+    background: var(--primary-dim);
+    border: 1px solid var(--primary-border);
     border-radius: 10px;
     color: var(--text-gray);
     font-size: 0.875rem;

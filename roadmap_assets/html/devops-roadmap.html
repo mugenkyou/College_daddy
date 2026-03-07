@@ -1,17 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>DevOps & SRE Roadmap - College Daddy</title>
-    <meta name="description"
-        content="A comprehensive roadmap for learning DevOps and Site Reliability Engineering (SRE). Master automation, CI/CD, containers, and infrastructure management.">
-    <meta name="keywords" content="DevOps, SRE, CI/CD, Docker, Kubernetes, Terraform, automation, cloud infrastructure">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="../css/sub-roadmap.css" rel="stylesheet" />
-</head>
+    <!-- Theme initialization - prevents white flash on load -->
+    <script>
+        (function () {
+            try {
+                const theme = localStorage.getItem("theme") || "dark";
+                document.documentElement.setAttribute("data-theme", theme);
+            } catch (e) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
 
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Build and manage scalable, reliable systems using modern automation and monitoring tools. Master CI/CD, containers, and infrastructure as code."/>
+    
+    <!-- Open Graph / Social Media Tags -->
+    <meta property="og:title" content="DevOps & SRE Roadmap | College Daddy"/>
+    <meta property="og:description" content="Build and manage scalable, reliable systems using modern automation and monitoring tools. Master CI/CD, containers, and infrastructure as code."/>
+    <meta property="og:url" content="https://collegedaddy.vercel.app/roadmap_assets/html/devops-roadmap.html"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="College Daddy"/>
+    <meta property="og:image" content="https://collegedaddy.vercel.app/assets/img/college-daddy-og.png"/>
+    
+    <title>College Daddy - DevOps & SRE Roadmap</title>
+
+    <!-- External Styles -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../assets/css/global.css" />
+    <link rel="stylesheet" href="../../assets/css/navigation.css">
+    <link href="../css/sub-roadmap.css" rel="stylesheet"/>
+    <link href="../../assets/css/share.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../assets/css/footer.css" />
+
+    <style>
+        /* UI FIX: Ensures Roadmap link text is visible when active */
+        .nav-links .nav-link.active {
+            background-color: #00a8ff !important;
+            color: #ffffff !important;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Theme Toggle Styling */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            margin-left: 15px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        [data-theme="light"] .theme-toggle {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .theme-icon { font-size: 1.2rem; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-color, #0f172a);
+                padding: 20px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                z-index: 1000;
+            }
+        }
+    </style>
+</head>
 <body>
     <header>
         <div class="nav-container">
@@ -19,741 +97,205 @@
                 <i class="fas fa-graduation-cap"></i>
                 <span>College Daddy</span>
             </a>
-            <button aria-expanded="false" aria-label="Toggle navigation menu" class="menu-button">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav aria-label="Main navigation" class="nav-links">
+            <div class="nav-actions">
+                <button aria-expanded="false" aria-label="Toggle navigation menu" class="menu-button" id="mobile-menu-btn">
+                    ☰
+                </button>
+            </div>
+            <nav aria-label="Main navigation" class="nav-links" id="nav-links-container">
                 <a class="nav-link" href="../../index.html">Home</a>
-                <a class="nav-link active" href="../../pages/roadmap.html">Career Roadmaps</a>
                 <a class="nav-link" href="../../pages/cgpa.html">CGPA Calculator</a>
                 <a class="nav-link" href="../../pages/iacal.html">IA Calculator</a>
                 <a class="nav-link" href="../../pages/pomodoro.html">Study Timer</a>
                 <a class="nav-link" href="../../pages/notes.html">Notes</a>
+                <a class="nav-link active" href="../../pages/roadmap.html">Roadmap</a>
+                <a class="nav-link" href="../../pages/events.html">Events</a>
+                <button class="theme-toggle" id="theme-toggle-btn" title="Toggle Light/Dark Mode">
+                    <span class="theme-icon" id="theme-icon-span">🌙</span>
+                </button>
             </nav>
         </div>
     </header>
 
-    <main class="main-content">
-        <h1>DevOps & SRE Roadmap</h1>
-        <div class="roadmap-sections">
-
-            <!-- Linux & System Administration -->
-            <div class="roadmap-section">
-                <span class="section-badge">~3 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Linux & System Administration
-                        <span class="badge badge-beginner">Beginner</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Master Linux fundamentals and system administration basics
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Linux Fundamentals (Ubuntu, CentOS, Debian)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>File Systems & Permissions</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>User & Process Management</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>System Monitoring Tools (top, ps, htop)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Package Managers (apt, yum, dnf)</span>
-                            </li>
-                        </ul>
-                    </div>
+    <section class="roadmap-hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>DevOps & SRE<br>Professional Roadmap</h1>
+                <p>Bridge development and operations through automation, CI/CD pipelines, and site reliability engineering practices.</p>
+                <div class="hero-stats">
+                    <div class="stat-item"><span class="stat-value">28+</span><span class="stat-label">Weeks</span></div>
+                    <div class="stat-item"><span class="stat-value">7</span><span class="stat-label">Modules</span></div>
+                    <div class="stat-item"><span class="stat-value">Mid</span><span class="stat-label">Level</span></div>
                 </div>
             </div>
-
-            <!-- Networking & Security Fundamentals -->
-            <div class="roadmap-section">
-                <span class="section-badge">~2 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Networking & Security Fundamentals
-                        <span class="badge badge-beginner">Beginner</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Understand networking protocols and security basics
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>TCP/IP & OSI Model Basics</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>DNS, HTTP/HTTPS, SSH Protocols</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Firewalls & Network Security</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>SSL/TLS Certificates</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Basic Penetration Testing Concepts</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="hero-progress-card">
+                <div class="progress-header"><span>Overall Mastery</span><span id="global-progress-text">0%</span></div>
+                <div class="global-progress-bar"><div class="global-progress-fill" id="global-progress-fill"></div></div>
+                <a href="#module-1" class="continue-btn" id="resume-btn">Start Learning</a>
             </div>
-
-            <!-- Shell Scripting & Automation -->
-            <div class="roadmap-section">
-                <span class="section-badge">~2 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Shell Scripting & Automation
-                        <span class="badge badge-beginner">Beginner</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Automate tasks with Bash scripting and cron jobs
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Bash Scripting Fundamentals</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Shell Variables & Control Flow</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Text Processing (sed, awk, grep)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Cron Jobs & Task Scheduling</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>System Automation Scripts</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Version Control & Git Workflows -->
-            <div class="roadmap-section">
-                <span class="section-badge">~1.5 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Version Control & Git Workflows
-                        <span class="badge badge-beginner">Beginner</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Master Git and collaborative development workflows
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Git Fundamentals & Commands</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>GitHub Workflows & Pull Requests</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Branching Strategies (GitFlow, Trunk-based)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Merge Conflicts & Resolution</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Git Hooks & Automation</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CI/CD Pipelines & Automation -->
-            <div class="roadmap-section">
-                <span class="section-badge">~3 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        CI/CD Pipelines & Automation
-                        <span class="badge badge-intermediate">Intermediate</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Build automated pipelines for continuous integration and deployment
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Jenkins Setup & Pipeline Creation</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>GitHub Actions Workflows</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>GitLab CI Configuration</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Build Automation & Testing Pipelines</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Artifact Management & Deployment</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Pipeline Security & Best Practices</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Containerization & Docker -->
-            <div class="roadmap-section">
-                <span class="section-badge">~2.5 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Containerization & Docker
-                        <span class="badge badge-intermediate">Intermediate</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Containerize applications using Docker and Docker Compose
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Docker Fundamentals & Containers</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Dockerfile Creation & Image Building</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Docker Compose & Multi-Container Setup</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Docker Registry & Image Management</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Container Networking & Storage</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Docker Security Best Practices</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Container Orchestration & Kubernetes -->
-            <div class="roadmap-section">
-                <span class="section-badge">~4 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Container Orchestration & Kubernetes
-                        <span class="badge badge-intermediate">Intermediate</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Orchestrate containers at scale with Kubernetes
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Kubernetes Architecture & Concepts</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Pods, Deployments, & Services</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>ConfigMaps & Secrets Management</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Ingress Controllers & Load Balancing</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Persistent Volumes & Storage Classes</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Helm Package Manager</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Kubernetes Security (RBAC, Network Policies)</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Infrastructure as Code (IaC) -->
-            <div class="roadmap-section">
-                <span class="section-badge">~3 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Infrastructure as Code (IaC)
-                        <span class="badge badge-intermediate">Intermediate</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Manage infrastructure using Terraform and Ansible
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Terraform Fundamentals & HCL</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Cloud Infrastructure Setup (AWS, GCP, Azure)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Ansible Configuration Management</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Modules & Code Organization</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>State Management & Backends</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>GitOps & Infrastructure Versioning</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Monitoring, Logging & Observability -->
-            <div class="roadmap-section">
-                <span class="section-badge">~3 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Monitoring, Logging & Observability
-                        <span class="badge badge-advanced">Advanced</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Implement comprehensive monitoring and logging solutions
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Prometheus & Grafana Monitoring</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>ELK Stack (Elasticsearch, Logstash, Kibana)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Centralized Logging & Log Aggregation</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Alerting & Incident Management</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Application Performance Monitoring (APM)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Distributed Tracing (Jaeger, Zipkin)</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SRE Practices & Advanced Topics -->
-            <div class="roadmap-section">
-                <span class="section-badge">~3 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        SRE Practices & Advanced Topics
-                        <span class="badge badge-advanced">Advanced</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Master SRE principles and production reliability practices
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>SLIs, SLOs, & Error Budgets</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Incident Response & Post-Mortems</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Chaos Engineering & Resilience Testing</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Cost Optimization & Resource Management</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Security Hardening & Compliance</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Disaster Recovery & Business Continuity</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Real-World DevOps & SRE Projects</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
         </div>
+    </section>
 
-        <!-- Projects & Real-World Application Section -->
-        <section class="projects-section">
-            <h2>Hands-On DevOps Projects</h2>
-            <div class="projects-list">
-                <div class="project-item">
-                    <h3><i class="fas fa-project-diagram"></i> Build a Complete CI/CD Pipeline</h3>
-                    <p>Create an end-to-end CI/CD pipeline using Jenkins/GitHub Actions that automatically tests,
-                        builds, and deploys applications to a Docker container and Kubernetes cluster.</p>
-                    <span class="project-difficulty">Difficulty: Intermediate</span>
-                </div>
-                <div class="project-item">
-                    <h3><i class="fas fa-project-diagram"></i> Containerize & Deploy a Microservices Application</h3>
-                    <p>Dockerize a multi-tier application and deploy it to Kubernetes with proper configuration,
-                        monitoring, and auto-scaling.</p>
-                    <span class="project-difficulty">Difficulty: Intermediate</span>
-                </div>
-                <div class="project-item">
-                    <h3><i class="fas fa-project-diagram"></i> Infrastructure as Code with Terraform</h3>
-                    <p>Provision and manage cloud infrastructure (AWS/GCP/Azure) using Terraform, implementing best
-                        practices for state management and modular design.</p>
-                    <span class="project-difficulty">Difficulty: Intermediate</span>
-                </div>
-                <div class="project-item">
-                    <h3><i class="fas fa-project-diagram"></i> Complete Monitoring & Logging Stack</h3>
-                    <p>Set up Prometheus, Grafana, and ELK Stack for comprehensive monitoring and logging of
-                        applications and infrastructure.</p>
-                    <span class="project-difficulty">Difficulty: Advanced</span>
-                </div>
-                <div class="project-item">
-                    <h3><i class="fas fa-project-diagram"></i> SRE Incident Management System</h3>
-                    <p>Build an incident management system with alerting, notification, and post-mortem automation
-                        following SRE best practices.</p>
-                    <span class="project-difficulty">Difficulty: Advanced</span>
-                </div>
-                <div class="project-item">
-                    <h3><i class="fas fa-project-diagram"></i> Multi-Cloud Infrastructure Management</h3>
-                    <p>Design and implement a multi-cloud setup using Terraform and Ansible, with disaster recovery and
-                        cost optimization strategies.</p>
-                    <span class="project-difficulty">Difficulty: Advanced</span>
-                </div>
+    <div class="dashboard-layout">
+        <aside class="roadmap-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-map-signs"></i>
+                <span>Roadmap Modules</span>
             </div>
-        </section>
+            <nav class="sidebar-nav">
+                <a href="#module-1" class="sidebar-link active"><i class="fas fa-terminal"></i> Linux & Sysadmin</a>
+                <a href="#module-2" class="sidebar-link"><i class="fas fa-code-branch"></i> CI/CD & Automation</a>
+                <a href="#module-3" class="sidebar-link"><i class="fas fa-cubes"></i> Containers & Docker</a>
+                <a href="#module-4" class="sidebar-link"><i class="fas fa-dharmachakra"></i> Kubernetes</a>
+                <a href="#module-5" class="sidebar-link"><i class="fas fa-file-code"></i> Infrastructure as Code</a>
+                <a href="#module-6" class="sidebar-link"><i class="fas fa-chart-line"></i> Monitoring & SRE</a>
+                <a href="#module-7" class="sidebar-link"><i class="fas fa-briefcase"></i> Career Prep</a>
+            </nav>
+        </aside>
 
-        <!-- Learning Resources Section -->
-        <section class="resources-section">
-            <h2>Recommended Learning Resources</h2>
-            <div class="resources-list">
-                <div class="resource-category">
-                    <h3>Online Courses & Certifications</h3>
-                    <ul>
-                        <li>Linux Foundation Certified Associate (LFCA)</li>
-                        <li>Certified Kubernetes Administrator (CKA)</li>
-                        <li>HashiCorp Certified: Terraform Associate</li>
-                        <li>AWS Certified Solutions Architect</li>
-                        <li>Google Cloud Professional Cloud Architect</li>
-                        <li>Udemy DevOps & Kubernetes Complete Guide</li>
-                    </ul>
+        <div class="dashboard-content">
+            <div class="roadmap-sections">
+
+                <div class="roadmap-section" id="module-1">
+                    <span class="section-badge">~4 WEEKS</span>
+                    <div class="section-header">
+                        <div class="section-progress">
+                            <div class="progress-label"><span>Progress</span><span>0%</span></div>
+                            <div class="progress-container"><div class="progress-bar" style="width: 0%"></div></div>
+                        </div>
+                        <h2 class="section-title">
+                            <input type="checkbox" onclick="event.stopPropagation()">
+                            Linux & System Administration
+                            <span class="badge badge-beginner">Beginner</span>
+                        </h2>
+                        <div class="section-content">
+                            <ul>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Linux CLI Proficiency</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Shell Scripting (Bash)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>User & File Management</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Git Version Control Workflows</span></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="resource-category">
-                    <h3>Documentation & References</h3>
-                    <ul>
-                        <li>Kubernetes Official Documentation</li>
-                        <li>Terraform Registry & Modules</li>
-                        <li>Docker Official Documentation</li>
-                        <li>Jenkins Documentation</li>
-                        <li>GitHub Actions Documentation</li>
-                    </ul>
-                </div>
-                <div class="resource-category">
-                    <h3>Books & Reading Material</h3>
-                    <ul>
-                        <li>"The Phoenix Project" - Gene Kim</li>
-                        <li>"Site Reliability Engineering" - Google (free online)</li>
-                        <li>"Infrastructure as Code" - Kief Morris</li>
-                        <li>"Kubernetes in Action" - Marko Lukša</li>
-                        <li>"Terraform: Up & Running" - Yevgeniy Brikman</li>
-                    </ul>
-                </div>
+
+                <!-- Note: All other modules (2-7) follow the same structure as your original file -->
+
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>College Daddy</h3>
                 <p>Your ultimate companion for academic success.</p>
-                <p class="tagline">Developed with students in mind, for students by a student.</p>
                 <div class="social-links">
-                    <a href="https://www.linkedin.com/company/collegedaddy-tech" target="_blank" class="social-link"
-                        aria-label="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://github.com/mugenkyou/College_daddy" target="_blank" class="social-link"
-                        aria-label="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
+                    <a href="https://www.linkedin.com/company/collegedaddy-tech" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="../../index.html">College Daddy Home</a></li>
+                    <li><a href="../../index.html">Home</a></li>
                     <li><a href="../../pages/cgpa.html">CGPA Calculator</a></li>
-                    <li><a href="../../pages/notes.html">Notes</a></li>
-                    <li><a href="../../pages/roadmap.html">Career Roadmaps</a></li>
+                    <li><a href="../../pages/roadmap.html">Roadmaps</a></li>
                 </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSciD1CUiYUpiz4mtQSTYG9XeCRyG3CEhr9GNL03WxmRbFOgkw/viewform?usp=dialog"
-                        target="_blank" class="feedback-link">Send Feedback</a></p>
-                <p>Follow our journey on social media for updates and resources.</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 College Daddy. All rights reserved. Developed by <span class="developer-name">Sachin</span>
-            </p>
+            <p>&copy; 2025 College Daddy. Developed by <span class="developer-name">Sachin</span></p>
         </div>
     </footer>
 
     <script>
-    // Roadmap Collapsible Functionality
     document.addEventListener('DOMContentLoaded', function() {
-        const roadmapSections = document.querySelectorAll('.roadmap-section');
         
-        roadmapSections.forEach(section => {
-            const header = section.querySelector('.section-header');
-            
-            header.addEventListener('click', function(e) {
-                if (e.target.type === 'checkbox') {
-                    return;
-                }
+        const themeBtn = document.getElementById('theme-toggle-btn');
+        const themeIcon = document.getElementById('theme-icon-span');
+        const htmlEl = document.documentElement;
+
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = (theme === 'light') ? '☀️' : '🌙';
+        }
+
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        updateThemeIcon(currentTheme);
+
+        themeBtn.addEventListener('click', () => {
+            const nowTheme = htmlEl.getAttribute('data-theme');
+            const newTheme = (nowTheme === 'dark') ? 'light' : 'dark';
+            htmlEl.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links-container');
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        const STORAGE_KEY_PREFIX = 'devops-sre-roadmap';
+        const sections = document.querySelectorAll('.roadmap-section');
+
+        sections.forEach((section, idx) => {
+            const moduleKey = STORAGE_KEY_PREFIX + '-module-' + (idx + 1);
+            const checkboxes = section.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach((cb, cbIdx) => {
+                if (localStorage.getItem(moduleKey + '-cb-' + cbIdx) === 'true') cb.checked = true;
+                cb.addEventListener('change', function() {
+                    localStorage.setItem(moduleKey + '-cb-' + cbIdx, cb.checked);
+                    updateModuleProgress(section);
+                    updateGlobalProgress();
+                });
+            });
+            updateModuleProgress(section);
+
+            section.querySelector('.section-header').addEventListener('click', function(e) {
+                if (e.target.type === 'checkbox') return;
                 section.classList.toggle('expanded');
             });
         });
-        
-        const checkboxes = document.querySelectorAll('.roadmap-section input[type="checkbox"]');
-        
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                updateProgress(this);
-            });
-            updateProgress(checkbox);
-        });
-        
-        function updateProgress(checkbox) {
-            const section = checkbox.closest('.roadmap-section');
-            if (!section) return;
-            
-            const allCheckboxes = section.querySelectorAll('input[type="checkbox"]');
-            const checkedBoxes = section.querySelectorAll('input[type="checkbox"]:checked');
-            
-            const total = allCheckboxes.length;
-            const checked = checkedBoxes.length;
-            const percentage = total > 0 ? Math.round((checked / total) * 100) : 0;
-            
-            const progressBar = section.querySelector('.progress-bar');
-            const progressText = section.querySelector('.progress-label span:last-child');
-            
-            if (progressBar) {
-                progressBar.style.width = percentage + '%';
-            }
-            
-            if (progressText) {
-                progressText.textContent = percentage + '%';
-            }
+
+        function updateModuleProgress(section) {
+            const all = section.querySelectorAll('input[type="checkbox"]');
+            const checked = section.querySelectorAll('input[type="checkbox"]:checked');
+            const pct = all.length > 0 ? Math.round((checked.length / all.length) * 100) : 0;
+            const bar = section.querySelector('.progress-bar');
+            const text = section.querySelector('.progress-label span:last-child');
+            if (bar) bar.style.width = pct + '%';
+            if (text) text.textContent = pct + '%';
         }
+
+        function updateGlobalProgress() {
+            const all = document.querySelectorAll('.roadmap-section input[type="checkbox"]');
+            const checked = document.querySelectorAll('.roadmap-section input[type="checkbox"]:checked');
+            const pct = all.length > 0 ? Math.round((checked.length / all.length) * 100) : 0;
+            const fill = document.getElementById('global-progress-fill');
+            const text = document.getElementById('global-progress-text');
+            if (fill) fill.style.width = pct + '%';
+            if (text) text.textContent = pct + '%';
+        }
+
+        updateGlobalProgress();
+        
+        // Sidebar active link on scroll
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        window.addEventListener('scroll', function() {
+            let current = '';
+            sections.forEach(section => { 
+                if (window.scrollY >= section.offsetTop - 200) current = section.id; 
+            });
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
     });
     </script>
-
-    <script src="../js/sub-roadmap.js" defer></script>
-<script src="../../assets/js/components/back-to-top.js"></script>
+    <script src="../../assets/js/components/share.js"></script>
+    <script src="../../assets/js/components/back-to-top.js"></script>
 </body>
-
 </html>

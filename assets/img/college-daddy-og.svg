@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#181818"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#009dff"/>
+      <stop offset="100%" style="stop-color:#00c8ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="1" y="1" width="1198" height="628" fill="none" stroke="url(#accent)" stroke-width="2" rx="12"/>
+  <text x="600" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" fill="#ffffff" text-anchor="middle">College Daddy</text>
+  <text x="600" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="#009dff" text-anchor="middle">Career Roadmaps " CGPA " Study Timer " Notes</text>
+  <text x="600" y="420" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#888" text-anchor="middle">Your ultimate companion for academic success</text>
+</svg>

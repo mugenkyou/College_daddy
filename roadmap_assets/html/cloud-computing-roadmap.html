@@ -1,537 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Theme initialization - prevents white flash on load -->
+    <script>
+        (function () {
+            try {
+                const theme = localStorage.getItem("theme") || "dark";
+                document.documentElement.setAttribute("data-theme", theme);
+            } catch (e) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Master cloud infrastructure and deployment. Learn AWS, Azure, GCP, and DevOps practices for scalable applications."/>
+    
+    <!-- Open Graph / Social Media Tags -->
+    <meta property="og:title" content="Cloud Computing Roadmap | College Daddy"/>
+    <meta property="og:description" content="Master cloud infrastructure and deployment. Learn AWS, Azure, GCP, and DevOps practices for scalable applications."/>
+    <meta property="og:url" content="https://collegedaddy.vercel.app/roadmap_assets/html/cloud-computing-roadmap.html"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="College Daddy"/>
+    <meta property="og:image" content="https://collegedaddy.vercel.app/assets/img/college-daddy-og.png"/>
+    
     <title>College Daddy - Cloud Computing Roadmap</title>
+    
+    <!-- External Styles -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../assets/css/global.css" />
+    <link rel="stylesheet" href="../../assets/css/navigation.css">
     <link href="../css/sub-roadmap.css" rel="stylesheet"/>
-</head>
+    <link href="../../assets/css/share.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../assets/css/footer.css" />
 
+    <style>
+        /* UI FIX: Ensures Roadmap link text is visible when active */
+        .nav-links .nav-link.active {
+            background-color: #00a8ff !important;
+            color: #ffffff !important;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Theme Toggle Styling */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            margin-left: 15px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        [data-theme="light"] .theme-toggle {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .theme-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-color, #0f172a);
+                padding: 20px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                z-index: 1000;
+            }
+        }
+    </style>
+</head>
 <body>
     <header>
         <div class="nav-container">
-            <a aria-label="College Buddy Home" class="logo" href="/College_daddy/index.html">
+            <a aria-label="College Daddy Home" class="logo" href="../../index.html">
                 <i class="fas fa-graduation-cap"></i>
                 <span>College Daddy</span>
             </a>
-            <button aria-expanded="false" aria-label="Toggle navigation menu" class="menu-button">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav aria-label="Main navigation" class="nav-links">
-                <a class="nav-link" href="/College_daddy/index.html">Home</a>
-                <a class="nav-link active" href="/College_daddy/pages/roadmap.html">Career Roadmaps</a>
-                <a class="nav-link" href="/College_daddy/pages/cgpa.html">CGPA Calculator</a>
-                <a class="nav-link" href="/College_daddy/pages/iacal.html">IA Calculator</a>
-                <a class="nav-link" href="/College_daddy/pages/pomodoro.html">Study Timer</a>
-                <a class="nav-link" href="/College_daddy/pages/notes.html">Notes</a>
+            <div class="nav-actions">
+                <button aria-expanded="false" aria-label="Toggle navigation menu" class="menu-button" id="mobile-menu-btn">
+                    ☰
+                </button>
+            </div>
+            <nav aria-label="Main navigation" class="nav-links" id="nav-links-container">
+                <a class="nav-link" href="../../index.html">Home</a>
+                <a class="nav-link" href="../../pages/cgpa.html">CGPA Calculator</a>
+                <a class="nav-link" href="../../pages/iacal.html">IA Calculator</a>
+                <a class="nav-link" href="../../pages/pomodoro.html">Study Timer</a>
+                <a class="nav-link" href="../../pages/notes.html">Notes</a>
+                <a class="nav-link active" href="../../pages/roadmap.html">Roadmap</a>
+                <a class="nav-link" href="../../pages/events.html">Events</a>
+                <button class="theme-toggle" id="theme-toggle-btn" title="Toggle Light/Dark Mode">
+                    <span class="theme-icon" id="theme-icon-span">🌙</span>
+                </button>
             </nav>
         </div>
     </header>
 
-    <main class="main-content">
-        <h1>Cloud Computing Roadmap</h1>
-        <div class="roadmap-sections">
-
-            <!-- Cloud Fundamentals -->
-            <div class="roadmap-section">
-                <span class="section-badge">~2 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Cloud Fundamentals
-                        <span class="badge badge-beginner">Beginner</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Understand cloud computing basics, service models, and deployment types
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Introduction to Cloud Computing (IaaS, PaaS, SaaS)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Public, Private, Hybrid Cloud Models</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Cloud Benefits & Use Cases</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Operating Systems (Linux, Windows Server)</span>
-                            </li>
-                        </ul>
-                    </div>
+    <section class="roadmap-hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Cloud Computing<br>Professional Roadmap</h1>
+                <p>Master cloud platforms, infrastructure, and DevOps practices to build and deploy scalable cloud-native solutions.</p>
+                <div class="hero-stats">
+                    <div class="stat-item"><span class="stat-value">24+</span><span class="stat-label">Weeks</span></div>
+                    <div class="stat-item"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+                    <div class="stat-item"><span class="stat-value">Mid</span><span class="stat-label">Level</span></div>
                 </div>
             </div>
-
-            <!-- Networking & Security -->
-            <div class="roadmap-section">
-                <span class="section-badge">~3 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Networking & Security
-                        <span class="badge badge-beginner">Beginner</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Master cloud networking concepts and security fundamentals
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Networking Basics (DNS, Load Balancing, VPN)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Cloud Security & IAM (Identity & Access Management)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Firewalls & Data Encryption</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="hero-progress-card">
+                <div class="progress-header"><span>Overall Mastery</span><span id="global-progress-text">0%</span></div>
+                <div class="global-progress-bar"><div class="global-progress-fill" id="global-progress-fill"></div></div>
+                <a href="#module-1" class="continue-btn" id="resume-btn">Start Learning</a>
             </div>
-
-            <!-- Cloud Platforms & Services -->
-            <div class="roadmap-section">
-                <span class="section-badge">~5 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Cloud Platforms & Services
-                        <span class="badge badge-intermediate">Intermediate</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Learn AWS, Azure, and GCP core services and offerings
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>AWS (EC2, S3, Lambda, RDS, CloudWatch)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Microsoft Azure (Virtual Machines, Blob Storage, Azure Functions)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Google Cloud (GCP) (Compute Engine, Cloud Storage, BigQuery)</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Virtualization & Containers -->
-            <div class="roadmap-section">
-                <span class="section-badge">~4 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Virtualization & Containers
-                        <span class="badge badge-intermediate">Intermediate</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Master VMs, Docker, and Kubernetes for containerized deployments
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Virtual Machines (VMs) & Hypervisors</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Docker & Containerization</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Kubernetes & Container Orchestration</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DevOps & Automation -->
-            <div class="roadmap-section">
-                <span class="section-badge">~4 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        DevOps & Automation
-                        <span class="badge badge-intermediate">Intermediate</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Implement CI/CD pipelines and infrastructure as code
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>CI/CD Pipelines (Jenkins, GitHub Actions)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Infrastructure as Code (Terraform, AWS CloudFormation)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Serverless Computing (AWS Lambda, Azure Functions)</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Databases & Storage -->
-            <div class="roadmap-section">
-                <span class="section-badge">~3 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Databases & Storage
-                        <span class="badge badge-intermediate">Intermediate</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Work with cloud databases and storage solutions
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>SQL & NoSQL Databases (MySQL, MongoDB, DynamoDB)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Cloud Storage (S3, Blob Storage, Google Cloud Storage)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Data Warehousing & Analytics</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Monitoring & Logging -->
-            <div class="roadmap-section">
-                <span class="section-badge">~2 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Monitoring & Logging
-                        <span class="badge badge-advanced">Advanced</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Monitor cloud infrastructure and optimize performance
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>CloudWatch, Azure Monitor, Google Cloud Operations</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Logging & Error Tracking (ELK Stack, Prometheus)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Performance Optimization</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cloud Security & Compliance -->
-            <div class="roadmap-section">
-                <span class="section-badge">~3 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Cloud Security & Compliance
-                        <span class="badge badge-advanced">Advanced</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Implement security best practices and compliance standards
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Security Best Practices (IAM, Role-Based Access)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Compliance Standards (ISO, GDPR, SOC 2)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Disaster Recovery & Backup Strategies</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Projects -->
-            <div class="roadmap-section">
-                <span class="section-badge">~4 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Projects
-                        <span class="badge badge-advanced">Advanced</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Build real-world cloud projects to showcase your skills
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Deploy a Static Website on AWS S3</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Set Up a Kubernetes Cluster on Cloud</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Implement CI/CD for a Cloud Application</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Job Preparation -->
-            <div class="roadmap-section">
-                <span class="section-badge">~2 WEEKS</span>
-                <div class="section-header">
-                    <div class="section-progress">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <h2 class="section-title">
-                        <input type="checkbox" onclick="event.stopPropagation()">
-                        Job Preparation
-                        <span class="badge badge-beginner">Beginner</span>
-                    </h2>
-                    
-                    <p class="section-description">
-                        Get certified and prepare for cloud computing interviews
-                    </p>
-                    
-                    <div class="section-content">
-                        <ul>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Cloud Certifications (AWS Certified Solutions Architect, Azure Fundamentals)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Resume & Portfolio (GitHub, Cloud Projects)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Interview Preparation (Cloud Design Patterns, DSA)</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" onclick="event.stopPropagation()">
-                                <span>Networking & Job Applications</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </main>
+    </section>
+
+    <div class="dashboard-layout">
+        <aside class="roadmap-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-map-signs"></i>
+                <span>Roadmap Modules</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#module-1" class="sidebar-link active"><i class="fas fa-cloud"></i> Cloud Fundamentals</a>
+                <a href="#module-2" class="sidebar-link"><i class="fas fa-network-wired"></i> Networking & Security</a>
+                <a href="#module-3" class="sidebar-link"><i class="fas fa-server"></i> Cloud Platforms</a>
+                <a href="#module-4" class="sidebar-link"><i class="fas fa-cubes"></i> Containers & Orchestration</a>
+                <a href="#module-5" class="sidebar-link"><i class="fas fa-code-branch"></i> DevOps & CI/CD</a>
+                <a href="#module-6" class="sidebar-link"><i class="fas fa-briefcase"></i> Career & Certifications</a>
+            </nav>
+        </aside>
+
+        <div class="dashboard-content">
+            <div class="roadmap-sections">
+
+                <div class="roadmap-section" id="module-1">
+                    <span class="section-badge">~3 WEEKS</span>
+                    <div class="section-header">
+                        <div class="section-progress">
+                            <div class="progress-label"><span>Progress</span><span>0%</span></div>
+                            <div class="progress-container"><div class="progress-bar" style="width: 0%"></div></div>
+                        </div>
+                        <h2 class="section-title">
+                            <input type="checkbox" onclick="event.stopPropagation()">
+                            Cloud Fundamentals
+                            <span class="badge badge-beginner">Beginner</span>
+                        </h2>
+                        <p class="section-description">Understand the core concepts and service models of cloud computing</p>
+                        <div class="section-content">
+                            <ul>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>What is Cloud Computing? (IaaS, PaaS, SaaS)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Virtualization & Hypervisors</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Public, Private & Hybrid Cloud</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Cloud Economics & Pricing Models</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Linux Fundamentals for Cloud</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Scripting Basics (Bash, Python)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-section" id="module-2">
+                    <span class="section-badge">~4 WEEKS</span>
+                    <div class="section-header">
+                        <div class="section-progress">
+                            <div class="progress-label"><span>Progress</span><span>0%</span></div>
+                            <div class="progress-container"><div class="progress-bar" style="width: 0%"></div></div>
+                        </div>
+                        <h2 class="section-title">
+                            <input type="checkbox" onclick="event.stopPropagation()">
+                            Networking & Security
+                            <span class="badge badge-beginner">Beginner</span>
+                        </h2>
+                        <p class="section-description">Learn cloud networking, security, and compliance fundamentals</p>
+                        <div class="section-content">
+                            <ul>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Networking Basics (TCP/IP, DNS)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Virtual Networks (VPC, Subnets, Routing)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Load Balancing & Firewalls</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Identity & Access Management (IAM)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Encryption at Rest & in Transit</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-section" id="module-3">
+                    <span class="section-badge">~6 WEEKS</span>
+                    <div class="section-header">
+                        <div class="section-progress">
+                            <div class="progress-label"><span>Progress</span><span>0%</span></div>
+                            <div class="progress-container"><div class="progress-bar" style="width: 0%"></div></div>
+                        </div>
+                        <h2 class="section-title">
+                            <input type="checkbox" onclick="event.stopPropagation()">
+                            Cloud Platforms & Services
+                            <span class="badge badge-intermediate">Intermediate</span>
+                        </h2>
+                        <p class="section-description">Gain hands-on experience with AWS, Azure, or Google Cloud Platform</p>
+                        <div class="section-content">
+                            <ul>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>AWS Core Services (EC2, S3, RDS, Lambda)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Azure Core Services (VMs, Blob Storage)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>GCP Core Services (Compute Engine, GCS)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Serverless Computing</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Managed Databases</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-section" id="module-4">
+                    <span class="section-badge">~4 WEEKS</span>
+                    <div class="section-header">
+                        <div class="section-progress">
+                            <div class="progress-label"><span>Progress</span><span>0%</span></div>
+                            <div class="progress-container"><div class="progress-bar" style="width: 0%"></div></div>
+                        </div>
+                        <h2 class="section-title">
+                            <input type="checkbox" onclick="event.stopPropagation()">
+                            Containers & Orchestration
+                            <span class="badge badge-intermediate">Intermediate</span>
+                        </h2>
+                        <p class="section-description">Master Docker and Kubernetes for containerized applications</p>
+                        <div class="section-content">
+                            <ul>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Docker: Images & Containers</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Container Registries</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Kubernetes Fundamentals (Pods, Services)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Managed Kubernetes (EKS, AKS, GKE)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Helm Charts</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-section" id="module-5">
+                    <span class="section-badge">~4 WEEKS</span>
+                    <div class="section-header">
+                        <div class="section-progress">
+                            <div class="progress-label"><span>Progress</span><span>0%</span></div>
+                            <div class="progress-container"><div class="progress-bar" style="width: 0%"></div></div>
+                        </div>
+                        <h2 class="section-title">
+                            <input type="checkbox" onclick="event.stopPropagation()">
+                            DevOps, IaC & CI/CD
+                            <span class="badge badge-advanced">Advanced</span>
+                        </h2>
+                        <p class="section-description">Automate infrastructure and deployments with DevOps practices</p>
+                        <div class="section-content">
+                            <ul>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Infrastructure as Code (Terraform)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Configuration Management (Ansible)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>CI/CD Pipelines (GitHub Actions)</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Monitoring & Observability</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Cost Optimization Strategies</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-section" id="module-6">
+                    <span class="section-badge">~3 WEEKS</span>
+                    <div class="section-header">
+                        <div class="section-progress">
+                            <div class="progress-label"><span>Progress</span><span>0%</span></div>
+                            <div class="progress-container"><div class="progress-bar" style="width: 0%"></div></div>
+                        </div>
+                        <h2 class="section-title">
+                            <input type="checkbox" onclick="event.stopPropagation()">
+                            Career & Certifications
+                            <span class="badge badge-beginner">Beginner</span>
+                        </h2>
+                        <p class="section-description">Earn industry certifications and prepare for career roles</p>
+                        <div class="section-content">
+                            <ul>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>AWS / Azure / GCP Fundamentals Certs</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Cloud Solutions Architect Certs</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Build Cloud Portfolio Projects</span></li>
+                                <li><input type="checkbox" onclick="event.stopPropagation()"><span>Interview Prep & Networking</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <footer class="footer">
-        <p>2025 College Daddy. All rights reserved. Developed by <span class="developer-name">Sachin</span></p>
-        <p class="tagline">*Developed with students in mind, for students by students*</p>
-        <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSciD1CUiYUpiz4mtQSTYG9XeCRyG3CEhr9GNL03WxmRbFOgkw/viewform?usp=dialog" target="_blank" class="feedback-link">Feedback</a></p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>College Daddy</h3>
+                <p>Your ultimate companion for academic success.</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/company/collegedaddy-tech" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../pages/cgpa.html">CGPA Calculator</a></li>
+                    <li><a href="../../pages/roadmap.html">Roadmaps</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 College Daddy. Developed by <span class="developer-name">Sachin</span></p>
+        </div>
     </footer>
 
     <script>
-    // Roadmap Collapsible Functionality
     document.addEventListener('DOMContentLoaded', function() {
-        const roadmapSections = document.querySelectorAll('.roadmap-section');
-        
-        roadmapSections.forEach(section => {
-            const header = section.querySelector('.section-header');
-            
-            header.addEventListener('click', function(e) {
-                if (e.target.type === 'checkbox') {
-                    return;
-                }
+        const themeBtn = document.getElementById('theme-toggle-btn');
+        const themeIcon = document.getElementById('theme-icon-span');
+        const htmlEl = document.documentElement;
+
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = (theme === 'light') ? '☀️' : '🌙';
+        }
+
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        updateThemeIcon(currentTheme);
+
+        themeBtn.addEventListener('click', () => {
+            const nowTheme = htmlEl.getAttribute('data-theme');
+            const newTheme = (nowTheme === 'dark') ? 'light' : 'dark';
+            htmlEl.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links-container');
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        const STORAGE_KEY_PREFIX = 'cloud-computing-roadmap';
+        const sections = document.querySelectorAll('.roadmap-section');
+
+        sections.forEach((section, idx) => {
+            const moduleKey = STORAGE_KEY_PREFIX + '-module-' + (idx + 1);
+            const checkboxes = section.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach((cb, cbIdx) => {
+                if (localStorage.getItem(moduleKey + '-cb-' + cbIdx) === 'true') cb.checked = true;
+                cb.addEventListener('change', function() {
+                    localStorage.setItem(moduleKey + '-cb-' + cbIdx, cb.checked);
+                    updateModuleProgress(section);
+                    updateGlobalProgress();
+                });
+            });
+            updateModuleProgress(section);
+
+            section.querySelector('.section-header').addEventListener('click', function(e) {
+                if (e.target.type === 'checkbox') return;
                 section.classList.toggle('expanded');
             });
         });
-        
-        const checkboxes = document.querySelectorAll('.roadmap-section input[type="checkbox"]');
-        
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                updateProgress(this);
-            });
-            updateProgress(checkbox);
-        });
-        
-        function updateProgress(checkbox) {
-            const section = checkbox.closest('.roadmap-section');
-            if (!section) return;
-            
-            const allCheckboxes = section.querySelectorAll('input[type="checkbox"]');
-            const checkedBoxes = section.querySelectorAll('input[type="checkbox"]:checked');
-            
-            const total = allCheckboxes.length;
-            const checked = checkedBoxes.length;
-            const percentage = total > 0 ? Math.round((checked / total) * 100) : 0;
-            
-            const progressBar = section.querySelector('.progress-bar');
-            const progressText = section.querySelector('.progress-label span:last-child');
-            
-            if (progressBar) {
-                progressBar.style.width = percentage + '%';
-            }
-            
-            if (progressText) {
-                progressText.textContent = percentage + '%';
-            }
+
+        function updateModuleProgress(section) {
+            const all = section.querySelectorAll('input[type="checkbox"]');
+            const checked = section.querySelectorAll('input[type="checkbox"]:checked');
+            const pct = all.length > 0 ? Math.round((checked.length / all.length) * 100) : 0;
+            const bar = section.querySelector('.progress-bar');
+            const text = section.querySelector('.progress-label span:last-child');
+            if (bar) bar.style.width = pct + '%';
+            if (text) text.textContent = pct + '%';
         }
+
+        function updateGlobalProgress() {
+            const all = document.querySelectorAll('.roadmap-section input[type="checkbox"]');
+            const checked = document.querySelectorAll('.roadmap-section input[type="checkbox"]:checked');
+            const pct = all.length > 0 ? Math.round((checked.length / all.length) * 100) : 0;
+            const fill = document.getElementById('global-progress-fill');
+            const text = document.getElementById('global-progress-text');
+            if (fill) fill.style.width = pct + '%';
+            if (text) text.textContent = pct + '%';
+        }
+
+        updateGlobalProgress();
+        
+        // Sidebar active link on scroll
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        window.addEventListener('scroll', function() {
+            let current = '';
+            sections.forEach(section => { 
+                if (window.scrollY >= section.offsetTop - 200) current = section.id; 
+            });
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
     });
     </script>
-    
-    <script src="../js/sub-roadmap.js"></script>
-    
-<script src="../../assets/js/components/back-to-top.js"></script>
+    <script src="../../assets/js/components/share.js"></script>
+    <script src="../../assets/js/components/back-to-top.js"></script>
 </body>
 </html>

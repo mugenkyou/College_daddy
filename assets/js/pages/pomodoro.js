@@ -211,8 +211,7 @@ class PomodoroTimer {
         this.pausedTime = null;
         if (this.startBtn) {
             this.startBtn.textContent = 'Start';
-            this.startBtn.style.backgroundColor = '';
-            this.startBtn.style.borderColor = '';
+            this.startBtn.classList.remove('btn-pause');
         }
         this.currentPhase = 'work';
         this.remainingTime = this.settings.workDuration * 60 * 1000;
@@ -236,8 +235,7 @@ class PomodoroTimer {
         this.isRunning = true;
         if (this.startBtn) {
             this.startBtn.textContent = 'Pause';
-            this.startBtn.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
-            this.startBtn.style.borderColor = '#ff4444';
+            this.startBtn.classList.add('btn-pause');
         }
 
         if (this.pausedTime) {
@@ -265,8 +263,7 @@ class PomodoroTimer {
         clearInterval(this.interval);
         if (this.startBtn) {
             this.startBtn.textContent = 'Resume';
-            this.startBtn.style.backgroundColor = '';
-            this.startBtn.style.borderColor = '';
+            this.startBtn.classList.remove('btn-pause');
         }
     }
 
@@ -282,8 +279,7 @@ class PomodoroTimer {
         
         if (this.startBtn) {
             this.startBtn.textContent = 'Start';
-            this.startBtn.style.backgroundColor = '';
-            this.startBtn.style.borderColor = '';
+            this.startBtn.classList.remove('btn-pause');
         }
 
         if (this.currentPhase === 'work') {
