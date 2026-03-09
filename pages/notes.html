@@ -6,33 +6,18 @@
     <title>College Daddy | Notes Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/navigation.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-            margin: 0;
         }
-
-        /* Navbar Styles from Image */
-        .nav-link {
-            color: #ffffff;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s;
-        }
-        .nav-link:hover {
-            color: #38bdf8;
-        }
-        .nav-active {
-            border-bottom: 2px solid #00d1b2;
-        }
-
         /* Card Styles from Image */
         .sem-card {
-            background-color: #1a1a1a;
+            background-color: var(--card-bg);
             border-radius: 12px;
             padding: 2.5rem 2rem;
             cursor: pointer;
@@ -42,7 +27,7 @@
             justify-content: flex-start;
         }
         .sem-card:hover {
-            background-color: #262626;
+            background-color: var(--hover-bg);
             transform: translateY(-2px);
         }
         .sem-card h3 {
@@ -53,16 +38,16 @@
 
         /* Search Bar */
         .search-input {
-            background-color: #262626;
-            border: none;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            color: white;
+            color: var(--text-color);
             padding: 0.75rem 1rem;
             width: 300px;
         }
 
         .modal-overlay {
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0,0,0,0.5);
             backdrop-filter: blur(8px);
             display: none;
             opacity: 0;
@@ -74,8 +59,8 @@
         }
 
         .dept-btn {
-            background: #262626;
-            border: 1px solid #333;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             transition: all 0.2s;
         }
         .dept-btn:hover {
@@ -85,33 +70,38 @@
         }
 
         .chapter-item {
-            background: #1a1a1a;
+            background: var(--card-bg);
             border-left: 4px solid #00d1b2;
             transition: all 0.2s;
         }
         .chapter-item:hover {
-            background: #262626;
+            background: var(--hover-bg);
         }
     </style>
 </head>
 <body>
-
+    
     <!-- Top Navigation Bar -->
-    <nav class="flex items-center justify-between px-12 py-6 border-b border-gray-800">
-        <div class="text-2xl font-bold text-sky-500">College Daddy</div>
-        <div class="hidden md:flex space-x-6 items-center">
-            <a href="../index.html" class="nav-link">Home</a>
-            <a href="#" class="nav-link">CGPA Calculator</a>
-            <a href="#" class="nav-link">IA Calculator</a>
-            <a href="#" class="nav-link">Study Timer</a>
-            <a href="#" class="nav-link nav-active">Notes</a>
-            <a href="#" class="nav-link">Roadmap</a>
-            <a href="#" class="nav-link">Events</a>
-            <button class="ml-4 p-2 rounded-full border border-sky-500 text-sky-500">
-                <i class="fas fa-moon"></i>
+    <header>
+        <nav class="flex items-center justify-between px-12 py-6 border-b border-gray-800">
+            <div class="text-2xl font-bold text-sky-500">College Daddy</div>
+            <button class="menu-button md:hidden text-white text-xl">
+                <i class="fas fa-bars"></i>
             </button>
-        </div>
-    </nav>
+            <div class="nav-links hidden md:flex space-x-6 items-center">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
+                <a href="iacal.html" class="nav-link">IA Calculator</a>
+                <a href="pomodoro.html" class="nav-link">Study Timer</a>
+                <a href="notes.html" class="nav-link active">Notes</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="events.html" class="nav-link">Events</a>
+                <button class="theme-toggle ml-4 p-2 rounded-full border border-sky-500 text-sky-500">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </nav>
+    </header>
 
     <!-- Content Header -->
     <div class="max-w-7xl mx-auto px-12 mt-12 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center">
@@ -157,7 +147,8 @@
             </div>
         </div>
     </div>
-
+    <script src="../assets/js/components/navigation.js"></script>
+    <script src="../assets/js/components/footer.js"></script>
     <script>
         // Unique Data for different semesters
         const academicData = {
