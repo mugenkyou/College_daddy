@@ -28,8 +28,27 @@
     --cd-transition: 0.25s ease;
 }
 
-/* --- Light mode overrides --- */
+/* --- Light mode overrides (legacy class — kept for compatibility) --- */
 body.light-mode {
+    --cd-bg-primary: #f1f5f9;
+    --cd-bg-secondary: #ffffff;
+    --cd-bg-card: #ffffff;
+    --cd-bg-input: #f8fafc;
+    --cd-border: #cbd5e1;
+    --cd-border-focus: #2563eb;
+    --cd-text-primary: #1e293b;
+    --cd-text-secondary: #475569;
+    --cd-text-muted: #94a3b8;
+    --cd-blue-primary: #2563eb;
+    --cd-blue-light: #3b82f6;
+    --cd-blue-dark: #1d4ed8;
+    --cd-blue-glow: rgba(37, 99, 235, 0.1);
+    --cd-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* FIX: The site's ThemeManager sets data-theme="light" on <html>, not a class on body.
+   This mirrors the block above so the correct variables apply when the theme toggle is used. */
+[data-theme="light"] body {
     --cd-bg-primary: #f1f5f9;
     --cd-bg-secondary: #ffffff;
     --cd-bg-card: #ffffff;
