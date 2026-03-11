@@ -18,6 +18,15 @@ body {
     color: var(--text-light);
     min-height: 100vh;
     transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    overflow-x: hidden;
+}
+
+/* Main Content Container */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px 20px;
+    width: 100%;
 }
 
 /* Typography */
@@ -38,18 +47,8 @@ p {
     color: var(--text-gray);
 }
 
-/* Header and Navigation */
-header {
-    background-color: var(--bg-darker);
-    padding: 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Notes Navigation */
-nav {
+/* Notes Portal Title and Search Bar */
+body > nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,7 +58,7 @@ nav {
     gap: 1rem;
 }
 
-nav h1 {
+body > nav h1 {
     color: var(--text-light);
     font-size: 2rem;
     font-weight: 600;
@@ -70,10 +69,11 @@ nav h1 {
 #searchInput {
     padding: 0.75rem 1.25rem;
     width: 300px;
+    max-width: 100%;
     background: var(--input-bg);
     border: 2px solid var(--border-color);
     border-radius: 8px;
-    color: var(--text-primary);
+    color: var(--text-light);
     font-size: 1rem;
     transition: all var(--transition-speed) ease;
 }
@@ -90,14 +90,14 @@ nav h1 {
 
 /* Mobile responsive nav */
 @media (max-width: 768px) {
-    nav {
+    body > nav {
         flex-direction: column;
         align-items: stretch;
         gap: 1rem;
         padding: 1rem 16px;
     }
     
-    nav h1 {
+    body > nav h1 {
         text-align: center;
         font-size: 1.75rem;
     }
@@ -148,9 +148,13 @@ nav h1 {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px 20px 20px;
+}
+
+/* Ensure cards and content don't overflow */
+.card,
+.card * {
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 /* Card Styles */
@@ -773,6 +777,39 @@ nav h1 {
     .material-card a {
         padding: 12px !important;
         /* Larger touch targets */
+    }
+}
+
+/* Desktop layout fixes - prevent overflow */
+@media (min-width: 769px) {
+    .card-actions {
+        flex-wrap: nowrap;
+    }
+    
+    body > nav {
+        flex-wrap: nowrap;
+    }
+    
+    #searchInput {
+        flex-shrink: 0;
+    }
+}
+
+/* Additional overflow prevention */
+* {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Fix for sticky elements on wide screens */
+@media (min-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
 }
 
