@@ -18,7 +18,7 @@
 /* Light theme variables */
 [data-theme="light"] {
     --dark-bg: #ffffff;
-    --darker-bg: #f5f5f5;
+    --darker-bg: #ffffff;
     --border-color: #e0e0e0;
     --text-color: #333333;
     --text-muted: #666666;
@@ -37,8 +37,11 @@ body > header {
     transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
 }
 
+/* FIX: Explicit light-theme background bypasses any variable conflicts from global.css */
 [data-theme="light"] body > header {
+    background-color: #ffffff !important;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1) !important;
+    border-bottom: 1px solid #e0e0e0 !important;
 }
 
 body > header .nav-container {
@@ -167,6 +170,16 @@ body > header .nav-link {
     display: inline-block !important;
 }
 
+/* FIX: Ensure nav link text is readable in light mode */
+[data-theme="light"] body > header .nav-link {
+    color: #333333 !important;
+}
+
+[data-theme="light"] body > header .nav-link:hover,
+[data-theme="light"] body > header .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
 /* Theme toggle when inside nav-links */
 body > header .nav-links .theme-toggle {
     margin-left: 0.5rem !important;
@@ -252,8 +265,8 @@ body > header .menu-button {
 @media (max-width: 768px) {
     body > header .nav-container {
         padding: 1rem !important;
-        width: 100% !important; /* Ensure full width */
-        justify-content: space-between !important; /* Ensure proper spacing */
+        width: 100% !important;
+        justify-content: space-between !important;
     }
     
     body > header .nav-actions {
@@ -279,7 +292,7 @@ body > header .menu-button {
     
     body > header .menu-button {
         display: flex !important;
-        margin-right: 0 !important; /* Ensure proper alignment */
+        margin-right: 0 !important;
         align-items: center !important;
         justify-content: center !important;
     }
@@ -287,7 +300,7 @@ body > header .menu-button {
     body > header .nav-links {
         position: fixed !important;
         top: 0 !important;
-        right: -300px !important; /* Start off-screen */
+        right: -300px !important;
         width: 280px !important;
         height: 100vh !important;
         background: var(--darker-bg) !important;
@@ -297,8 +310,15 @@ body > header .menu-button {
         transition: right var(--transition-speed) ease !important;
         z-index: 1001 !important;
         border-left: 1px solid var(--border-color) !important;
-        margin: 0 !important; /* Reset margin */
+        margin: 0 !important;
         align-items: stretch !important;
+    }
+
+    /* FIX: Mobile slide-out panel also needs explicit light background */
+    [data-theme="light"] body > header .nav-links {
+        background: #ffffff !important;
+        border-left: 1px solid #e0e0e0 !important;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.15) !important;
     }
     
     body > header .nav-links .theme-toggle {
@@ -310,7 +330,7 @@ body > header .menu-button {
     }
     
     body > header .nav-links.active {
-        right: 0 !important; /* Slide in from right */
+        right: 0 !important;
     }
     
     body > header .nav-link {
@@ -319,7 +339,12 @@ body > header .menu-button {
         text-align: center !important;
         border-bottom: 1px solid var(--border-color) !important;
         animation: fadeInRight 0.5s ease forwards !important;
-        margin: 0 !important; /* Reset margin */
+        margin: 0 !important;
+    }
+
+    /* FIX: Mobile nav link dividers in light mode */
+    [data-theme="light"] body > header .nav-link {
+        border-bottom: 1px solid #e0e0e0 !important;
     }
     
     body > header .nav-links.active .nav-link:nth-child(1) { animation-delay: 0.1s !important; }
@@ -333,7 +358,6 @@ body > header .menu-button {
         display: none !important;
     }
     
-    /* Fix for logo positioning */
     body > header .logo {
         margin-left: 0 !important;
     }
@@ -366,5 +390,4 @@ body > header .menu-button {
 .logo:hover i {
     transform: rotate(10deg);
     transition: transform 0.3s ease;
-} 
-
+}

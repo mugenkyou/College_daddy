@@ -674,7 +674,7 @@ body::before {
 }
 
 .testimonial:hover {
-  transform: translateY(-10px) rotateX(5deg);
+  transform: translateY(-10px) ;
   box-shadow: 0 15px 30px rgba(0, 157, 255, 0.15);
   border-color: rgba(0, 157, 255, 0.3);
 }
