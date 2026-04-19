@@ -6,6 +6,13 @@
 ![GitHub forks](https://img.shields.io/github/forks/mugenkyou/College_daddy?style=for-the-badge)
 ![GitHub issues](https://img.shields.io/github/issues/mugenkyou/College_daddy?style=for-the-badge)
 
+> **Program Affiliations**
+>
+> This project has been officially accepted and is actively maintained under the following open source programs:
+> - [Nexus-Spring-of-Code](https://woc.codesocial.tech/)
+> - [NSOC](https://www.nsoc.in/home)
+> - [Apertre](https://apertre.resourcio.in/)
+
 
 
 # College Daddy

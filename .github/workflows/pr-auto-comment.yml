@@ -21,15 +21,15 @@ jobs:
             const prNumber = context.payload.pull_request.number;
             const prBody = context.payload.pull_request.body || '';
             const prAuthor = context.payload.pull_request.user.login;
-            
+
             // Extract issue numbers from PR body (supports #123, fixes #123, closes #123, resolves #123, etc.)
             const issuePattern = /(close[sd]?|fix(e[sd])?|resolve[sd]?)\s*#(\d+)|#(\d+)/gi;
             const matches = [...prBody.matchAll(issuePattern)];
             const issueNumbers = [...new Set(matches.map(m => m[3] || m[4]).filter(Boolean))];
-            
-            let allLabels = new Set(['awaiting review', 'apertre3.0']);
+
+            let allLabels = new Set(['awaiting review', 'nsoc26']);
             let linkedIssuesInfo = [];
-            
+
             // Fetch labels from each linked issue
             for (const issueNumber of issueNumbers) {
               try {
@@ -54,7 +54,7 @@ jobs:
                 console.log(`Could not fetch issue #${issueNumber}: ${error.message}`);
               }
             }
-            
+
             // Apply all collected labels to PR
             if (allLabels.size > 0) {
               await github.rest.issues.addLabels({
@@ -64,7 +64,7 @@ jobs:
                 labels: Array.from(allLabels)
               });
             }
-            
+
             // Assign mugenkyou as reviewer (only if they're not the PR author)
             if (prAuthor !== 'mugenkyou') {
               try {
@@ -78,11 +78,11 @@ jobs:
                 console.log(`Could not assign reviewer mugenkyou: ${error.message}`);
               }
             }
-            
+
             // Create professional comment
             let commentBody = `## 📥 Pull Request Received\n\n`;
             commentBody += `Thank you for your contribution to **College Daddy**. Your pull request has been received and is currently under review.\n\n`;
-            
+
             if (linkedIssuesInfo.length > 0) {
               commentBody += `### 🔗 Linked Issues\n\n`;
               
@@ -91,22 +91,22 @@ jobs:
               }
               commentBody += `\n`;
             }
-            
+
             commentBody += `### ✅ Pre-Merge Checklist\n\n`;
             commentBody += `Please ensure the following requirements are met:\n\n`;
             commentBody += `- [ ] Changes adhere to contribution guidelines\n`;
             commentBody += `- [ ] Related issues are referenced in description\n`;
             commentBody += `- [ ] All changes tested and verified locally\n`;
             commentBody += `- [ ] Code follows project standards\n\n`;
-            
+
             if (prAuthor !== 'mugenkyou') {
               commentBody += `### 👤 Reviewer Assigned\n\n`;
               commentBody += `@mugenkyou has been assigned to review this pull request.\n\n`;
             }
-            
+
             commentBody += `---\n\n`;
             commentBody += `Our team will review your submission shortly. We appreciate your effort in improving the platform for students.`;
-            
+
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -122,7 +122,7 @@ jobs:
           script: |
             const prNumber = context.payload.pull_request.number;
             const contributor = context.payload.pull_request.user.login;
-            
+
             const commentBody = `## 🎉 Pull Request Merged Successfully\n\n` +
               `**Contributor**: @${contributor}\n\n` +
               `Your pull request has been successfully merged into the main codebase. ` +
@@ -134,7 +134,7 @@ jobs:
               `- 🔄 Continue contributing to enhance the platform\n\n` +
               `---\n\n` +
               `We value your commitment to improving educational technology and look forward to your continued involvement.`;
-            
+
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -149,7 +149,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const prNumber = context.payload.pull_request.number;
-            
+
             // Remove 'awaiting review' label
             try {
               await github.rest.issues.removeLabel({
