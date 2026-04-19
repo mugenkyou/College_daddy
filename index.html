@@ -55,6 +55,7 @@
   <link rel="stylesheet" href="assets/css/global.css" />
   <link rel="stylesheet" href="assets/css/footer.css" />
   <link rel="stylesheet" href="assets/css/hero.css">
+  <link rel="stylesheet" href="assets/css/heatmap.css">
   <style>
     /* FAQ Toggle Specific Styles , WHY IS FAQ STYLING HERE , SEPARATE THIS OUT */
     .faq-question {
@@ -167,11 +168,29 @@
           >Developed with students in mind, for students by a student.</strong
         >
       </p>
-    </section>
-
     <section class=" features">
         <h2>College Daddy Tools & Resources</h2>
         <div class="features-container">
+          <!-- Activity Tracker Card -->
+          <div class="feature-card heatmap-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="heatmap-header-main">
+              <div class="feature-icon">🔥</div>
+              <h3>Activity Tracker</h3>
+            </div>
+            
+            <div class="streak-mini">
+              <span id="homeStreakCount">0</span> Day Streak
+            </div>
+
+            <div class="heatmap-wrapper-mini">
+              <div id="heatmapGrid" class="heatmap-grid"></div>
+            </div>
+            
+            <a href="pages/pomodoro.html" class="streak-btn-mini">
+               Make One More Streak
+            </a>
+          </div>
+
           <div class="feature-card" data-aos="fade-up" data-aos-delay="0" data-url="pages/cgpa.html">
             <div class="feature-icon">📊</div>
             <h3>Grade Calculator</h3>
@@ -380,6 +399,7 @@
 
   <script src="assets/js/components/navigation.js"></script>
   <script src="assets/js/components/footer.js"></script>
+  <script src="assets/js/utils/heatmap.js"></script>
   <script src="assets/js/pages/index.js"></script>
   <script>
     // FAQ Toggle Functionality

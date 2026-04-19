@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/footer.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/pomodoro.css">
+    <link rel="stylesheet" href="../assets/css/heatmap.css">
     <link rel="stylesheet" href="../roadmap_assets/css/progress.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Theme initialization script - runs before page render to prevent flash -->
@@ -333,15 +334,57 @@
             letter-spacing: 0.5px;
         }
 
-        /* Responsive */
+        /* Responsive Scaling and Mobile Fixes */
         @media (max-width: 968px) {
             .progress-tracking-section {
                 grid-template-columns: 1fr;
                 gap: 24px;
+                padding: 0 15px;
             }
             .calendar-summary-row {
                 grid-template-columns: 1fr;
+                gap: 12px;
             }
+            .focus-stats-row, .streak-stats-row {
+                grid-template-columns: 1fr;
+            }
+            .today-focus-card, .streaks-card, .calendar-card {
+                padding: 20px;
+            }
+            .time-display {
+                font-size: clamp(3rem, 15vw, 4.5rem);
+            }
+            .timer-container {
+                width: min(85vw, 320px);
+                height: min(85vw, 320px);
+            }
+            .calendar-column {
+                order: 2; /* Put calendar below stats on mobile */
+            }
+            .stats-column {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .today-focus-card h2, .streaks-card h2 {
+                font-size: 1.25rem;
+            }
+            .focus-stat-card .focus-value, .streak-stat-card .streak-value {
+                font-size: 1.5rem;
+            }
+            .summary-stat .summary-value {
+                font-size: 1.2rem;
+            }
+            .progress-tracking-wrapper {
+                margin-top: 40px;
+            }
+        }
+
+        /* Prevent unwanted horizontal scroll on root */
+        body, html {
+            overflow-x: hidden;
+            width: 100%;
         }
     </style>
     </head>
@@ -501,18 +544,6 @@
                         </div>
                     </div>
 
-                    <!-- Progress Bar -->
-                    <div class="progress-bar-card">
-                        <div class="progress-section">
-                            <div class="progress-info">
-                                <span>Monthly Progress</span>
-                                <span class="progress-percent" id="progressPercent">0%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="progressFill"></div>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- Motivation Message -->
                     <div class="motivation-card" id="motivationCard" style="display: none;">
@@ -540,26 +571,18 @@
                 <div class="calendar-column">
                     <div class="calendar-card">
                         <div class="calendar-header">
-                            <button class="month-nav" onclick="changeMonth(-1)">
+                            <button class="month-nav" onclick="changeHeatmapYear(-1)">
                                 <i class="fas fa-chevron-left"></i>
                             </button>
-                            <h2 id="monthYear"></h2>
-                            <button class="month-nav" onclick="changeMonth(1)">
+                            <h2 id="heatmapYearLabel">2026</h2>
+                            <button class="month-nav" onclick="changeHeatmapYear(1)">
                                 <i class="fas fa-chevron-right"></i>
                             </button>
                         </div>
 
-                        <div class="calendar-weekdays">
-                            <div>Sun</div>
-                            <div>Mon</div>
-                            <div>Tue</div>
-                            <div>Wed</div>
-                            <div>Thu</div>
-                            <div>Fri</div>
-                            <div>Sat</div>
+                        <div class="heatmap-wrapper-full">
+                            <div id="heatmapGrid" class="heatmap-grid"></div>
                         </div>
-
-                        <div class="calendar-grid" id="calendarGrid"></div>
 
                         <div class="calendar-legend">
                             <span>Less</span>
@@ -572,13 +595,16 @@
                             </div>
                             <span>More</span>
                         </div>
+                        <!-- Hidden legacy elements for compatibility -->
+                        <div id="calendarGrid" style="display: none;"></div>
+                        <div id="monthYear" style="display: none;"></div>
                     </div>
 
-                    <!-- Summary Stats Below Calendar -->
+                    <!-- Summary Stats -->
                     <div class="calendar-summary-row">
                         <div class="summary-stat">
                             <div class="summary-label">Days Focused</div>
-                            <div class="summary-value" id="daysFocused">0 / 28</div>
+                            <div class="summary-value" id="daysFocused">0 / 365</div>
                         </div>
                         <div class="summary-stat">
                             <div class="summary-label">Avg Focus/Day</div>
@@ -651,6 +677,7 @@
 
     <!-- Progress tracking scripts -->
     <script src="../roadmap_assets/js/pomodoroStorage.js"></script>
+    <script src="../assets/js/utils/heatmap.js"></script>
     <script src="../roadmap_assets/js/progress.js"></script>
     <script src="../assets/js/pages/pomodoro.js"></script>
     <script src="../assets/js/components/footer.js"></script>

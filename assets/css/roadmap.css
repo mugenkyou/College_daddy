@@ -499,4 +499,39 @@ a:hover {
     opacity: 1;
 }
 
+/* Subtask Completion Styles */
+.roadmap-stage ul {
+    list-style: none !important;
+    padding-left: 0 !important;
+}
 
+.roadmap-stage li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0.8rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.roadmap-stage li:hover {
+    background-color: rgba(0, 157, 255, 0.05);
+}
+
+.subtask-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.roadmap-stage li a {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.roadmap-stage li input:checked + a {
+    text-decoration: line-through;
+    opacity: 0.6;
+}

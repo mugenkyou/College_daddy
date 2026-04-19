@@ -253,6 +253,9 @@ class PomodoroTimer {
             } else {
                 this.updateDisplay();
                 this.updateProgress(this.remainingTime / this.initialTime);
+                
+                // Real-time DOM updates every second
+                this.updateLiveStats();
             }
         }, 100);
     }
@@ -272,6 +275,10 @@ class PomodoroTimer {
     }
 
     completePhase() {
+        const spentMs = this.initialTime - this.remainingTime;
+        const minutesSpent = Math.floor(spentMs / (60 * 1000));
+        const secondsSpent = Math.floor((spentMs % (60 * 1000)) / 1000);
+
         clearInterval(this.interval);
         this.isRunning = false;
         this.startTime = null;
@@ -283,14 +290,16 @@ class PomodoroTimer {
         }
 
         if (this.currentPhase === 'work') {
-            this.completedPomodoros++;
-            this.totalFocusTime += this.settings.workDuration;
-            this.currentStreak++;
-            this.updateStats();
-
-            // NEW: Save progress data for tracking
-            this.saveProgressData();
-
+            // Only count as a "completed pomodoro" if they did at least 80% of the time?
+            // User just asked for real time, so let's log the time anyway.
+            if (minutesSpent >= 1) {
+                this.completedPomodoros++;
+                this.totalFocusTime += minutesSpent;
+                this.currentStreak++;
+                this.updateStats();
+                this.saveProgressData(minutesSpent);
+            }
+            
             if (this.completedPomodoros % this.settings.pomodorosUntilLongBreak === 0) {
                 this.currentPhase = 'longBreak';
                 this.remainingTime = this.settings.longBreak * 60 * 1000;
@@ -308,16 +317,40 @@ class PomodoroTimer {
         this.updateProgress(1);
         this.updatePhaseDisplay();
         this.playNotificationSound();
-        this.showNotification(`${this.currentPhase === 'work' ? 'Work Time' : 'Break Time'} - Let's go!`);
+        this.showNotification(`${this.currentPhase === 'work' ? 'Work Time' : 'Break Time'} - ${minutesSpent}m ${secondsSpent}s spent.`);
     }
 
-    // NEW METHOD: Save progress data
-    saveProgressData() {
+    // NEW METHOD: Real-time DOM updates
+    updateLiveStats() {
+        if (this.currentPhase !== 'work') return;
+
+        const liveMs = this.initialTime - this.remainingTime;
+        const liveMinutes = Math.floor(liveMs / 60000);
+        
+        // Update Focus Time counter in DOM (if exists)
+        const focusTimeEl = document.getElementById('totalFocusTime');
+        if (focusTimeEl) {
+            focusTimeEl.textContent = `${this.totalFocusTime + liveMinutes}m`;
+        }
+
+        // Update heatmap every minute to reflect intensity changes live
+        if (Math.floor(liveMs / 1000) % 60 === 0) {
+            if (typeof renderHeatmap === 'function') {
+                renderHeatmap();
+            }
+        }
+    }
+
+    // NEW METHOD: Save progress data with real minutes
+    saveProgressData(minutesSpent = 0) {
         try {
-            // Check if the storage utility exists
             if (typeof saveTodayProgress === 'function') {
                 saveTodayProgress(this.completedPomodoros, this.totalFocusTime);
-                console.log('Progress saved:', this.completedPomodoros, 'pomodoros,', this.totalFocusTime, 'minutes');
+                
+                // Refresh heatmap after save
+                if (typeof renderHeatmap === 'function') {
+                    renderHeatmap();
+                }
             }
         } catch (e) {
             console.error('Error saving progress:', e);
