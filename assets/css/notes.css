@@ -823,3 +823,211 @@ iframe {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 }
+
+/* Note sharing and hover preview */
+.card::before {
+  pointer-events: none;
+}
+
+.material-card {
+  overflow: visible;
+}
+
+.material-card .card-actions {
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 10;
+}
+
+.copy-link-btn,
+.share-note-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--primary-color);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 2px solid var(--primary-color);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  min-width: 120px;
+  transition: all var(--transition-speed) ease;
+}
+
+.copy-link-btn:hover,
+.share-note-btn:hover,
+.share-note-btn[aria-expanded="true"] {
+  background: var(--primary-color);
+  color: var(--text-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 157, 255, 0.3);
+}
+
+.copy-link-btn:active,
+.share-note-btn:active {
+  transform: translateY(0);
+}
+
+.note-share {
+  display: inline-flex;
+  position: relative;
+}
+
+.note-share-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 190px;
+  padding: 0.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  z-index: 40;
+}
+
+.note-share-menu[hidden] {
+  display: none;
+}
+
+.note-share-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  color: var(--text-light);
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.note-share-option:hover,
+.note-share-option:focus-visible {
+  background: var(--primary-dim);
+  color: var(--primary-color);
+}
+
+.note-share-option i {
+  width: 18px;
+  text-align: center;
+}
+
+.pdf-hover-preview {
+  width: 100%;
+  height: 0;
+  margin: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--primary-border);
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgba(0, 157, 255, 0.04);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition:
+    height var(--transition-speed) ease,
+    margin var(--transition-speed) ease,
+    opacity var(--transition-speed) ease,
+    transform var(--transition-speed) ease,
+    visibility var(--transition-speed) ease;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.material-card.has-pdf-preview:hover .pdf-hover-preview,
+.material-card.has-pdf-preview:focus-within .pdf-hover-preview {
+  height: 260px;
+  margin: 0 0 1rem;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.material-card.share-menu-open .pdf-hover-preview {
+  height: 0;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+}
+
+.pdf-preview-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.8rem;
+  color: var(--text-light);
+  background: var(--bg-darker);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pdf-preview-frame {
+  width: 100%;
+  height: calc(100% - 42px);
+  border: 0;
+  background: var(--input-bg);
+}
+
+.note-toast {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 10000;
+  max-width: min(320px, calc(100vw - 2rem));
+  padding: 0.9rem 1.1rem;
+  color: var(--text-light);
+  background: var(--card-bg);
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.note-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (min-width: 769px) {
+  .material-card .card-actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .pdf-hover-preview {
+    display: none;
+  }
+
+  .copy-link-btn,
+  .share-note-btn,
+  .note-share {
+    width: 100%;
+  }
+
+  .note-share-menu {
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+
+  .note-toast {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+  }
+}

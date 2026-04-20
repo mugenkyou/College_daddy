@@ -78,37 +78,27 @@ function displayMaterials(semesterId, branchId, subjectId) {
     content.innerHTML = '';
     content.className = 'materials-container'; // Remove grid class to prevent cards from being clickable
 
-    // Detect if mobile device
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
     subject.materials.forEach(material => {
         const card = document.createElement('div');
         card.className = 'card material-card'; // Add specific class for material cards
 
         // Get the material data
         const filePath = material.path || '';
-
-        // Get absolute path for PDF files
-        let absoluteFilePath = filePath;
-        if (filePath.startsWith('/')) {
-            absoluteFilePath = window.location.origin + filePath;
-        }
+        const fileUrl = getMaterialFileUrl(filePath);
 
         const uploadDate = material.uploadDate ? new Date(material.uploadDate).toLocaleDateString() : 'Unknown';
-
-        // Create a safe download filename
-        const safeFileName = material.title.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.pdf';
 
         // Get thumbnail URL if available
         const thumbnailUrl = material.thumbnailUrl || '';
         const hasThumbnail = thumbnailUrl && thumbnailUrl.length > 0;
+        const contextText = `${semester.name} | ${branch.name} | ${subject.name}`;
 
         // Create the card content with thumbnail if available
         let thumbnailHTML = '';
         if (hasThumbnail) {
             thumbnailHTML = `
                 <div class="thumbnail-container">
-                    <img src="${thumbnailUrl}" alt="PDF Preview" class="material-thumbnail" 
+                    <img src="${sanitizeHTML(thumbnailUrl)}" alt="PDF Preview" class="material-thumbnail"
                          onerror="this.style.display='none'">
                 </div>
             `;
@@ -118,19 +108,14 @@ function displayMaterials(semesterId, branchId, subjectId) {
         card.innerHTML = `
             ${thumbnailHTML}
             <div class="card-header">
-                <h3>${material.title}</h3>
-                <p>${material.description}</p>
-                <p><span class="meta-label">Size:</span> ${material.size || 'Unknown'}</p>
+                <h3>${sanitizeHTML(material.title || 'Untitled notes')}</h3>
+                <p>${sanitizeHTML(material.description || 'No description available.')}</p>
+                <p><span class="meta-label">Size:</span> ${sanitizeHTML(material.size || 'Unknown')}</p>
                 <p><span class="meta-label">Uploaded:</span> ${uploadDate}</p>
             </div>
+            ${createPdfPreviewHTML(material, fileUrl)}
             <div class="card-actions">
-                <a href="${absoluteFilePath}" 
-                   target="_blank" class="view-btn">
-                    View PDF
-                </a>
-                <a href="${absoluteFilePath}" download="${safeFileName}" class="download-btn">
-                    Download
-                </a>
+                ${createNoteActionsHTML(material, contextText)}
             </div>
         `;
 
@@ -138,6 +123,7 @@ function displayMaterials(semesterId, branchId, subjectId) {
         card.style.cursor = 'default';
 
         content.appendChild(card);
+        setupMaterialCardInteractions(card);
     });
 
     navigationState.semester = semesterId;
