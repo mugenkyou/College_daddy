@@ -26,7 +26,8 @@ The original name, "College Buddy," was not available as a domain, so we rebrand
 - **CGPA Calculator**: Quickly estimate your CGPA based on your grades. If you enter your current SGPA and desired CGPA, the calculator will tell you how much SGPA is needed in each semester to reach your goal. It also suggests how many companies you may be eligible for during placements based on your CGPA.
 - **Internal Marks Calculator**: Predict your internal marks and assess your academic standing. It also helps determine if you are eligible for the end-semester exam and calculates how many marks you need in the final exam to achieve your desired grade.
 - **Notes Repository**: Access all 8 semesters of engineering notes in one place.
-- **Pomodoro Study Timer**: Boost productivity with a built-in study timer designed for effective learning. It also includes built-in study music to help maintain focus.
+- **Pomodoro Study Timer**: Boost productivity with a built-in study timer designed for effective learning. Features real-time focus tracking, built-in study music, and precision logging that captures actual minutes spent.
+- **Activity Heatmap & Streak System**: A GitHub-style yearly productivity dashboard that tracks both study sessions and roadmap progress. Includes a smart **4:00 AM Midnight Buffer** so late-night study sessions correctly count toward your daily streak.
 - **Roadmaps & Career Guidance**: Get structured learning roadmaps for various career paths, including AI, Full Stack Development, and Cybersecurity. Each roadmap includes recommended learning resources and skill-building steps.
 - **Aptitude Preparation**: Direct access to aptitude test preparation resources via IndiaBix, offering practice questions in quantitative, logical, and verbal reasoning, along with interview preparation materials.
 
@@ -84,20 +85,22 @@ The project follows a clean, organized directory structure:
 ```
 college_daddy/
 ├── assets/                     # All static assets
-│   ├── css/                    # CSS stylesheets
+│   ├── css/                    # CSS stylesheets (heatmap.css, navigation.css)
 │   ├── js/                     # JavaScript files
-│   │   ├── components/         # Reusable UI components (navigation, footer, etc.)
-│   │   └── pages/              # Page-specific scripts
-│   │       └── notes/          # Notes-specific functionality
+│   │   ├── components/         # Reusable UI components
+│   │   ├── utils/              # Utility scripts (heatmap.js)
+│   │   └── pages/              # Page-specific scripts (pomodoro.js, roadmap.js)
 │   ├── img/                    # Images and graphics
 │   └── offline/                # Offline caching scripts
-│       └── offlineCache.js
-├── data/                       # Data files for applications
-├── pages/                      # Individual page templates (notes.html, cgpa.html, etc.)
-└── index.html                  # Homepage
+├── roadmap_assets/             # Roadmap-specific assets & storage logic
+│   ├── js/                     # pomodoroStorage.js, progress.js
+├── pages/                      # Individual templates (pomodoro.html, roadmap.html)
+└── index.html                  # Homepage with Activity Dashboard
 ```
 
 ### Key Components
+- **Local-First Privacy**: All activity data, streaks, and heatmap progress are stored entirely in your browser (`localStorage`). No account or internet connection required.
+- **Smart Rollover Logic**: Features a custom 4:00 AM rollover buffer to accommodate student sleep cycles.
 - **JavaScript Organization**: Scripts are organized by functionality - reusable components and page-specific logic
 - **CSS Structure**: Stylesheets follow a consistent naming convention
 - **Data Files**: Application data is stored in dedicated data directory for easy updates

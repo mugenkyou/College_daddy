@@ -1,0 +1,145 @@
+.heatmap-card {
+    cursor: default !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px !important;
+}
+
+/* On desktop, make it span 2 columns if the grid allows */
+@media (min-width: 992px) {
+    .heatmap-card {
+        grid-column: span 2;
+    }
+}
+
+.heatmap-header-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.heatmap-header-main .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.heatmap-header-main h3 {
+    margin: 0;
+    font-size: 1.2rem !important;
+}
+
+.streak-mini {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    margin-bottom: 15px;
+}
+
+.streak-mini span {
+    font-weight: 800;
+    color: #ff9d00;
+    font-size: 1.2rem;
+}
+
+.heatmap-wrapper-mini, .heatmap-wrapper-full {
+    width: 100%;
+    overflow-x: auto;
+    padding: 15px 5px;
+    margin-bottom: 10px;
+    scrollbar-width: thin;
+    cursor: grab;
+}
+
+.heatmap-wrapper-mini::-webkit-scrollbar, .heatmap-wrapper-full::-webkit-scrollbar {
+    height: 4px;
+}
+
+.heatmap-wrapper-mini::-webkit-scrollbar-thumb, .heatmap-wrapper-full::-webkit-scrollbar-thumb {
+    background: var(--primary-border);
+    border-radius: 10px;
+}
+
+.heatmap-months-header {
+    display: grid;
+    grid-template-columns: repeat(54, 15px); 
+    font-size: 0.7rem;
+    color: var(--text-gray);
+    margin-bottom: 5px;
+    padding-left: 2px;
+}
+
+.heatmap-months-header span {
+    grid-row: 1;
+}
+
+.heatmap-grid {
+    display: grid;
+    grid-template-rows: repeat(7, 11px);
+    grid-auto-flow: column;
+    gap: 4px;
+    justify-content: start;
+}
+
+.pumping {
+    animation: pump 1.5s infinite ease-in-out;
+    box-shadow: 0 0 8px var(--primary-color);
+    z-index: 2;
+}
+
+@keyframes pump {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
+}
+
+.heatmap-cell {
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+    background: var(--border-light);
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Intensity levels */
+.level-0 { background: var(--border-light); }
+.level-1 { background: #0e4429; }
+.level-2 { background: #006d32; }
+.level-3 { background: #26a641; }
+.level-4 { background: #39d353; }
+
+.streak-btn-mini {
+    background: #ff9d00;
+    color: #fff !important;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+}
+
+.streak-btn-mini:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 157, 0, 0.3);
+}
+
+/* Tooltip replacement for mobile/minimal */
+.heatmap-cell:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 9px;
+    white-space: nowrap;
+    z-index: 10;
+    margin-bottom: 4px;
+}

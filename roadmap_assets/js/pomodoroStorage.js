@@ -8,17 +8,38 @@ const STORAGE_PREFIX = 'pomodoro_';
 /**
  * Save today's pomodoro data
  */
+function getEffectiveDate() {
+    const now = new Date();
+    if (now.getHours() < 4) now.setDate(now.getDate() - 1);
+    return formatDate(now);
+}
+
+function formatDate(date) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+}
+
 function saveTodayProgress(completedPomodoros, totalMinutes) {
-    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
-    const data = {
-        date: today,
-        completedPomodoros,
-        totalMinutes,
-        timestamp: Date.now()
-    };
+    const today = getEffectiveDate();
+    const key = `${STORAGE_PREFIX}${today}`;
+    
+    // Read existing data first
+    let data = {};
+    try {
+        const existing = localStorage.getItem(key);
+        if (existing) data = JSON.parse(existing);
+    } catch (e) {}
+
+    // Update with new values
+    data.date = today;
+    data.completedPomodoros = completedPomodoros;
+    data.totalMinutes = totalMinutes;
+    data.timestamp = Date.now();
     
     try {
-        localStorage.setItem(`${STORAGE_PREFIX}${today}`, JSON.stringify(data));
+        localStorage.setItem(key, JSON.stringify(data));
         return data;
     } catch (e) {
         console.error('Error saving progress:', e);
@@ -77,36 +98,37 @@ function getMonthProgress(year, month) {
  * Calculate current streak
  */
 function calculateStreak() {
-    const allData = getAllProgress();
-    if (allData.length === 0) return 0;
-    
-    let streak = 0;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    // Check if studied today
-    const todayString = today.toISOString().split('T')[0];
-    const todayData = getDateProgress(todayString);
-    
-    // Start from yesterday if not studied today, otherwise start from today
-    let currentDate = new Date(today);
-    if (!todayData || todayData.completedPomodoros === 0) {
-        currentDate.setDate(currentDate.getDate() - 1);
-    }
-    
-    // Count consecutive days backwards
-    while (true) {
-        const dateString = currentDate.toISOString().split('T')[0];
-        const data = getDateProgress(dateString);
-        
-        if (data && data.completedPomodoros > 0) {
-            streak++;
-            currentDate.setDate(currentDate.getDate() - 1);
-        } else {
-            break;
+    const data = {};
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith(STORAGE_PREFIX)) {
+            const d = JSON.parse(localStorage.getItem(key));
+            data[key.replace(STORAGE_PREFIX, '')] = d;
         }
     }
     
+    let streak = 0;
+    const effectiveDay = getEffectiveDate();
+    let checkDate = new Date();
+    if (new Date().getHours() < 4) checkDate.setDate(checkDate.getDate() - 1);
+    checkDate.setHours(0,0,0,0);
+
+    while (true) {
+        const dateStr = formatDate(checkDate);
+        const dayData = data[dateStr];
+        const hasActivity = dayData && ((dayData.totalMinutes || 0) > 0 || (dayData.roadmapSteps || 0) > 0);
+        
+        if (hasActivity) {
+            streak++;
+            checkDate.setDate(checkDate.getDate() - 1);
+        } else {
+            if (dateStr === effectiveDay) {
+                checkDate.setDate(checkDate.getDate() - 1);
+                continue;
+            }
+            break;
+        }
+    }
     return streak;
 }
 
@@ -115,7 +137,7 @@ function calculateStreak() {
  */
 function calculateBestStreak() {
     const allData = getAllProgress()
-        .filter(d => d.completedPomodoros > 0)
+        .filter(d => (d.totalMinutes || 0) > 0 || (d.roadmapSteps || 0) > 0)
         .sort((a, b) => new Date(a.date) - new Date(b.date));
     
     if (allData.length === 0) return 0;
@@ -146,7 +168,7 @@ function getMonthStats(year, month) {
     const monthData = getMonthProgress(year, month);
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     
-    const daysFocused = monthData.filter(d => d.completedPomodoros > 0).length;
+    const daysFocused = monthData.filter(d => (d.totalMinutes || 0) > 0 || (d.roadmapSteps || 0) > 0).length;
     const totalFocusMinutes = monthData.reduce((sum, d) => sum + d.totalMinutes, 0);
     const totalPomodoros = monthData.reduce((sum, d) => sum + d.completedPomodoros, 0);
     const avgFocusDay = daysFocused > 0 ? Math.round(totalFocusMinutes / daysFocused) : 0;

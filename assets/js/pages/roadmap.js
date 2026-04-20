@@ -93,16 +93,45 @@ class RoadmapRenderer {
         const subtasksList = utils.createElement('ul');
         stage.subtasks.forEach(subtask => {
             const item = utils.createElement('li');
+            
+            const checkbox = utils.createElement('input', {
+                type: 'checkbox',
+                className: 'subtask-checkbox'
+            });
+            
+            // Persistent checkbox state
+            const storageKey = `roadmap_done_${stage.id}_${subtask.title.replace(/\s/g, '_')}`;
+            checkbox.checked = localStorage.getItem(storageKey) === 'true';
+            
+            checkbox.addEventListener('change', () => {
+                localStorage.setItem(storageKey, checkbox.checked);
+                if (checkbox.checked) {
+                    this.logRoadmapActivity();
+                }
+            });
+
             const link = utils.createElement('a', {
                 href: subtask.resource,
-                textContent: subtask.title
+                textContent: subtask.title,
+                target: '_blank'
             });
+            
+            item.appendChild(checkbox);
             item.appendChild(link);
             subtasksList.appendChild(item);
         });
 
         stageElement.appendChild(subtasksList);
         return stageElement;
+    }
+
+    logRoadmapActivity() {
+        const today = new Date().toISOString().split('T')[0];
+        const key = `pomodoro_${today}`;
+        const existingData = JSON.parse(localStorage.getItem(key) || '{"totalMinutes":0,"completedPomodoros":0}');
+        existingData.roadmapSteps = (existingData.roadmapSteps || 0) + 1;
+        existingData.date = today;
+        localStorage.setItem(key, JSON.stringify(existingData));
     }
 }
 
