@@ -876,6 +876,7 @@ iframe {
 .note-share {
   display: inline-flex;
   position: relative;
+  z-index: 60;
 }
 
 .note-share-menu {
@@ -883,16 +884,23 @@ iframe {
   right: 0;
   top: calc(100% + 8px);
   min-width: 190px;
+  max-height: min(260px, calc(100vh - 2rem));
+  overflow-y: auto;
   padding: 0.5rem;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-  z-index: 40;
+  z-index: 70;
 }
 
 .note-share-menu[hidden] {
   display: none;
+}
+
+.note-share-menu.open-above {
+  top: auto;
+  bottom: calc(100% + 8px);
 }
 
 .note-share-option {
@@ -949,14 +957,6 @@ iframe {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-}
-
-.material-card.share-menu-open .pdf-hover-preview {
-  height: 0;
-  margin: 0;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-6px);
 }
 
 .pdf-preview-heading {

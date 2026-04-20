@@ -205,7 +205,10 @@ function setupMaterialCardInteractions(card) {
         closeAllNoteShareMenus();
         shareMenu.hidden = isOpen;
         shareButton.setAttribute('aria-expanded', String(!isOpen));
-        card.classList.toggle('share-menu-open', !isOpen);
+
+        if (!isOpen) {
+            positionNoteShareMenu(shareMenu);
+        }
     });
 
     shareMenu?.addEventListener('click', (event) => {
@@ -250,14 +253,24 @@ function ensureNoteShareGlobalListeners() {
 function closeAllNoteShareMenus() {
     document.querySelectorAll('.note-share-menu').forEach(menu => {
         menu.hidden = true;
+        menu.classList.remove('open-above');
     });
 
     document.querySelectorAll('.share-note-btn[aria-expanded="true"]').forEach(button => {
         button.setAttribute('aria-expanded', 'false');
     });
+}
 
-    document.querySelectorAll('.material-card.share-menu-open').forEach(card => {
-        card.classList.remove('share-menu-open');
+function positionNoteShareMenu(menu) {
+    menu.classList.remove('open-above');
+
+    requestAnimationFrame(() => {
+        const menuRect = menu.getBoundingClientRect();
+        const bottomSpace = window.innerHeight - menuRect.bottom;
+
+        if (bottomSpace < 16) {
+            menu.classList.add('open-above');
+        }
     });
 }
 
