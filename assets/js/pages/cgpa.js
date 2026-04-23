@@ -141,32 +141,8 @@ function hideAllSections() {
 }
 
 function initializeAll() {
-    initializeMobileMenu();
     initializeTooltips();
     initializeCompanyData();
-}
-
-function initializeMobileMenu() {
-    const menuButton = document.querySelector('.menu-button');
-    const navLinks = document.querySelector('.nav-links');
-
-    if (menuButton && navLinks) {
-        menuButton.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        document.addEventListener('click', (event) => {
-            if (!event.target.closest('.nav-container')) {
-                navLinks.classList.remove('active');
-            }
-        });
-
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                navLinks.classList.remove('active');
-            }
-        });
-    }
 }
 
 function initializeTooltips() {

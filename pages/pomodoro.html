@@ -16,7 +16,7 @@
     <script src="../assets/js/components/navigation.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
 
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <link rel="stylesheet" href="../assets/css/navigation.css">
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/footer.css">
@@ -540,11 +540,11 @@
                 <div class="calendar-column">
                     <div class="calendar-card">
                         <div class="calendar-header">
-                            <button class="month-nav" onclick="changeMonth(-1)">
+                            <button type="button" class="month-nav" onclick="changeMonth(-1)" aria-label="Previous month">
                                 <i class="fas fa-chevron-left"></i>
                             </button>
                             <h2 id="monthYear"></h2>
-                            <button class="month-nav" onclick="changeMonth(1)">
+                            <button type="button" class="month-nav" onclick="changeMonth(1)" aria-label="Next month">
                                 <i class="fas fa-chevron-right"></i>
                             </button>
                         </div>
@@ -639,7 +639,7 @@
         btn.addEventListener('click', () => {
             if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen().catch(err => {
-                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                    alert('Fullscreen could not be enabled in this browser.');
                 });
             } else {
                 document.exitFullscreen();
@@ -657,22 +657,6 @@
 
 
     <script>
-    // Mobile menu
-    const menuButton = document.querySelector('.menu-button');
-    const navLinks = document.querySelector('.nav-links');
-
-    menuButton.addEventListener('click', () => {
-        menuButton.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!menuButton.contains(e.target) && !navLinks.contains(e.target)) {
-            menuButton.classList.remove('active');
-            navLinks.classList.remove('active');
-        }
-    });
-    
     // Function wrappers
     function exportProgressData() {
         exportData();

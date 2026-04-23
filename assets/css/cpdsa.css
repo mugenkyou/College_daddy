@@ -1,16 +1,16 @@
 /* ---------- Layout ---------- */
 body {
   background: radial-gradient(circle at top, #0b132b, #000000 80%);
-  color: var(--text-color);
+  color: var(--text-light);
 }
 
 [data-theme="light"] body {
   background: radial-gradient(circle at top, #f9fafb, #e8eef3 80%);
-  color: var(--text-color);
+  color: var(--text-light);
 }
 
 main {
-  padding: 3rem 5%;
+  padding: 2rem 5% 3rem;
   min-height: 90vh;
 }
 
@@ -74,7 +74,7 @@ main {
   padding: 1.5rem;
   width: 100%;
   max-width: 320px;
-  color: var(--text-color);
+  color: var(--text-light);
   text-decoration: none;
   box-shadow: 0 0 15px rgba(0, 157, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -111,6 +111,11 @@ main {
   transform: translateY(-8px) scale(1.03);
   box-shadow: 0 0 25px rgba(0, 157, 255, 0.4);
   border-color: #009dff;
+}
+
+.resource-card:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 3px;
 }
 
 .resource-card:hover i {

@@ -14,35 +14,35 @@
   color: #fff;
 
   /* brighter + sharper grid */
-  background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.12) 1px,
-      transparent 1px
-    ),
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
     linear-gradient(0deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
   background-size: 40px 40px;
 
   animation: gridMove 4s linear infinite; /* faster */
-  transition: background var(--transition-speed, 0.3s) ease, color var(--transition-speed, 0.3s) ease;
+  transition:
+    background var(--transition-speed, 0.3s) ease,
+    color var(--transition-speed, 0.3s) ease;
 }
 
 [data-theme="light"] .hero {
   color: #1a1a1a;
-  background: linear-gradient(
-      90deg,
-      rgba(0, 102, 204, 0.08) 1px,
-      transparent 1px
-    ),
+  background:
+    linear-gradient(90deg, rgba(0, 102, 204, 0.08) 1px, transparent 1px),
     linear-gradient(0deg, rgba(0, 102, 204, 0.08) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
 @keyframes gridMove {
   from {
-    background-position: 0 0, 0 0;
+    background-position:
+      0 0,
+      0 0;
   }
   to {
-    background-position: 40px 40px, 40px 40px;
+    background-position:
+      40px 40px,
+      40px 40px;
   }
 }
 
@@ -101,7 +101,7 @@
   font-weight: 700;
   margin-bottom: 1rem;
   line-height: 1.2;
-  font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, -apple-system, sans-serif;
+  font-family: var(--font-heading);
 }
 
 /* If you want the h1 to use the signature font, uncomment below
@@ -118,12 +118,20 @@
   text-align: center;
   transition: color var(--transition-speed, 0.3s) ease;
 }
-.cursor{
+
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .hero::before,
+  .hero > * {
+    animation: none !important;
+  }
+}
+.cursor {
   display: inline-block;
   animation: blink 0.7s infinite;
 }
-@keyframes blink{
-  50%{
+@keyframes blink {
+  50% {
     opacity: 0;
   }
 }
@@ -170,5 +178,3 @@
     transform: translateY(0);
   }
 }
-
-

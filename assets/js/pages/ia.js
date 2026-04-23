@@ -15,7 +15,6 @@ function getInputValue(id) {
     try {
         const input = document.getElementById(id);
         if (!input) {
-            console.warn(`Input element with id '${id}' not found`);
             return 0;
         }
         const value = input.value.trim();
@@ -24,7 +23,6 @@ function getInputValue(id) {
         const numValue = parseFloat(value);
         return isNaN(numValue) ? 0 : numValue;
     } catch (error) {
-        console.error(`Error getting input value for ${id}:`, error);
         return 0;
     }
 }
@@ -65,7 +63,7 @@ function toggleLabSection() {
         // Reset all result displays
         resetDisplays();
     } catch (error) {
-        console.error('Error in toggleLabSection:', error);
+        alert('Unable to switch calculation mode right now. Please refresh and try again.');
     }
 }
 
@@ -94,7 +92,7 @@ function resetDisplays() {
             eligibilityDiv.className = 'eligibility';
         }
     } catch (error) {
-        console.error('Error in resetDisplays:', error);
+        alert('Unable to reset result displays. Please refresh and try again.');
     }
 }
 
@@ -114,7 +112,7 @@ function calculateMarks(event) {
 
         isLabMode ? calculateLabMode() : calculateRegularMode();
     } catch (error) {
-        console.error('Error in calculateMarks:', error);
+        alert('Unable to calculate marks. Please review your inputs and try again.');
     }
 }
 
@@ -133,7 +131,7 @@ function calculateRegularMode() {
         // Calculate scaled marks
         const seriesAvg = (series1 + series2 + series3) / 3;
         const scaledSeries = (seriesAvg / 50) * 30;
-0
+
         const assignmentTotal = assignment1 + assignment2;
         const scaledAssignments = (assignmentTotal / 20) * 10;
 
@@ -177,7 +175,7 @@ function calculateRegularMode() {
             }
         }
     } catch (error) {
-        console.error('Error in calculateRegularMode:', error);
+        alert('Could not calculate regular mode marks. Please verify your inputs and try again.');
     }
 }
 
@@ -268,7 +266,7 @@ function updateScaledMarksDisplay(series, assignments, modules, grace) {
             }
         }
     } catch (error) {
-        console.error('Error in updateScaledMarksDisplay:', error);
+        alert('Unable to update scaled marks display.');
     }
 }
 
@@ -286,7 +284,7 @@ function updateLabMarksDisplay(internal, external) {
             }
         }
     } catch (error) {
-        console.error('Error in updateLabMarksDisplay:', error);
+        alert('Unable to update lab marks display.');
     }
 }
 
@@ -317,7 +315,7 @@ function displayGradeTable(currentMarks, isLabMode) {
             }
         });
     } catch (error) {
-        console.error('Error in displayGradeTable:', error);
+        alert('Unable to generate grade table. Please retry.');
     }
 }
 

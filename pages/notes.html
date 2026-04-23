@@ -1,98 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>College Daddy - Notes Portal</title>
-    <link rel="stylesheet" href="../assets/css/navigation.css">
-    <link rel="stylesheet" href="../assets/css/global.css">
-    <link rel="stylesheet" href="../assets/css/footer.css">
-    <link rel="stylesheet" href="../assets/css/notes.css">
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        /* Critical overrides for icons */
-        .fas, .far, .fa {
-            display: inline-block !important;
-            font-family: "Font Awesome 5 Free" !important;
-            font-weight: 900 !important;
-            font-style: normal !important;
-        }
-        
-        i.fab {
-            font-family: "Font Awesome 5 Brands" !important;
-        }
-        
-        .logo i {
-            color: #009dff !important;
-            font-size: 1.5rem !important;
-            margin-right: 8px !important;
-        }
-        
-        .tool-card i {
-            color: #009dff !important;
-            font-size: 2.5rem !important;
-            margin-bottom: 1rem !important;
-        }
-        
-        .download-btn {
-            display: flex !important;
-            align-items: center !important;
-        }
-        
-        .download-btn i {
-            margin-right: 8px !important;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/navigation.css" />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+    <link rel="stylesheet" href="../assets/css/footer.css" />
+    <link rel="stylesheet" href="../assets/css/notes.css" />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <!-- Theme initialization script - runs before page render to prevent flash -->
     <script>
-      (function() {
+      (function () {
         try {
-          const theme = localStorage.getItem('theme') || 'dark';
-          document.documentElement.setAttribute('data-theme', theme);
+          const theme = localStorage.getItem("theme") || "dark";
+          document.documentElement.setAttribute("data-theme", theme);
         } catch (e) {
-          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.setAttribute("data-theme", "dark");
         }
       })();
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="nav-container">
-            <a href="../index.html" class="logo" aria-label="College Daddy Home">
-            
-                <span>College Daddy</span>
-            </a>
-            <div class="nav-actions">
-                <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-            </div>
-            <nav class="nav-links">
-                <a href="../index.html" class="nav-link">Home</a>
-                <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
-                <a href="iacal.html" class="nav-link">IA Calculator</a>
-                <a href="pomodoro.html" class="nav-link">Study Timer</a>
-                <a href="notes.html" class="nav-link active">Notes</a>
-                <a href="roadmap.html" class="nav-link">Roadmap</a>
-                <a href="events.html" class="nav-link">Events</a>
-                <button
-                    class="theme-toggle"
-                    aria-label="Toggle dark/light theme"
-                    title="Toggle theme"
-                >
-                    <span class="theme-icon">🌙</span>
-                </button>
-            </nav>
+      <div class="nav-container">
+        <a href="../index.html" class="logo" aria-label="College Daddy Home">
+          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+          <span>College Daddy</span>
+        </a>
+        <div class="nav-actions">
+          <button
+            class="menu-button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
         </div>
+        <nav class="nav-links">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
+          <a href="iacal.html" class="nav-link">IA Calculator</a>
+          <a href="pomodoro.html" class="nav-link">Study Timer</a>
+          <a href="notes.html" class="nav-link active">Notes</a>
+          <a href="roadmap.html" class="nav-link">Roadmap</a>
+          <a href="events.html" class="nav-link">Events</a>
+          <button
+            class="theme-toggle"
+            aria-label="Toggle dark/light theme"
+            title="Toggle theme"
+          >
+            <span class="theme-icon">🌙</span>
+          </button>
+        </nav>
+      </div>
     </header>
-    <nav>
-        <h1>Notes Portal</h1>
-        <input type="search" id="searchInput" placeholder="Search notes...">
+    <nav aria-label="Notes page toolbar">
+      <h1>Notes Portal</h1>
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="Search notes..."
+        aria-label="Search notes"
+      />
     </nav>
 
     <div id="breadcrumb">Home</div>
 
     <main id="content">
-        <!-- Content will be loaded dynamically -->
+      <!-- Content will be loaded dynamically -->
     </main>
 
     <script src="../assets/js/components/navigation.js" defer></script>
@@ -102,6 +82,6 @@
     <script src="../assets/js/pages/notes/notes-search.js"></script>
     <script src="../assets/js/pages/notes/notes-main.js"></script>
 
-<script src="../assets/js/components/back-to-top.js"></script>
-</body>
+    <script src="../assets/js/components/back-to-top.js"></script>
+  </body>
 </html>

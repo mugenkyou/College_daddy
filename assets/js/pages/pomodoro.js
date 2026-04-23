@@ -17,8 +17,6 @@ class PomodoroTimer {
         this.updateStats();
     }
 
-    title
-
     setupElements() {
         // Add settings icon element
         this.settingsIcon = document.getElementById('settings-icon');
@@ -139,7 +137,6 @@ class PomodoroTimer {
                 this.loadDefaultSettings();
             }
         } catch (e) {
-            console.error('Error loading settings:', e);
             this.loadDefaultSettings();
         }
     }
@@ -177,7 +174,7 @@ class PomodoroTimer {
         try {
             localStorage.setItem('pomodoroSettings', JSON.stringify(this.settings));
         } catch (e) {
-            console.error('Error saving settings:', e);
+            this.showNotification('Settings could not be persisted in this browser session');
         }
 
         this.resetTimer();
@@ -196,11 +193,10 @@ class PomodoroTimer {
                 if (todayData) {
                     this.completedPomodoros = todayData.completedPomodoros || 0;
                     this.totalFocusTime = todayData.totalMinutes || 0;
-                    console.log('Loaded today\'s progress:', todayData);
                 }
             }
         } catch (e) {
-            console.log('Progress tracking not initialized yet');
+            this.showNotification('Progress history is unavailable right now');
         }
     }
 
@@ -317,10 +313,9 @@ class PomodoroTimer {
             // Check if the storage utility exists
             if (typeof saveTodayProgress === 'function') {
                 saveTodayProgress(this.completedPomodoros, this.totalFocusTime);
-                console.log('Progress saved:', this.completedPomodoros, 'pomodoros,', this.totalFocusTime, 'minutes');
             }
         } catch (e) {
-            console.error('Error saving progress:', e);
+            this.showNotification('Unable to save progress data');
         }
     }
 
@@ -367,7 +362,7 @@ class PomodoroTimer {
                 currentStreak: this.currentStreak
             }));
         } catch (e) {
-            console.error('Error saving stats:', e);
+            this.showNotification('Unable to save timer stats');
         }
     }
 
@@ -444,7 +439,6 @@ class PomodoroTimer {
 
     showNotification(message) {
         if (!this.notification) {
-            console.log('Notification:', message);
             return;
         }
 
@@ -503,7 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(style);
 
     // Initialize the timer
-    const timer = new PomodoroTimer();
+    window.timer = new PomodoroTimer();
 
 });
 

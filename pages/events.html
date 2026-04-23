@@ -1,105 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Events | College Daddy</title>
-  <meta name="description" content="Stay updated with live hackathons, open source programs and major tech events – all in one place." />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events | College Daddy</title>
+    <meta
+      name="description"
+      content="Stay updated with live hackathons, open source programs and major tech events – all in one place."
+    />
 
-  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
-  <link rel="stylesheet" href="../assets/css/navigation.css" />
-  <link rel="stylesheet" href="../assets/css/global.css">
-  <link rel="stylesheet" href="../assets/css/footer.css">
-  <link rel="stylesheet" href="../assets/css/index.css" />
-  <link rel="stylesheet" href="../assets/css/hero.css" />
-  <link rel="stylesheet" href="../assets/css/events.css" />
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <link rel="stylesheet" href="../assets/css/navigation.css" />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+    <link rel="stylesheet" href="../assets/css/footer.css" />
+    <link rel="stylesheet" href="../assets/css/index.css" />
+    <link rel="stylesheet" href="../assets/css/hero.css" />
+    <link rel="stylesheet" href="../assets/css/events.css" />
 
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-</head>
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <script>
+      (function () {
+        try {
+          const theme = localStorage.getItem("theme") || "dark";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (_err) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+  </head>
 
-<body>
+  <body>
+    <header>
+      <div class="nav-container">
+        <a href="../index.html" class="logo" aria-label="College Daddy Home">
+          <i class="fas fa-graduation-cap"></i>
+          <span>College Daddy</span>
+        </a>
 
-<header>
-  <div class="nav-container">
-    <a href="../index.html" class="logo">
-      <i class="fas fa-graduation-cap"></i>
-      <span>College Daddy</span>
-    </a>
+        <div class="nav-actions">
+          <button
+            class="menu-button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+        </div>
 
-    <div class="nav-actions">
-      <button class="menu-button">☰</button>
-    </div>
+        <nav class="nav-links">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
+          <a href="iacal.html" class="nav-link">IA Calculator</a>
+          <a href="pomodoro.html" class="nav-link">Study Timer</a>
+          <a href="notes.html" class="nav-link">Notes</a>
+          <a href="roadmap.html" class="nav-link">Roadmap</a>
+          <a href="events.html" class="nav-link active">Events</a>
 
-    <nav class="nav-links">
-      <a href="../index.html" class="nav-link">Home</a>
-      <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
-      <a href="iacal.html" class="nav-link">IA Calculator</a>
-      <a href="pomodoro.html" class="nav-link">Study Timer</a>
-      <a href="notes.html" class="nav-link">Notes</a>
-      <a href="roadmap.html" class="nav-link">Roadmap</a>
-      <a href="events.html" class="nav-link active">Events</a>
-
-      <button class="theme-toggle">
-        <span class="theme-icon">🌙</span>
-      </button>
-    </nav>
-  </div>
-</header>
-
-<main class="events-section">
-
-  <!-- Hero -->
-  <div class="events-hero">
-    <div class="events-eyebrow">
-      <span class="dot"></span>
-      Live &amp; Upcoming
-    </div>
-    <h1 class="events-title">
-      <span class="highlight">Hackathons</span> &amp; Tech Events
-    </h1>
-    <p class="events-subtitle">
-      Stay updated with major hackathons, open source programs &amp; coding events — curated just for you.
-    </p>
-
-    <!-- Stats populated by JS -->
-    <div class="events-stats" id="eventsStats">
-      <div class="stat-item">
-        <span class="stat-number" id="statTotal">—</span>
-        <span class="stat-label">Total Events</span>
+          <button
+            class="theme-toggle"
+            aria-label="Toggle dark/light theme"
+            title="Toggle theme"
+          >
+            <span class="theme-icon">🌙</span>
+          </button>
+        </nav>
       </div>
-      <div class="stat-item">
-        <span class="stat-number" id="statOngoing">—</span>
-        <span class="stat-label">Live Now</span>
+    </header>
+
+    <main class="events-section">
+      <!-- Hero -->
+      <div class="events-hero">
+        <div class="events-eyebrow">
+          <span class="dot"></span>
+          Live &amp; Upcoming
+        </div>
+        <h1 class="events-title">
+          <span class="highlight">Hackathons</span> &amp; Tech Events
+        </h1>
+        <p class="events-subtitle">
+          Stay updated with major hackathons, open source programs &amp; coding
+          events — curated just for you.
+        </p>
+
+        <!-- Stats populated by JS -->
+        <div class="events-stats" id="eventsStats">
+          <div class="stat-item">
+            <span class="stat-number" id="statTotal">—</span>
+            <span class="stat-label">Total Events</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="statOngoing">—</span>
+            <span class="stat-label">Live Now</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="statUpcoming">—</span>
+            <span class="stat-label">Upcoming</span>
+          </div>
+        </div>
       </div>
-      <div class="stat-item">
-        <span class="stat-number" id="statUpcoming">—</span>
-        <span class="stat-label">Upcoming</span>
+
+      <!-- Filters -->
+      <div class="event-filters-wrapper">
+        <div class="event-filters" id="eventFilters">
+          <button
+            type="button"
+            onclick="filterEvents('all', this)"
+            class="active"
+          >
+            All
+          </button>
+          <button type="button" onclick="filterEvents('ongoing', this)">
+            🟢 Ongoing
+          </button>
+          <button type="button" onclick="filterEvents('upcoming', this)">
+            🟡 Upcoming
+          </button>
+          <button type="button" onclick="filterEvents('ended', this)">
+            ⚫ Ended
+          </button>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Filters -->
-  <div class="event-filters-wrapper">
-    <div class="event-filters" id="eventFilters">
-      <button onclick="filterEvents('all', this)" class="active">All</button>
-      <button onclick="filterEvents('ongoing', this)">🟢 Ongoing</button>
-      <button onclick="filterEvents('upcoming', this)">🟡 Upcoming</button>
-      <button onclick="filterEvents('ended', this)">⚫ Ended</button>
-    </div>
-  </div>
+      <!-- Grid -->
+      <div class="events-grid-wrapper">
+        <div class="events-grid" id="eventsGrid"></div>
+      </div>
+    </main>
 
-  <!-- Grid -->
-  <div class="events-grid-wrapper">
-    <div class="events-grid" id="eventsGrid"></div>
-  </div>
-
-</main>
-
-<script src="../assets/js/components/navigation.js"></script>
-<script src="../assets/js/components/footer.js"></script>
-<script src="../assets/js/pages/events.js"></script>
-<script src="../assets/js/components/back-to-top.js"></script>
-
-</body>
+    <script src="../assets/js/components/navigation.js"></script>
+    <script src="../assets/js/components/footer.js"></script>
+    <script src="../assets/js/pages/events.js"></script>
+    <script src="../assets/js/components/back-to-top.js"></script>
+  </body>
 </html>

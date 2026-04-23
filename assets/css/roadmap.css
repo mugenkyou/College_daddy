@@ -20,10 +20,10 @@ html {
 }
 
 body {
-    font-family: var(--font-main);
+    font-family: var(--font-body);
     line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--dark-bg);
+    color: var(--text-light);
+    background-color: var(--bg-dark);
     overflow-x: hidden;
     transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
@@ -117,6 +117,11 @@ a:hover {
     align-items: center;
 }
 
+.roadmap-card:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
 .roadmap-card::before {
     content: '';
     position: absolute;
@@ -167,7 +172,7 @@ a:hover {
 }
 
 .roadmap-description {
-    color: var(--text-muted);
+    color: var(--text-gray);
     text-align: center;
     font-size: 0.9rem;
     margin-top: 0.5rem;
@@ -186,7 +191,7 @@ a:hover {
 
 .placeholder-message {
     text-align: center;
-    color: var(--text-muted);
+    color: var(--text-gray);
     animation: bounce 2s infinite;
     padding: 2rem;
 }
@@ -260,7 +265,7 @@ a:hover {
 .faq-item p {
     padding-left: 1.8rem;
     position: relative;
-    color: var(--text-color);
+    color: var(--text-light);
 }
 
 .faq-item p::before {

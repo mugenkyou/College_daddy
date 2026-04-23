@@ -3,7 +3,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', system-ui, -apple-system, sans-serif;
 }
 
 /* Font Awesome icon fixes */
@@ -18,6 +17,7 @@ i.fa {
 }
 
 body {
+    font-family: var(--font-body);
     background-color: var(--bg-dark);
     color: var(--text-light);
     min-height: 100vh;
@@ -207,8 +207,8 @@ body {
 /*** Main Container ***/
 .container {
     max-width: 1200px;
-    margin: 2rem auto;
-    padding: 2rem;
+    margin: 1.75rem auto 2.5rem;
+    padding: 1.25rem;
     position: relative;
     z-index: 1;
 }

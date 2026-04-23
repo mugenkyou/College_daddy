@@ -4,209 +4,94 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>College Daddy - Admin PDF Upload</title>
-  <link rel="stylesheet" href="/assets/css/notes.css">
-  <style>
-    :root {
-    --primary-color: #4285f4;
-    --primary-dark: #3367d6;
-    --secondary-color: #34a853;
-    --accent-color: #fbbc05;
-    --danger-color: #ea4335;
-    --dark-bg: #000000;
-    --darker-bg: #000000;
-    --border-color: #222222;
-    --text-color: #e0e0e0;
-    --text-muted: #a0a0a0;
-    --text-bright: #ffffff;
-    --transition-speed: 0.3s;
-    --border-radius: 8px;
-}
-
-/* Light theme variables */
-[data-theme="light"] {
-    --dark-bg: #ffffff;
-    --darker-bg: #f5f5f5;
-    --border-color: #e0e0e0;
-    --text-color: #333333;
-    --text-muted: #666666;
-    --text-bright: #000000;
-}
-    .admin-container {
-      max-width: 500px;
-      margin: 3rem auto;
-      background: var(--background-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
-      padding: 2rem 2.5rem 2.5rem 2.5rem;
-      color: var(--text-primary);
-    }
-    .admin-container h1 {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .admin-form label {
-      display: block;
-      margin-top: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-    .admin-form input, .admin-form select {
-      width: 100%;
-      padding: 0.7rem 1rem;
-      border-radius: 8px;
-      border: 1.5px solid var(--border-color);
-      background: var(--input-bg);
-      color: var(--text-primary);
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      transition: border-color 0.2s;
-    }
-    .admin-form input:focus, .admin-form select:focus {
-      border-color: var(--primary-color);
-      outline: none;
-    }
-    .admin-form button {
-      margin-top: 1.5rem;
-      width: 100%;
-      padding: 0.9rem;
-      background: var(--primary-color);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .admin-form button:hover {
-      background: var(--primary-hover);
-      color: #000;
-    }
-    #result {
-      margin-top: 1.2rem;
-      text-align: center;
-      font-weight: 500;
-      min-height: 1.5em;
-    }
-    .success { color: var(--success-color); }
-    .error { color: var(--error-color); }
-    .materials-list {
-      margin-top: 0.5rem;
-      background: var(--background-hover);
-      border-radius: 10px;
-      padding: 1.2rem 1rem;
-    }
-    .materials-list h2 {
-      font-size: 1.1rem;
-      color: var(--primary-color);
-    }
-    .material-item {
-      margin-bottom: 0.7rem;
-      padding-bottom: 0.7rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-    .material-item:last-child { border-bottom: none; }
-    .material-title { font-weight: 600; }
-    .material-desc { color: var(--text-secondary); font-size: 0.97em; }
-    .material-date { color: var(--text-tertiary); font-size: 0.92em; }
-    .material-link { color: var(--primary-color); text-decoration: underline; font-size: 0.97em; }
-  </style>
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="stylesheet" href="../assets/css/navigation.css">
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/footer.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script>
+    (function () {
+      try {
+        const theme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
 </head>
 <body>
-  <div class="admin-container">
-    <h1>Admin PDF Upload</h1>
-    <form id="uploadForm" class="admin-form" enctype="multipart/form-data" method="POST" action="/api/admin/upload">
-      <label for="semester">Semester:</label>
-      <select id="semester" name="semester" required></select>
-      <label for="branch">Branch:</label>
-      <select id="branch" name="branch" required></select>
-      <label for="subject">Subject:</label>
-      <select id="subject" name="subject" required></select>
-      <label for="title">Title:</label>
-      <input type="text" id="title" name="title" required>
-      <label for="description">Description (Optional):</label>
-      <input type="text" id="description" name="description">
-      <label for="pdf">Document File:</label>
-      <input type="file" id="pdf" name="pdf" accept=".pdf,.docx,.doc,.txt,.pptx,.ppt" required>
-      <small style="color: var(--text-secondary); font-size: 0.9em;">Supported: PDF, DOCX, DOC, TXT, PPTX, PPT (auto-converts to PDF)</small>
-      <button type="submit">Upload</button>
-    </form>
-    <div id="result"></div>
-    <div class="materials-list" id="materialsList">
-      <h2>Latest Materials for Selected Subject</h2>
-      <div id="materials"></div>
+  <header>
+    <div class="nav-container">
+      <a href="../index.html" class="logo" aria-label="College Daddy Home">
+        <i class="fas fa-graduation-cap"></i>
+        <span>College Daddy</span>
+      </a>
+      <div class="nav-actions">
+        <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      </div>
+      <nav class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
+        <a href="iacal.html" class="nav-link">IA Calculator</a>
+        <a href="pomodoro.html" class="nav-link">Study Timer</a>
+        <a href="notes.html" class="nav-link active">Notes</a>
+        <a href="roadmap.html" class="nav-link">Roadmap</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <button class="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </nav>
     </div>
-    <a href="notes.html" style="display:block;text-align:center;margin-top:2rem;color:var(--primary-color);">&larr; Back to Notes</a>
-  </div>
-  <script src="/assets/js/pages/admin.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+  </header>
 
-    const dataMap = {
-        'sem1': [ 'CSE', 'EEE', 'Civil' ],
-        'sem2': [ 'CSE', 'EEE', 'Mechanical' ],
-        'sem3': [ 'CSE', 'Electrical', 'Mechanical' ]
-    };
+  <main class="admin-main">
+    <div class="admin-container">
+      <h1>Admin PDF Upload</h1>
+      <form id="uploadForm" class="admin-form" enctype="multipart/form-data" method="POST" action="/api/admin/upload">
+        <div class="form-field">
+          <label for="semester">Semester:</label>
+          <select id="semester" name="semester" required></select>
+        </div>
+        <div class="form-field">
+          <label for="branch">Branch:</label>
+          <select id="branch" name="branch" required></select>
+        </div>
+        <div class="form-field full-span">
+          <label for="subject">Subject:</label>
+          <select id="subject" name="subject" required></select>
+        </div>
+        <div class="form-field full-span">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-field full-span">
+          <label for="description">Description (Optional):</label>
+          <input type="text" id="description" name="description">
+        </div>
+        <div class="form-field full-span">
+          <label for="pdf">Document File:</label>
+          <input type="file" id="pdf" name="pdf" accept=".pdf,.docx,.doc,.txt,.pptx,.ppt" required>
+          <small class="file-note">Supported: PDF, DOCX, DOC, TXT, PPTX, PPT (auto-converts to PDF)</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </form>
 
-  
-    const subjectMap = {
-        'CSE': [ 'DSA', 'DBMS', 'OS' ],
-        'EEE': [ 'Circuits', 'DSP', 'Control Systems' ],
-        'Civil': [ 'Mechanics', 'Hydrology' ],
-        'Mechanical': [ 'Thermodynamics', 'Fluid Mechanics' ],
-        'Electrical': [ 'Power Systems', 'Machines' ]
-    };
+      <div id="result" role="status" aria-live="polite"></div>
 
-    const semesterSelect = document.getElementById('semester');
-    const branchSelect = document.getElementById('branch');
-    const subjectSelect = document.getElementById('subject');
-    const form = document.getElementById('uploadForm');
+      <section class="materials-list" id="materialsList" aria-live="polite">
+        <h2>Latest Materials for Selected Subject</h2>
+        <div id="materials"></div>
+      </section>
 
-    const populateSelect = (selectElement, items, defaultText) => {
-        selectElement.innerHTML = `<option value="" disabled selected>${defaultText}</option>`;
-        items.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item; 
-            option.textContent = item;
-            selectElement.appendChild(option);
-        });
-        selectElement.disabled = items.length === 0;
-    };
+      <a href="notes.html" class="back-link">&larr; Back to Notes</a>
+    </div>
+  </main>
 
-    const updateBranches = () => {
-        const selectedSem = semesterSelect.value;
-        const branches = dataMap[selectedSem] || [];
-        
-        populateSelect(branchSelect, branches, "Select Branch");
-        updateSubjects();
-    };
-
-    const updateSubjects = () => {
-        const selectedBranch = branchSelect.value;
-        const subjects = subjectMap[selectedBranch] || [];
-        populateSelect(subjectSelect, subjects, "Select Subject");
-      
-    };
-
-    const initForm = () => {
-        const semesters = [
-            { id: 'sem1', name: 'Semester 1' },
-            { id: 'sem2', name: 'Semester 2' },
-            { id: 'sem3', name: 'Semester 3' }
-        ];
-   
-        populateSelect(semesterSelect, semesters.map(s => s.id), "Select Semester");
-        branchSelect.disabled = true;
-        subjectSelect.disabled = true;
-    };
-    semesterSelect.addEventListener('change', updateBranches);
-    branchSelect.addEventListener('change', updateSubjects);
-    initForm();
-});
-  </script>
-<script src="../assets/js/components/back-to-top.js"></script>
+  <script src="../assets/js/components/navigation.js"></script>
+  <script src="../assets/js/components/footer.js"></script>
+  <script src="../assets/js/pages/admin.js"></script>
+  <script src="../assets/js/components/back-to-top.js"></script>
 </body>
-</html> 
-
+</html>

@@ -3,38 +3,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 :root {
-  --primary-color: #009dff;
-  --primary-glow: #009dffb3;
-  --accent-color: #00c8ff;
-  --bg-dark: #000;
-  --bg-darker: #000;
-  --text-light: #e6e6e6;
-  --text-gray: #b3b3b3;
-  --border-light: #333;
-  --card-bg: #111;
-  --card-hover: #222;
-  --shadow-color: rgba(0, 0, 0, 0.5);
+  --primary-glow: color-mix(in srgb, var(--primary-color) 70%, transparent);
+  --border-light: var(--border-color);
+  --card-hover: var(--card-bg-hover);
   --grid-pattern: radial-gradient(rgba(0, 157, 255, 0.1) 1px, transparent 1px);
-  --transition-speed: 0.3s;
 }
 
 /* Light theme variables */
 [data-theme="light"] {
-  --primary-color: #0066cc;
-  --primary-glow: #0066ccb3;
-  --accent-color: #0088dd;
-  --bg-dark: #ffffff;
-  --bg-darker: #f5f5f5;
-  --text-light: #1a1a1a;
-  --text-gray: #666666;
-  --border-light: #e0e0e0;
-  --card-bg: #ffffff;
-  --card-hover: #f0f0f0;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --primary-glow: color-mix(in srgb, var(--primary-color) 65%, transparent);
   --grid-pattern: radial-gradient(rgba(0, 102, 204, 0.05) 1px, transparent 1px);
 }
 [data-theme="light"] .tagline strong {
@@ -62,6 +42,15 @@ body {
   position: relative;
 }
 
+#offline-banner {
+  display: none;
+  background: #b91c1c;
+  color: #fff;
+  padding: 0.7rem 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -69,7 +58,8 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 10% 10%,
       rgba(255, 242, 0, 0.03) 0%,
       transparent 40%
@@ -85,7 +75,8 @@ body::before {
 }
 
 [data-theme="light"] body::before {
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 10% 10%,
       rgba(255, 242, 0, 0.08) 0%,
       transparent 40%
@@ -183,7 +174,9 @@ body::before {
   border-radius: 15px;
   padding: 25px;
   width: 280px;
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
 }
 [data-theme="light"] .highlight-card {
   border: 1px solid rgba(0, 0, 0, 0.6);
@@ -252,7 +245,8 @@ body::before {
   box-shadow: 0 0 30px rgba(0, 157, 255, 0.1);
   position: relative;
   overflow: hidden;
-  transition: background-color var(--transition-speed) ease,
+  transition:
+    background-color var(--transition-speed) ease,
     box-shadow var(--transition-speed) ease;
 }
 
@@ -270,7 +264,8 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 90% 10%,
       rgba(0, 157, 255, 0.1) 0%,
       transparent 40%
@@ -429,7 +424,8 @@ body::before {
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 30px rgba(0, 157, 255, 0.1);
-  transition: background-color var(--transition-speed) ease,
+  transition:
+    background-color var(--transition-speed) ease,
     box-shadow var(--transition-speed) ease;
 }
 
@@ -446,11 +442,8 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-      135deg,
-      rgba(0, 157, 255, 0.05) 0%,
-      transparent 50%
-    ),
+  background:
+    linear-gradient(135deg, rgba(0, 157, 255, 0.05) 0%, transparent 50%),
     radial-gradient(
       circle at 80% 80%,
       rgba(0, 229, 255, 0.05) 0%,
@@ -526,6 +519,30 @@ body::before {
   transition: all 0.3s ease;
 }
 
+.faq-question {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: inherit;
+}
+
+.faq-question::after {
+  content: "+";
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-left: 0.8rem;
+}
+
+.faq-item.active .faq-question::after {
+  content: "−";
+}
+
 .faq-item:hover .faq-question h3 {
   transform: translateX(5px);
 }
@@ -533,12 +550,20 @@ body::before {
 .faq-answer {
   color: var(--text-light);
   line-height: 1.6;
-  opacity: 0.8;
-  transition: all 0.3s ease;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.3s ease,
+    opacity 0.3s ease,
+    padding-top 0.3s ease;
 }
 
+.faq-item.active .faq-answer,
 .faq-item:hover .faq-answer {
   opacity: 1;
+  max-height: 420px;
+  padding-top: 0.7rem;
 }
 
 .faq-answer p {
@@ -674,7 +699,7 @@ body::before {
 }
 
 .testimonial:hover {
-  transform: translateY(-10px) ;
+  transform: translateY(-10px);
   box-shadow: 0 15px 30px rgba(0, 157, 255, 0.15);
   border-color: rgba(0, 157, 255, 0.3);
 }

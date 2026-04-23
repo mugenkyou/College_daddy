@@ -1,191 +1,163 @@
-// Navigation utility functions
-const navUtils = {
-    /**
-     * Safely query DOM elements
-     * @param {string} selector - CSS selector
-     * @param {Element} [context=document] - Context to search within
-     * @returns {Element|null}
-     */
-    querySelector(selector, context = document) {
-        try {
-            return context.querySelector(selector);
-        } catch (error) {
-            console.error(`Error querying selector "${selector}":`, error);
-            return null;
-        }
-    }
-};
+(() => {
+  const SELECTORS = {
+    menuButton: ".menu-button",
+    navLinks: ".nav-links",
+    navLinksItems: ".nav-link",
+    themeToggle: ".theme-toggle",
+    themeIcon: ".theme-toggle .theme-icon",
+  };
 
-// Mobile menu handler
-class MobileMenu {
+  class NavigationController {
     constructor() {
-        this.menuButton = navUtils.querySelector('.menu-button');
-        this.navLinks = navUtils.querySelector('.nav-links');
-        this.initialized = false;
-        this.init();
+      this.menuButton = document.querySelector(SELECTORS.menuButton);
+      this.navLinks = document.querySelector(SELECTORS.navLinks);
+      this.themeToggle = document.querySelector(SELECTORS.themeToggle);
+      this.overlay = null;
+      this.theme = this.getStoredTheme() || "dark";
     }
 
     init() {
-        if (this.menuButton && this.navLinks && !this.initialized) {
-            // Remove any existing listeners to prevent duplicates
-            const newMenuButton = this.menuButton.cloneNode(true);
-            this.menuButton.parentNode.replaceChild(newMenuButton, this.menuButton);
-            this.menuButton = newMenuButton;
-            
-            // Add toggle menu listener
-            this.menuButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                this.toggleMenu();
-            });
-            
-            // Create overlay if it doesn't exist
-            let overlay = document.querySelector('.nav-overlay');
-            if (!overlay) {
-                overlay = document.createElement('div');
-                overlay.classList.add('nav-overlay');
-                document.body.appendChild(overlay);
-            }
-            this.overlay = overlay;
-            
-            // Close menu when clicking overlay
-            this.overlay.addEventListener('click', () => {
-                if (this.navLinks.classList.contains('active')) {
-                    this.toggleMenu();
-                }
-            });
-            
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (this.navLinks.classList.contains('active') && 
-                    !this.navLinks.contains(e.target) && 
-                    !this.menuButton.contains(e.target)) {
-                    this.toggleMenu();
-                }
-            });
-
-            // Add ESC key handler to close menu
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && this.navLinks.classList.contains('active')) {
-                    this.toggleMenu();
-                }
-            });
-            
-            // Set as initialized
-            this.initialized = true;
-            
-            console.log('Mobile menu initialized successfully');
-        } else {
-            console.error('Menu elements not found or already initialized');
-        }
-    }
-
-    toggleMenu() {
-        console.log('Toggling menu');
-        if (this.navLinks.classList.contains('active')) {
-            this.navLinks.classList.remove('active');
-            this.overlay.classList.remove('active');
-            this.menuButton.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-        } else {
-            this.navLinks.classList.add('active');
-            this.overlay.classList.add('active');
-            this.menuButton.setAttribute('aria-expanded', 'true');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
-        }
-    }
-}
-
-// Theme Manager
-class ThemeManager {
-    constructor() {
-        this.theme = this.getStoredTheme() || 'dark';
-        this.init();
-    }
-
-    init() {
-        // Apply stored theme immediately to prevent flash
-        this.applyTheme(this.theme);
-        
-        // Wait for DOM to be ready before setting up button
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.setupToggleButton());
-        } else {
-            this.setupToggleButton();
-        }
-    }
-
-    setupToggleButton() {
-        // Set up theme toggle button
-        const themeToggle = document.querySelector('.theme-toggle');
-        if (themeToggle) {
-            // Add click listener
-            themeToggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                this.toggleTheme();
-            });
-            this.updateToggleIcon();
-        }
+      this.applyTheme(this.theme);
+      this.initThemeToggle();
+      this.initMobileMenu();
+      this.markActiveLink();
     }
 
     getStoredTheme() {
-        try {
-            return localStorage.getItem('theme');
-        } catch (e) {
-            console.warn('localStorage not available:', e);
-            return null;
-        }
+      try {
+        return localStorage.getItem("theme");
+      } catch (_err) {
+        return null;
+      }
     }
 
     setStoredTheme(theme) {
-        try {
-            localStorage.setItem('theme', theme);
-        } catch (e) {
-            console.warn('localStorage not available:', e);
-        }
+      try {
+        localStorage.setItem("theme", theme);
+      } catch (_err) {
+        // Ignore write errors from restricted contexts.
+      }
     }
 
     applyTheme(theme) {
-        this.theme = theme;
-        document.documentElement.setAttribute('data-theme', theme);
-        this.setStoredTheme(theme);
-        this.updateToggleIcon();
+      this.theme = theme;
+      document.documentElement.setAttribute("data-theme", theme);
+      this.setStoredTheme(theme);
+      this.updateThemeIcon();
     }
 
-    toggleTheme() {
-        const newTheme = this.theme === 'dark' ? 'light' : 'dark';
-        this.applyTheme(newTheme);
+    updateThemeIcon() {
+      const themeIcon = document.querySelector(SELECTORS.themeIcon);
+      if (!themeIcon) {
+        return;
+      }
+      themeIcon.textContent = this.theme === "dark" ? "🌙" : "☀️";
     }
 
-    updateToggleIcon() {
-        const themeIcon = document.querySelector('.theme-toggle .theme-icon');
-        if (themeIcon) {
-            themeIcon.textContent = this.theme === 'dark' ? '🌙' : '☀️';
+    initThemeToggle() {
+      if (!this.themeToggle) {
+        return;
+      }
+      this.themeToggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        const nextTheme = this.theme === "dark" ? "light" : "dark";
+        this.applyTheme(nextTheme);
+      });
+    }
+
+    initMobileMenu() {
+      if (!this.menuButton || !this.navLinks) {
+        return;
+      }
+
+      this.menuButton.setAttribute("aria-expanded", "false");
+      this.navLinks.setAttribute("id", "site-navigation");
+      this.menuButton.setAttribute("aria-controls", "site-navigation");
+
+      this.overlay = document.querySelector(".nav-overlay");
+      if (!this.overlay) {
+        this.overlay = document.createElement("div");
+        this.overlay.className = "nav-overlay";
+        document.body.appendChild(this.overlay);
+      }
+
+      this.menuButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        this.toggleMenu();
+      });
+
+      this.overlay.addEventListener("click", () => this.closeMenu());
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          this.closeMenu();
         }
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 960) {
+          this.closeMenu();
+        }
+      });
+
+      this.navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => this.closeMenu());
+      });
     }
-}
 
-// Initialize navigation when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize theme manager first
-    const themeManager = new ThemeManager();
-    
-    // Wait a moment to ensure other scripts have run
-    setTimeout(() => {
-        console.log('Initializing mobile menu');
-        new MobileMenu();
-        
-        // Set active class for current page
-        const currentPath = window.location.pathname;
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href && currentPath.includes(href)) {
-                link.classList.add('active');
-            }
-        });
-    }, 100);
-}); 
+    toggleMenu() {
+      if (!this.navLinks) {
+        return;
+      }
+      const isActive = this.navLinks.classList.toggle("active");
+      this.overlay?.classList.toggle("active", isActive);
+      this.menuButton?.setAttribute(
+        "aria-expanded",
+        isActive ? "true" : "false",
+      );
+      document.body.style.overflow = isActive ? "hidden" : "";
+    }
 
+    closeMenu() {
+      if (!this.navLinks) {
+        return;
+      }
+      this.navLinks.classList.remove("active");
+      this.overlay?.classList.remove("active");
+      this.menuButton?.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    }
+
+    markActiveLink() {
+      const navLinks = document.querySelectorAll(SELECTORS.navLinksItems);
+      if (!navLinks.length) {
+        return;
+      }
+
+      const normalize = (value) =>
+        value
+          .toLowerCase()
+          .replace(/\/index\.html$/, "/")
+          .replace(/\/$/, "") || "/";
+
+      const current = normalize(window.location.pathname);
+
+      navLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (!href || href.startsWith("#")) {
+          return;
+        }
+        const path = normalize(new URL(href, window.location.href).pathname);
+        if (path === current) {
+          link.classList.add("active");
+          link.setAttribute("aria-current", "page");
+        }
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const navigationController = new NavigationController();
+    navigationController.init();
+  });
+})();

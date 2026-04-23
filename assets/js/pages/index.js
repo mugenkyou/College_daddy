@@ -1,198 +1,109 @@
-// Utility function to detect mobile devices
-function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
-// Initialize mobile menu
-function initMobileMenu() {
-    const menuButton = document.querySelector('.menu-button');
-    const navLinks = document.querySelector('.nav-links');
-
-    if (menuButton && navLinks) {
-        menuButton.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (navLinks.classList.contains('active') && 
-                !e.target.closest('.nav-links') && 
-                !e.target.closest('.menu-button')) {
-                navLinks.classList.remove('active');
-            }
-        });
-    }
-}
-
-// Initialize feature cards
 function initFeatureCards() {
-    const cards = document.querySelectorAll('.feature-card');
-    const isMobileDevice = isMobile();
-    
-    // Initializing AOS (scroll fade-up animations)
-    AOS.init({
-        offset:120,
-        duration: 800, // smooth fade duration
-        easing: 'ease-in-out',
-        once: true,
+  const cards = document.querySelectorAll(".feature-card");
+
+  if (window.AOS && typeof window.AOS.init === "function") {
+    window.AOS.init({
+      offset: 120,
+      duration: 700,
+      easing: "ease-in-out",
+      once: true,
     });
+  }
 
-    cards.forEach(card => {
-        if (isMobileDevice) {
-            // Mobile touch handling (unchanged from previous version)
-            let touchStartY = 0;
-            let touchEndY = 0;
-            const MIN_SWIPE_DISTANCE = 10;
-            let isScrolling = false;
-            let touchStartTime = 0;
+  cards.forEach((card) => {
+    card.setAttribute("role", "link");
+    card.setAttribute("tabindex", "0");
 
-            card.addEventListener('touchstart', (e) => {
-                touchStartY = e.touches[0].clientY;
-                touchStartTime = Date.now();
-                isScrolling = false;
-                
-                // Add pressed state
-                card.style.transform = 'scale(0.98)';
-                card.style.backgroundColor = '#111111';
-            });
+    const navigate = () => {
+      const url = card.getAttribute("data-url");
+      if (url) {
+        window.location.href = url;
+      }
+    };
 
-            card.addEventListener('touchmove', (e) => {
-                touchEndY = e.touches[0].clientY;
-                
-                // Check if user is scrolling
-                if (Math.abs(touchEndY - touchStartY) > MIN_SWIPE_DISTANCE) {
-                    isScrolling = true;
-                    // Remove pressed state
-                    card.style.transform = 'scale(1)';
-                    card.style.backgroundColor = '#000000';
-                }
-            });
-
-            card.addEventListener('touchend', (e) => {
-                const touchEndTime = Date.now();
-                const touchDuration = touchEndTime - touchStartTime;
-                
-                // Reset styles
-                card.style.transform = 'scale(1)';
-                card.style.backgroundColor = '#000000';
-
-                // Navigate only if it was a tap (not a scroll) and touch duration was short
-                if (!isScrolling && touchDuration < 300) {
-                    const url = card.getAttribute('data-url');
-                    if (url) {
-                        window.location.href = url;
-                    }
-                }
-            });
-        } else {
-            // Desktop click handling to navigate in same tab
-            card.addEventListener('click', () => {
-                const url = card.getAttribute('data-url');
-                if (url) {
-                    window.location.href = url;
-                }
-            });
-
-            // Desktop hover effects
-            card.addEventListener('mouseover', () => {
-                card.style.transform = 'translateY(-5px)';
-                card.style.boxShadow = '0 5px 15px rgba(0, 157, 255, 0.3)';
-                card.style.backgroundColor = '#111111';
-            });
-
-            card.addEventListener('mouseout', () => {
-                card.style.transform = 'translateY(0)';
-                card.style.boxShadow = 'none';
-                card.style.backgroundColor = '#000000';
-            });
-        }
+    card.addEventListener("click", navigate);
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        navigate();
+      }
     });
+  });
 }
 
-// Initialize ripple effect for feedback link
-function initFeedbackLinkRipple() {
-    const feedbackLink = document.querySelector('.feedback-link');
-     if (!feedbackLink) return;
+function initTypingAnimation() {
+  const target = document.getElementById("changingText");
+  if (!target) {
+    return;
+  }
 
-    // Avoid duplicate listeners
-    if (feedbackLink.dataset.listenerAdded === 'true') return;
-    feedbackLink.dataset.listenerAdded = 'true';
+  const words = ["CGPA Calculator", "Study Timer", "Career Roadmaps"];
+  let wordIndex = 0;
+  let letterIndex = 0;
 
-    console.log("Feedback listener added!");
+  const type = () => {
+    const currentWord = words[wordIndex];
+    letterIndex += 1;
+    target.textContent = currentWord.slice(0, letterIndex);
 
-
-    feedbackLink.addEventListener('click', (e) => {
-        const ripple = document.createElement('div');
-        ripple.style.position = 'absolute';
-        ripple.style.borderRadius = '50%';
-        ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-        ripple.style.width = '20px';
-        ripple.style.height = '20px';
-        ripple.style.transform = 'translate(-50%, -50%)';
-        ripple.style.animation = 'ripple 0.6s linear';
-        ripple.style.left = `${e.clientX - e.target.offsetLeft}px`;
-        ripple.style.top = `${e.clientY - e.target.offsetTop}px`;
-
-        feedbackLink.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-    });
-
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes ripple {
-            0% {
-                width: 0;
-                height: 0;
-                opacity: 0.5;
-            }
-            100% {
-                width: 200px;
-                height: 200px;
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initMobileMenu();
-    initFeatureCards();
-    initFeedbackLinkRipple();
-});
-
-// Handle window resize
-window.addEventListener('resize', () => {
-    const navLinks = document.querySelector('.nav-links');
-    if (window.innerWidth > 768) {
-        navLinks.classList.remove('active');
+    if (letterIndex === currentWord.length) {
+      setTimeout(() => {
+        letterIndex = 0;
+        wordIndex = (wordIndex + 1) % words.length;
+        type();
+      }, 1300);
+      return;
     }
-});
 
-// text animation 
-const texts = ["CGPA Calculator", "Study Planner", "Expert Roadmaps"];
-let count = 0;
-let index = 0;
-let currentText = "";
-let letter = "";
+    setTimeout(type, 95);
+  };
 
-function type() {
-  if(count === texts.length){
-    count = 0;
-  }
-  currentText = texts[count];
-  letter = currentText.slice(0 , ++index);
-
-  document.getElementById("changingText").textContent = letter;
-
-  if(letter.length === currentText.length){
-    index = 0;
-    count++;
-    setTimeout(type , 1500); // pause before next text
-  }else{
-    setTimeout(type , 120); //typing speed
-  }
+  type();
 }
 
-type(); 
+function initFaqAccessibility() {
+  const questions = document.querySelectorAll(".faq-question");
+
+  questions.forEach((question) => {
+    if (question.tagName.toLowerCase() === "button") {
+      return;
+    }
+
+    question.setAttribute("role", "button");
+    question.setAttribute("tabindex", "0");
+    question.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        question.click();
+      }
+    });
+  });
+}
+
+function initFaqToggle() {
+  const faqItems = document.querySelectorAll(".faq-item");
+
+  faqItems.forEach((item) => {
+    const trigger = item.querySelector(".faq-question");
+    if (!trigger) {
+      return;
+    }
+
+    trigger.addEventListener("click", () => {
+      faqItems.forEach((otherItem) => {
+        if (otherItem !== item) {
+          otherItem.classList.remove("active");
+        }
+      });
+
+      item.classList.toggle("active");
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initFeatureCards();
+  initTypingAnimation();
+  initFaqAccessibility();
+  initFaqToggle();
+});

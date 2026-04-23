@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderMaterials() {
     const subject = getSelectedSubject();
     if (!subject || !subject.materials || subject.materials.length === 0) {
-      materialsDiv.innerHTML = '<div style="color:var(--text-tertiary);">No materials uploaded yet.</div>';
+      materialsDiv.innerHTML = '<div class="empty-materials">No materials uploaded yet.</div>';
       return;
     }
     materialsDiv.innerHTML = subject.materials.slice(-5).reverse().map(mat => `
