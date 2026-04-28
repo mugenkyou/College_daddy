@@ -128,6 +128,9 @@ function displayMaterials(semesterId, branchId, subjectId) {
                    target="_blank" class="view-btn">
                     View PDF
                 </a>
+                <a href="chat.html?path=${encodeURIComponent(filePath)}&title=${encodeURIComponent(material.title)}" class="chat-btn">
+                    <i class="fas fa-robot"></i> Chat
+                </a>
                 <a href="${absoluteFilePath}" download="${safeFileName}" class="download-btn">
                     Download
                 </a>

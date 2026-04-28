@@ -8,3 +8,9 @@ reportlab==4.0.4
 python-pptx==0.6.21
 openpyxl==3.1.2
 comtypes==1.2.0
+langchain>=0.1.13
+langchain-google-genai>=1.0.1
+langchain-community>=0.0.29
+PyPDF2>=3.0.1
+faiss-cpu>=1.8.0
+python-dotenv>=1.0.1
