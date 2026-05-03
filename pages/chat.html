@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>College Daddy - Chat with PDF</title>
+    <link rel="stylesheet" href="../assets/css/navigation.css" />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+    <link rel="stylesheet" href="../assets/css/chat.css" />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <script>
+      (function () {
+        try {
+          const theme = localStorage.getItem("theme") || "dark";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="nav-container">
+        <a href="../index.html" class="logo" aria-label="College Daddy Home">
+          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+          <span>College Daddy</span>
+        </a>
+        <div class="nav-actions">
+          <button
+            class="menu-button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+        </div>
+        <nav class="nav-links">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
+          <a href="iacal.html" class="nav-link">IA Calculator</a>
+          <a href="pomodoro.html" class="nav-link">Study Timer</a>
+          <a href="notes.html" class="nav-link active">Notes</a>
+          <a href="roadmap.html" class="nav-link">Roadmap</a>
+          <a href="events.html" class="nav-link">Events</a>
+          <button
+            class="theme-toggle"
+            aria-label="Toggle dark/light theme"
+            title="Toggle theme"
+          >
+            <span class="theme-icon">🌙</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="chat-container">
+      <div class="chat-header">
+        <button class="back-btn" onclick="window.history.back()">
+          <i class="fas fa-arrow-left"></i> Back to Notes
+        </button>
+        <h2 id="pdf-title">Loading PDF...</h2>
+      </div>
+
+      <div class="chat-box" id="chat-box">
+        <div class="message system-message" id="init-message">
+          <i class="fas fa-spinner fa-spin"></i> Initializing AI model with your document... This may take a moment.
+        </div>
+      </div>
+
+      <div class="chat-input-container">
+        <form id="chat-form">
+          <input 
+            type="text" 
+            id="chat-input" 
+            placeholder="Ask a question about this document..." 
+            autocomplete="off"
+            disabled
+          />
+          <button type="submit" id="send-btn" disabled>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <script src="../assets/js/components/navigation.js" defer></script>
+    <script src="../assets/js/pages/chat.js"></script>
+  </body>
+</html>

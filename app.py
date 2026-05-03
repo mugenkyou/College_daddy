@@ -9,6 +9,7 @@ import logging
 import subprocess
 import threading
 import atexit
+from utils.chatbot import PDFChatbot
 
 app = Flask(__name__, static_folder='assets', template_folder='pages')
 CORS(app)
@@ -168,6 +169,47 @@ def download():
 @app.route('/pages/<path:filename>')
 def serve_pages(filename):
     return send_from_directory('pages', filename)
+
+@app.route('/api/chat/init', methods=['POST'])
+def chat_init():
+    data = request.get_json()
+    pdf_path_req = data.get('path')
+    
+    if not pdf_path_req:
+        return jsonify({'success': False, 'message': 'PDF path is required.'}), 400
+        
+    # Ensure it's a relative path from app root
+    pdf_path = pdf_path_req.lstrip('/')
+    
+    if not os.path.exists(pdf_path):
+        return jsonify({'success': False, 'message': f'PDF file not found: {pdf_path}'}), 404
+        
+    try:
+        chatbot = PDFChatbot.get_instance(pdf_path)
+        chatbot.initialize()
+        return jsonify({'success': True, 'message': 'Chatbot initialized successfully.'})
+    except Exception as e:
+        logger.error(f"Chatbot init error: {str(e)}")
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+@app.route('/api/chat/ask', methods=['POST'])
+def chat_ask():
+    data = request.get_json()
+    pdf_path_req = data.get('path')
+    question = data.get('question')
+    
+    if not pdf_path_req or not question:
+        return jsonify({'success': False, 'message': 'Path and question are required.'}), 400
+        
+    pdf_path = pdf_path_req.lstrip('/')
+    
+    try:
+        chatbot = PDFChatbot.get_instance(pdf_path)
+        answer = chatbot.ask(question)
+        return jsonify({'success': True, 'answer': answer})
+    except Exception as e:
+        logger.error(f"Chatbot ask error: {str(e)}")
+        return jsonify({'success': False, 'message': str(e)}), 500
 
 @app.route('/api/admin/delete-material', methods=['POST'])
 def delete_material():
