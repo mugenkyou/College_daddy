@@ -373,16 +373,34 @@ class PomodoroTimer {
         this.quizSummary.style.display = 'none';
         
         try {
-            const response = await fetch('/api/quiz/generate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    topic: finalTopic,
-                    count: 5
-                })
-            });
+            const fileInput = document.getElementById('quiz-notes');
+            const file = fileInput && fileInput.files.length > 0 ? fileInput.files[0] : null;
+
+            let fetchOptions = {};
+            if (file) {
+                const formData = new FormData();
+                formData.append('topic', finalTopic);
+                formData.append('count', 5);
+                formData.append('file', file);
+                
+                fetchOptions = {
+                    method: 'POST',
+                    body: formData
+                };
+            } else {
+                fetchOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        topic: finalTopic,
+                        count: 5
+                    })
+                };
+            }
+
+            const response = await fetch('/api/quiz/generate', fetchOptions);
             
             const data = await response.json();
             

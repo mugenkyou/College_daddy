@@ -677,6 +677,8 @@ body > header .fullscreen-btn:active {
         top: 64px;
         right: 20px;
         width: 300px;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
         background: var(--card-bg);
         border-radius: 10px;
         padding: 2rem;

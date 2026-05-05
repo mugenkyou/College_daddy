@@ -272,9 +272,15 @@ def delete_material():
 
 @app.route('/api/quiz/generate', methods=['POST'])
 def generate_quiz():
-    data = request.get_json()
-    topic = data.get('topic', 'General Knowledge')
-    count = data.get('count', 5)
+    if request.is_json:
+        data = request.get_json()
+        topic = data.get('topic', 'General Knowledge')
+        count = data.get('count', 5)
+        file = None
+    else:
+        topic = request.form.get('topic', 'General Knowledge')
+        count = int(request.form.get('count', 5))
+        file = request.files.get('file')
     
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key:
@@ -283,17 +289,55 @@ def generate_quiz():
     try:
         client = Groq(api_key=api_key)
         
-        prompt = f"""
-        Generate a {count}-question multiple choice quiz about "{topic}".
-        Return the result strictly as a valid JSON array of objects. Do not include any markdown formatting, backticks, or other text outside the JSON array.
-        Each object must have the following exact structure:
-        {{
-            "question": "The question text",
-            "options": ["Option A", "Option B", "Option C", "Option D"],
-            "correctAnswer": 0,  // The integer index (0-3) of the correct option in the options array
-            "explanation": "A short explanation of why the answer is correct"
-        }}
-        """
+        context_text = ""
+        if file:
+            import PyPDF2
+            if file.filename.endswith('.pdf'):
+                try:
+                    pdf_reader = PyPDF2.PdfReader(file)
+                    for page in pdf_reader.pages:
+                        page_text = page.extract_text()
+                        if page_text:
+                            context_text += page_text + "\n"
+                    context_text = context_text[:15000]
+                except Exception as e:
+                    logger.error(f"Error reading PDF for quiz: {e}")
+            elif file.filename.endswith('.txt'):
+                try:
+                    context_text = file.read().decode('utf-8')[:15000]
+                except Exception as e:
+                    logger.error(f"Error reading TXT for quiz: {e}")
+
+        if context_text:
+            prompt = f"""
+            Generate a {count}-question multiple choice quiz strictly based on the following context document. 
+            The general topic is "{topic}", but you must prioritize the content in the context document.
+            Do not include information outside of the context.
+            
+            Context Document:
+            {context_text}
+            
+            Return the result strictly as a valid JSON array of objects. Do not include any markdown formatting, backticks, or other text outside the JSON array.
+            Each object must have the following exact structure:
+            {{
+                "question": "The question text",
+                "options": ["Option A", "Option B", "Option C", "Option D"],
+                "correctAnswer": 0,  // The integer index (0-3) of the correct option in the options array
+                "explanation": "A short explanation of why the answer is correct based on the context document"
+            }}
+            """
+        else:
+            prompt = f"""
+            Generate a {count}-question multiple choice quiz about "{topic}".
+            Return the result strictly as a valid JSON array of objects. Do not include any markdown formatting, backticks, or other text outside the JSON array.
+            Each object must have the following exact structure:
+            {{
+                "question": "The question text",
+                "options": ["Option A", "Option B", "Option C", "Option D"],
+                "correctAnswer": 0,  // The integer index (0-3) of the correct option in the options array
+                "explanation": "A short explanation of why the answer is correct"
+            }}
+            """
         
         chat_completion = client.chat.completions.create(
             messages=[

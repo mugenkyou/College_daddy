@@ -412,6 +412,11 @@
                         <label class="settings-label">Study Topic (For Quiz)</label>
                         <input type="text" class="settings-input" id="study-topic" placeholder="e.g. Data Structures, React.js" value="General Knowledge">
                     </div>
+                    <div class="settings-group" style="grid-column: 1 / -1;">
+                        <label class="settings-label">Upload Notes (For Quiz Context)</label>
+                        <input type="file" class="settings-input" id="quiz-notes" accept=".pdf,.txt" style="padding: 0.5rem; background: var(--surface);">
+                        <small style="color: var(--text-muted); font-size: 0.8rem; margin-top: 5px; display: block;">If uploaded, the AI will strictly use this document to generate the quiz.</small>
+                    </div>
                 </div>
                 <button class="btn btn-secondary" id="apply-settings">Apply Settings</button>
             </div>
