@@ -71,7 +71,19 @@ pip install flask flask-cors werkzeug
 pip install -r requirements.txt
 ```
 
-### 2. Run the Dashboard
+### 2. Environment Setup (For AI Features)
+
+To use the AI-powered features like the Pomodoro Post-Session Quiz or PDF Chatbot, you must set up your environment variables.
+
+1. Create a `.env` file in the root directory.
+2. Add your Groq API key (required for generating the Pomodoro quiz from your notes) and Google Gemini API key (for the chatbot):
+   ```env
+   GROQ_API_KEY="your_groq_api_key_here"
+   GEMINI_API_KEY="your_gemini_api_key_here"
+   ```
+   *Note: You can get a free Groq API key from the [Groq Console](https://console.groq.com/) and a Gemini key from [Google AI Studio](https://aistudio.google.com/).*
+
+### 3. Run the Dashboard
 
 ```bash
 # Start the Flask application
