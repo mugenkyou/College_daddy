@@ -2,9 +2,9 @@ import os
 import PyPDF2
 from langchain_community.vectorstores import FAISS
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.chains.question_answering import load_qa_chain
-from langchain.prompts import PromptTemplate
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+from langchain_core.prompts import PromptTemplate
 from dotenv import load_dotenv
 import logging
 
@@ -93,7 +93,7 @@ class PDFChatbot:
         """
         
         prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
-        self.chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
+        self.chain = prompt | model
         
         return True
 
@@ -104,11 +104,9 @@ class PDFChatbot:
             
         # Retrieve relevant chunks
         docs = self.vector_store.similarity_search(question, k=4)
+        context = "\n\n".join([doc.page_content for doc in docs])
         
         # Get answer from chain
-        response = self.chain.invoke(
-            {"input_documents": docs, "question": question},
-            return_only_outputs=True
-        )
+        response = self.chain.invoke({"context": context, "question": question})
         
-        return response.get("output_text", "I'm sorry, I couldn't generate a response.")
+        return getattr(response, "content", "I'm sorry, I couldn't generate a response.")

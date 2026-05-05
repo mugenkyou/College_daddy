@@ -10,6 +10,10 @@ import subprocess
 import threading
 import atexit
 from utils.chatbot import PDFChatbot
+from dotenv import load_dotenv
+from groq import Groq
+
+load_dotenv()
 
 app = Flask(__name__, static_folder='assets', template_folder='pages')
 CORS(app)
@@ -265,6 +269,73 @@ def delete_material():
     except Exception as e:
         logger.error(f"Error deleting material: {str(e)}")
         return jsonify({'success': False, 'message': f'Error: {str(e)}'}), 500
+
+@app.route('/api/quiz/generate', methods=['POST'])
+def generate_quiz():
+    data = request.get_json()
+    topic = data.get('topic', 'General Knowledge')
+    count = data.get('count', 5)
+    
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        return jsonify({'success': False, 'message': 'GROQ_API_KEY is not set in environment.'}), 500
+        
+    try:
+        client = Groq(api_key=api_key)
+        
+        prompt = f"""
+        Generate a {count}-question multiple choice quiz about "{topic}".
+        Return the result strictly as a valid JSON array of objects. Do not include any markdown formatting, backticks, or other text outside the JSON array.
+        Each object must have the following exact structure:
+        {{
+            "question": "The question text",
+            "options": ["Option A", "Option B", "Option C", "Option D"],
+            "correctAnswer": 0,  // The integer index (0-3) of the correct option in the options array
+            "explanation": "A short explanation of why the answer is correct"
+        }}
+        """
+        
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a helpful quiz generator. Always respond with raw valid JSON."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            model="llama-3.1-8b-instant",
+            temperature=0.5,
+            max_tokens=1024,
+        )
+        
+        response_text = chat_completion.choices[0].message.content.strip()
+        
+        # In case the model still outputs markdown backticks, strip them
+        if response_text.startswith("```json"):
+            response_text = response_text[7:]
+        if response_text.startswith("```"):
+            response_text = response_text[3:]
+        if response_text.endswith("```"):
+            response_text = response_text[:-3]
+            
+        response_text = response_text.strip()
+        
+        quiz_data = json.loads(response_text)
+        
+        return jsonify({
+            'success': True,
+            'quiz': quiz_data
+        })
+        
+    except json.JSONDecodeError as e:
+        logger.error(f"Failed to parse Groq response as JSON: {response_text}")
+        return jsonify({'success': False, 'message': 'Failed to generate a valid quiz format. Please try again.'}), 500
+    except Exception as e:
+        logger.error(f"Error generating quiz: {str(e)}")
+        return jsonify({'success': False, 'message': f'Error generating quiz: {str(e)}'}), 500
 
 @app.route('/assets/<path:filename>')
 def serve_assets(filename):

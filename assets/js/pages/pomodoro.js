@@ -52,6 +52,27 @@ class PomodoroTimer {
         // Notification element
         this.notification = document.getElementById('notification');
 
+        // Quiz elements
+        this.studyTopicInput = document.getElementById('study-topic');
+        this.quizModal = document.getElementById('quiz-modal');
+        this.quizLoading = document.getElementById('quiz-loading');
+        this.quizContainer = document.getElementById('quiz-container');
+        this.quizSummary = document.getElementById('quiz-summary');
+        
+        this.quizQuestion = document.getElementById('quiz-question');
+        this.quizOptions = document.getElementById('quiz-options');
+        this.quizProgress = document.getElementById('quiz-progress');
+        
+        this.skipQuizBtn = document.getElementById('skip-quiz');
+        this.nextQuestionBtn = document.getElementById('next-question');
+        this.finishQuizBtn = document.getElementById('finish-quiz');
+
+        // Quiz State
+        this.quizData = [];
+        this.currentQuestionIndex = 0;
+        this.userAnswers = [];
+        this.pendingPhase = null;
+
         // Initialize progress ring
         if (this.progressRing) {
             this.circumference = 2 * Math.PI * parseFloat(this.progressRing.getAttribute('r'));
@@ -101,6 +122,17 @@ class PomodoroTimer {
                 this.settingsPanel.classList.remove('show');
             }
         });
+
+        // Quiz Event Listeners
+        if (this.skipQuizBtn) {
+            this.skipQuizBtn.addEventListener('click', () => this.endQuiz());
+        }
+        if (this.nextQuestionBtn) {
+            this.nextQuestionBtn.addEventListener('click', () => this.handleNextQuestion());
+        }
+        if (this.finishQuizBtn) {
+            this.finishQuizBtn.addEventListener('click', () => this.endQuiz());
+        }
 
         // Save settings on inputs change
         const settingsInputs = [this.workDurationInput, this.shortBreakInput, this.longBreakInput, this.pomodorosCountInput];
@@ -288,23 +320,178 @@ class PomodoroTimer {
             this.saveProgressData();
 
             if (this.completedPomodoros % this.settings.pomodorosUntilLongBreak === 0) {
-                this.currentPhase = 'longBreak';
-                this.remainingTime = this.settings.longBreak * 60 * 1000;
+                this.pendingPhase = 'longBreak';
             } else {
-                this.currentPhase = 'shortBreak';
-                this.remainingTime = this.settings.shortBreak * 60 * 1000;
+                this.pendingPhase = 'shortBreak';
             }
+            
+            // Start quiz instead of going immediately to break
+            this.startQuiz();
+            return;
         } else {
             this.currentPhase = 'work';
             this.remainingTime = this.settings.workDuration * 60 * 1000;
         }
 
+        this.applyPhaseChange();
+    }
+
+    applyPhaseChange() {
+        if (this.pendingPhase) {
+            this.currentPhase = this.pendingPhase;
+            this.remainingTime = this.settings[this.pendingPhase] * 60 * 1000;
+            this.pendingPhase = null;
+        }
+        
         this.initialTime = this.remainingTime;
         this.updateDisplay();
         this.updateProgress(1);
         this.updatePhaseDisplay();
         this.playNotificationSound();
         this.showNotification(`${this.currentPhase === 'work' ? 'Work Time' : 'Break Time'} - Let's go!`);
+    }
+
+    // QUIZ LOGIC
+    async startQuiz() {
+        if (!this.quizModal) {
+            this.applyPhaseChange();
+            return;
+        }
+        
+        const topic = this.studyTopicInput ? this.studyTopicInput.value.trim() : 'General Knowledge';
+        const finalTopic = topic === '' ? 'General Knowledge' : topic;
+        
+        // Reset quiz state
+        this.quizData = [];
+        this.currentQuestionIndex = 0;
+        this.userAnswers = [];
+        
+        // UI changes
+        this.quizModal.classList.add('show');
+        this.quizLoading.style.display = 'flex';
+        this.quizContainer.style.display = 'none';
+        this.quizSummary.style.display = 'none';
+        
+        try {
+            const response = await fetch('/api/quiz/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    topic: finalTopic,
+                    count: 5
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success && data.quiz && data.quiz.length > 0) {
+                this.quizData = data.quiz;
+                this.quizLoading.style.display = 'none';
+                this.quizContainer.style.display = 'block';
+                this.renderQuestion();
+            } else {
+                this.showNotification(data.message || 'Failed to generate quiz. Skipping to break.');
+                this.endQuiz();
+            }
+        } catch (error) {
+            console.error('Quiz generation error:', error);
+            this.showNotification('Network error while generating quiz.');
+            this.endQuiz();
+        }
+    }
+    
+    renderQuestion() {
+        if (this.currentQuestionIndex >= this.quizData.length) {
+            this.showQuizSummary();
+            return;
+        }
+        
+        const q = this.quizData[this.currentQuestionIndex];
+        this.quizProgress.textContent = `Question ${this.currentQuestionIndex + 1}/${this.quizData.length}`;
+        this.quizQuestion.textContent = q.question;
+        
+        this.quizOptions.innerHTML = '';
+        this.nextQuestionBtn.disabled = true;
+        
+        q.options.forEach((optText, idx) => {
+            const optDiv = document.createElement('div');
+            optDiv.className = 'quiz-option';
+            optDiv.textContent = optText;
+            
+            optDiv.addEventListener('click', () => {
+                // Remove selected from all
+                Array.from(this.quizOptions.children).forEach(c => c.classList.remove('selected'));
+                // Add selected to this
+                optDiv.classList.add('selected');
+                this.userAnswers[this.currentQuestionIndex] = idx;
+                this.nextQuestionBtn.disabled = false;
+            });
+            
+            this.quizOptions.appendChild(optDiv);
+        });
+        
+        if (this.currentQuestionIndex === this.quizData.length - 1) {
+            this.nextQuestionBtn.textContent = 'Finish';
+        } else {
+            this.nextQuestionBtn.textContent = 'Next';
+        }
+    }
+    
+    handleNextQuestion() {
+        if (this.userAnswers[this.currentQuestionIndex] === undefined) return;
+        
+        this.currentQuestionIndex++;
+        this.renderQuestion();
+    }
+    
+    showQuizSummary() {
+        this.quizContainer.style.display = 'none';
+        this.quizSummary.style.display = 'block';
+        
+        let correctCount = 0;
+        const reviewContainer = document.getElementById('quiz-review');
+        reviewContainer.innerHTML = '';
+        
+        this.quizData.forEach((q, idx) => {
+            const userAns = this.userAnswers[idx];
+            const isCorrect = userAns === q.correctAnswer;
+            
+            if (isCorrect) correctCount++;
+            
+            const reviewItem = document.createElement('div');
+            reviewItem.className = 'review-item';
+            
+            reviewItem.innerHTML = `
+                <div class="review-q">${idx + 1}. ${q.question}</div>
+                <div class="review-a" style="color: ${isCorrect ? '#28a745' : '#dc3545'}">
+                    Your Answer: ${userAns !== undefined ? q.options[userAns] : 'None'} 
+                    ${isCorrect ? '✅' : '❌'}
+                </div>
+                ${!isCorrect ? `<div class="review-a">Correct Answer: ${q.options[q.correctAnswer]}</div>` : ''}
+                <div class="review-exp">${q.explanation}</div>
+            `;
+            
+            reviewContainer.appendChild(reviewItem);
+        });
+        
+        document.getElementById('score-value').textContent = correctCount;
+        document.querySelector('.score-total').textContent = `/ ${this.quizData.length}`;
+        
+        const scoreMsg = document.getElementById('score-message');
+        const percentage = correctCount / this.quizData.length;
+        if (percentage === 1) scoreMsg.textContent = 'Perfect score! Outstanding work!';
+        else if (percentage >= 0.8) scoreMsg.textContent = 'Great job! You really know this topic.';
+        else if (percentage >= 0.6) scoreMsg.textContent = 'Good effort. Keep studying!';
+        else scoreMsg.textContent = 'Use this as a learning opportunity and review the answers below.';
+    }
+    
+    endQuiz() {
+        if (this.quizModal) {
+            this.quizModal.classList.remove('show');
+        }
+        this.applyPhaseChange();
     }
 
     // NEW METHOD: Save progress data
