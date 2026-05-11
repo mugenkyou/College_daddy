@@ -408,6 +408,15 @@
                         <label class="settings-label">Pomodoros until Long Break</label>
                         <input type="number" class="settings-input" id="pomodoros-count" value="4" min="1" max="10">
                     </div>
+                    <div class="settings-group" style="grid-column: 1 / -1;">
+                        <label class="settings-label">Study Topic (For Quiz)</label>
+                        <input type="text" class="settings-input" id="study-topic" placeholder="e.g. Data Structures, React.js" value="General Knowledge">
+                    </div>
+                    <div class="settings-group" style="grid-column: 1 / -1;">
+                        <label class="settings-label">Upload Notes (For Quiz Context)</label>
+                        <input type="file" class="settings-input" id="quiz-notes" accept=".pdf,.txt" style="padding: 0.5rem; background: var(--surface);">
+                        <small style="color: var(--text-muted); font-size: 0.8rem; margin-top: 5px; display: block;">If uploaded, the AI will strictly use this document to generate the quiz.</small>
+                    </div>
                 </div>
                 <button class="btn btn-secondary" id="apply-settings">Apply Settings</button>
             </div>
@@ -593,6 +602,7 @@
             </div>
         </div>
 
+
         <!-- SECTION 4: DATA MANAGEMENT -->
         <div class="container">
             <div class="data-management" style="margin-top: 30px;">
@@ -681,5 +691,38 @@
     });
     </script>
 <script src="../assets/js/components/back-to-top.js"></script>
+        <!-- SECTION 3: QUIZ MODAL -->
+        <div class="quiz-modal-overlay" id="quiz-modal">
+            <div class="quiz-modal-content">
+                <div id="quiz-loading" class="quiz-loading">
+                    <div class="spinner"></div>
+                    <p>Generating your quiz...</p>
+                </div>
+                
+                <div id="quiz-container" class="quiz-container" style="display: none;">
+                    <div class="quiz-header">
+                        <h2>Post-Session Quiz</h2>
+                        <span class="quiz-progress" id="quiz-progress">Question 1/5</span>
+                    </div>
+                    <div class="quiz-question" id="quiz-question"></div>
+                    <div class="quiz-options" id="quiz-options"></div>
+                    <div class="quiz-footer">
+                        <button class="btn btn-secondary" id="skip-quiz">Skip Quiz</button>
+                        <button class="btn btn-primary" id="next-question" disabled>Next</button>
+                    </div>
+                </div>
+
+                <div id="quiz-summary" class="quiz-summary" style="display: none;">
+                    <h2>Quiz Summary</h2>
+                    <div class="quiz-score">
+                        <span class="score-value" id="score-value">0</span>
+                        <span class="score-total">/ 5</span>
+                    </div>
+                    <p id="score-message">Good job! Keep it up.</p>
+                    <div class="quiz-review" id="quiz-review"></div>
+                    <button class="btn btn-primary" id="finish-quiz" style="margin-top: 20px; width: 100%;">Continue to Break</button>
+                </div>
+            </div>
+        </div>
 </body>
 </html>

@@ -14,3 +14,4 @@ langchain-community>=0.0.29
 PyPDF2>=3.0.1
 faiss-cpu>=1.8.0
 python-dotenv>=1.0.1
+groq>=0.4.0

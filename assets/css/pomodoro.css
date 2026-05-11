@@ -677,13 +677,15 @@ body > header .fullscreen-btn:active {
         top: 64px;
         right: 20px;
         width: 300px;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
         background: var(--card-bg);
         border-radius: 10px;
         padding: 2rem;
         margin-bottom: 2rem;
         transform: translateX(150%);
         transition: transform 0.3s ease;
-        z-index: 999;
+        z-index: 1001;
         backdrop-filter: blur(10px);
         border: 1px solid var(--primary-color);
     }
@@ -819,4 +821,205 @@ body > header .fullscreen-btn:active {
 .notification {
     z-index: 5;
     position: relative;
+}
+
+/* Quiz Modal Styles */
+.quiz-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.quiz-modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.quiz-modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--primary-color);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    padding: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 157, 255, 0.3);
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.quiz-modal-overlay.show .quiz-modal-content {
+    transform: translateY(0);
+}
+
+.quiz-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 157, 255, 0.2);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.quiz-header h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.quiz-progress {
+    background: var(--primary-dim);
+    color: var(--primary-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.quiz-question {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+.quiz-option {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: left;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.quiz-option:hover {
+    background: var(--primary-dim);
+    border-color: var(--primary-color);
+}
+
+.quiz-option.selected {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.quiz-option.correct {
+    background: rgba(40, 167, 69, 0.2);
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.quiz-option.incorrect {
+    background: rgba(220, 53, 69, 0.2);
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.quiz-footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.quiz-score {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.score-value {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.score-total {
+    font-size: 1.5rem;
+    color: var(--text-gray);
+    margin-left: 0.5rem;
+}
+
+.quiz-review {
+    margin-top: 1.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: left;
+    padding: 1rem;
+    background: var(--bg-dark);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.review-item {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.review-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.review-q {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.review-a {
+    color: #28a745;
+    font-size: 0.9rem;
+}
+
+.review-exp {
+    color: var(--text-gray);
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    font-style: italic;
 }
