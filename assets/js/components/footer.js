@@ -36,10 +36,26 @@ document.addEventListener("DOMContentLoaded", () => {
       <section class="footer-section" aria-labelledby="footer-quick-links">
         <h3 id="footer-quick-links">Quick Links</h3>
         <ul>
-          <li><a href="${homeHref}">Home</a></li>
-          <li><a href="${pagePrefix}cgpa.html">CGPA Calculator</a></li>
-          <li><a href="${pagePrefix}notes.html">Notes</a></li>
-          <li><a href="${pagePrefix}roadmap.html">Roadmap</a></li>
+          <li><a href="${homeHref}"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="${pagePrefix}cgpa.html"><i class="fas fa-calculator"></i> CGPA Calculator</a></li>
+          <li><a href="${pagePrefix}notes.html"><i class="fas fa-book"></i> Notes</a></li>
+          <li><a href="${pagePrefix}roadmap.html"><i class="fas fa-map-signs"></i> Roadmap</a></li>
+        </ul>
+      </section>
+
+      <section class="footer-section" aria-labelledby="footer-legal">
+        <h3 id="footer-legal">Legal</h3>
+        <ul>
+          <li><a href="${pagePrefix}privacy.html"><i class="fas fa-user-shield"></i> Privacy Policy</a></li>
+          <li><a href="${pagePrefix}terms.html"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+        </ul>
+      </section>
+
+      <section class="footer-section" aria-labelledby="footer-resources">
+        <h3 id="footer-resources">Resources</h3>
+        <ul>
+          <li><a href="${pagePrefix}docs.html"><i class="fas fa-book-open"></i> Documentation</a></li>
+          <li><a href="${pagePrefix}faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
         </ul>
       </section>
 
@@ -51,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
           rel="noopener noreferrer"
           class="feedback-link"
         >
-          Send Feedback
+          <i class="fas fa-comment-dots"></i> Send Feedback
         </a>
         <p>Follow along for updates, tools, and study resources.</p>
       </section>
