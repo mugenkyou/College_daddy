@@ -89,6 +89,19 @@ class PomodoroTimer {
         if (this.addYoutubeBtn && this.youtubeInput) {
             this.addYoutubeBtn.addEventListener('click', () => this.loadYoutubeVideo());
         }
+
+        // Music Presets
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const url = e.currentTarget.getAttribute('data-url');
+                if (this.youtubeInput) {
+                    this.youtubeInput.value = url;
+                    this.loadYoutubeVideo();
+                    this.showNotification(`Loading ${e.currentTarget.textContent.trim()}...`);
+                }
+            });
+        });
+
         if (this.volumeSlider) {
             this.volumeSlider.addEventListener('input', (e) => this.updateVolume(e.target.value));
         }
