@@ -24,32 +24,70 @@
             margin-bottom: 1.5rem;
             display: block;
         }
-        .faq-grid {
+        .faq-accordion {
             display: grid;
-            gap: 1.5rem;
+            gap: 1rem;
         }
-        .faq-card {
+        .faq-item {
             background: var(--surface-1);
-            padding: 2rem;
             border-radius: var(--radius-lg);
             border: 1px solid var(--border-color);
-            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
-        .faq-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        .faq-item:hover {
             border-color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        .faq-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+        .faq-header {
+            padding: 1.5rem 2rem;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s;
         }
-        .faq-card p {
+        .faq-header:hover {
+            background: var(--surface-2);
+        }
+        .faq-question {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-light);
+            font-weight: 600;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .faq-question i {
+            color: var(--primary-color);
+            width: 24px;
+            text-align: center;
+        }
+        .faq-toggle-icon {
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+        .faq-item.active .faq-toggle-icon {
+            transform: rotate(180deg);
+            color: var(--primary-color);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
+            padding: 0 2rem;
+            background: var(--surface-1);
+        }
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 1rem 2rem 2rem 4rem;
+        }
+        .faq-answer p {
             color: var(--text-gray);
-            line-height: 1.7;
+            line-height: 1.8;
+            margin: 0;
         }
     </style>
     <script>
@@ -92,63 +130,141 @@
             <p>Everything you need to know about College Daddy tools and resources.</p>
         </div>
 
-        <div class="faq-grid">
-            <div class="faq-card">
-                <h3><i class="fas fa-info-circle"></i> What is College Daddy?</h3>
-                <p>College Daddy is your ultimate college companion, designed to help students track grades, organize assignments, and stay on top of their academic journey.</p>
+        <div class="faq-accordion">
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3 class="faq-question"><i class="fas fa-info-circle"></i> What is College Daddy?</h3>
+                    <i class="fas fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>College Daddy is your ultimate college companion, designed to help students track grades, organize assignments, and stay on top of their academic journey.</p>
+                </div>
             </div>
 
-            <div class="faq-card">
-                <h3><i class="fas fa-chart-bar"></i> Can I track my GPA?</h3>
-                <p>Yes! College Daddy provides a simple GPA calculator and grade tracker to help you monitor your academic progress seamlessly.</p>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3 class="faq-question"><i class="fas fa-chart-bar"></i> Can I track my GPA?</h3>
+                    <i class="fas fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! College Daddy provides a simple GPA calculator and grade tracker to help you monitor your academic progress seamlessly.</p>
+                </div>
             </div>
 
-            <div class="faq-card">
-                <h3><i class="fas fa-gift"></i> Is College Daddy free?</h3>
-                <p>Yes, College Daddy is completely free for students. No hidden fees or subscriptions!</p>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3 class="faq-question"><i class="fas fa-gift"></i> Is College Daddy free?</h3>
+                    <i class="fas fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, College Daddy is completely free for students. No hidden fees or subscriptions!</p>
+                </div>
             </div>
 
-            <div class="faq-card">
-                <h3><i class="fas fa-calendar-check"></i> How can I organize assignments?</h3>
-                <p>College Daddy offers a built-in planner where you can set reminders, track assignments, and stay ahead of deadlines.</p>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3 class="faq-question"><i class="fas fa-calendar-check"></i> How can I organize assignments?</h3>
+                    <i class="fas fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>College Daddy offers a built-in planner where you can set reminders, track assignments, and stay ahead of deadlines.</p>
+                </div>
             </div>
 
-            <div class="faq-card">
-                <h3><i class="fas fa-university"></i> Does it work for all colleges?</h3>
-                <p>Absolutely! Whether you're in a university, community college, or online program, College Daddy is designed for any academic setting.</p>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3 class="faq-question"><i class="fas fa-university"></i> Does it work for all colleges?</h3>
+                    <i class="fas fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely! Whether you're in a university, community college, or online program, College Daddy is designed for any academic setting.</p>
+                </div>
             </div>
 
-            <div class="faq-card">
-                <h3><i class="fas fa-mobile-alt"></i> Is it available on mobile?</h3>
-                <p>Currently, College Daddy is a web-based platform, but a mobile app version is in development. Stay tuned!</p>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3 class="faq-question"><i class="fas fa-mobile-alt"></i> Is it available on mobile?</h3>
+                    <i class="fas fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Currently, College Daddy is a web-based platform, but a mobile app version is in development. Stay tuned!</p>
+                </div>
             </div>
 
-            <div class="faq-card">
-                <h3><i class="fas fa-notes-medical"></i> Do you have all notes?</h3>
-                <p>Not yet! We're working on adding a comprehensive notes section, but since every course is different, it's an ongoing challenge. Stay tuned for updates!</p>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3 class="faq-question"><i class="fas fa-notes-medical"></i> Do you have all notes?</h3>
+                    <i class="fas fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Not yet! We're working on adding a comprehensive notes section, but since every course is different, it's an ongoing challenge. Stay tuned for updates!</p>
+                </div>
             </div>
 
-            <div class="faq-card">
-                <h3><i class="fas fa-road"></i> Are roadmaps reliable?</h3>
-                <p>Yes! Our roadmaps are designed by industry professionals and academic experts, ensuring you follow the best learning paths possible.</p>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3 class="faq-question"><i class="fas fa-road"></i> Are roadmaps reliable?</h3>
+                    <i class="fas fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! Our roadmaps are designed by industry professionals and academic experts, ensuring you follow the best learning paths possible.</p>
+                </div>
             </div>
 
-            <div class="faq-card">
-                <h3><i class="fas fa-users"></i> Can I share my progress?</h3>
-                <p>Currently, progress tracking is personal, but we're exploring ways to add collaborative features in the future.</p>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3 class="faq-question"><i class="fas fa-users"></i> Can I share my progress?</h3>
+                    <i class="fas fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Currently, progress tracking is personal, but we're exploring ways to add collaborative features in the future.</p>
+                </div>
             </div>
 
-            <div class="faq-card">
-                <h3><i class="fas fa-lightbulb"></i> How can I suggest features?</h3>
-                <p>We love feedback! You can send your ideas through our contact page or social media channels. Your input helps shape the future of College Daddy!</p>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3 class="faq-question"><i class="fas fa-lightbulb"></i> How can I suggest features?</h3>
+                    <i class="fas fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We love feedback! You can send your ideas through our contact page or social media channels. Your input helps shape the future of College Daddy!</p>
+                </div>
             </div>
 
-            <div class="faq-card">
-                <h3><i class="fas fa-shield-alt"></i> Is my data safe?</h3>
-                <p>Yes! College Daddy is a client-side platform. All your academic data is stored locally in your browser. We don't have servers that store your private information.</p>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3 class="faq-question"><i class="fas fa-shield-alt"></i> Is my data safe?</h3>
+                    <i class="fas fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! College Daddy is a client-side platform. All your academic data is stored locally in your browser. We don't have servers that store your private information.</p>
+                </div>
             </div>
         </div>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const header = item.querySelector('.faq-header');
+                header.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+                    
+                    // Toggle current item
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
 
     <script src="../assets/js/components/navigation.js"></script>
     <script src="../assets/js/components/footer.js"></script>
