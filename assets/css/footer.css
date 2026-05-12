@@ -19,7 +19,7 @@
   width: min(var(--container-width), 92%);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.1fr 1fr 1fr;
+  grid-template-columns: 1.5fr repeat(auto-fit, minmax(160px, 1fr));
   gap: 2rem;
 }
 
