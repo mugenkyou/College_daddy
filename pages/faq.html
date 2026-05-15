@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | College Daddy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/navigation.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <style>
+        .faq-page-container {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+        .faq-page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .faq-page-header i {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        .faq-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .faq-card {
+            background: var(--surface-1);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .faq-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-color);
+        }
+        .faq-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .faq-card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+    </style>
+    <script>
+        (function () {
+            try {
+                const theme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>College Daddy</span>
+            </a>
+            <div class="nav-actions">
+                <button class="menu-button" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <button class="theme-toggle" title="Toggle theme">
+                    <span class="theme-icon"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="faq-page-container">
+        <div class="faq-page-header">
+            <i class="fas fa-question-circle"></i>
+            <h1>Frequently Asked Questions</h1>
+            <p>Everything you need to know about College Daddy tools and resources.</p>
+        </div>
+
+        <div class="faq-grid">
+            <div class="faq-card">
+                <h3><i class="fas fa-info-circle"></i> What is College Daddy?</h3>
+                <p>College Daddy is your ultimate college companion, designed to help students track grades, organize assignments, and stay on top of their academic journey.</p>
+            </div>
+
+            <div class="faq-card">
+                <h3><i class="fas fa-chart-bar"></i> Can I track my GPA?</h3>
+                <p>Yes! College Daddy provides a simple GPA calculator and grade tracker to help you monitor your academic progress seamlessly.</p>
+            </div>
+
+            <div class="faq-card">
+                <h3><i class="fas fa-gift"></i> Is College Daddy free?</h3>
+                <p>Yes, College Daddy is completely free for students. No hidden fees or subscriptions!</p>
+            </div>
+
+            <div class="faq-card">
+                <h3><i class="fas fa-calendar-check"></i> How can I organize assignments?</h3>
+                <p>College Daddy offers a built-in planner where you can set reminders, track assignments, and stay ahead of deadlines.</p>
+            </div>
+
+            <div class="faq-card">
+                <h3><i class="fas fa-university"></i> Does it work for all colleges?</h3>
+                <p>Absolutely! Whether you're in a university, community college, or online program, College Daddy is designed for any academic setting.</p>
+            </div>
+
+            <div class="faq-card">
+                <h3><i class="fas fa-mobile-alt"></i> Is it available on mobile?</h3>
+                <p>Currently, College Daddy is a web-based platform, but a mobile app version is in development. Stay tuned!</p>
+            </div>
+
+            <div class="faq-card">
+                <h3><i class="fas fa-notes-medical"></i> Do you have all notes?</h3>
+                <p>Not yet! We're working on adding a comprehensive notes section, but since every course is different, it's an ongoing challenge. Stay tuned for updates!</p>
+            </div>
+
+            <div class="faq-card">
+                <h3><i class="fas fa-road"></i> Are roadmaps reliable?</h3>
+                <p>Yes! Our roadmaps are designed by industry professionals and academic experts, ensuring you follow the best learning paths possible.</p>
+            </div>
+
+            <div class="faq-card">
+                <h3><i class="fas fa-users"></i> Can I share my progress?</h3>
+                <p>Currently, progress tracking is personal, but we're exploring ways to add collaborative features in the future.</p>
+            </div>
+
+            <div class="faq-card">
+                <h3><i class="fas fa-lightbulb"></i> How can I suggest features?</h3>
+                <p>We love feedback! You can send your ideas through our contact page or social media channels. Your input helps shape the future of College Daddy!</p>
+            </div>
+
+            <div class="faq-card">
+                <h3><i class="fas fa-shield-alt"></i> Is my data safe?</h3>
+                <p>Yes! College Daddy is a client-side platform. All your academic data is stored locally in your browser. We don't have servers that store your private information.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/components/navigation.js"></script>
+    <script src="../assets/js/components/footer.js"></script>
+</body>
+</html>

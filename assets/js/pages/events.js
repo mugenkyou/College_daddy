@@ -33,7 +33,7 @@ async function loadEventsFromAPI() {
     if (grid) {
       grid.innerHTML = `
         <div class="events-empty">
-          <div class="empty-icon">⚡</div>
+          <div class="empty-icon"><i class="fas fa-bolt"></i></div>
           <p>Couldn't load events right now. Please check back soon!</p>
         </div>`;
     }
@@ -64,9 +64,9 @@ function getCountdown(end, status) {
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
-  if (days > 0) return `⏱ ${days}d ${hours}h left`;
-  if (hours > 0) return `⏱ ${hours}h left`;
-  return "⏱ Ends today";
+  if (days > 0) return `<i class="fas fa-hourglass-half"></i> ${days}d ${hours}h left`;
+  if (hours > 0) return `<i class="fas fa-hourglass-half"></i> ${hours}h left`;
+  return `<i class="fas fa-hourglass-half"></i> Ends today`;
 }
 
 function formatDate(dateStr) {
@@ -116,7 +116,7 @@ function renderEvents(filter = "all") {
   if (filtered.length === 0) {
     grid.innerHTML = `
       <div class="events-empty">
-        <div class="empty-icon">🔍</div>
+        <div class="empty-icon"><i class="fas fa-search"></i></div>
         <p>No ${filter === "all" ? "" : filter + " "}events found right now. Check back soon!</p>
       </div>`;
     return;
@@ -134,21 +134,21 @@ function renderEvents(filter = "all") {
     const dateRange =
       ev.startDate || ev.endDate
         ? `<div class="event-meta-row">
-           <span class="meta-icon">📅</span>
+           <span class="meta-icon"><i class="fas fa-calendar-alt"></i></span>
            ${formatDate(ev.startDate)}${ev.endDate ? " – " + formatDate(ev.endDate) : ""}
          </div>`
         : "";
 
     const locationRow = ev.location
       ? `<div class="event-meta-row">
-           <span class="meta-icon">📍</span>
+           <span class="meta-icon"><i class="fas fa-map-marker-alt"></i></span>
            ${ev.location}
          </div>`
       : "";
 
     const prizeRow = ev.prize
       ? `<div class="event-meta-row">
-           <span class="meta-icon">🏆</span>
+           <span class="meta-icon"><i class="fas fa-trophy"></i></span>
            ${ev.prize}
          </div>`
       : "";
@@ -178,7 +178,7 @@ function renderEvents(filter = "all") {
       <div class="event-card-divider"></div>
 
       <a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="event-link" aria-label="View details for ${ev.title}">
-        View Details <span class="arrow">→</span>
+        View Details <span class="arrow"><i class="fas fa-arrow-right"></i></span>
       </a>`;
 
     grid.appendChild(card);
