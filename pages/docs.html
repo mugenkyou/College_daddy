@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | College Daddy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/navigation.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <style>
+        .docs-container {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+        .docs-sidebar {
+            position: sticky;
+            top: 6rem;
+            height: fit-content;
+            background: var(--surface-1);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+        .docs-sidebar h4 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        .docs-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .docs-sidebar li {
+            margin-bottom: 0.75rem;
+        }
+        .docs-sidebar a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .docs-sidebar a:hover {
+            color: var(--primary-color);
+        }
+        .docs-main {
+            background: var(--surface-1);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+        }
+        .docs-section {
+            margin-bottom: 4rem;
+        }
+        .docs-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        .docs-section p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .feature-item {
+            background: var(--bg-darker);
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+        }
+        .feature-item i {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .docs-container {
+                grid-template-columns: 1fr;
+            }
+            .docs-sidebar {
+                display: none;
+            }
+        }
+    </style>
+    <script>
+        (function () {
+            try {
+                const theme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>College Daddy</span>
+            </a>
+            <div class="nav-actions">
+                <button class="menu-button" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <button class="theme-toggle" title="Toggle theme">
+                    <span class="theme-icon"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="docs-container">
+        <aside class="docs-sidebar">
+            <h4>Getting Started</h4>
+            <ul>
+                <li><a href="#introduction"><i class="fas fa-info-circle"></i> Introduction</a></li>
+                <li><a href="#cgpa-tool"><i class="fas fa-calculator"></i> CGPA Tool</a></li>
+                <li><a href="#study-timer"><i class="fas fa-stopwatch"></i> Study Timer</a></li>
+                <li><a href="#roadmaps"><i class="fas fa-map-signs"></i> Roadmaps</a></li>
+            </ul>
+        </aside>
+
+        <main class="docs-main">
+            <section id="introduction" class="docs-section">
+                <h2>Introduction to College Daddy</h2>
+                <p>Welcome to the official documentation for College Daddy. This platform is designed to be a comprehensive hub for college students to manage their academic journey efficiently.</p>
+                <p>Whether you're tracking your GPA, planning your study sessions, or looking for career roadmaps, College Daddy provides the tools you need with a privacy-first approach.</p>
+            </section>
+
+            <section id="cgpa-tool" class="docs-section">
+                <h2>CGPA & SGPA Calculator</h2>
+                <p>Our calculator helps you track your academic performance with precision. You can calculate your current CGPA, predict future requirements, and visualize your progress.</p>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-chart-line"></i>
+                        <strong>Progress Tracking</strong>
+                        <p>Visualize your SGPA trends across semesters.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-bullseye"></i>
+                        <strong>Target Setting</strong>
+                        <p>Calculate what you need in the next semester to reach your goal.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="study-timer" class="docs-section">
+                <h2>Pomodoro Study Timer</h2>
+                <p>Boost your productivity using the Pomodoro technique. Our timer allows you to focus in 25-minute sprints with curated study music presets.</p>
+                <p>Choose from Nature, Lofi, Classical, or Ambient sounds to create the perfect study environment.</p>
+            </section>
+
+            <section id="roadmaps" class="docs-section">
+                <h2>Career Roadmaps</h2>
+                <p>Master the latest technologies with our guided paths. We provide structured roadmaps for AI, Web Development, Cloud Computing, and more.</p>
+                <p>Each roadmap is curated to take you from beginner to job-ready with clear milestones and resource links.</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="../assets/js/components/navigation.js"></script>
+    <script src="../assets/js/components/footer.js"></script>
+</body>
+</html>

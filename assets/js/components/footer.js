@@ -14,46 +14,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
   footer.innerHTML = `
     <div class="footer-content">
-      <section class="footer-section" aria-labelledby="footer-brand">
-        <h3 id="footer-brand">College Daddy</h3>
-        <p>Your practical companion for academic success.</p>
-        <p class="tagline">Built for students by a student.</p>
-        <div class="social-links" aria-label="Social links">
+      <div class="footer-main-grid">
+        <section class="footer-section brand-section" aria-labelledby="footer-brand">
+          <h3 id="footer-brand">College Daddy</h3>
+          <p>Your practical companion for academic success.</p>
+          <p class="tagline">Built for students by a student.</p>
+          <div class="social-links" aria-label="Social links">
+            <a
+              href="https://www.linkedin.com/company/collegedaddy-tech"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="College Daddy on LinkedIn"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </section>
+
+        <section class="footer-section" aria-labelledby="footer-quick-links">
+          <h3 id="footer-quick-links">Quick Links</h3>
+          <ul>
+            <li><a href="${homeHref}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="${pagePrefix}cgpa.html"><i class="fas fa-calculator"></i> CGPA Calculator</a></li>
+            <li><a href="${pagePrefix}notes.html"><i class="fas fa-book"></i> Notes</a></li>
+            <li><a href="${pagePrefix}roadmap.html"><i class="fas fa-map-signs"></i> Roadmap</a></li>
+          </ul>
+        </section>
+
+        <section class="footer-section" aria-labelledby="footer-legal">
+          <h3 id="footer-legal">Legal</h3>
+          <ul>
+            <li><a href="${pagePrefix}privacy.html"><i class="fas fa-user-shield"></i> Privacy Policy</a></li>
+            <li><a href="${pagePrefix}terms.html"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+          </ul>
+        </section>
+
+        <section class="footer-section" aria-labelledby="footer-resources">
+          <h3 id="footer-resources">Resources</h3>
+          <ul>
+            <li><a href="${pagePrefix}docs.html"><i class="fas fa-book-open"></i> Documentation</a></li>
+            <li><a href="${pagePrefix}faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <section class="footer-section connect-section" aria-labelledby="footer-connect">
+        <h3 id="footer-connect">Connect</h3>
+        <div class="connect-content">
           <a
-            href="https://www.linkedin.com/company/collegedaddy-tech"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSciD1CUiYUpiz4mtQSTYG9XeCRyG3CEhr9GNL03WxmRbFOgkw/viewform?usp=dialog"
             target="_blank"
             rel="noopener noreferrer"
-            class="social-link"
-            aria-label="College Daddy on LinkedIn"
+            class="feedback-link"
           >
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
+            <i class="fas fa-comment-dots"></i> Send Feedback
           </a>
+          <p>Follow along for updates, tools, and study resources.</p>
         </div>
-      </section>
-
-      <section class="footer-section" aria-labelledby="footer-quick-links">
-        <h3 id="footer-quick-links">Quick Links</h3>
-        <ul>
-          <li><a href="${homeHref}">Home</a></li>
-          <li><a href="${pagePrefix}cgpa.html">CGPA Calculator</a></li>
-          <li><a href="${pagePrefix}notes.html">Notes</a></li>
-          <li><a href="${pagePrefix}roadmap.html">Roadmap</a></li>
-        </ul>
-      </section>
-
-      <section class="footer-section" aria-labelledby="footer-connect">
-        <h3 id="footer-connect">Connect</h3>
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSciD1CUiYUpiz4mtQSTYG9XeCRyG3CEhr9GNL03WxmRbFOgkw/viewform?usp=dialog"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="feedback-link"
-        >
-          Send Feedback
-        </a>
-        <p>Follow along for updates, tools, and study resources.</p>
       </section>
     </div>
 

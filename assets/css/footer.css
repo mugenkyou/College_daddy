@@ -18,9 +18,38 @@
 .footer-content {
   width: min(var(--container-width), 92%);
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.footer-main-grid {
   display: grid;
-  grid-template-columns: 1.1fr 1fr 1fr;
+  grid-template-columns: 1.5fr repeat(3, 1fr);
   gap: 2rem;
+}
+
+.footer-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+  width: 100%;
+}
+
+.connect-section {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.connect-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-section {
+  text-align: left;
 }
 
 .footer-section h3 {
@@ -128,8 +157,12 @@
 }
 
 @media (max-width: 900px) {
-  .footer-content {
+  .footer-main-grid {
     grid-template-columns: 1fr;
-    gap: 1.35rem;
+    gap: 2rem;
+  }
+  
+  .footer-content {
+    gap: 2.5rem;
   }
 }
