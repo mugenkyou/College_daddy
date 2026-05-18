@@ -12,6 +12,12 @@ const DEFAULT_LABELS = {
   decision: "Decision",
   input: "Input / Output",
 };
+const DEFAULT_NODE_COLORS = {
+  fill: "#0f172a",
+  stroke: "#94a3b8",
+  text: "#e7edf7",
+};
+const DEFAULT_EDGE_COLOR = "#38bdf8";
 
 class ProjectArchitect {
   constructor() {
@@ -29,6 +35,9 @@ class ProjectArchitect {
     this.labelInput = document.getElementById("labelInput");
     this.widthInput = document.getElementById("widthInput");
     this.heightInput = document.getElementById("heightInput");
+    this.fillColorInput = document.getElementById("fillColorInput");
+    this.strokeColorInput = document.getElementById("strokeColorInput");
+    this.accentColorInput = document.getElementById("accentColorInput");
     this.selectionSummary = document.getElementById("selectionSummary");
     this.modePill = document.getElementById("modePill");
     this.inspectorNote = document.getElementById("inspectorNote");
@@ -158,6 +167,40 @@ class ProjectArchitect {
       this.render();
       this.updateInspector();
     });
+
+    this.fillColorInput.addEventListener("input", () => {
+      const node = this.getSelectedNode();
+      if (!node) {
+        return;
+      }
+      node.fill = this.fillColorInput.value;
+      this.render();
+    });
+
+    this.strokeColorInput.addEventListener("input", () => {
+      const node = this.getSelectedNode();
+      if (!node) {
+        return;
+      }
+      node.stroke = this.strokeColorInput.value;
+      this.render();
+    });
+
+    this.accentColorInput.addEventListener("input", () => {
+      const node = this.getSelectedNode();
+      if (node) {
+        node.textColor = this.accentColorInput.value;
+        this.render();
+        return;
+      }
+
+      const edge = this.getSelectedEdge();
+      if (!edge) {
+        return;
+      }
+      edge.color = this.accentColorInput.value;
+      this.render();
+    });
   }
 
   addNode(shape, x, y) {
@@ -181,6 +224,9 @@ class ProjectArchitect {
       width: baseSize.width,
       height: baseSize.height,
       label: DEFAULT_LABELS[shape] || "Step",
+      fill: DEFAULT_NODE_COLORS.fill,
+      stroke: DEFAULT_NODE_COLORS.stroke,
+      textColor: DEFAULT_NODE_COLORS.text,
     };
 
     this.nodes.push(node);
@@ -204,6 +250,7 @@ class ProjectArchitect {
       id: `edge-${crypto.randomUUID()}`,
       from,
       to,
+      color: DEFAULT_EDGE_COLOR,
     });
     this.selection = { type: "edge", id: this.edges[this.edges.length - 1].id };
     this.render();
@@ -267,6 +314,9 @@ class ProjectArchitect {
         width: 180,
         height: 80,
         label: "Start",
+        fill: "#132033",
+        stroke: "#60a5fa",
+        textColor: "#e7edf7",
       },
       {
         id: "sample-input",
@@ -276,6 +326,9 @@ class ProjectArchitect {
         width: 210,
         height: 90,
         label: "Collect Inputs",
+        fill: "#10203a",
+        stroke: "#7dd3fc",
+        textColor: "#e7edf7",
       },
       {
         id: "sample-decision",
@@ -285,6 +338,9 @@ class ProjectArchitect {
         width: 180,
         height: 120,
         label: "Criteria Met?",
+        fill: "#1f2336",
+        stroke: "#a78bfa",
+        textColor: "#f8fafc",
       },
       {
         id: "sample-process",
@@ -294,6 +350,9 @@ class ProjectArchitect {
         width: 220,
         height: 100,
         label: "Generate Output",
+        fill: "#18252e",
+        stroke: "#2dd4bf",
+        textColor: "#f8fafc",
       },
       {
         id: "sample-end",
@@ -303,14 +362,17 @@ class ProjectArchitect {
         width: 180,
         height: 80,
         label: "End",
+        fill: "#14253a",
+        stroke: "#38bdf8",
+        textColor: "#f8fafc",
       },
     ];
 
     this.edges = [
-      { id: "edge-1", from: "sample-start", to: "sample-input" },
-      { id: "edge-2", from: "sample-input", to: "sample-decision" },
-      { id: "edge-3", from: "sample-decision", to: "sample-process" },
-      { id: "edge-4", from: "sample-process", to: "sample-end" },
+      { id: "edge-1", from: "sample-start", to: "sample-input", color: "#38bdf8" },
+      { id: "edge-2", from: "sample-input", to: "sample-decision", color: "#38bdf8" },
+      { id: "edge-3", from: "sample-decision", to: "sample-process", color: "#38bdf8" },
+      { id: "edge-4", from: "sample-process", to: "sample-end", color: "#38bdf8" },
     ];
 
     this.selection = { type: "node", id: "sample-input" };
@@ -350,6 +412,13 @@ class ProjectArchitect {
       return null;
     }
     return this.nodes.find((node) => node.id === this.selection.id) || null;
+  }
+
+  getSelectedEdge() {
+    if (!this.selection || this.selection.type !== "edge") {
+      return null;
+    }
+    return this.edges.find((edge) => edge.id === this.selection.id) || null;
   }
 
   handleNodeInteraction(node, event) {
@@ -424,12 +493,15 @@ class ProjectArchitect {
 
       const shape = this.createNodeShape(node);
       shape.classList.add("node-shape");
+      shape.style.fill = node.fill || DEFAULT_NODE_COLORS.fill;
+      shape.style.stroke = node.stroke || DEFAULT_NODE_COLORS.stroke;
       group.appendChild(shape);
 
       const text = document.createElementNS(SVG_NS, "text");
       text.setAttribute("x", String(node.x));
       text.setAttribute("y", String(node.y));
       text.setAttribute("class", "node-label");
+      text.style.fill = node.textColor || DEFAULT_NODE_COLORS.text;
       text.textContent = node.label;
       group.appendChild(text);
 
@@ -514,6 +586,7 @@ class ProjectArchitect {
       path.setAttribute("class", "edge-path");
       path.dataset.edgeId = edge.id;
       path.setAttribute("d", this.buildConnectorPath(fromNode, toNode));
+      path.style.stroke = edge.color || DEFAULT_EDGE_COLOR;
 
       if (this.selection?.type === "edge" && this.selection.id === edge.id) {
         path.classList.add("selected");
@@ -557,29 +630,48 @@ class ProjectArchitect {
 
   updateInspector() {
     const node = this.getSelectedNode();
+    const edge = this.getSelectedEdge();
     const hasNode = Boolean(node);
+    const hasEdge = Boolean(edge);
 
     this.labelInput.disabled = !hasNode;
     this.widthInput.disabled = !hasNode;
     this.heightInput.disabled = !hasNode;
+    this.fillColorInput.disabled = !hasNode;
+    this.strokeColorInput.disabled = !hasNode;
+    this.accentColorInput.disabled = !hasNode && !hasEdge;
 
     if (node) {
       this.selectionSummary.textContent = `${this.titleCase(node.shape)} node selected`;
       this.labelInput.value = node.label;
       this.widthInput.value = String(node.width);
       this.heightInput.value = String(node.height);
+      this.fillColorInput.value = this.normalizeColor(
+        node.fill || DEFAULT_NODE_COLORS.fill,
+      );
+      this.strokeColorInput.value = this.normalizeColor(
+        node.stroke || DEFAULT_NODE_COLORS.stroke,
+      );
+      this.accentColorInput.value = this.normalizeColor(
+        node.textColor || DEFAULT_NODE_COLORS.text,
+      );
       this.inspectorNote.textContent =
-        "Resize in clean 20px steps to keep the flowchart aligned on the academic grid.";
+        "Resize in clean 20px steps and use the color pickers to match your report theme.";
       return;
     }
 
-    if (this.selection?.type === "edge") {
+    if (edge) {
       this.selectionSummary.textContent = "Connector selected";
       this.labelInput.value = "";
       this.widthInput.value = "";
       this.heightInput.value = "";
+      this.fillColorInput.value = DEFAULT_NODE_COLORS.fill;
+      this.strokeColorInput.value = DEFAULT_NODE_COLORS.stroke;
+      this.accentColorInput.value = this.normalizeColor(
+        edge.color || DEFAULT_EDGE_COLOR,
+      );
       this.inspectorNote.textContent =
-        "Connectors auto-snap to the nearest logical side of each shape while you move blocks around.";
+        "Use the Text / Arrow picker to recolor the selected connector while keeping its snap behavior.";
       return;
     }
 
@@ -587,6 +679,9 @@ class ProjectArchitect {
     this.labelInput.value = "";
     this.widthInput.value = "";
     this.heightInput.value = "";
+    this.fillColorInput.value = DEFAULT_NODE_COLORS.fill;
+    this.strokeColorInput.value = DEFAULT_NODE_COLORS.stroke;
+    this.accentColorInput.value = DEFAULT_EDGE_COLOR;
     this.inspectorNote.textContent =
       "Tip: in connect mode, click one shape and then another to draw a smart arrow.";
   }
@@ -655,10 +750,10 @@ class ProjectArchitect {
     const style = document.createElementNS(SVG_NS, "style");
     style.textContent = `
       .grid-line { fill: none; stroke: rgba(148, 163, 184, 0.16); stroke-width: 1; }
-      .arrow-head { fill: #38bdf8; }
-      .edge-path { fill: none; stroke: #38bdf8; stroke-width: 2.5; marker-end: url(#arrowhead); }
-      .node-shape { fill: rgba(15, 23, 42, 0.92); stroke: rgba(148, 163, 184, 0.65); stroke-width: 2; }
-      .node-label { fill: #e7edf7; font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif; font-size: 16px; font-weight: 600; text-anchor: middle; dominant-baseline: middle; }
+      .arrow-head { fill: context-stroke; }
+      .edge-path { fill: none; stroke: ${DEFAULT_EDGE_COLOR}; stroke-width: 2.5; marker-end: url(#arrowhead); }
+      .node-shape { fill: ${DEFAULT_NODE_COLORS.fill}; stroke: ${DEFAULT_NODE_COLORS.stroke}; stroke-width: 2; }
+      .node-label { fill: ${DEFAULT_NODE_COLORS.text}; font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif; font-size: 16px; font-weight: 600; text-anchor: middle; dominant-baseline: middle; }
     `;
     clone.insertBefore(style, clone.firstChild);
     return new XMLSerializer().serializeToString(clone);
@@ -690,6 +785,10 @@ class ProjectArchitect {
 
   titleCase(value) {
     return value.replace(/(^|\s|-)\w/g, (match) => match.toUpperCase());
+  }
+
+  normalizeColor(value) {
+    return /^#[0-9a-f]{6}$/i.test(value) ? value : "#000000";
   }
 }
 

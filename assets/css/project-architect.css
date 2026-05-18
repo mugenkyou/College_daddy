@@ -262,7 +262,7 @@
 }
 
 .arrow-head {
-  fill: #38bdf8;
+  fill: context-stroke;
 }
 
 .edge-path {
@@ -273,7 +273,8 @@
 }
 
 .edge-path.selected {
-  stroke: #f59e0b;
+  stroke-width: 4;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.35));
 }
 
 .node-group {
@@ -287,11 +288,13 @@
 }
 
 .node-group.selected .node-shape {
-  stroke: #38bdf8;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.3));
 }
 
 .node-group.connect-source .node-shape {
-  stroke: #f59e0b;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.45));
 }
 
 .node-label {
@@ -330,6 +333,22 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.8rem;
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+input[type="color"] {
+  min-height: 52px;
+  padding: 0.35rem;
+  cursor: pointer;
+}
+
+input[type="color"]:disabled {
+  cursor: not-allowed;
 }
 
 .inspector-state {
@@ -388,6 +407,10 @@
   }
 
   .size-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .color-grid {
     grid-template-columns: 1fr;
   }
 }
