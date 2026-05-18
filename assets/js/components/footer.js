@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <li><a href="${homeHref}">Home</a></li>
           <li><a href="${pagePrefix}cgpa.html">CGPA Calculator</a></li>
           <li><a href="${pagePrefix}notes.html">Notes</a></li>
+          <li><a href="${pagePrefix}project-architect.html">Project Architect</a></li>
           <li><a href="${pagePrefix}roadmap.html">Roadmap</a></li>
         </ul>
       </section>
