@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>College Daddy - Project Architect</title>
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+    <link rel="stylesheet" href="../assets/css/navigation.css" />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+    <link rel="stylesheet" href="../assets/css/footer.css" />
+    <link rel="stylesheet" href="../assets/css/project-architect.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script>
+      (function () {
+        try {
+          const theme = localStorage.getItem("theme") || "dark";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="nav-container">
+        <a href="../index.html" class="logo" aria-label="College Daddy Home">
+          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+          <span>College Daddy</span>
+        </a>
+        <div class="nav-actions">
+          <button
+            class="menu-button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+        </div>
+        <nav class="nav-links">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
+          <a href="iacal.html" class="nav-link">IA Calculator</a>
+          <a href="attendance.html" class="nav-link">Attendance</a>
+          <a href="pomodoro.html" class="nav-link">Study Timer</a>
+          <a href="notes.html" class="nav-link">Notes</a>
+          <a href="roadmap.html" class="nav-link">Roadmap</a>
+          <a href="events.html" class="nav-link">Events</a>
+          <a href="project-architect.html" class="nav-link active"
+            >Architect</a
+          >
+          <button
+            class="theme-toggle"
+            aria-label="Toggle dark/light theme"
+            title="Toggle theme"
+          >
+            <span class="theme-icon">🌙</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="architect-page">
+      <section class="architect-hero container">
+        <div class="hero-copy">
+          <span class="eyebrow">Professional diagram maker</span>
+          <h1>Project Architect</h1>
+          <p>
+            Build crisp flowcharts and system diagrams for lab records, mini
+            projects, and documentation without leaving College Daddy.
+          </p>
+          <div class="hero-points">
+            <span>Grid-snapped 2D canvas</span>
+            <span>Shape-aware connectors</span>
+            <span>PNG and SVG export</span>
+          </div>
+        </div>
+        <div class="hero-card card">
+          <h2>How it works</h2>
+          <ol>
+            <li>Drag a shape from the palette or click to insert it.</li>
+            <li>Move blocks around and connect them in one click.</li>
+            <li>Edit labels, then export the final diagram for your report.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="architect-shell container">
+        <aside class="architect-panel card palette-panel">
+          <div class="panel-heading">
+            <h2>Elements</h2>
+            <p>Drag onto the canvas or click to add.</p>
+          </div>
+
+          <div class="shape-palette" role="list" aria-label="Diagram shapes">
+            <button
+              class="shape-chip"
+              data-shape="terminator"
+              draggable="true"
+              type="button"
+            >
+              <span class="shape-preview preview-pill"></span>
+              Start / End
+            </button>
+            <button
+              class="shape-chip"
+              data-shape="process"
+              draggable="true"
+              type="button"
+            >
+              <span class="shape-preview preview-rect"></span>
+              Process
+            </button>
+            <button
+              class="shape-chip"
+              data-shape="decision"
+              draggable="true"
+              type="button"
+            >
+              <span class="shape-preview preview-diamond"></span>
+              Decision
+            </button>
+            <button
+              class="shape-chip"
+              data-shape="input"
+              draggable="true"
+              type="button"
+            >
+              <span class="shape-preview preview-input"></span>
+              Input / Output
+            </button>
+          </div>
+
+          <div class="starter-actions">
+            <button class="btn btn-secondary" id="loadSampleBtn" type="button">
+              Load Sample Flow
+            </button>
+            <button class="btn btn-secondary" id="clearBoardBtn" type="button">
+              Clear Board
+            </button>
+          </div>
+        </aside>
+
+        <section class="canvas-column">
+          <div class="workspace-toolbar card" aria-label="Canvas tools">
+            <div class="toolbar-group">
+              <button class="btn btn-primary" id="connectBtn" type="button">
+                Connect Nodes
+              </button>
+              <button class="btn btn-secondary" id="duplicateBtn" type="button">
+                Duplicate
+              </button>
+              <button class="btn btn-secondary" id="deleteBtn" type="button">
+                Delete
+              </button>
+            </div>
+            <div class="toolbar-group">
+              <button class="btn btn-secondary" id="exportSvgBtn" type="button">
+                Export SVG
+              </button>
+              <button class="btn btn-secondary" id="exportPngBtn" type="button">
+                Export PNG
+              </button>
+            </div>
+          </div>
+
+          <div class="canvas-card card">
+            <div class="canvas-meta">
+              <div>
+                <h2>Diagram Canvas</h2>
+                <p>Snap-enabled workspace for polished academic diagrams.</p>
+              </div>
+              <span class="mode-pill" id="modePill">Select mode</span>
+            </div>
+
+            <div class="canvas-stage" id="canvasStage">
+              <svg
+                id="diagramCanvas"
+                class="diagram-canvas"
+                viewBox="0 0 1200 760"
+                role="img"
+                aria-label="Project Architect drawing canvas"
+              >
+                <defs>
+                  <marker
+                    id="arrowhead"
+                    markerWidth="12"
+                    markerHeight="12"
+                    refX="10"
+                    refY="6"
+                    orient="auto"
+                    markerUnits="strokeWidth"
+                  >
+                    <path d="M0,0 L12,6 L0,12 z" class="arrow-head"></path>
+                  </marker>
+                  <pattern
+                    id="gridPattern"
+                    width="20"
+                    height="20"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path d="M 20 0 L 0 0 0 20" class="grid-line"></path>
+                  </pattern>
+                </defs>
+                <rect width="1200" height="760" fill="url(#gridPattern)"></rect>
+                <g id="edgeLayer"></g>
+                <g id="nodeLayer"></g>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <aside class="architect-panel card inspector-panel">
+          <div class="panel-heading">
+            <h2>Inspector</h2>
+            <p>Adjust the selected block or connector.</p>
+          </div>
+
+          <div class="inspector-state" id="selectionSummary">
+            No element selected
+          </div>
+
+          <label class="field">
+            <span>Label</span>
+            <input
+              id="labelInput"
+              type="text"
+              placeholder="Select a node to rename"
+              disabled
+            />
+          </label>
+
+          <div class="size-grid">
+            <label class="field">
+              <span>Width</span>
+              <input
+                id="widthInput"
+                type="number"
+                min="80"
+                max="320"
+                step="20"
+                disabled
+              />
+            </label>
+            <label class="field">
+              <span>Height</span>
+              <input
+                id="heightInput"
+                type="number"
+                min="60"
+                max="220"
+                step="20"
+                disabled
+              />
+            </label>
+          </div>
+
+          <div class="inspector-note" id="inspectorNote">
+            Tip: in connect mode, click one shape and then another to draw a
+            smart arrow.
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="../assets/js/components/navigation.js" defer></script>
+    <script src="../assets/js/components/footer.js"></script>
+    <script src="../assets/js/pages/project-architect.js"></script>
+  </body>
+</html>
