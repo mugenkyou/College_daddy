@@ -16,6 +16,7 @@ from groq import Groq
 load_dotenv()
 
 app = Flask(__name__, static_folder='assets', template_folder='pages')
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # 16 MB max upload size
 CORS(app)
 
 UPLOAD_ROOT = 'data/notes'
