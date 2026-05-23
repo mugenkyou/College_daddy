@@ -1023,3 +1023,154 @@ body > header .fullscreen-btn:active {
     margin-top: 0.3rem;
     font-style: italic;
 }
+
+/* Gamified Task Tracker Styles */
+.task-tracker-section {
+    padding: 1rem 1.5rem 3rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.gamified-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius, 16px);
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.user-rank-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rank-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.level-badge {
+    background: var(--primary-color);
+    color: #000;
+    font-weight: 800;
+    padding: 0.5rem 0.8rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    box-shadow: 0 0 15px rgba(0, 157, 255, 0.4);
+}
+
+.rank-titles h3 {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.xp-label {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    margin: 0;
+    font-weight: 600;
+}
+
+.achievements-preview {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.achievements-preview i {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.achievements-preview i.unlocked {
+    color: #ffd700;
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+}
+
+.xp-bar-container {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.xp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), #00ff88);
+    box-shadow: 0 0 10px rgba(0, 157, 255, 0.5);
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.task-input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.task-input-group input {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-light);
+    padding: 0.75rem;
+    border-radius: 8px;
+}
+
+.task-input-group select {
+    background: var(--bg-darker);
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0 0.5rem;
+}
+
+.quest-board {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1.2rem;
+    min-height: 150px;
+}
+
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 0.5rem;
+}
+
+.empty-tasks {
+    text-align: center;
+    color: var(--text-gray);
+    padding: 2rem 0;
+}
+
+.empty-tasks i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.2;
+}
+
+.milestones-row {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.2rem;
+}
+
+.milestone-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
