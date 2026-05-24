@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Dashboard Demo</title>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/cgpa-dashboard.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .demo-header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .demo-controls {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .control-group label {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        .control-group input {
+            padding: 0.75rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            background: var(--bg-darker);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        .demo-button {
+            grid-column: 1 / -1;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #009dff, #00c8ff);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 157, 255, 0.4);
+        }
+        .theme-toggle-demo {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle-demo" onclick="toggleTheme()">Toggle Theme</button>
+    
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>🎓 CGPA Visual Dashboard Demo</h1>
+            <p>Interactive 2D visualization built with native SVG and CSS</p>
+        </div>
+
+        <div class="demo-controls">
+            <div class="control-group">
+                <label for="demoCurrentCGPA">Current CGPA</label>
+                <input type="number" id="demoCurrentCGPA" value="7.8" step="0.1" min="0" max="10">
+            </div>
+            <div class="control-group">
+                <label for="demoTargetCGPA">Target CGPA</label>
+                <input type="number" id="demoTargetCGPA" value="8.5" step="0.1" min="0" max="10">
+            </div>
+            <div class="control-group">
+                <label for="demoRequiredCGPA">Required per Semester</label>
+                <input type="number" id="demoRequiredCGPA" value="9.2" step="0.1" min="0" max="10">
+            </div>
+            <button class="demo-button" onclick="updateDashboard()">
+                Update Dashboard
+            </button>
+        </div>
+
+        <div id="visual-dashboard" class="visual-dashboard visible">
+            <div class="dashboard-header">
+                <h2>
+                    <i class="fas fa-chart-pie"></i>
+                    Visual Performance Dashboard
+                </h2>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card radial-meter-card">
+                    <h3>Current CGPA</h3>
+                    <div class="radial-meter-container" id="radialMeterContainer"></div>
+                </div>
+
+                <div class="dashboard-card target-tracker-card">
+                    <h3>Target Progress</h3>
+                    <div class="target-tracker-container" id="targetTrackerContainer"></div>
+                </div>
+
+                <div class="dashboard-card progress-bars-card">
+                    <h3>Performance Breakdown</h3>
+                    <div class="progress-bars-container" id="progressBarsContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/pages/cgpa-dashboard.js"></script>
+    <script>
+        // Initialize theme
+        document.documentElement.setAttribute('data-theme', 'dark');
+
+        // Toggle theme function
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            
+            // Re-render dashboard to update colors
+            updateDashboard();
+        }
+
+        // Update dashboard function
+        function updateDashboard() {
+            const currentCGPA = parseFloat(document.getElementById('demoCurrentCGPA').value);
+            const targetCGPA = parseFloat(document.getElementById('demoTargetCGPA').value);
+            const requiredCGPA = parseFloat(document.getElementById('demoRequiredCGPA').value);
+
+            if (window.CGPADashboard) {
+                CGPADashboard.render({
+                    currentCGPA: currentCGPA,
+                    targetCGPA: targetCGPA,
+                    requiredCGPA: requiredCGPA
+                });
+            }
+        }
+
+        // Initial render
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                updateDashboard();
+            }, 100);
+        });
+    </script>
+</body>
+</html>

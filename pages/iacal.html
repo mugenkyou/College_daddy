@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/css/ia.css">
+    <link rel="stylesheet" href="../assets/css/cgpa-dashboard.css">
     <!-- Theme initialization script - runs before page render to prevent flash -->
     <script>
       (function() {
@@ -205,6 +206,36 @@
             </form>
 
             <div id="results" class="result-section">
+                <!-- Visual Dashboard for Internal Marks -->
+                <div id="internal-marks-dashboard" class="visual-dashboard">
+                    <div class="dashboard-header">
+                        <h2>
+                            <i class="fas fa-chart-bar"></i>
+                            Internal Marks Breakdown
+                        </h2>
+                    </div>
+                    
+                    <div class="dashboard-grid internal-marks-grid">
+                        <!-- Component Progress Bars -->
+                        <div class="dashboard-card internal-components-card">
+                            <h3>Component-wise Performance</h3>
+                            <div class="internal-progress-bars" id="internalProgressBars"></div>
+                        </div>
+
+                        <!-- Radial Total Meter -->
+                        <div class="dashboard-card internal-radial-card">
+                            <h3>Total Internal Marks</h3>
+                            <div class="radial-meter-container" id="internalRadialMeter"></div>
+                        </div>
+
+                        <!-- Eligibility Status -->
+                        <div class="dashboard-card eligibility-status-card">
+                            <h3>SEE Eligibility Status</h3>
+                            <div class="eligibility-visual" id="eligibilityVisual"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Standard Results -->
                 <div class="regular-results">
                     <div class="result-item">
@@ -338,6 +369,8 @@
 
     <script src="../assets/js/components/navigation.js" defer></script>
     <script src="../assets/js/components/footer.js"></script>
+    <script src="../assets/js/pages/cgpa-dashboard.js" defer></script>
+    <script src="../assets/js/pages/ia-dashboard.js" defer></script>
     <script src="../assets/js/pages/ia.js"></script>
     
 <script src="../assets/js/components/back-to-top.js"></script>

@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/css/cgpa.css">
+    <link rel="stylesheet" href="../assets/css/cgpa-dashboard.css">
     <link rel="stylesheet" href="../assets/css/cgpa-tracker.css">
 
     <!-- Preload Critical Resources -->
@@ -55,6 +56,7 @@
     <script src="../assets/js/components/footer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+    <script src="../assets/js/pages/cgpa-dashboard.js" defer></script>
     <script src="../assets/js/pages/cgpa.js" defer></script>
     <script src="../assets/js/pages/cgpa-tracker.js" defer></script>
     <!-- Theme initialization script - runs before page render to prevent flash -->
@@ -176,6 +178,36 @@
             <div id="error" role="alert" aria-live="polite"></div>
 
             <div id="result" aria-live="polite">
+                <!-- Visual Dashboard Section -->
+                <div id="visual-dashboard" class="visual-dashboard">
+                    <div class="dashboard-header">
+                        <h2>
+                            <i class="fas fa-chart-pie"></i>
+                            Visual Performance Dashboard
+                        </h2>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <!-- Radial CGPA Meter -->
+                        <div class="dashboard-card radial-meter-card">
+                            <h3>Current CGPA</h3>
+                            <div class="radial-meter-container" id="radialMeterContainer"></div>
+                        </div>
+
+                        <!-- Target Tracker -->
+                        <div class="dashboard-card target-tracker-card">
+                            <h3>Target Progress</h3>
+                            <div class="target-tracker-container" id="targetTrackerContainer"></div>
+                        </div>
+
+                        <!-- Internal Marks Progress Bars -->
+                        <div class="dashboard-card progress-bars-card">
+                            <h3>Performance Breakdown</h3>
+                            <div class="progress-bars-container" id="progressBarsContainer"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="result-grid">
                     <div class="result-item">
                         <div class="result-icon">
