@@ -466,6 +466,70 @@
             </div>
         </div>
 
+        <!-- SECTION: GAMIFIED TASK TRACKER -->
+        <div class="container task-tracker-section">
+            <div class="gamified-card">
+                <div class="user-rank-header">
+                    <div class="rank-info">
+                        <div class="level-badge">Lv. <span id="userLevel">1</span></div>
+                        <div class="rank-titles">
+                            <h3 id="rankName">Novice Scholar</h3>
+                            <p class="xp-label"><span id="currentXP">0</span> / <span id="nextLevelXP">500</span> XP</p>
+                        </div>
+                    </div>
+                    <div class="achievements-preview">
+                        <i class="fas fa-award locked" id="badge-focus" title="Deep Focus - Reach Level 3"></i>
+                        <i class="fas fa-fire-alt locked" id="badge-streak" title="Daily Warrior - 3 tasks today"></i>
+                        <i class="fas fa-trophy locked" id="badge-tasks" title="Goal Crusher - 1000 Total Points"></i>
+                    </div>
+                </div>
+                
+                <div class="xp-bar-container">
+                    <div class="xp-bar-fill" id="xpBarFill" style="width: 0%"></div>
+                </div>
+
+                <div class="task-manager-content">
+                    <div class="task-input-group">
+                        <input type="text" id="taskInput" placeholder="What is your next quest?">
+                        <select id="taskCategory">
+                            <option value="study">Study</option>
+                            <option value="assignment">Assignment</option>
+                            <option value="revision">Revision</option>
+                            <option value="project">Project</option>
+                        </select>
+                        <button id="addTaskBtn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <div class="quest-board">
+                        <div class="board-header">
+                            <h4><i class="fas fa-scroll"></i> Active Quests</h4>
+                            <span class="task-count" id="activeTaskCount">0 active</span>
+                        </div>
+                        <div id="taskList" class="task-list">
+                            <!-- Tasks will be injected here -->
+                            <div class="empty-tasks">
+                                <i class="fas fa-tasks"></i>
+                                <p>Your quest board is empty. Add a task to start earning XP!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="milestones-row">
+                    <div class="milestone-item">
+                        <span class="m-val" id="dailyGoalProgress">0/3</span>
+                        <span class="m-lbl">Daily Quests</span>
+                    </div>
+                    <div class="milestone-item">
+                        <span class="m-val" id="totalPointsDisplay">0</span>
+                        <span class="m-lbl">Total Points</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- SECTION 2: STATS + CALENDAR -->
         <div class="progress-tracking-wrapper">
             <div class="progress-tracking-section">
@@ -663,6 +727,7 @@
     <!-- Progress tracking scripts -->
     <script src="../roadmap_assets/js/pomodoroStorage.js"></script>
     <script src="../roadmap_assets/js/progress.js"></script>
+    <script src="../assets/js/pages/task-tracker.js"></script>
     <script src="../assets/js/pages/pomodoro.js"></script>
     <script src="../assets/js/components/footer.js"></script>
 

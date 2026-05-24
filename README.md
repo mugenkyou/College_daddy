@@ -27,6 +27,7 @@ The original name, "College Buddy," was not available as a domain, so we rebrand
 - **Internal Marks Calculator**: Predict your internal marks and assess your academic standing. It also helps determine if you are eligible for the end-semester exam and calculates how many marks you need in the final exam to achieve your desired grade.
 - **Notes Repository**: Access all 8 semesters of engineering notes in one place.
 - **Pomodoro Study Timer**: Boost productivity with a built-in study timer designed for effective learning. It also includes built-in study music to help maintain focus.
+- **Gamified Task Tracker**: Manage assignments and study goals with an interactive XP system, levels, and achievement badges to stay motivated.
 - **Roadmaps & Career Guidance**: Get structured learning roadmaps for various career paths, including AI, Full Stack Development, and Cybersecurity. Each roadmap includes recommended learning resources and skill-building steps.
 - **Aptitude Preparation**: Direct access to aptitude test preparation resources via IndiaBix, offering practice questions in quantitative, logical, and verbal reasoning, along with interview preparation materials.
 
@@ -222,4 +223,3 @@ Your contributions help improve College Daddy and support students in their acad
 *Getting notes from all semesters takes a lot of time, so most of the upcoming commits will be focused on uploading notes from other semesters.*
 
 *Developed with students in mind, for students by students.*
-
