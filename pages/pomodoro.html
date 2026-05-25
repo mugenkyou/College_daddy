@@ -364,6 +364,7 @@
                 <a href="notes.html" class="nav-link">Notes</a>
                 <a href="roadmap.html" class="nav-link">Roadmap</a>
                 <a href="events.html" class="nav-link">Events</a>
+                <a href="project-architect.html" class="nav-link">Architect</a>
                 <div class="timer-nav-controls">
                     <div class="settings-icon" id="settings-icon" aria-label="Timer settings" title="Settings"></div>
                     <button id="fullscreenBtn" class="fullscreen-btn" aria-label="Toggle fullscreen" title="Fullscreen">
@@ -407,6 +408,15 @@
                     <div class="settings-group">
                         <label class="settings-label">Pomodoros until Long Break</label>
                         <input type="number" class="settings-input" id="pomodoros-count" value="4" min="1" max="10">
+                    </div>
+                    <div class="settings-group" style="grid-column: 1 / -1;">
+                        <label class="settings-label">Study Topic (For Quiz)</label>
+                        <input type="text" class="settings-input" id="study-topic" placeholder="e.g. Data Structures, React.js" value="General Knowledge">
+                    </div>
+                    <div class="settings-group" style="grid-column: 1 / -1;">
+                        <label class="settings-label">Upload Notes (For Quiz Context)</label>
+                        <input type="file" class="settings-input" id="quiz-notes" accept=".pdf,.txt" style="padding: 0.5rem; background: var(--surface);">
+                        <small style="color: var(--text-muted); font-size: 0.8rem; margin-top: 5px; display: block;">If uploaded, the AI will strictly use this document to generate the quiz.</small>
                     </div>
                 </div>
                 <button class="btn btn-secondary" id="apply-settings">Apply Settings</button>
@@ -453,6 +463,70 @@
                     <button class="btn btn-secondary" id="add-youtube">Load Music</button>
                 </div>
                 <div class="youtube-container"></div>
+            </div>
+        </div>
+
+        <!-- SECTION: GAMIFIED TASK TRACKER -->
+        <div class="container task-tracker-section">
+            <div class="gamified-card">
+                <div class="user-rank-header">
+                    <div class="rank-info">
+                        <div class="level-badge">Lv. <span id="userLevel">1</span></div>
+                        <div class="rank-titles">
+                            <h3 id="rankName">Novice Scholar</h3>
+                            <p class="xp-label"><span id="currentXP">0</span> / <span id="nextLevelXP">500</span> XP</p>
+                        </div>
+                    </div>
+                    <div class="achievements-preview">
+                        <i class="fas fa-award locked" id="badge-focus" title="Deep Focus - Reach Level 3"></i>
+                        <i class="fas fa-fire-alt locked" id="badge-streak" title="Daily Warrior - 3 tasks today"></i>
+                        <i class="fas fa-trophy locked" id="badge-tasks" title="Goal Crusher - 1000 Total Points"></i>
+                    </div>
+                </div>
+                
+                <div class="xp-bar-container">
+                    <div class="xp-bar-fill" id="xpBarFill" style="width: 0%"></div>
+                </div>
+
+                <div class="task-manager-content">
+                    <div class="task-input-group">
+                        <input type="text" id="taskInput" placeholder="What is your next quest?">
+                        <select id="taskCategory">
+                            <option value="study">Study</option>
+                            <option value="assignment">Assignment</option>
+                            <option value="revision">Revision</option>
+                            <option value="project">Project</option>
+                        </select>
+                        <button id="addTaskBtn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <div class="quest-board">
+                        <div class="board-header">
+                            <h4><i class="fas fa-scroll"></i> Active Quests</h4>
+                            <span class="task-count" id="activeTaskCount">0 active</span>
+                        </div>
+                        <div id="taskList" class="task-list">
+                            <!-- Tasks will be injected here -->
+                            <div class="empty-tasks">
+                                <i class="fas fa-tasks"></i>
+                                <p>Your quest board is empty. Add a task to start earning XP!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="milestones-row">
+                    <div class="milestone-item">
+                        <span class="m-val" id="dailyGoalProgress">0/3</span>
+                        <span class="m-lbl">Daily Quests</span>
+                    </div>
+                    <div class="milestone-item">
+                        <span class="m-val" id="totalPointsDisplay">0</span>
+                        <span class="m-lbl">Total Points</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -593,6 +667,7 @@
             </div>
         </div>
 
+
         <!-- SECTION 4: DATA MANAGEMENT -->
         <div class="container">
             <div class="data-management" style="margin-top: 30px;">
@@ -652,6 +727,7 @@
     <!-- Progress tracking scripts -->
     <script src="../roadmap_assets/js/pomodoroStorage.js"></script>
     <script src="../roadmap_assets/js/progress.js"></script>
+    <script src="../assets/js/pages/task-tracker.js"></script>
     <script src="../assets/js/pages/pomodoro.js"></script>
     <script src="../assets/js/components/footer.js"></script>
 
@@ -681,5 +757,38 @@
     });
     </script>
 <script src="../assets/js/components/back-to-top.js"></script>
+        <!-- SECTION 3: QUIZ MODAL -->
+        <div class="quiz-modal-overlay" id="quiz-modal">
+            <div class="quiz-modal-content">
+                <div id="quiz-loading" class="quiz-loading">
+                    <div class="spinner"></div>
+                    <p>Generating your quiz...</p>
+                </div>
+                
+                <div id="quiz-container" class="quiz-container" style="display: none;">
+                    <div class="quiz-header">
+                        <h2>Post-Session Quiz</h2>
+                        <span class="quiz-progress" id="quiz-progress">Question 1/5</span>
+                    </div>
+                    <div class="quiz-question" id="quiz-question"></div>
+                    <div class="quiz-options" id="quiz-options"></div>
+                    <div class="quiz-footer">
+                        <button class="btn btn-secondary" id="skip-quiz">Skip Quiz</button>
+                        <button class="btn btn-primary" id="next-question" disabled>Next</button>
+                    </div>
+                </div>
+
+                <div id="quiz-summary" class="quiz-summary" style="display: none;">
+                    <h2>Quiz Summary</h2>
+                    <div class="quiz-score">
+                        <span class="score-value" id="score-value">0</span>
+                        <span class="score-total">/ 5</span>
+                    </div>
+                    <p id="score-message">Good job! Keep it up.</p>
+                    <div class="quiz-review" id="quiz-review"></div>
+                    <button class="btn btn-primary" id="finish-quiz" style="margin-top: 20px; width: 100%;">Continue to Break</button>
+                </div>
+            </div>
+        </div>
 </body>
 </html>

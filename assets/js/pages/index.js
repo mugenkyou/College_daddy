@@ -37,7 +37,12 @@ function initTypingAnimation() {
     return;
   }
 
-  const words = ["CGPA Calculator", "Study Timer", "Career Roadmaps"];
+  const words = [
+    "CGPA Calculator",
+    "Study Timer",
+    "Career Roadmaps",
+    "Project Architect",
+  ];
   let wordIndex = 0;
   let letterIndex = 0;
 

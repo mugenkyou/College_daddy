@@ -40,11 +40,14 @@ function showTab(tabName) {
 
     const statsTab = document.getElementById('statsTab');
     const calendarTab = document.getElementById('calendarTab');
+    const typingTab = document.getElementById('typingTab');
 
     if (tabName === 'stats' && statsTab) {
         statsTab.classList.add('active');
-    } else if (calendarTab) {
+    } else if (tabName === 'calendar' && calendarTab) {
         calendarTab.classList.add('active');
+    } else if (tabName === 'typing' && typingTab) {
+        typingTab.classList.add('active');
     }
 
     // Update tab content
@@ -54,13 +57,17 @@ function showTab(tabName) {
 
     const statsContent = document.getElementById('statsContent');
     const calendarContent = document.getElementById('calendarContent');
+    const typingContent = document.getElementById('typingContent');
 
     if (tabName === 'stats' && statsContent) {
         statsContent.classList.add('active');
         loadStatistics();
-    } else if (calendarContent) {
+    } else if (tabName === 'calendar' && calendarContent) {
         calendarContent.classList.add('active');
         renderCalendar();
+    } else if (tabName === 'typing' && typingContent) {
+        typingContent.classList.add('active');
+        loadTypingStatistics();
     }
 
     currentTab = tabName;
@@ -334,3 +341,66 @@ function clearAllData() {
 
 
 console.log('Progress page loaded');
+
+// Typing Statistics
+function loadTypingStatistics() {
+    const history = JSON.parse(localStorage.getItem('cd_typing')) || [];
+    
+    const testsTaken = history.length;
+    let totalWpm = 0;
+    let totalAcc = 0;
+    let bestWpm = 0;
+
+    history.forEach(item => {
+        totalWpm += item.wpm;
+        totalAcc += item.accuracy;
+        if (item.wpm > bestWpm) {
+            bestWpm = item.wpm;
+        }
+    });
+
+    const avgWpm = testsTaken > 0 ? Math.round(totalWpm / testsTaken) : 0;
+    const avgAcc = testsTaken > 0 ? Math.round(totalAcc / testsTaken) : 0;
+
+    const elTestsTaken = document.getElementById('typingTestsTaken');
+    const elAvgWpm = document.getElementById('typingAvgWpm');
+    const elAvgAcc = document.getElementById('typingAvgAcc');
+    const elBestWpm = document.getElementById('typingBestWpm');
+    const elHistory = document.getElementById('progressTypingHistory');
+
+    if (elTestsTaken) elTestsTaken.textContent = testsTaken;
+    if (elAvgWpm) elAvgWpm.textContent = avgWpm;
+    if (elAvgAcc) elAvgAcc.textContent = avgAcc + '%';
+    if (elBestWpm) elBestWpm.textContent = bestWpm;
+
+    if (elHistory) {
+        if (testsTaken === 0) {
+            elHistory.innerHTML = '<p style="color: var(--text-gray); text-align: center;">No typing history yet.</p>';
+        } else {
+            elHistory.innerHTML = '';
+            // Show top 5 most recent
+            history.slice().reverse().slice(0, 5).forEach(entry => {
+                const item = document.createElement('div');
+                item.style.cssText = 'display: flex; justify-content: space-between; align-items: center; background: var(--bg-dark, #121212); padding: 16px; border-radius: 8px; border-left: 4px solid var(--primary-color, #2196F3);';
+                
+                item.innerHTML = `
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <span style="color: var(--text-light); font-weight: 600;">${entry.language} - ${entry.difficulty}</span>
+                        <span style="color: var(--text-gray); font-size: 0.85rem;">${entry.date}</span>
+                    </div>
+                    <div style="display: flex; gap: 20px; text-align: right;">
+                        <div>
+                            <div style="color: var(--text-gray); font-size: 0.8rem; text-transform: uppercase;">WPM</div>
+                            <div style="color: var(--primary-color); font-weight: bold; font-size: 1.2rem;">${entry.wpm}</div>
+                        </div>
+                        <div>
+                            <div style="color: var(--text-gray); font-size: 0.8rem; text-transform: uppercase;">ACC</div>
+                            <div style="color: var(--primary-color); font-weight: bold; font-size: 1.2rem;">${entry.accuracy}%</div>
+                        </div>
+                    </div>
+                `;
+                elHistory.appendChild(item);
+            });
+        }
+    }
+}

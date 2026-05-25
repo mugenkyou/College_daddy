@@ -54,6 +54,7 @@
                 <a href="notes.html" class="nav-link">Notes</a>
                 <a href="roadmap.html" class="nav-link">Roadmap</a>
                 <a href="events.html" class="nav-link">Events</a>
+                <a href="project-architect.html" class="nav-link">Architect</a>
 
                 <button
                     class="theme-toggle"
@@ -82,6 +83,9 @@
                 </button>
                 <button class="tab-btn" onclick="showTab('calendar')" id="calendarTab">
                     <i class="fas fa-calendar"></i> Calendar
+                </button>
+                <button class="tab-btn" onclick="showTab('typing')" id="typingTab">
+                    <i class="fas fa-keyboard"></i> Typing
                 </button>
             </div>
 
@@ -205,6 +209,49 @@
                             <span class="detail-value" id="detailMinutes">0</span>
                             <span class="detail-label">Minutes</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Tab -->
+            <div id="typingContent" class="tab-content" style="display:none;">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-keyboard"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="typingTestsTaken">0</div>
+                            <div class="stat-label">Tests Taken</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="typingAvgWpm">0</div>
+                            <div class="stat-label">Average WPM</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-bullseye"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="typingAvgAcc">0%</div>
+                            <div class="stat-label">Average Accuracy</div>
+                        </div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="typingBestWpm">0</div>
+                            <div class="stat-label">Best WPM</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calendar-card" style="margin-top: 30px;">
+                    <div class="calendar-header" style="justify-content: flex-start; margin-bottom: 20px;">
+                        <h2><i class="fas fa-history"></i> Recent Typing History</h2>
+                    </div>
+                    <div id="progressTypingHistory" style="display:flex; flex-direction:column; gap:10px;">
+                        <p style="color: var(--text-gray); text-align: center;">No typing history yet.</p>
                     </div>
                 </div>
             </div>

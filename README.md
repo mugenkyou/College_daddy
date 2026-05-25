@@ -27,6 +27,7 @@ The original name, "College Buddy," was not available as a domain, so we rebrand
 - **Internal Marks Calculator**: Predict your internal marks and assess your academic standing. It also helps determine if you are eligible for the end-semester exam and calculates how many marks you need in the final exam to achieve your desired grade.
 - **Notes Repository**: Access all 8 semesters of engineering notes in one place.
 - **Pomodoro Study Timer**: Boost productivity with a built-in study timer designed for effective learning. It also includes built-in study music to help maintain focus.
+- **Gamified Task Tracker**: Manage assignments and study goals with an interactive XP system, levels, and achievement badges to stay motivated.
 - **Roadmaps & Career Guidance**: Get structured learning roadmaps for various career paths, including AI, Full Stack Development, and Cybersecurity. Each roadmap includes recommended learning resources and skill-building steps.
 - **Aptitude Preparation**: Direct access to aptitude test preparation resources via IndiaBix, offering practice questions in quantitative, logical, and verbal reasoning, along with interview preparation materials.
 
@@ -71,7 +72,19 @@ pip install flask flask-cors werkzeug
 pip install -r requirements.txt
 ```
 
-### 2. Run the Dashboard
+### 2. Environment Setup (For AI Features)
+
+To use the AI-powered features like the Pomodoro Post-Session Quiz or PDF Chatbot, you must set up your environment variables.
+
+1. Create a `.env` file in the root directory.
+2. Add your Groq API key (required for generating the Pomodoro quiz from your notes) and Google Gemini API key (for the chatbot):
+   ```env
+   GROQ_API_KEY="your_groq_api_key_here"
+   GEMINI_API_KEY="your_gemini_api_key_here"
+   ```
+   *Note: You can get a free Groq API key from the [Groq Console](https://console.groq.com/) and a Gemini key from [Google AI Studio](https://aistudio.google.com/).*
+
+### 3. Run the Dashboard
 
 ```bash
 # Start the Flask application
@@ -210,4 +223,3 @@ Your contributions help improve College Daddy and support students in their acad
 *Getting notes from all semesters takes a lot of time, so most of the upcoming commits will be focused on uploading notes from other semesters.*
 
 *Developed with students in mind, for students by students.*
-

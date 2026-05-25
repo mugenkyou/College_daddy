@@ -180,13 +180,13 @@ header {
 }
 
 h1 {
-    text-align: center;
-    font-size: 2.5rem;
+    text-align: left;
+    font-size: 3.5rem;
     margin-bottom: var(--spacing-xl);
-    color: var(--primary-color);
+    color: var(--text-main);
     font-weight: 800;
     letter-spacing: -0.5px;
-}
+    }
 
 /* ===============================
    VERTICAL TIMELINE ROADMAP STYLES WITH COLLAPSIBLE FUNCTIONALITY
@@ -277,7 +277,7 @@ h1 {
 /* Content card - NOW COLLAPSIBLE */
 .section-header {
     flex: 1;
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    background: var(--timeline-card-bg);
     padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
@@ -1449,7 +1449,9 @@ input[type="checkbox"]:checked::after {
     position: relative;
     overflow: hidden;
 }
-
+[data-theme="light"] .roadmap-hero {
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+}
 .roadmap-hero::before {
     content: "";
     position: absolute;
@@ -1476,10 +1478,10 @@ input[type="checkbox"]:checked::after {
     flex: 1;
 }
 
-.hero-text h1 {
+[data-theme="light"] .hero-text h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
-    background: linear-gradient(to right, #fff, #94a3b8);
+    background: linear-gradient(to right, #0f172a, #475569);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-align: left;
@@ -1519,11 +1521,28 @@ input[type="checkbox"]:checked::after {
 .hero-progress-card {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 2rem;
     border-radius: var(--border-radius);
     min-width: 320px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+[data-theme="light"] .hero-progress-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .progress-header {
+    color: #0f172a !important;
+}
+[data-theme="light"] .hero-text p,
+[data-theme="light"] .stat-label,
+[data-theme="light"] .share-label {
+    color: #475569 !important;
+}
+[data-theme="light"] .stat-value {
+    color: var(--primary-color) !important;
 }
 
 .progress-header {
@@ -1542,7 +1561,13 @@ input[type="checkbox"]:checked::after {
     overflow: hidden;
     position: relative;
 }
+[data-theme="light"] .global-progress-bar {
+    background: rgba(0, 0, 0, 0.12);
+}
 
+[data-theme="light"] .progress-header {
+    color: #0f172a !important;
+}
 .global-progress-fill {
     height: 100%;
     background: var(--tech-gradient);
@@ -2110,6 +2135,15 @@ header {
     color: #334155 !important;
 }
 
+[data-theme="light"] .section-content li {
+    color: #1e293b !important;
+    border-bottom-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="light"] .progress-container {
+    background: rgba(0, 0, 0, 0.12);
+}
+
 .roadmap-section.expanded .section-description,
 .roadmap-section.expanded .section-content {
     max-height: 1000px;
@@ -2238,6 +2272,7 @@ header {
 }
 
 [data-theme="light"] {
+    --timeline-card-bg: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
     --background-color: #f1f5f9;
     --bg-card: #ffffff;
     --text-main: #0f172a;     

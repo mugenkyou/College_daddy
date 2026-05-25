@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>College Daddy - Code Typing Speed Test</title>
+    <script src="../assets/js/components/navigation.js" defer></script>
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="stylesheet" href="../assets/css/navigation.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/typing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+      (function() {
+        try {
+          const theme = localStorage.getItem('theme') || 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="../index.html" class="logo" aria-label="College Daddy Home">
+                <i class="fas fa-graduation-cap"></i>
+                <span>College Daddy</span>
+            </a>
+            <div class="nav-actions">
+                <button class="menu-button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
+                <a href="iacal.html" class="nav-link">IA Calculator</a>
+                <a href="pomodoro.html" class="nav-link">Study Timer</a>
+                <a href="typing.html" class="nav-link active">Typing Test</a>
+                <a href="progress.html" class="nav-link">Progress</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="events.html" class="nav-link">Events</a>
+                <button class="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="typing-container">
+        <div class="typing-header">
+            <h1><i class="fas fa-keyboard"></i> Code Typing Speed Test</h1>
+            <p class="subtitle">Practice typing real code snippets across multiple programming languages to improve your coding speed and accuracy.</p>
+        </div>
+
+        <div class="controls-card">
+            <div class="control-group">
+                <label for="languageSelect"><i class="fas fa-code"></i> Language</label>
+                <select id="languageSelect">
+                    <option value="Python">Python</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="C++">C++</option>
+                    <option value="Java">Java</option>
+                    <option value="SQL">SQL</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="difficultySelect"><i class="fas fa-layer-group"></i> Difficulty</label>
+                <select id="difficultySelect">
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" id="startTestBtn"><i class="fas fa-play"></i> Start Test</button>
+        </div>
+
+        <div class="stats-row" style="display:none;" id="liveStats">
+            <div class="stat-box">
+                <div class="stat-label">WPM</div>
+                <div class="stat-value" id="liveWpm">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Accuracy</div>
+                <div class="stat-value" id="liveAccuracy">100%</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Time</div>
+                <div class="stat-value" id="liveTime">0s</div>
+            </div>
+        </div>
+
+        <div class="typing-area" id="typingArea" style="display:none;">
+            <div class="snippet-display" id="snippetDisplay"></div>
+            <textarea class="hidden-input" id="hiddenInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+        </div>
+
+        <div class="result-card" id="resultCard" style="display:none;">
+            <h2><i class="fas fa-flag-checkered"></i> Test Completed!</h2>
+            <div class="result-stats">
+                <div class="result-stat-item">
+                    <span class="result-label">WPM</span>
+                    <span class="result-value" id="finalWpm">0</span>
+                </div>
+                <div class="result-stat-item">
+                    <span class="result-label">Accuracy</span>
+                    <span class="result-value" id="finalAccuracy">0%</span>
+                </div>
+                <div class="result-stat-item">
+                    <span class="result-label">Time</span>
+                    <span class="result-value" id="finalTime">0s</span>
+                </div>
+            </div>
+            <div class="result-actions">
+                <button class="btn btn-secondary" id="tryAgainBtn"><i class="fas fa-redo"></i> Try Again</button>
+                <button class="btn btn-primary" id="nextSnippetBtn"><i class="fas fa-step-forward"></i> Next Snippet</button>
+            </div>
+        </div>
+
+        <div class="history-card">
+            <h3><i class="fas fa-history"></i> Recent History</h3>
+            <div class="history-list" id="historyList">
+                <p class="empty-history">No typing history yet. Start a test to record your stats!</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/pages/typing.js"></script>
+    <script src="../assets/js/components/footer.js"></script>
+    <script src="../assets/js/components/back-to-top.js"></script>
+</body>
+</html>
