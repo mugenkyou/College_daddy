@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | College Daddy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/navigation.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <style>
+        .legal-container {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: var(--surface-1);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .legal-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .legal-header i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .legal-content h2 {
+            margin-top: 2rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .legal-content p {
+            margin-bottom: 1rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        .legal-content ul {
+            margin-bottom: 1.5rem;
+            list-style: none;
+            padding-left: 0;
+        }
+        .legal-content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .legal-content li i {
+            color: var(--primary-color);
+            margin-top: 0.3rem;
+        }
+    </style>
+    <script>
+        (function () {
+            try {
+                const theme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>College Daddy</span>
+            </a>
+            <div class="nav-actions">
+                <button class="menu-button" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <button class="theme-toggle" title="Toggle theme">
+                    <span class="theme-icon"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="legal-container">
+        <div class="legal-header">
+            <i class="fas fa-file-contract"></i>
+            <h1>Terms of Service</h1>
+            <p>Last Updated: May 12, 2026</p>
+        </div>
+
+        <div class="legal-content">
+            <p>By using College Daddy, you agree to the following terms. Please read them carefully as they govern your use of our platform and tools.</p>
+
+            <h2><i class="fas fa-handshake"></i> Acceptance of Terms</h2>
+            <p>By accessing or using College Daddy, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</p>
+
+            <h2><i class="fas fa-user-check"></i> Proper Use</h2>
+            <p>College Daddy is an educational resource meant to assist students in their academic journey. You agree not to:</p>
+            <ul>
+                <li><li><i class="fas fa-times-circle"></i> Use our tools for any illegal or unauthorized purpose.</li></li>
+                <li><li><i class="fas fa-times-circle"></i> Attempt to reverse engineer or disrupt the functionality of our website.</li></li>
+                <li><li><i class="fas fa-times-circle"></i> Use automated scripts to scrape data from our platform.</li></li>
+            </ul>
+
+            <h2><i class="fas fa-exclamation-triangle"></i> Disclaimer</h2>
+            <p>While we strive for 100% accuracy in our calculators and roadmaps, College Daddy is provided "as is" without any warranties. Always cross-verify critical academic data with your official college portal.</p>
+
+            <h2><i class="fas fa-copyright"></i> Intellectual Property</h2>
+            <p>All content, branding, and tool logic are the property of College Daddy and its contributors. You may use our tools for personal education, but commercial redistribution is prohibited.</p>
+        </div>
+    </main>
+
+    <script src="../assets/js/components/navigation.js"></script>
+    <script src="../assets/js/components/footer.js"></script>
+</body>
+</html>

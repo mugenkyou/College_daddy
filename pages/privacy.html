@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | College Daddy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/navigation.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <style>
+        .legal-container {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: var(--surface-1);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .legal-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .legal-header i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .legal-content h2 {
+            margin-top: 2rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .legal-content p {
+            margin-bottom: 1rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        .legal-content ul {
+            margin-bottom: 1.5rem;
+            list-style: none;
+            padding-left: 0;
+        }
+        .legal-content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .legal-content li i {
+            color: var(--primary-color);
+            margin-top: 0.3rem;
+        }
+    </style>
+    <script>
+        (function () {
+            try {
+                const theme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>College Daddy</span>
+            </a>
+            <div class="nav-actions">
+                <button class="menu-button" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="cgpa.html" class="nav-link">CGPA Calculator</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <button class="theme-toggle" title="Toggle theme">
+                    <span class="theme-icon"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="legal-container">
+        <div class="legal-header">
+            <i class="fas fa-user-shield"></i>
+            <h1>Privacy Policy</h1>
+            <p>Last Updated: May 12, 2026</p>
+        </div>
+
+        <div class="legal-content">
+            <p>At College Daddy, we take your privacy seriously. This policy outlines how we handle your data and ensure your information remains secure while you use our tools.</p>
+
+            <h2><i class="fas fa-database"></i> Data Collection</h2>
+            <p>College Daddy is designed to be privacy-first. Most of our tools, including the CGPA Calculator and Study Timer, operate entirely within your browser.</p>
+            <ul>
+                <li><li><i class="fas fa-check-circle"></i> <strong>Local Storage:</strong> Your grades, settings, and progress are stored locally on your device using browser local storage.</li></li>
+                <li><li><i class="fas fa-check-circle"></i> <strong>No Backend Storage:</strong> We do not store your academic records on our servers.</li></li>
+            </ul>
+
+            <h2><i class="fas fa-chart-line"></i> Analytics</h2>
+            <p>We use minimal analytics to understand how our tools are used and to improve the student experience.</p>
+            <ul>
+                <li><li><i class="fas fa-check-circle"></i> <strong>Anonymized Data:</strong> All usage data is anonymized and contains no personally identifiable information.</li></li>
+                <li><li><i class="fas fa-check-circle"></i> <strong>Usage Patterns:</strong> We track which tools are most popular to prioritize future updates.</li></li>
+            </ul>
+
+            <h2><i class="fas fa-lock"></i> Security</h2>
+            <p>Since your data lives on your device, its security depends on your browser's security. We recommend using modern, updated browsers to ensure maximum protection.</p>
+
+            <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+            <p>If you have any questions about our privacy practices, feel free to reach out via our feedback form available in the footer.</p>
+        </div>
+    </main>
+
+    <script src="../assets/js/components/navigation.js"></script>
+    <script src="../assets/js/components/footer.js"></script>
+</body>
+</html>

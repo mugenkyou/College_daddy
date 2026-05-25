@@ -1804,3 +1804,8 @@ input[type=number] {
 [data-theme="light"] #error {
     background-color: rgba(255, 68, 68, 0.07);
 }
+[data-theme='light'] .icon-wrapper {
+    background: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 105, 161, 0.2);
+}

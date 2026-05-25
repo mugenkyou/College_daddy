@@ -66,49 +66,9 @@ function initTypingAnimation() {
   type();
 }
 
-function initFaqAccessibility() {
-  const questions = document.querySelectorAll(".faq-question");
 
-  questions.forEach((question) => {
-    if (question.tagName.toLowerCase() === "button") {
-      return;
-    }
-
-    question.setAttribute("role", "button");
-    question.setAttribute("tabindex", "0");
-    question.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        question.click();
-      }
-    });
-  });
-}
-
-function initFaqToggle() {
-  const faqItems = document.querySelectorAll(".faq-item");
-
-  faqItems.forEach((item) => {
-    const trigger = item.querySelector(".faq-question");
-    if (!trigger) {
-      return;
-    }
-
-    trigger.addEventListener("click", () => {
-      faqItems.forEach((otherItem) => {
-        if (otherItem !== item) {
-          otherItem.classList.remove("active");
-        }
-      });
-
-      item.classList.toggle("active");
-    });
-  });
-}
 
 document.addEventListener("DOMContentLoaded", () => {
   initFeatureCards();
   initTypingAnimation();
-  initFaqAccessibility();
-  initFaqToggle();
 });
