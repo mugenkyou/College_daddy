@@ -174,6 +174,46 @@ function calculateRegularMode() {
                 displayGradeTable(total, false);
             }
         }
+
+        // Update visual dashboard
+        if (window.IADashboard) {
+            window.IADashboard.render({
+                components: [
+                    {
+                        label: 'Series Exams',
+                        icon: 'fas fa-book',
+                        obtained: scaledSeries,
+                        maximum: 30,
+                        threshold: null
+                    },
+                    {
+                        label: 'Assignments',
+                        icon: 'fas fa-tasks',
+                        obtained: scaledAssignments,
+                        maximum: 10,
+                        threshold: null
+                    },
+                    {
+                        label: 'Module Tests',
+                        icon: 'fas fa-clipboard-check',
+                        obtained: scaledModules,
+                        maximum: 10,
+                        threshold: null
+                    },
+                    {
+                        label: 'Grace Marks',
+                        icon: 'fas fa-star',
+                        obtained: graceMarks,
+                        maximum: 10,
+                        threshold: null
+                    }
+                ],
+                totalMarks: total,
+                maxMarks: 50,
+                isEligible: isEligible,
+                threshold: 20
+            });
+        }
     } catch (error) {
         alert('Could not calculate regular mode marks. Please verify your inputs and try again.');
     }
@@ -243,6 +283,53 @@ function calculateLabMode() {
                 const percentage = (total / 75) * 100;
                 displayGradeTable(percentage, true);
             }
+        }
+
+        // Update visual dashboard
+        if (window.IADashboard) {
+            window.IADashboard.render({
+                components: [
+                    {
+                        label: 'Series Exams',
+                        icon: 'fas fa-book',
+                        obtained: scaledSeries / 2,
+                        maximum: 15,
+                        threshold: null
+                    },
+                    {
+                        label: 'Assignments',
+                        icon: 'fas fa-tasks',
+                        obtained: scaledAssignments / 2,
+                        maximum: 5,
+                        threshold: null
+                    },
+                    {
+                        label: 'Module Tests',
+                        icon: 'fas fa-clipboard-check',
+                        obtained: scaledModules / 2,
+                        maximum: 5,
+                        threshold: null
+                    },
+                    {
+                        label: 'Lab Internal',
+                        icon: 'fas fa-flask',
+                        obtained: labInternalMarks,
+                        maximum: 25,
+                        threshold: null
+                    },
+                    {
+                        label: 'Lab External',
+                        icon: 'fas fa-vial',
+                        obtained: labExternalMarks,
+                        maximum: 25,
+                        threshold: null
+                    }
+                ],
+                totalMarks: total,
+                maxMarks: 75,
+                isEligible: isEligible,
+                threshold: 20
+            });
         }
     } catch (error) {
         console.error('Error in calculateLabMode:', error);

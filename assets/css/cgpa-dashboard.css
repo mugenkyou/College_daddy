@@ -1,0 +1,753 @@
+/**
+ * CGPA Visual Dashboard Styles
+ * Native SVG-based visualizations with CSS animations
+ */
+
+/* Dashboard Container */
+.visual-dashboard {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 157, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    animation: fadeInUp 0.6s ease;
+    display: none; /* Hidden by default, shown when results are calculated */
+}
+
+.visual-dashboard.visible {
+    display: block;
+}
+
+[data-theme="light"] .visual-dashboard {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.dashboard-header h2 {
+    color: var(--text-bright);
+    font-size: 1.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 0;
+}
+
+.dashboard-header i {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+}
+
+/* Dashboard Grid Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+    background: var(--bg-darker);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 157, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="light"] .dashboard-card {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.dashboard-card:hover::before {
+    transform: scaleX(1);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 157, 255, 0.2);
+}
+
+.dashboard-card h3 {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+}
+
+/* Radial Meter Styles */
+.radial-meter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.radial-meter-svg {
+    filter: drop-shadow(0 4px 12px rgba(0, 157, 255, 0.3));
+}
+
+.meter-bg {
+    opacity: 0.2;
+}
+
+.meter-progress {
+    transition: stroke-dashoffset 0.3s ease;
+    filter: drop-shadow(0 0 8px currentColor);
+}
+
+.meter-value {
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.meter-grade {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Target Tracker Styles */
+.target-tracker-container {
+    padding: 1rem;
+}
+
+.target-tracker {
+    width: 100%;
+}
+
+.target-tracker-svg {
+    margin-bottom: 1.5rem;
+}
+
+.tracker-line {
+    opacity: 0.3;
+}
+
+.tracker-progress {
+    transition: x2 0.3s ease;
+    filter: drop-shadow(0 0 4px var(--primary-color));
+}
+
+.tracker-marker-current circle,
+.tracker-marker-target circle {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tracker-marker-current circle:hover,
+.tracker-marker-target circle:hover {
+    r: 8;
+    filter: drop-shadow(0 0 8px currentColor);
+}
+
+.tracker-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.tracker-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(0, 157, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 157, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .tracker-stat {
+    background: rgba(0, 102, 204, 0.05);
+    border: 1px solid rgba(0, 102, 204, 0.1);
+}
+
+.tracker-stat:hover {
+    background: rgba(0, 157, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.tracker-stat-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.tracker-stat-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Progress Bars Styles */
+.progress-bars-container {
+    padding: 0.5rem;
+}
+
+.progress-bars-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.progress-bar-wrapper {
+    width: 100%;
+}
+
+.progress-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar-label {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.progress-bar-value {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.progress-bar-svg {
+    display: block;
+    width: 100%;
+}
+
+.bar-bg {
+    opacity: 0.3;
+}
+
+.bar-progress {
+    transition: width 0.3s ease;
+    filter: drop-shadow(0 2px 6px currentColor);
+}
+
+.bar-percent {
+    font-family: 'Roboto', sans-serif;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .visual-dashboard {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .dashboard-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .dashboard-card {
+        padding: 1.25rem;
+    }
+
+    .radial-meter-svg {
+        width: 240px;
+        height: 240px;
+    }
+
+    .tracker-info {
+        grid-template-columns: 1fr;
+    }
+
+    .progress-bar-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .visual-dashboard {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+
+    .dashboard-grid {
+        gap: 1rem;
+    }
+
+    .dashboard-card {
+        padding: 1rem;
+    }
+
+    .radial-meter-svg {
+        width: 200px;
+        height: 200px;
+    }
+
+    .dashboard-header h2 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .visual-dashboard,
+    .dashboard-card,
+    .tracker-stat,
+    .meter-progress,
+    .tracker-progress,
+    .bar-progress {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .visual-dashboard {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+
+    .dashboard-card {
+        break-inside: avoid;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .dashboard-card {
+        border: 2px solid currentColor;
+    }
+
+    .meter-progress,
+    .tracker-progress,
+    .bar-progress {
+        filter: none;
+    }
+}
+
+/* Dark Theme Specific Adjustments */
+[data-theme="dark"] .radial-meter-svg {
+    filter: drop-shadow(0 4px 12px rgba(0, 157, 255, 0.4));
+}
+
+[data-theme="dark"] .meter-progress {
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+/* Light Theme Specific Adjustments */
+[data-theme="light"] .radial-meter-svg {
+    filter: drop-shadow(0 4px 12px rgba(0, 102, 204, 0.2));
+}
+
+[data-theme="light"] .meter-progress {
+    filter: drop-shadow(0 0 6px currentColor);
+}
+
+[data-theme="light"] .dashboard-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 102, 204, 0.15);
+}
+
+/* Loading State */
+.dashboard-card.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.dashboard-card.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 3px solid var(--primary-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Empty State */
+.dashboard-card.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    color: var(--text-muted);
+}
+
+.dashboard-card.empty i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Tooltip for SVG elements */
+.svg-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+}
+
+[data-theme="light"] .svg-tooltip {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.svg-tooltip.visible {
+    opacity: 1;
+}
+
+
+/* ===== Internal Marks Dashboard Specific Styles ===== */
+
+.internal-marks-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .internal-marks-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    .internal-marks-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+}
+
+/* Internal Progress Bars */
+.internal-bars-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.internal-bar-wrapper {
+    width: 100%;
+}
+
+.internal-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.internal-bar-label {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.internal-bar-label i {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.internal-bar-value {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.internal-bar-svg {
+    display: block;
+    width: 100%;
+}
+
+.threshold-line {
+    opacity: 0.6;
+}
+
+/* Eligibility Visual */
+.eligibility-visual-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0.5rem;
+}
+
+.eligibility-status {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.eligibility-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.eligibility-icon.eligible {
+    background: rgba(74, 255, 145, 0.15);
+    color: var(--success-color);
+}
+
+.eligibility-icon.not-eligible {
+    background: rgba(255, 74, 74, 0.15);
+    color: var(--danger-color);
+}
+
+.eligibility-text {
+    flex: 1;
+}
+
+.eligibility-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 0.25rem;
+}
+
+.eligibility-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Threshold Progress */
+.threshold-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.threshold-bar-bg {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    background: var(--bg-darker);
+    border-radius: 15px;
+    overflow: visible;
+}
+
+.threshold-bar-fill {
+    height: 100%;
+    border-radius: 15px;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px currentColor;
+}
+
+.threshold-bar-fill.eligible {
+    background: var(--success-color);
+}
+
+.threshold-bar-fill.not-eligible {
+    background: var(--danger-color);
+}
+
+.threshold-marker {
+    position: absolute;
+    top: -8px;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 46px;
+    background: var(--warning-color);
+    z-index: 2;
+}
+
+.threshold-marker::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: var(--warning-color);
+    border-radius: 50%;
+}
+
+.threshold-marker::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: var(--warning-color);
+    border-radius: 50%;
+}
+
+.threshold-label {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--warning-color);
+    white-space: nowrap;
+    background: var(--card-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.threshold-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Internal Components Card */
+.internal-components-card {
+    grid-column: span 1;
+}
+
+@media (min-width: 1024px) {
+    .internal-components-card {
+        grid-column: span 2;
+    }
+}
+
+/* Radial Card for Internal Marks */
+.internal-radial-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Eligibility Status Card */
+.eligibility-status-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mobile Adjustments for Internal Dashboard */
+@media (max-width: 768px) {
+    .internal-marks-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .internal-bars-list {
+        gap: 1rem;
+    }
+
+    .eligibility-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .eligibility-title {
+        font-size: 1rem;
+    }
+
+    .threshold-bar-bg {
+        height: 25px;
+    }
+}
+
+/* Animation for eligibility icon */
+@keyframes eligibilityPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.eligibility-icon.eligible {
+    animation: eligibilityPulse 2s ease-in-out infinite;
+}
+
+/* Hover effects for internal bars */
+.internal-bar-wrapper:hover .internal-bar-label {
+    color: var(--primary-color);
+}
+
+.internal-bar-wrapper:hover .internal-bar-svg {
+    transform: translateX(3px);
+    transition: transform 0.3s ease;
+}

@@ -138,6 +138,12 @@ function hideAllSections() {
             element.style.display = 'none';
         }
     });
+
+    // Hide visual dashboard
+    const dashboard = document.getElementById('visual-dashboard');
+    if (dashboard) {
+        dashboard.classList.remove('visible');
+    }
 }
 
 function initializeAll() {
@@ -250,6 +256,16 @@ function showResults(requiredCGPA, remainingSem, currentCGPA) {
     // Update charts and company info
     updateCharts();
     updateCompanyEligibility(currentCGPA);
+
+    // Update visual dashboard
+    const targetCGPA = parseFloat(document.getElementById('targetCGPA').value);
+    if (window.CGPADashboard) {
+        window.CGPADashboard.render({
+            currentCGPA: currentCGPA,
+            targetCGPA: targetCGPA,
+            requiredCGPA: requiredCGPA
+        });
+    }
 }
 
 function updateCompanyEligibility(cgpa) {
