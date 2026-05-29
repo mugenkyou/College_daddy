@@ -1,12 +1,17 @@
 window.addEventListener('scroll', function () {
   const btn = document.getElementById('backToTopBtn');
+  if (!btn) return;
   if (window.scrollY > 300) {
-    btn.classList.add('show');
+    btn.style.display = 'flex';
   } else {
-    btn.classList.remove('show');
+    btn.style.display = 'none';
   }
 });
 
-document.getElementById('backToTopBtn').addEventListener('click', function () {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+document.addEventListener('DOMContentLoaded', function () {
+  const btn = document.getElementById('backToTopBtn');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 });
