@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory, render_template, redirect
 from flask_cors import CORS
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 import os
 import json
 from werkzeug.utils import secure_filename
@@ -18,6 +20,15 @@ load_dotenv()
 app = Flask(__name__, static_folder='assets', template_folder='pages')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # 16 MB max upload size
 CORS(app)
+
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=[],
+    storage_uri="memory://",
+)
+
+MAX_QUIZ_QUESTIONS = 20
 
 UPLOAD_ROOT = 'data/notes'
 NOTES_JSON = 'data/notes-data.json'
@@ -272,15 +283,16 @@ def delete_material():
         return jsonify({'success': False, 'message': f'Error: {str(e)}'}), 500
 
 @app.route('/api/quiz/generate', methods=['POST'])
+@limiter.limit("10 per minute")
 def generate_quiz():
     if request.is_json:
         data = request.get_json()
         topic = data.get('topic', 'General Knowledge')
-        count = data.get('count', 5)
+        count = min(int(data.get('count', 5)), MAX_QUIZ_QUESTIONS)
         file = None
     else:
         topic = request.form.get('topic', 'General Knowledge')
-        count = int(request.form.get('count', 5))
+        count = min(int(request.form.get('count', 5)), MAX_QUIZ_QUESTIONS)
         file = request.files.get('file')
     
     api_key = os.getenv("GROQ_API_KEY")
