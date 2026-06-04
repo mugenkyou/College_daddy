@@ -184,6 +184,7 @@ function calculate() {
     hideAllSections();
 
     // Get input values
+    const scale = parseFloat(document.getElementById('cgpaScale').value);
     const currentCGPA = parseFloat(document.getElementById('currentCGPA').value);
     const completedSem = parseInt(document.getElementById('completedSem').value);
     const targetCGPA = parseFloat(document.getElementById('targetCGPA').value);
@@ -197,8 +198,8 @@ function calculate() {
     const remainingSem = 8 - completedSem;
     const requiredCGPA = calculateRequiredCGPA(currentCGPA, completedSem, targetCGPA, remainingSem);
 
-    if (requiredCGPA > 10) {
-        const maxPossible = ((currentCGPA * completedSem + 10 * remainingSem) / 8).toFixed(2);
+    if (replaceCGPA > scale) {
+       const maxPossible = ((currentCGPA * completedSem + scale * remainingSem) / 8).toFixed(2);;
         showError(`Target CGPA is not achievable. Maximum possible CGPA is ${maxPossible}`);
         return;
     }
@@ -212,9 +213,8 @@ function validateInputs(currentCGPA, completedSem, targetCGPA) {
         showError('Please fill in all fields with valid numbers');
         return false;
     }
-
-    if (currentCGPA < 0 || currentCGPA > 10 || targetCGPA < 0 || targetCGPA > 10) {
-        showError('CGPA must be between 0 and 10');
+if (currentCGPA < 0 || currentCGPA > scale || targetCGPA < 0 || targetCGPA > scale) {
+    showError(`CGPA must be between 0 and ${scale}`);
         return false;
     }
 
