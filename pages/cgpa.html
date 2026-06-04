@@ -110,6 +110,21 @@
             </div>
 
             <form id="cgpaForm" onsubmit="event.preventDefault(); calculate();">
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+    <label for="cgpaScale">
+        <i class="fas fa-sliders-h"></i>
+        CGPA Scale
+    </label>
+    <div class="input-wrapper">
+        <select id="cgpaScale" required>
+            <option value="10">10 Point Scale</option>
+            <option value="7">7 Point Scale</option>
+            <option value="5">5 Point Scale</option>
+            <option value="4">4 Point Scale</option>
+        </select>
+        <div class="input-decoration"></div>
+    </div>
+</div>
                 <div class="input-row">
                     <div class="input-group">
                         <label for="currentCGPA">
@@ -117,8 +132,7 @@
                             Current CGPA
                         </label>
                         <div class="input-wrapper">
-                            <input type="number" id="currentCGPA" placeholder="Enter current CGPA" step="0.01" min="0"
-                                max="10" required>
+                            <input type="number" id="currentCGPA" placeholder="Enter current CGPA" step="0.01" min="0" required>
 
                             <div class="tooltip">
                                 <i class="fas fa-question-circle"></i>
@@ -154,7 +168,7 @@
                         </label>
                         <div class="input-wrapper">
                             <input type="number" id="targetCGPA" placeholder="CGPA you want to achieve" step="0.01"
-                                min="0" max="10" required>
+                                min="0"required>
 
                             <div class="tooltip">
                                 <i class="fas fa-question-circle"></i>
