@@ -3,16 +3,8 @@ header {
   top: 0;
   z-index: 1000;
   border-bottom: 1px solid var(--border-color);
-  background: transparent;
-}
-
-header::before {
-  content: "";
-  position: absolute;
-  inset: 0;
   background: color-mix(in srgb, var(--bg-darker) 86%, transparent);
   backdrop-filter: blur(12px);
-  z-index: -1;
 }
 
 .nav-container {
@@ -104,7 +96,7 @@ header::before {
   transition:
     opacity var(--transition-speed) ease,
     visibility var(--transition-speed) ease;
-  z-index: 9999;
+  z-index: 998;
 }
 
 .nav-overlay.active {
@@ -133,7 +125,7 @@ header::before {
     padding: 5.5rem 1rem 1.25rem;
     border-left: 1px solid var(--border-color);
     background: var(--bg-darker);
-    z-index: 10000;
+    z-index: 999;
   }
 
   .nav-links.active {
