@@ -109,6 +109,8 @@ header {
     display: flex;
     align-items: center;
     gap: 0.45rem;
+    position: relative;
+    z-index: 1001;
   }
 
   .nav-links {
@@ -128,7 +130,8 @@ header {
     z-index: 999;
   }
 
-  .nav-links.active {
+  .nav-links.active,
+  .nav-links.open {
     transform: translateX(0);
   }
 

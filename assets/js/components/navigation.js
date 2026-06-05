@@ -109,22 +109,30 @@
       if (!this.navLinks) {
         return;
       }
-      const isActive = this.navLinks.classList.toggle("active");
-      this.overlay?.classList.toggle("active", isActive);
+      const isOpen = this.navLinks.classList.toggle("open");
+      this.overlay?.classList.toggle("active", isOpen);
       this.menuButton?.setAttribute(
         "aria-expanded",
-        isActive ? "true" : "false",
+        isOpen ? "true" : "false",
       );
-      document.body.style.overflow = isActive ? "hidden" : "";
+      const menuIcon = this.menuButton?.querySelector(".menu-icon");
+      if (menuIcon) {
+        menuIcon.textContent = isOpen ? "✕" : "☰";
+      }
+      document.body.style.overflow = isOpen ? "hidden" : "";
     }
 
     closeMenu() {
       if (!this.navLinks) {
         return;
       }
-      this.navLinks.classList.remove("active");
+      this.navLinks.classList.remove("open");
       this.overlay?.classList.remove("active");
       this.menuButton?.setAttribute("aria-expanded", "false");
+      const menuIcon = this.menuButton?.querySelector(".menu-icon");
+      if (menuIcon) {
+        menuIcon.textContent = "☰";
+      }
       document.body.style.overflow = "";
     }
 

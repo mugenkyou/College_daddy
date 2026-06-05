@@ -488,7 +488,8 @@ body > nav h1 {
     order: 3;
   }
 
-  .nav-links.active {
+  .nav-links.active,
+  .nav-links.open {
     display: flex;
   }
 
