@@ -7,6 +7,13 @@ header {
   backdrop-filter: blur(12px);
 }
 
+/* When mobile nav is open, disable header backdrop-filter to avoid
+   creating a containing block that traps fixed-position children. */
+body.nav-open header {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
 .nav-container {
   width: min(var(--container-width), 94%);
   margin-inline: auto;
@@ -96,7 +103,7 @@ header {
   transition:
     opacity var(--transition-speed) ease,
     visibility var(--transition-speed) ease;
-  z-index: 998;
+  z-index: 1001;
 }
 
 .nav-overlay.active {
@@ -125,7 +132,7 @@ header {
     padding: 5.5rem 1rem 1.25rem;
     border-left: 1px solid var(--border-color);
     background: var(--bg-darker);
-    z-index: 999;
+    z-index: 1002;
   }
 
   .nav-links.active {
