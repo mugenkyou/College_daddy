@@ -48,7 +48,7 @@
             aria-label="Toggle navigation menu"
             aria-expanded="false"
           >
-            ☰
+            <i class="fas fa-bars"></i>
           </button>
         </div>
 
@@ -67,7 +67,7 @@
             aria-label="Toggle dark/light theme"
             title="Toggle theme"
           >
-            <span class="theme-icon">🌙</span>
+            <span class="theme-icon"></span>
           </button>
         </nav>
       </div>
@@ -116,13 +116,13 @@
             All
           </button>
           <button type="button" onclick="filterEvents('ongoing', this)">
-            🟢 Ongoing
+            <i class="fas fa-circle text-success" style="font-size: 0.8rem; margin-right: 5px;"></i> Ongoing
           </button>
           <button type="button" onclick="filterEvents('upcoming', this)">
-            🟡 Upcoming
+            <i class="fas fa-circle text-warning" style="font-size: 0.8rem; margin-right: 5px;"></i> Upcoming
           </button>
           <button type="button" onclick="filterEvents('ended', this)">
-            ⚫ Ended
+            <i class="fas fa-circle text-muted" style="font-size: 0.8rem; margin-right: 5px;"></i> Ended
           </button>
         </div>
       </div>

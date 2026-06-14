@@ -51,7 +51,7 @@
       if (!themeIcon) {
         return;
       }
-      themeIcon.textContent = this.theme === "dark" ? "🌙" : "☀️";
+      themeIcon.innerHTML = this.theme === "dark" ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
     }
 
     initThemeToggle() {
