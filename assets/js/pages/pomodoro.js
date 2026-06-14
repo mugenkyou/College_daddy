@@ -110,6 +110,19 @@ class PomodoroTimer {
         if (this.addYoutubeBtn && this.youtubeInput) {
             this.addYoutubeBtn.addEventListener('click', () => this.loadYoutubeVideo());
         }
+
+        // Music Presets
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const url = e.currentTarget.getAttribute('data-url');
+                if (this.youtubeInput) {
+                    this.youtubeInput.value = url;
+                    this.loadYoutubeVideo();
+                    this.showNotification(`Loading ${e.currentTarget.textContent.trim()}...`);
+                }
+            });
+        });
+
         if (this.volumeSlider) {
             this.volumeSlider.addEventListener('input', (e) => this.updateVolume(e.target.value));
         }
@@ -637,7 +650,7 @@ class PomodoroTimer {
     }
 
     extractVideoId(url) {
-        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|live\/)([^#&?]*).*/;
         const match = url.match(regExp);
         return (match && match[2].length === 11) ? match[2] : null;
     }
