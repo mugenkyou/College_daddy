@@ -2378,6 +2378,11 @@ header {
     color: var(--text-muted) !important;
 }
 
+[data-theme="light"] .sidebar-link:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+}
+
 @media (max-width: 900px) {
     .dashboard-layout { grid-template-columns: 1fr; }
     .roadmap-sidebar { display: none; }
