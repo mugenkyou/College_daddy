@@ -407,10 +407,12 @@ body {
 .calculate-btn {
     width: 100%;
     padding: 1.25rem;
-    background: linear-gradient(135deg, #009dff, #00c8ff);  /* Add gradient background */
+    background: linear-gradient(135deg, #009dff, #00c8ff);
+    /* Add gradient background */
     border: none;
     border-radius: 12px;
-    color: white;  /* Changed to white for better contrast */
+    color: white;
+    /* Changed to white for better contrast */
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
@@ -1489,6 +1491,7 @@ body {
     .header-decoration {
         display: none;
     }
+
     /* Mobile styles for companies section */
     .companies-filter {
         justify-content: center;
@@ -1803,4 +1806,11 @@ input[type=number] {
 /* --- Error div --- */
 [data-theme="light"] #error {
     background-color: rgba(255, 68, 68, 0.07);
+}
+
+/* --- Icon wrapper (calculator icon beside the title) --- */
+[data-theme="light"] .icon-wrapper {
+    background: linear-gradient(135deg, #0369a1, #0ea5e9);
+    box-shadow: 0 4px 15px rgba(3, 105, 161, 0.25);
+    color: #ffffff;
 }
