@@ -17,6 +17,9 @@ from groq import Groq
 
 load_dotenv()
 
+# Threading lock to protect concurrent read-modify-write on notes-data.json
+_notes_lock = threading.Lock()
+
 app = Flask(__name__, static_folder='assets', template_folder='pages')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # 16 MB max upload size
 CORS(app)
@@ -85,49 +88,29 @@ def admin_upload():
     if not all([semester_id, branch_id, subject_id, title, pdf]):
         return jsonify({'success': False, 'message': 'Missing required fields.'}), 400
 
-    # Load notes-data.json
-    with open(NOTES_JSON, 'r', encoding='utf-8') as f:
-        notes_data = json.load(f)
-
-    # Find semester, branch, subject
-    semester = next((s for s in notes_data['semesters'] if str(s['id']) == str(semester_id)), None)
-    if not semester:
-        return jsonify({'success': False, 'message': 'Semester not found.'}), 404
-    branch = next((b for b in semester['branches'] if b['id'] == branch_id), None)
-    if not branch:
-        return jsonify({'success': False, 'message': 'Branch not found.'}), 404
-    subject = next((sub for sub in branch['subjects'] if sub['id'] == subject_id), None)
-    if not subject:
-        return jsonify({'success': False, 'message': 'Subject not found.'}), 404
-
-    # Handle file upload and conversion
+    # Handle file upload and conversion first (outside lock for performance)
     safe_filename = secure_filename(pdf.filename)
-    folder_path = os.path.join(UPLOAD_ROOT, f'semester-{semester_id}', branch_id, subject['name'].replace(' ', '-').lower())
+    folder_path = os.path.join(UPLOAD_ROOT, f'semester-{semester_id}', branch_id)
     os.makedirs(folder_path, exist_ok=True)
-    
+
     file_extension = os.path.splitext(safe_filename)[1].lower()
     original_path = os.path.join(folder_path, safe_filename)
     pdf.save(original_path)
-    
+
     # Convert to PDF if not already PDF
     conversion_message = ""
     if file_extension != '.pdf':
         if DocumentConverter.is_supported(file_extension):
             pdf_filename = DocumentConverter.get_converted_filename(safe_filename)
             pdf_path = os.path.join(folder_path, pdf_filename)
-            
+
             success, converted_path, message = DocumentConverter.convert_to_pdf(original_path, pdf_path)
             if success:
                 file_path = pdf_path
                 conversion_message = f" (Converted from {file_extension.upper()} to PDF)"
                 logger.info(f"Document converted: {original_path} -> {pdf_path}")
-                # Delete original file after successful conversion
                 os.remove(original_path)
                 logger.info(f"Original file deleted: {original_path}")
-                # Add converted file path to existing paths to prevent watcher duplicate
-                rel_path_watcher = f"../{file_path.replace(os.path.sep, '/')}"
-                if not any(m['path'] == rel_path_watcher for m in subject.get('materials', [])):
-                    pass  # Will be added by admin upload logic below
             else:
                 logger.error(f"Conversion failed: {message}")
                 return jsonify({'success': False, 'message': f'Conversion failed: {message}'}), 500
@@ -136,34 +119,55 @@ def admin_upload():
     else:
         file_path = original_path
 
-    # Thumbnail generation disabled
+    # Protect read-modify-write on notes-data.json with lock
+    with _notes_lock:
+        # Load notes-data.json
+        with open(NOTES_JSON, 'r', encoding='utf-8') as f:
+            notes_data = json.load(f)
 
-    # Update JSON
-    rel_path = '/' + file_path.replace('\\', '/').replace(os.path.sep, '/')
-    
-    # Check for duplicates before adding (use set for O(1) lookup instead of O(n))
-    rel_path_alt = f"..{rel_path[1:]}"
-    existing_paths = {m['path'] for m in subject.get('materials', [])}
-    if rel_path in existing_paths or rel_path_alt in existing_paths:
-        return jsonify({'success': True, 'message': 'File already exists in database'}), 200
-    
-    # Get file size (fast operation, but do it before JSON write)
-    file_size_kb = os.path.getsize(file_path) // 1024
-    
-    material = {
-        'title': title,
-        'description': description,
-        'path': rel_path,
-        'type': 'pdf',
-        'size': f"{file_size_kb}KB",
-        'uploadDate': datetime.now().strftime('%Y-%m-%d'),
-        'downloadUrl': f"/api/download?path={rel_path}"
-    }
-    subject.setdefault('materials', []).append(material)
+        # Find semester, branch, subject
+        semester = next((s for s in notes_data['semesters'] if str(s['id']) == str(semester_id)), None)
+        if not semester:
+            return jsonify({'success': False, 'message': 'Semester not found.'}), 404
+        branch = next((b for b in semester['branches'] if b['id'] == branch_id), None)
+        if not branch:
+            return jsonify({'success': False, 'message': 'Branch not found.'}), 404
+        subject = next((sub for sub in branch['subjects'] if sub['id'] == subject_id), None)
+        if not subject:
+            return jsonify({'success': False, 'message': 'Subject not found.'}), 404
 
-    # Write JSON without indentation for faster writes (compact JSON)
-    with open(NOTES_JSON, 'w', encoding='utf-8') as f:
-        json.dump(notes_data, f, ensure_ascii=False, separators=(',', ':'))
+        # Update subject folder path
+        subject_folder = subject['name'].replace(' ', '-').lower()
+        folder_path = os.path.join(UPLOAD_ROOT, f'semester-{semester_id}', branch_id, subject_folder)
+        os.makedirs(folder_path, exist_ok=True)
+        file_path = file_path.replace(os.path.join(UPLOAD_ROOT, f'semester-{semester_id}', branch_id), folder_path)
+
+        # Update JSON
+        rel_path = '/' + file_path.replace('\\', '/').replace(os.path.sep, '/')
+
+        # Check for duplicates before adding
+        rel_path_alt = f"..{rel_path[1:]}"
+        existing_paths = {m['path'] for m in subject.get('materials', [])}
+        if rel_path in existing_paths or rel_path_alt in existing_paths:
+            return jsonify({'success': True, 'message': 'File already exists in database'}), 200
+
+        # Get file size
+        file_size_kb = os.path.getsize(file_path) // 1024
+
+        material = {
+            'title': title,
+            'description': description,
+            'path': rel_path,
+            'type': 'pdf',
+            'size': f"{file_size_kb}KB",
+            'uploadDate': datetime.now().strftime('%Y-%m-%d'),
+            'downloadUrl': f"/api/download?path={rel_path}"
+        }
+        subject.setdefault('materials', []).append(material)
+
+        # Write JSON without indentation for faster writes (compact JSON)
+        with open(NOTES_JSON, 'w', encoding='utf-8') as f:
+            json.dump(notes_data, f, ensure_ascii=False, separators=(',', ':'))
 
     return jsonify({
         'success': True, 
@@ -242,41 +246,43 @@ def delete_material():
         return jsonify({'success': False, 'message': 'Missing required fields'}), 400
     
     try:
-        # Load notes-data.json
-        with open(NOTES_JSON, 'r', encoding='utf-8') as f:
-            notes_data = json.load(f)
-        
-        # Find and remove material
-        semester = next((s for s in notes_data['semesters'] if str(s['id']) == str(semester_id)), None)
-        if not semester:
-            return jsonify({'success': False, 'message': 'Semester not found'}), 404
-        
-        branch = next((b for b in semester['branches'] if b['id'] == branch_id), None)
-        if not branch:
-            return jsonify({'success': False, 'message': 'Branch not found'}), 404
-        
-        subject = next((sub for sub in branch['subjects'] if sub['id'] == subject_id), None)
-        if not subject:
-            return jsonify({'success': False, 'message': 'Subject not found'}), 404
-        
-        # Remove material from list
-        original_count = len(subject.get('materials', []))
-        subject['materials'] = [m for m in subject.get('materials', []) if m['path'] != material_path]
-        
-        if len(subject['materials']) == original_count:
-            return jsonify({'success': False, 'message': 'Material not found'}), 404
-        
-        # Delete PDF file
-        pdf_file_path = material_path.lstrip('/')
-        if os.path.exists(pdf_file_path):
-            os.remove(pdf_file_path)
-            logger.info(f"PDF file deleted: {pdf_file_path}")
-        
-        # Update JSON (use compact format for faster writes)
-        with open(NOTES_JSON, 'w', encoding='utf-8') as f:
-            json.dump(notes_data, f, ensure_ascii=False, separators=(',', ':'))
-        
-        return jsonify({'success': True, 'message': 'Material deleted successfully'})
+        # Protect read-modify-write on notes-data.json with lock
+        with _notes_lock:
+            # Load notes-data.json
+            with open(NOTES_JSON, 'r', encoding='utf-8') as f:
+                notes_data = json.load(f)
+
+            # Find and remove material
+            semester = next((s for s in notes_data['semesters'] if str(s['id']) == str(semester_id)), None)
+            if not semester:
+                return jsonify({'success': False, 'message': 'Semester not found'}), 404
+
+            branch = next((b for b in semester['branches'] if b['id'] == branch_id), None)
+            if not branch:
+                return jsonify({'success': False, 'message': 'Branch not found'}), 404
+
+            subject = next((sub for sub in branch['subjects'] if sub['id'] == subject_id), None)
+            if not subject:
+                return jsonify({'success': False, 'message': 'Subject not found'}), 404
+
+            # Remove material from list
+            original_count = len(subject.get('materials', []))
+            subject['materials'] = [m for m in subject.get('materials', []) if m['path'] != material_path]
+
+            if len(subject['materials']) == original_count:
+                return jsonify({'success': False, 'message': 'Material not found'}), 404
+
+            # Delete PDF file
+            pdf_file_path = material_path.lstrip('/')
+            if os.path.exists(pdf_file_path):
+                os.remove(pdf_file_path)
+                logger.info(f"PDF file deleted: {pdf_file_path}")
+
+            # Update JSON (use compact format for faster writes)
+            with open(NOTES_JSON, 'w', encoding='utf-8') as f:
+                json.dump(notes_data, f, ensure_ascii=False, separators=(',', ':'))
+
+            return jsonify({'success': True, 'message': 'Material deleted successfully'})
     
     except Exception as e:
         logger.error(f"Error deleting material: {str(e)}")
