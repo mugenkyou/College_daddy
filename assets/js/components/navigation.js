@@ -74,6 +74,28 @@
       this.navLinks.setAttribute("id", "site-navigation");
       this.menuButton.setAttribute("aria-controls", "site-navigation");
 
+      // remember original position so we can restore on large screens
+      this._originalParent = this.navLinks.parentElement;
+      this._originalNextSibling = this.navLinks.nextSibling;
+
+      // ensure nav is positioned in the correct container for current viewport
+      const placeNavForViewport = () => {
+        if (window.innerWidth <= 960) {
+          if (this.navLinks.parentElement !== document.body) {
+            document.body.appendChild(this.navLinks);
+          }
+        } else {
+          // restore into original parent for desktop layout
+          if (this._originalParent && this.navLinks.parentElement !== this._originalParent) {
+            if (this._originalNextSibling && this._originalNextSibling.parentElement === this._originalParent) {
+              this._originalParent.insertBefore(this.navLinks, this._originalNextSibling);
+            } else {
+              this._originalParent.appendChild(this.navLinks);
+            }
+          }
+        }
+      };
+
       this.overlay = document.querySelector(".nav-overlay");
       if (!this.overlay) {
         this.overlay = document.createElement("div");
@@ -95,10 +117,14 @@
       });
 
       window.addEventListener("resize", () => {
+        placeNavForViewport();
         if (window.innerWidth > 960) {
           this.closeMenu();
         }
       });
+
+      // place correctly on init as well
+      placeNavForViewport();
 
       this.navLinks.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", () => this.closeMenu());
@@ -116,6 +142,7 @@
         isActive ? "true" : "false",
       );
       document.body.style.overflow = isActive ? "hidden" : "";
+      document.body.classList.toggle("nav-open", isActive);
     }
 
     closeMenu() {
@@ -126,6 +153,7 @@
       this.overlay?.classList.remove("active");
       this.menuButton?.setAttribute("aria-expanded", "false");
       document.body.style.overflow = "";
+      document.body.classList.remove("nav-open");
     }
 
     markActiveLink() {
